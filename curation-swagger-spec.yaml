@@ -1,0 +1,314 @@
+---
+swagger: '2.0'
+
+# Document metadata
+info:
+  version: "1.0.0"
+  title: Haplotype Frequency Curation Service
+  description: Allows to create a
+
+# Describe paths here
+paths:
+  /hfc:
+    post:
+      description: |
+        Curation of a new Haplotype Frequency set.
+      parameters:
+        - name: HFCurationRequest
+          in: body
+          description: Haplotype Frequency Curation Data
+          required: true
+          schema:
+            $ref:  '#/definitions/HFCurationRequest'
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HFCurationResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+
+definitions:
+  HFCurationResponse:
+    title: HFCurationResponse
+    type: object
+    required:
+      - SubmissionID
+    properties:
+      SubmissionID:
+        type: integer
+        description: Reference to a submission
+      PopulationID:
+        type: integer
+        description: Reference to a population
+      CohortID:
+        type: integer
+        description: References a cohort
+      MethodSetID:
+        type: integer
+        description: References a method set
+      Methods:
+        type: object
+        description: References a method set
+      LabelID:
+        type: integer
+        description: References a label
+      HaplotypeListID:
+        type: integer
+        description: References a haplotype list
+      QualitySetID:
+        type: integer
+        description: References a quality set
+      ScopeID:
+        type: integer
+        description: References a scope
+      AccessID:
+        type: integer
+        description: References a access controls
+                
+  HFCurationRequest:
+    title: HFCurationRequest
+    type: object
+    required:
+      - PopulationID
+    properties:
+      license:
+        type: string
+        description: License under which GT data is available
+      PopulationID:
+        type: integer
+        description: Reference to a population
+      CohortID:
+        type: integer
+        description: Cohort ID or genotype list
+      GenotypeData:
+        type: object
+        items:
+          $ref: '#/definitions/GenotypeList'
+      MethodSetID:
+        type: integer
+        description: References a method set
+      MethodData:
+        type: object
+        description: List of Methods
+        items:
+          $ref: '#/definitions/MethodList'
+      LabelID:
+        type: integer
+        description: References a label
+      LabelData:
+        type: object
+        description: List of labels
+        items:
+          $ref: '#/definitions/LabelList'
+      HaplotypeFrequencyDataID:
+        type: integer
+        description: References a haplotype list
+      HaplotypeFrequencyData:
+        $ref: '#/definitions/HaplotypeFrequencyData'
+      QualitySetID:
+        type: integer
+        description: References a quality set
+      ScopeID:
+        type: integer
+        description: References a scope
+      AccessID:
+        type: integer
+        description: References a access controls
+
+  HaplotypeFrequencyData:
+    title: HaplotypeFrequencyData
+    type: object
+    required:
+      - HaplotypeFrequencyList
+      - License
+    properties:
+      License:
+        type: string
+        description: There will be a default license if one is not provided
+      ResolutionData:
+        type: object
+        items:
+          $ref: '#/definitions/ResolutionData'
+      HaplotypeFrequencyList:
+        title: HaplotypeFrequencyList
+        type: array
+        description: List of HaplotypeFrequencys
+        items:
+          $ref: '#/definitions/HaplotypeFrequency'
+
+
+  HaplotypeFrequency:
+    title: HaplotypeFrequency
+    type: object
+    required:
+      - haplotypeName
+      - frequency
+    properties:
+      haplotypeName:
+        type: string #glstring
+        description: Haplotype Name
+      frequency: 
+        type: number
+        description: frequency
+      FrequencyErrorList:
+        type: array
+        description: List of frequency errors
+        items:
+          $ref: '#/definitions/FrequencyError'
+
+  MethodList:
+    type: array
+    description: List of Methods
+    items:
+      $ref: '#/definitions/Method'
+
+  LabelList:
+    type: array
+    description: List of labels
+    items:
+      $ref: '#/definitions/Label'
+
+  Label:
+    title: Label
+    type: object
+    description: List of Genotypes
+    properties:
+      value:
+        type: string 
+        description: label name
+      typeOfLabel: 
+        type: string
+        description: type of label
+
+  GenotypeList:
+    title: GenotypeList
+    type: array
+    description: List of Genotypes
+    items:
+      $ref: '#/definitions/Genotype'
+  
+  Genotype:
+    title: Genotype
+    type: object
+    required:
+      - genotypeName
+    properties:
+      license:
+        type: string
+        description: license
+      genotypeName:
+        type: string
+        description: Glstring
+      genotypingMethods:
+        title: GenotypingMethods
+        type: array
+        description: Additional Information on genotype
+        items:
+          $ref: '#/definitions/GenotypeMethod'
+
+  GenotypeMethod:
+    title: GenotypeMethod
+    type: object
+    description: GenotypeMethod Record
+    properties:
+      methodLabel:
+        type: string
+        description: Type of method label
+        enum:
+        - TYPING_METHOD
+        - TYPING_REF
+        - TYPING_DATE
+        - TYPING_IMGT_VER
+        - MIRING_REF
+      methodValue:
+        type: string
+        description: Value of method
+      methodComment:
+        type: string
+        description: Comment on method
+      methodReference:
+        type: string
+        description: To be used to refer to an external source
+
+  Method:
+    title: Method
+    type: object
+    description: Method Record
+    properties:
+      methodLabel:
+        type: string
+        description: Type of method label
+        enum:
+        - EM_ALGORITHM
+        - EM_VERSION
+        - EM_ALG_REF
+        - MAC_SERVICE
+        - MAC_SER_REF
+        - MAC_VERSION
+        - ARS_SERVICE
+        - ARS_SERV_REF
+        - ARS_VERSION
+        - HWE_METHOD
+        - HWE_REF
+        - LD_METHOD
+        - LD_METHOD_REF
+      methodValue:
+        type: string
+        description: Value of method
+      methodComment:
+        type: string
+        description: Comment on method
+      methodReference:
+        type: string
+        description: To be used to refer to an external source
+
+  ResolutionData:
+    title: ResolutionData
+    type: array
+    description: List of Method
+    items:
+      $ref: '#/definitions/ResolutionInfo'
+      
+  ResolutionInfo:
+    title: ResolutionInfo
+    properties:
+     scopeElement:
+       type: string
+     resolution:
+       type: string
+       description: resolution of the data
+       enum:
+        - G
+        - P
+        - gNMDP
+        - gDKMS
+        - 2-Field
+        - 4-Field
+        - 6-Field
+        - 8-Field
+        - Serology
+
+  FrequencyError:
+    title: FrequencyError
+    properties:
+     value:
+       type: number
+     typeOfError:
+       type: string
+       description: type of error
+
+
+  Error:
+    properties:
+     code:
+       type: string
+     message:
+       type: string
+
+responses:
+  Standard500ErrorResponse:
+    description: An unexpected error ocurred
+    schema:
+      $ref: '#/definitions/Error'

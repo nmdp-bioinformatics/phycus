@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	   xmlns="http://www.w3schools.com"
+	   elementFormDefault="qualified">
+  
+  
+  <xs:element name="HFCuS">
+    <xs:complexType>
+      <xs:sequence>
+		
+		<xs:element name="POP_ID" type="xs:string"/>
+		
+		<xs:element name="HT">
+		  <xs:complexType>
+			<xs:sequence>
+				<xs:element name="HT_List">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="HTL" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+									  <xs:element name="HTL_Name" type="xs:string"/>
+									  <xs:element name="HTL_Freq">
+										<xs:simpleType>
+										  <xs:restriction base="xs:decimal">
+											<xs:minInclusive value="0"/>
+											<xs:maxInclusive value="1"/>
+										  </xs:restriction>
+										</xs:simpleType>
+									  </xs:element> 			       
+									</xs:sequence>      
+								</xs:complexType>
+							</xs:element>     
+						</xs:sequence>      
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="HT_Lic" type="xs:integer"/>
+				<xs:element name="HT_Res">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:enumeration value="G"/>
+						<xs:enumeration value="P"/>
+						<xs:enumeration value="gNMDP"/>
+						<xs:enumeration value="gDKMS"/>
+						<xs:enumeration value="2-Field"/>
+						<xs:enumeration value="4-Field"/>
+						<xs:enumeration value="6-Field"/>
+						<xs:enumeration value="8-Field"/>
+						<xs:enumeration value="Serology"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				</xs:element> 			 
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>             
+		
+		<xs:element name="GT" minOccurs="0">					
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:choice>
+				<xs:element name="GT_List">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="GTL" maxOccurs="unbounded">
+						<xs:complexType>
+						  <xs:sequence>
+							<xs:element name="GTL_Name" type="xs:string"/>			  
+
+							<xs:element name="GTLP_Meth" minOccurs="0" maxOccurs="unbounded">
+							  <xs:complexType>
+								<xs:sequence minOccurs="1" maxOccurs="1">
+									<xs:element name="HH2016">
+										<xs:complexType>
+										  <xs:sequence>
+											<xs:element name="TYPING_METHOD" type="xs:string" minOccurs="0"/>
+											<xs:element name="TYPING_REF" type="xs:string" minOccurs="0"/>
+											<xs:element name="TYPING_DATE" type="xs:date" minOccurs="0"/>
+											<xs:element name="TYPING_IMGT_VER" type="xs:string" minOccurs="0"/>
+											<xs:element name="MIRING_REF" type="xs:string" minOccurs="0"/>
+										  </xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>      
+							  </xs:complexType>
+							</xs:element>						
+						  </xs:sequence>      
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>      
+				  </xs:complexType>
+				</xs:element>
+				<xs:element name="COHORT_ID" type="xs:integer"/>
+			  </xs:choice>
+			  <xs:element name="GT_Lic" type="xs:string"/>			  
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		
+		<xs:choice minOccurs="0">
+		  
+		  <xs:element name="METHOD">
+			<xs:complexType>
+			  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice minOccurs="1" maxOccurs="1">
+					<xs:element name="HH2016">
+						<xs:complexType>
+							<xs:choice>
+								<xs:element name="EM_ALGORITHM" type="xs:string" minOccurs="1"/>
+								<xs:element name="EM_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="EM_ALG_REF" type="xs:date" minOccurs="1"/>
+								<xs:element name="MAC_SERVICE" type="xs:string" minOccurs="1"/>
+								<xs:element name="MAC_SER_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="MAC_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_SERVICE" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_SERV_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="HWE_METHOD" type="xs:string" minOccurs="1"/>
+								<xs:element name="HWE_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="LD_METHOD" type="xs:string" minOccurs="1"/>
+								<xs:element name="LD_METHOD_REF" type="xs:string" minOccurs="1"/>
+							</xs:choice>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>      
+				<xs:element name="METH_Comment" type="xs:string" minOccurs="0"/>
+				<xs:element name="METH_REF" type="xs:string" minOccurs="0"/>
+			  </xs:sequence>
+			</xs:complexType>					
+		  </xs:element>
+
+		  <xs:element name="METHOD_ID" type="xs:integer"/>
+
+		</xs:choice>
+
+		
+		
+		<xs:element name="QUALITY"  minOccurs="0">
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:element name="HH2016"  minOccurs="0">
+				<xs:complexType>
+				  <xs:sequence>
+					<xs:element name="DIV_LAMBDA" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:maxInclusive value="0"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element> 
+					<xs:element name="DIV_50" type="xs:integer" minOccurs="0"/>	     
+					<xs:element name="DIV_50_REL" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element> 
+					<xs:element name="SAM_SIZE" type="xs:integer" minOccurs="0"/>
+					<xs:element name="SAM_POP" type="xs:integer" minOccurs="0"/>
+					<xs:element name="DIV_PGD" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element> 
+					<xs:element name="DIV_HEAVY_TAIL" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="RES_TRS_COUNT" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element>
+					<xs:element name="RES_TRS" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element> 
+					<xs:element name="RES_SHARE_AMBIG" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element>
+					<xs:element name="RES_MISS_LOCI" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element>		    
+					<xs:element name="DEV_HWE" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="ERR_STD" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element>
+					<xs:element name="ERR_SAMP_80_100" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="SUM_FREQ_GAP" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="ERR_OFFSET" minOccurs="0">
+					  <xs:simpleType>
+					<xs:restriction base="xs:decimal">
+					  <xs:minInclusive value="0"/>
+					  <xs:maxInclusive value="1"/>
+					</xs:restriction>
+					  </xs:simpleType>
+					</xs:element>
+					<xs:element name="LD_MEASURE" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="KFOLD_IMPUTE" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="KFOLD_PRED_ACTUAL" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="KFOLD_N" type="xs:integer" minOccurs="0"/>	   
+					
+				  </xs:sequence>      
+				</xs:complexType>
+			  </xs:element>
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		
+
+		<xs:element name="LABEL" minOccurs="0">
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:element name="HH2016" minOccurs="0">
+				<xs:complexType>
+				  <xs:sequence>
+					<xs:element name="GT_REGISTRY" type="xs:string" minOccurs="0"/>
+					<xs:element name="HF_ESTIMATION_ENT" type="xs:string" minOccurs="0"/>	
+				  </xs:sequence>      
+				</xs:complexType>
+			  </xs:element>
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		<xs:element name="ACL" type="xs:string" minOccurs="0" default="public"/>
+      </xs:sequence>      
+    </xs:complexType>
+  </xs:element>      
+</xs:schema> 

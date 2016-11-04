@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<COMMENT
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="comment.xsd">
+  <COM_TIME>2016-10-27</COM_TIME>
+  <COM_USER>0</COM_USER>
+  <HTLCOM_REF_HF>
+    <COM_REF_TARGET>Hier</COM_REF_TARGET>
+    <COM_REF_ID>1</COM_REF_ID>
+  </HTLCOM_REF_HF>
+  <COM_LIST>
+    <COM_REC>
+      <COM_TEXT>Alles Super!</COM_TEXT>
+      <COM_REF_SPEC>X</COM_REF_SPEC>
+    </COM_REC>
+    <COM_REC>
+      <COM_TEXT>Alles Super2!</COM_TEXT>
+      <COM_REF_SPEC>Y</COM_REF_SPEC>
+    </COM_REC>
+  </COM_LIST>
+</COMMENT> 

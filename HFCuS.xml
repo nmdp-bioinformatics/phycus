@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HFCuS
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="HFCuS.xsd">
+  <POP_ID>POP123</POP_ID>
+  <HT>
+    <HT_List>
+      <HTL>
+	<HTL_Name> 001/002 </HTL_Name>
+	<HTL_Freq> 0.5</HTL_Freq>
+      </HTL>
+    </HT_List>
+    <HT_Lic>GNU</HT_Lic>
+    <HT_Res>G</HT_Res>
+  </HT>
+</HFCuS> 

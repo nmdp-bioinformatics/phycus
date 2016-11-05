@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	   xmlns="http://www.w3schools.com"
+	   elementFormDefault="qualified">
+  
+  
+	<xs:element name="HFCuS">
+		<xs:complexType>
+			<xs:sequence>
+# Top-Level Element: Population
+				<xs:element name="PopulationID" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+							The Pop-Id referce to an external service that provides the detailed information about the relevant population 
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>      
+
+# Top-Level Element: Haplotype-Frequenzy-Data
+				<xs:choice>
+	# either provide a Haplotype-Frequenzy-Data ID
+					<xs:element name="HaplotypeFrequencyDataID" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								The Haplotype-Frequenzy-Data ID referce to an already curated set of HaplotypeFrequencyData
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>      
+	# or provide the Haplotype-Frequenzy-Data in detail
+					<xs:element name="HaplotypeFrequencyData">      
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="License" type="xs:string" default="public">
+									<xs:annotation>
+										<xs:documentation>
+											Defines the License under which HFData can be used
+										</xs:documentation>
+									</xs:annotation>
+								</xs:element>   							
+								<xs:element name="HaplotypeFrequencyList">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="HaplotypeFrequency" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="haplotypeName" type="xs:string">
+															<xs:annotation>
+																<xs:documentation>
+																	A GL-String that provides the specific Haplotype
+																</xs:documentation>
+															</xs:annotation>
+														</xs:element>   							
+														<xs:element name="frequency">
+															<xs:simpleType>
+																<xs:restriction base="xs:decimal">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>   
+														<xs:element name="FrequencyErrorList" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="typeOfError" type="xs:string"/>
+																	<xs:element name="value">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:decimal">
+																				<xs:minInclusive value="0"/>
+																				<xs:maxInclusive value="1"/>
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>      	
+																</xs:sequence>
+															</xs:complexType>									
+														</xs:element>      													
+													</xs:sequence>
+												</xs:complexType>									
+											</xs:element>      		
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>    
+								<xs:element name="ResolutionData">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ResolutionInfo" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+	# the NameOfScopeElement must point to a ScopeElement defined in the Block ScopeData
+														<xs:element name="NameOfScopeElement" type="xs:string"/>
+														<xs:element name="resolution">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="G"/>
+																	<xs:enumeration value="P"/>
+																	<xs:enumeration value="gNMDP"/>
+																	<xs:enumeration value="gDKMS"/>
+																	<xs:enumeration value="2-Field"/>
+																	<xs:enumeration value="4-Field"/>
+																	<xs:enumeration value="6-Field"/>
+																	<xs:enumeration value="8-Field"/>
+																	<xs:enumeration value="Serology"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element> 
+													</xs:sequence>
+												</xs:complexType>	
+											</xs:element>      		
+										</xs:sequence>
+									</xs:complexType>													
+								</xs:element>    
+								<xs:element name="Quality" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+	# not yet finished ---
+									<xs:enumeration>	
+	# the choice is introduced to handle different value types for the TypeOfQuality elements
+											<xs:sequence>
+												<xs:element name="typeOfQuality">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="DIV_LAMBDA"/>
+															<xs:enumeration value="DIV_50_REL"/>
+															<xs:enumeration value="DIV_PGD"/>
+															<xs:enumeration value="RES_TRS_COUNT"/>
+															<xs:enumeration value="RES_TRS"/>
+															<xs:enumeration value="RES_SHARE_AMBIG"/>
+															<xs:enumeration value="RES_MISS_LOCI"/>
+															<xs:enumeration value="ERR_STD"/>
+															<xs:enumeration value="ERR_OFFSET"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="value">
+													<xs:simpleType>
+														<xs:restriction base="xs:decimal">
+															<xs:minInclusive value="0"/>
+															<xs:maxInclusive value="1"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element> 
+											</xs:sequence>
+											<xs:sequence>
+												<xs:element name="typeOfQuality">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="DIV_50"/>
+															<xs:enumeration value="SAM_SIZE"/>
+															<xs:enumeration value="SAM_POP"/>
+															<xs:enumeration value="KFOLD_N"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="value" type="xs:integer"/>
+											</xs:sequence>
+											<xs:sequence>
+												<xs:element name="typeOfQuality">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="DIV_HEAVY_TAIL"/>
+															<xs:enumeration value="DEV_HWE"/>
+															<xs:enumeration value="ERR_SAMP_80_100"/>
+															<xs:enumeration value="SUM_FREQ_GAP"/>
+															<xs:enumeration value="LD_MEASURE"/>
+															<xs:enumeration value="KFOLD_IMPUTE"/>
+															<xs:enumeration value="KFOLD_PRED_ACTUAL"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>			
+												<xs:element name="value" type="xs:decimal"/>
+											</xs:sequence>											
+										</xs:enumeration>
+									</xs:complexType>									
+								</xs:element>    
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>   
+				</xs:choice>
+			</xs:sequence>      
+		</xs:complexType>
+	</xs:element>      	
+</xs:schema> 
+
+
+---- 
+----
+Old:
+	  
+	
+-- Doc-Block
+	<xs:annotation>
+		<xs:documentation>
+		</xs:documentation>
+	</xs:annotation>
+	
+----
+----	
+		
+		<xs:element name="HT">
+		  <xs:complexType>
+			<xs:sequence>
+				<xs:element name="HT_List">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="HTL" maxOccurs="unbounded">
+					
+					<xs:complexType>
+									<xs:sequence>
+									  <xs:element name="HTL_Name" type="xs:string"/> 
+-- koennen wir hier eine Referenz auf eine XSD Datei für Gl-Strings einbinden
+									  <xs:element name="HTL_Freq">
+-- hier ein Element für die fehler der Frequenzen einfuegen
+	1 to n Relation with each HTL 
+	-- make up a list of error tags
+										
+									  </xs:element> 			       
+									</xs:sequence>      
+								</xs:complexType>
+							</xs:element>     
+						</xs:sequence>      
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="HT_Lic" type="xs:integer"/>
+
+				-- fuer jedes scope element die resolution angabe hier eintragen
+							 
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>             
+		
+-- Scope
+	scope_list
+		scope_element
+			description
+				gen
+				feature
+			name
+				e.g.: A*, B*:exon2
+			name_free
+				what ever you want
+-- end Scope		
+		
+		<xs:element name="GT" minOccurs="0">					
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:choice>
+				<xs:element name="GT_List">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="GTL" maxOccurs="unbounded">
+						<xs:complexType>
+						  <xs:sequence>
+							<xs:element name="GTL_Name" type="xs:string"/>			  
+
+							<xs:element name="GTLP_Meth" minOccurs="0" maxOccurs="unbounded">
+							  <xs:complexType>
+								<xs:sequence minOccurs="1" maxOccurs="1">
+									<xs:element name="HH2016">
+										<xs:complexType>
+										  <xs:sequence>
+											<xs:element name="TYPING_METHOD" type="xs:string" minOccurs="0"/>
+											<xs:element name="TYPING_REF" type="xs:string" minOccurs="0"/>
+											<xs:element name="TYPING_DATE" type="xs:date" minOccurs="0"/>
+											<xs:element name="TYPING_IMGT_VER" type="xs:string" minOccurs="0"/>
+											<xs:element name="MIRING_REF" type="xs:string" minOccurs="0"/>
+										  </xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>      
+							  </xs:complexType>
+							</xs:element>						
+						  </xs:sequence>      
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>      
+				  </xs:complexType>
+				</xs:element>
+				<xs:element name="COHORT_ID" type="xs:integer"/>
+			  </xs:choice>
+			  <xs:element name="GT_Lic" type="xs:string"/>			  
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		
+		<xs:choice minOccurs="0">
+		  
+		  <xs:element name="METHOD">
+			<xs:complexType>
+			  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice minOccurs="1" maxOccurs="1">
+					<xs:element name="HH2016">
+						<xs:complexType>
+							<xs:choice>
+								<xs:element name="EM_ALGORITHM" type="xs:string" minOccurs="1"/>
+								<xs:element name="EM_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="EM_ALG_REF" type="xs:date" minOccurs="1"/>
+								<xs:element name="MAC_SERVICE" type="xs:string" minOccurs="1"/>
+								<xs:element name="MAC_SER_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="MAC_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_SERVICE" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_SERV_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="ARS_VERSION" type="xs:string" minOccurs="1"/>
+								<xs:element name="HWE_METHOD" type="xs:string" minOccurs="1"/>
+								<xs:element name="HWE_REF" type="xs:string" minOccurs="1"/>
+								<xs:element name="LD_METHOD" type="xs:string" minOccurs="1"/>
+								<xs:element name="LD_METHOD_REF" type="xs:string" minOccurs="1"/>
+							</xs:choice>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>      
+				<xs:element name="METH_Comment" type="xs:string" minOccurs="0"/>
+				<xs:element name="METH_REF" type="xs:string" minOccurs="0"/>
+			  </xs:sequence>
+			</xs:complexType>					
+		  </xs:element>
+
+		  <xs:element name="METHOD_ID" type="xs:integer"/>
+
+		</xs:choice>
+
+-- block: 		struktur bleibt die selbe wie bei quality stellt aber nur werte dar die nicht aus den GT abgeleitete werden koennen
+		
+		<xs:element name="QUALITY"  minOccurs="0"> --derivable
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:element name="HH2016"  minOccurs="0"> -- get rid of the quality groups, make the individual qualities all optional 
+				<xs:complexType>
+				       
+				</xs:complexType>
+			  </xs:element>
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		
+
+		<xs:element name="LABEL" minOccurs="0">
+		  <xs:complexType>
+			<xs:sequence>
+			  <xs:element name="HH2016" minOccurs="0">
+				<xs:complexType>
+				  <xs:sequence>
+					<xs:element name="GT_REGISTRY" type="xs:string" minOccurs="0"/>
+					<xs:element name="HF_ESTIMATION_ENT" type="xs:string" minOccurs="0"/>	
+				  </xs:sequence>      
+				</xs:complexType>
+			  </xs:element>
+			</xs:sequence>      
+		  </xs:complexType>
+		</xs:element>
+		<xs:element name="ACL" type="xs:string" minOccurs="0" default="public"/>
+      </xs:sequence>      
+    </xs:complexType>
+  </xs:element>      
+</xs:schema> 

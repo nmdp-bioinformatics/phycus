@@ -57,9 +57,6 @@ definitions:
       HaplotypeListID:
         type: integer
         description: References a haplotype list
-      QualitySetID:
-        type: integer
-        description: References a quality set
       ScopeID:
         type: integer
         description: References a scope
@@ -83,40 +80,43 @@ definitions:
         type: integer
         description: Cohort ID or genotype list
       GenotypeData:
-        type: object
-        items:
-          $ref: '#/definitions/GenotypeList'
+        $ref: '#/definitions/GenotypeData'
       MethodSetID:
         type: integer
         description: References a method set
       MethodData:
-        type: object
-        description: List of Methods
-        items:
-          $ref: '#/definitions/MethodList'
+        $ref: '#/definitions/MethodData'
       LabelID:
         type: integer
         description: References a label
       LabelData:
-        type: object
-        description: List of labels
-        items:
-          $ref: '#/definitions/LabelList'
+        $ref: '#/definitions/LabelData'
       HaplotypeFrequencyDataID:
         type: integer
         description: References a haplotype list
       HaplotypeFrequencyData:
         $ref: '#/definitions/HaplotypeFrequencyData'
-      QualitySetID:
-        type: integer
-        description: References a quality set
       ScopeID:
         type: integer
         description: References a scope
+      ScopeData:
+        $ref: '#/definitions/ScopeData'
       AccessID:
         type: integer
         description: References a access controls
+      AccessData:
+        $ref: '#/definitions/AccessData'
 
+  AccessData:
+    title: AccessData
+    type: object
+    required:
+      - typeOfAccess
+    properties:
+      typeOfAccess:
+        type: string
+        description: There will be a default license if one is not provided
+    
   HaplotypeFrequencyData:
     title: HaplotypeFrequencyData
     type: object
@@ -128,15 +128,18 @@ definitions:
         type: string
         description: There will be a default license if one is not provided
       ResolutionData:
-        type: object
-        items:
-          $ref: '#/definitions/ResolutionData'
+        $ref: '#/definitions/ResolutionData'
       HaplotypeFrequencyList:
         title: HaplotypeFrequencyList
         type: array
         description: List of HaplotypeFrequencys
         items:
           $ref: '#/definitions/HaplotypeFrequency'
+      QualityList:
+        type: array
+        description: List of Quality
+        items:
+          $ref: '#/definitions/Quality'
 
 
   HaplotypeFrequency:
@@ -158,17 +161,109 @@ definitions:
         items:
           $ref: '#/definitions/FrequencyError'
 
+  Quality:
+    title: Quality
+    type: object
+    required:
+      - value
+      - typeOfQuality
+    properties:
+      value:
+        type:  number
+        description: label name
+      typeOfQuality: 
+        type: string
+        description: type of quality
+        enum:
+        - DIV_LAMBDA
+        - DIV_50         
+        - DIV_50_REL
+        - SAM_SIZE
+        - SAM_POP
+        - DIV_PGD
+        - DIV_HEAVY_TAIL
+        - RES_TRS_COUNT
+        - RES_TRS
+        - RES_SHARE_AMBIG
+        - RES_MISS_LOCI
+        - DEV_HWE
+        - ERR_STD
+        - ERR_SAMP_80_100
+        - SUM_FREQ_GAP
+        - ERR_OFFSET
+        - LD_MEASURE
+        - KFOLD_IMPUTE
+        - KFOLD_PRED_ACTUAL
+        - KFOLD_N
+
+  ScopeData:
+    title: ScopeData
+    type: object
+    required:
+      - ScopeElement
+    properties:
+      ScopeElement:
+        title: ScopeElement
+        type: array
+        description: Additional Information on genotype
+        items:
+          $ref: '#/definitions/ScopeElement'
+
+  ScopeElement:
+    title: ScopeElement
+    type: object
+    properties:
+      name:
+        type: string 
+        description: label name
+      freeName:
+        type: string 
+        description: label name
+      typeOfScope: 
+        type: string
+        description: type of label
+        enum:
+        - gene
+        - feature
+
+  MethodData:
+    title: MethodData
+    type: object
+    required:
+      - MethodList
+    properties:
+      MethodList:
+        $ref: '#/definitions/MethodList'
+
   MethodList:
-    type: array
-    description: List of Methods
-    items:
-      $ref: '#/definitions/Method'
+    type: object
+    title: MethodList
+    properties:
+      Method:
+        title: Method
+        type: array
+        description: list of methods
+        items:
+          $ref: '#/definitions/Method'
+
+
+  LabelData:
+    title: LabelData
+    type: object
+    required:
+      - LabelList
+    properties:
+      LabelList:
+        $ref: '#/definitions/LabelList'
 
   LabelList:
-    type: array
+    type: object
     description: List of labels
-    items:
-      $ref: '#/definitions/Label'
+    properties:
+      Label:
+        type: array
+        items:
+          $ref: '#/definitions/Label'
 
   Label:
     title: Label
@@ -182,12 +277,29 @@ definitions:
         type: string
         description: type of label
 
+  GenotypeData:
+    title: GenotypeData
+    type: object
+    required:
+      - GenotypeList
+    properties:
+      GenotypeList:
+        $ref: '#/definitions/GenotypeList'
+
   GenotypeList:
     title: GenotypeList
-    type: array
+    type: object
     description: List of Genotypes
-    items:
-      $ref: '#/definitions/Genotype'
+    properties:
+      license:
+        type: string
+        description: license
+      Genotype:
+        title: Genotype
+        type: array
+        description: Additional Information on genotype
+        items:
+          $ref: '#/definitions/Genotype'
   
   Genotype:
     title: Genotype
@@ -195,9 +307,6 @@ definitions:
     required:
       - genotypeName
     properties:
-      license:
-        type: string
-        description: license
       genotypeName:
         type: string
         description: Glstring
@@ -237,7 +346,7 @@ definitions:
     type: object
     description: Method Record
     properties:
-      methodLabel:
+      typeOfMethod:
         type: string
         description: Type of method label
         enum:

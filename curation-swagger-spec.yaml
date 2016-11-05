@@ -5,14 +5,110 @@ swagger: '2.0'
 info:
   version: "1.0.0"
   title: Haplotype Frequency Curation Service
-  description: Allows to create a
+  description: Allows to store and return haplotype frequency data
 
 # Describe paths here
 paths:
+  /hfc/{submissionId}:
+    get:
+      description: Returns a submission of haplotypes
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id that the haplotype frequencies were submitted under
+      responses:
+        200:
+          description: Returns the data set containing all references
+          schema:
+            $ref: '#/definitions/HFCurationResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/{submissionId}/haplotypes:
+    get:
+      description: Returns the list of haplotypes attached to the given submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id
+      responses:
+        200:
+          description: Returns the haplotype frequency data
+          schema:
+            $ref: '#/definitions/HaplotypeFrequencyData'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/{submissionId}/cohort:
+    get:
+      description: Returns the list of haplotypes attached to the given submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id
+      responses:
+        200:
+          description: Returns the cohort data and genotypes if available
+          schema:
+            $ref: '#/definitions/CohortData'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/{submissionId}/population:
+    get:
+      description: Returns the population of the given submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id
+      responses:
+        200:
+          description: Returns the population
+          schema:
+            $ref: '#/definitions/PopulationData'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/{submissionId}/labels:
+    get:
+      description: Returns the labels associated to the submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id
+      responses:
+        200:
+          description: Returns label set
+          schema:
+            $ref: '#/definitions/LabelData'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/{submissionId}/scope:
+    get:
+      description: Returns the scope of the genotypes used for creating the submitted haplotypes
+      parameters:
+        - name: submissionId
+          in: path
+          type: string
+          required: true
+          description: The submission id
+      responses:
+        200:
+          description: Returns scope set
+          schema:
+            $ref: '#/definitions/ScopeData'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
   /hfc:
     post:
       description: |
-        Curation of a new Haplotype Frequency set.
+        Storing of a new Haplotype Frequency set.
       parameters:
         - name: HFCurationRequest
           in: body
@@ -28,8 +124,53 @@ paths:
             $ref: '#/definitions/HFCurationResponse'
         500:
           $ref: '#/responses/Standard500ErrorResponse'
+    get:
+      description: |
+        Gets a list of all submission data sets
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HFCurationListResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/population:
+    get:
+      description: |
+        Get a list of all populations
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PopulationResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+  /hfc/population/{populationId}:
+    get:
+      description: Returns a population with its attached submissions
+      parameters:
+        - name: populationId
+          in: path
+          type: string
+          required: true
+          description: The population id
+      responses:
+        200:
+          description: Returns the population including all attached submissions
+          schema:
+            $ref: '#/definitions/PopulationSubmissionResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
 
 definitions:
+  HFCurationListResponse:
+    title: HFCurationResponseList
+    type: object
+    properties:
+      HFCurationResponses:
+        type: array
+        items:
+          $ref: '#/definitions/HFCurationResponse'
   HFCurationResponse:
     title: HFCurationResponse
     type: object
@@ -37,69 +178,88 @@ definitions:
       - SubmissionID
     properties:
       SubmissionID:
-        type: integer
+        type: string
         description: Reference to a submission
       PopulationID:
-        type: integer
+        type: string
         description: Reference to a population
       CohortID:
-        type: integer
+        type: string
         description: References a cohort
       MethodSetID:
-        type: integer
+        type: string
         description: References a method set
       LabelID:
-        type: integer
+        type: string
         description: References a label
       HaplotypeListID:
-        type: integer
+        type: string
         description: References a haplotype list
       ScopeID:
-        type: integer
+        type: string
         description: References a scope
       AccessID:
-        type: integer
+        type: string
         description: References a access controls
-                
+
+  PopulationSubmissionResponse:
+    title: PopulationSubmissionResponse
+    type: object
+    properties:
+      PopulationSubmissionList:
+        type: array
+        description: List of populations together with all attached submissions
+        items:
+          $ref: '#/definitions/PopulationSubmissionData'
+
+  PopulationResponse:
+    title: PopulationResponse
+    type: object
+    properties:
+      PopulationList:
+        type: array
+        description: List of populations
+        items:
+          $ref: '#/definitions/PopulationData'
+
   HFCurationRequest:
     title: HFCurationRequest
     type: object
     required:
       - PopulationID
     properties:
-      license:
-        type: string
-        description: License under which GT data is available
       PopulationID:
-        type: integer
+        type: string
         description: Reference to a population
+      PopulationData:
+        $ref: '#/definitions/PopulationData'
       CohortID:
-        type: integer
+        type: string
         description: Cohort ID or genotype list
-      GenotypeData:
-        $ref: '#/definitions/GenotypeData'
+      CohortData:
+        $ref: '#/definitions/CohortData'
       MethodSetID:
-        type: integer
+        type: string
         description: References a method set
       MethodData:
         $ref: '#/definitions/MethodData'
       LabelID:
-        type: integer
+        type: string
         description: References a label
       LabelData:
         $ref: '#/definitions/LabelData'
       HaplotypeFrequencyDataID:
-        type: integer
+        type: string
         description: References a haplotype list
       HaplotypeFrequencyData:
         $ref: '#/definitions/HaplotypeFrequencyData'
       ScopeID:
-        type: integer
+        type: string
         description: References a scope
       ScopeData:
         $ref: '#/definitions/ScopeData'
       AccessID:
-        type: integer
+        type: string
         description: References a access controls
       AccessData:
         $ref: '#/definitions/AccessData'
@@ -122,8 +282,7 @@ definitions:
       - License
     properties:
       License:
-        type: string
-        description: There will be a default license if one is not provided
+        $ref: '#/definitions/License'
       ResolutionData:
         $ref: '#/definitions/ResolutionData'
       HaplotypeFrequencyList:
@@ -143,12 +302,12 @@ definitions:
     title: HaplotypeFrequency
     type: object
     required:
-      - haplotypeName
+      - haplotypeString
       - frequency
     properties:
-      haplotypeName:
+      haplotypeString:
         type: string #glstring
-        description: Haplotype Name
+        description: GL string describing the haplotype
       frequency: 
         type: number
         description: frequency
@@ -205,6 +364,37 @@ definitions:
         description: Additional Information on genotype
         items:
           $ref: '#/definitions/ScopeElement'
+
+  PopulationSubmissionData:
+    title: PopulationSubmissionData
+    description: Contains all submissions for a population
+    type: object
+    required:
+      - population
+    properties: #this is just a placeholder for now
+      population:
+        $ref: '#/definitions/PopulationData'
+      submissions:
+        title: attached submissions
+        type: array
+        description: submissions that describe the population
+        items:
+          type: string
+
+  PopulationData:
+    title: PopulationData
+    type: object
+    required:
+      - name
+    properties: #this is just a placeholder for now
+      id:
+        title: id
+        type: string
+        description: id of the population
+      name:
+        title: Name
+        type: string
+        description: Name of the population
 
   ScopeElement:
     title: ScopeElement
@@ -274,8 +464,8 @@ definitions:
         type: string
         description: type of label
 
-  GenotypeData:
-    title: GenotypeData
+  CohortData:
+    title: CohortData #this will also contain meta information about the sample of the population
     type: object
     required:
       - GenotypeList
@@ -288,9 +478,8 @@ definitions:
     type: object
     description: List of Genotypes
     properties:
-      license:
-        type: string
-        description: license
+      License:
+        $ref: '#/definitions/License'
       Genotype:
         title: Genotype
         type: array
@@ -302,11 +491,11 @@ definitions:
     title: Genotype
     type: object
     required:
-      - genotypeName
+      - genotypeString
     properties:
-      genotypeName:
+      genotypeString:
         type: string
-        description: Glstring
+        description: GL string of the genotype
       genotypingMethods:
         title: GenotypingMethods
         type: array
@@ -337,6 +526,25 @@ definitions:
       methodReference:
         type: string
         description: To be used to refer to an external source
+
+  License:
+    title: License
+    type: object
+    description: License models, there will be a default license if one is not provided
+    required:
+      - typeOfLicense
+    properties:
+      typeOfLicense:
+        type: string
+        description: Type of creative commons license
+        enum:
+        - CC0
+        - by
+        - by-sa
+        - by-nd
+        - by-nc
+        - by-nc-sa
+        - by-nc-nd
 
   Method:
     title: Method

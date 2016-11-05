@@ -48,9 +48,6 @@ definitions:
       MethodSetID:
         type: integer
         description: References a method set
-      Methods:
-        type: object
-        description: References a method set
       LabelID:
         type: integer
         description: References a label

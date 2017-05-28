@@ -34,6 +34,7 @@ public class HFCurationApiController implements HfcApi{
         for (HFCuration curation : curations) {
             HFCurationResponse hfCurationResponse = new HFCurationResponse();
             BeanUtils.copyProperties(curation, hfCurationResponse);
+            hfCurationResponse.submissionID(curation.getId());
             response.addHfCurationResponsesItem(hfCurationResponse);
         }
 
@@ -45,8 +46,11 @@ public class HFCurationApiController implements HfcApi{
         if (hfCurationRequest != null) {
             HFCuration curation = new HFCuration();
             BeanUtils.copyProperties(hfCurationRequest, curation);
-            curationRepository.save(curation);
-            return new ResponseEntity<>(HttpStatus.OK);
+            curation = curationRepository.save(curation);
+            HFCurationResponse response = new HFCurationResponse();
+            BeanUtils.copyProperties(curation, response);
+            response.submissionID(curation.getId());
+            return ResponseEntity.ok(response);
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

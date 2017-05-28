@@ -1,0 +1,14 @@
+{
+  "groupId":"org.nmdp",
+  "artifactId":"service-haplotype-frequency-curation",
+  "artifactVersion":"0.0.1",
+
+  "developerName": "Pradeep Bashyal",
+  "developerEmail": "pbashyal@nmdp.org",
+  "developerOrganization": "Be The Match",
+  "developerOrganizationUrl": "https://bethematch.org/",
+
+  "java8": true,
+  "serializableModel":"true",
+  "dateLibrary": "java8"
+}

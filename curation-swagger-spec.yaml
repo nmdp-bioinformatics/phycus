@@ -310,7 +310,8 @@ definitions:
         description: GL string describing the haplotype
       frequency: 
         type: number
-        description: frequency
+        format: double
+        description: value of frequency
       FrequencyErrorList:
         type: array
         description: List of frequency errors
@@ -326,7 +327,8 @@ definitions:
     properties:
       value:
         type:  number
-        description: label name
+        format: double
+        description: value of quality
       typeOfQuality: 
         type: string
         description: type of quality
@@ -609,6 +611,8 @@ definitions:
     properties:
      value:
        type: number
+       format: double
+       description: value of error
      typeOfError:
        type: string
        description: type of error

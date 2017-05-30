@@ -9,15 +9,14 @@ import io.swagger.model.Genotype;
 import io.swagger.model.License;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * List of Genotypes
  */
 @ApiModel(description = "List of Genotypes")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class GenotypeList  implements Serializable {
+public class GenotypeList   {
   @JsonProperty("License")
   private License license = null;
 

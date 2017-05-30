@@ -6,17 +6,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * Quality
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class Quality  implements Serializable {
+public class Quality   {
   @JsonProperty("value")
-  private BigDecimal value = null;
+  private Double value = null;
 
   /**
    * type of quality
@@ -88,22 +86,22 @@ public class Quality  implements Serializable {
   @JsonProperty("typeOfQuality")
   private TypeOfQualityEnum typeOfQuality = null;
 
-  public Quality value(BigDecimal value) {
+  public Quality value(Double value) {
     this.value = value;
     return this;
   }
 
    /**
-   * label name
+   * value of quality
    * @return value
   **/
-  @ApiModelProperty(required = true, value = "label name")
+  @ApiModelProperty(required = true, value = "value of quality")
   @NotNull
-  public BigDecimal getValue() {
+  public Double getValue() {
     return value;
   }
 
-  public void setValue(BigDecimal value) {
+  public void setValue(Double value) {
     this.value = value;
   }
 

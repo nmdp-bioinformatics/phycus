@@ -5,24 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.HFCurationResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 /**
- * HFCurationListResponse
+ * HFCurationResponseList
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class HFCurationListResponse   {
+public class HFCurationResponseList   {
   @JsonProperty("HFCurationResponses")
   private List<HFCurationResponse> hfCurationResponses = new ArrayList<HFCurationResponse>();
 
-  public HFCurationListResponse hfCurationResponses(List<HFCurationResponse> hfCurationResponses) {
+  public HFCurationResponseList hfCurationResponses(List<HFCurationResponse> hfCurationResponses) {
     this.hfCurationResponses = hfCurationResponses;
     return this;
   }
 
-  public HFCurationListResponse addHfCurationResponsesItem(HFCurationResponse hfCurationResponsesItem) {
+  public HFCurationResponseList addHfCurationResponsesItem(HFCurationResponse hfCurationResponsesItem) {
     this.hfCurationResponses.add(hfCurationResponsesItem);
     return this;
   }
@@ -49,8 +50,8 @@ public class HFCurationListResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    HFCurationListResponse hfCurationListResponse = (HFCurationListResponse) o;
-    return Objects.equals(this.hfCurationResponses, hfCurationListResponse.hfCurationResponses);
+    HFCurationResponseList hfCurationResponseList = (HFCurationResponseList) o;
+    return Objects.equals(this.hfCurationResponses, hfCurationResponseList.hfCurationResponses);
   }
 
   @Override
@@ -61,7 +62,7 @@ public class HFCurationListResponse   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class HFCurationListResponse {\n");
+    sb.append("class HFCurationResponseList {\n");
     
     sb.append("    hfCurationResponses: ").append(toIndentedString(hfCurationResponses)).append("\n");
     sb.append("}");

@@ -6,22 +6,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.FrequencyError;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * HaplotypeFrequency
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class HaplotypeFrequency  implements Serializable {
+public class HaplotypeFrequency   {
   @JsonProperty("haplotypeString")
   private String haplotypeString = null;
 
   @JsonProperty("frequency")
-  private BigDecimal frequency = null;
+  private Double frequency = null;
 
   @JsonProperty("FrequencyErrorList")
   private List<FrequencyError> frequencyErrorList = new ArrayList<FrequencyError>();
@@ -45,22 +43,22 @@ public class HaplotypeFrequency  implements Serializable {
     this.haplotypeString = haplotypeString;
   }
 
-  public HaplotypeFrequency frequency(BigDecimal frequency) {
+  public HaplotypeFrequency frequency(Double frequency) {
     this.frequency = frequency;
     return this;
   }
 
    /**
-   * frequency
+   * value of frequency
    * @return frequency
   **/
-  @ApiModelProperty(required = true, value = "frequency")
+  @ApiModelProperty(required = true, value = "value of frequency")
   @NotNull
-  public BigDecimal getFrequency() {
+  public Double getFrequency() {
     return frequency;
   }
 
-  public void setFrequency(BigDecimal frequency) {
+  public void setFrequency(Double frequency) {
     this.frequency = frequency;
   }
 

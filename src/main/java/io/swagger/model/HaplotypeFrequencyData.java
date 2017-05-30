@@ -8,22 +8,21 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.HaplotypeFrequency;
 import io.swagger.model.License;
 import io.swagger.model.Quality;
-import io.swagger.model.ResolutionData;
+import io.swagger.model.ResolutionInfo;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * HaplotypeFrequencyData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class HaplotypeFrequencyData  implements Serializable {
+public class HaplotypeFrequencyData   {
   @JsonProperty("License")
   private License license = null;
 
   @JsonProperty("ResolutionData")
-  private ResolutionData resolutionData = null;
+  private List<ResolutionInfo> resolutionData = new ArrayList<ResolutionInfo>();
 
   @JsonProperty("HaplotypeFrequencyList")
   private List<HaplotypeFrequency> haplotypeFrequencyList = new ArrayList<HaplotypeFrequency>();
@@ -40,8 +39,7 @@ public class HaplotypeFrequencyData  implements Serializable {
    * Get license
    * @return license
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
   public License getLicense() {
     return license;
   }
@@ -50,21 +48,26 @@ public class HaplotypeFrequencyData  implements Serializable {
     this.license = license;
   }
 
-  public HaplotypeFrequencyData resolutionData(ResolutionData resolutionData) {
+  public HaplotypeFrequencyData resolutionData(List<ResolutionInfo> resolutionData) {
     this.resolutionData = resolutionData;
     return this;
   }
 
+  public HaplotypeFrequencyData addResolutionDataItem(ResolutionInfo resolutionDataItem) {
+    this.resolutionData.add(resolutionDataItem);
+    return this;
+  }
+
    /**
-   * Get resolutionData
+   * List of Method
    * @return resolutionData
   **/
-  @ApiModelProperty(value = "")
-  public ResolutionData getResolutionData() {
+  @ApiModelProperty(value = "List of Method")
+  public List<ResolutionInfo> getResolutionData() {
     return resolutionData;
   }
 
-  public void setResolutionData(ResolutionData resolutionData) {
+  public void setResolutionData(List<ResolutionInfo> resolutionData) {
     this.resolutionData = resolutionData;
   }
 

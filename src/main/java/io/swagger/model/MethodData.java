@@ -6,14 +6,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.MethodList;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * MethodData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class MethodData  implements Serializable {
+public class MethodData   {
   @JsonProperty("MethodList")
   private MethodList methodList = null;
 
@@ -26,8 +25,7 @@ public class MethodData  implements Serializable {
    * Get methodList
    * @return methodList
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
   public MethodList getMethodList() {
     return methodList;
   }

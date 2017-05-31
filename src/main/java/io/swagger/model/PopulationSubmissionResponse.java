@@ -8,14 +8,13 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.PopulationSubmissionData;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * PopulationSubmissionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class PopulationSubmissionResponse  implements Serializable {
+public class PopulationSubmissionResponse   {
   @JsonProperty("PopulationSubmissionList")
   private List<PopulationSubmissionData> populationSubmissionList = new ArrayList<PopulationSubmissionData>();
 

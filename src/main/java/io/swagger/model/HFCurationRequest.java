@@ -2,24 +2,14 @@ package io.swagger.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.AccessData;
-import io.swagger.model.CohortData;
-import io.swagger.model.HaplotypeFrequencyData;
-import io.swagger.model.LabelData;
-import io.swagger.model.MethodData;
-import io.swagger.model.PopulationData;
-import io.swagger.model.ScopeData;
-import java.io.Serializable;
 import javax.validation.constraints.*;
 /**
  * HFCurationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-26T11:57:21.787-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
 
-public class HFCurationRequest  implements Serializable {
+public class HFCurationRequest   {
   @JsonProperty("PopulationID")
   private String populationID = null;
 

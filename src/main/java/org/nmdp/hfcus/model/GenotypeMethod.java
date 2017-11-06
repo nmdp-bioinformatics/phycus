@@ -17,22 +17,22 @@ public class GenotypeMethod {
         methodLabel = swaggerObject.getMethodLabel();
         methodValue = swaggerObject.getMethodValue();
         methodComment = swaggerObject.getMethodComment();
-        methoReference = swaggerObject.getMethodReference();
+        methodReference = swaggerObject.getMethodReference();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private io.swagger.model.GenotypeMethod.MethodLabelEnum methodLabel;
     private String methodValue;
     private String methodComment;
-    private String methoReference;
+    private String methodReference;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,12 +60,12 @@ public class GenotypeMethod {
         this.methodComment = methodComment;
     }
 
-    public String getMethoReference() {
-        return methoReference;
+    public String getMethodReference() {
+        return methodReference;
     }
 
-    public void setMethoReference(String methoReference) {
-        this.methoReference = methoReference;
+    public void setMethodReference(String methodReference) {
+        this.methodReference = methodReference;
     }
 
     public io.swagger.model.GenotypeMethod toSwaggerObject(){
@@ -73,7 +73,7 @@ public class GenotypeMethod {
         data.setMethodLabel(methodLabel);
         data.setMethodValue(methodValue);
         data.setMethodComment(methodComment);
-        data.setMethodReference(methoReference);
+        data.setMethodReference(methodReference);
         return data;
     }
 }

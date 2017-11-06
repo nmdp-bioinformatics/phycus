@@ -8,15 +8,20 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.PopulationSubmissionData;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * PopulationSubmissionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class PopulationSubmissionResponse   {
+public class PopulationSubmissionResponse  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("PopulationSubmissionList")
-  private List<PopulationSubmissionData> populationSubmissionList = new ArrayList<PopulationSubmissionData>();
+  private List<PopulationSubmissionData> populationSubmissionList = null;
 
   public PopulationSubmissionResponse populationSubmissionList(List<PopulationSubmissionData> populationSubmissionList) {
     this.populationSubmissionList = populationSubmissionList;
@@ -24,6 +29,9 @@ public class PopulationSubmissionResponse   {
   }
 
   public PopulationSubmissionResponse addPopulationSubmissionListItem(PopulationSubmissionData populationSubmissionListItem) {
+    if (this.populationSubmissionList == null) {
+      this.populationSubmissionList = new ArrayList<PopulationSubmissionData>();
+    }
     this.populationSubmissionList.add(populationSubmissionListItem);
     return this;
   }
@@ -33,6 +41,9 @@ public class PopulationSubmissionResponse   {
    * @return populationSubmissionList
   **/
   @ApiModelProperty(value = "List of populations together with all attached submissions")
+
+  @Valid
+
   public List<PopulationSubmissionData> getPopulationSubmissionList() {
     return populationSubmissionList;
   }

@@ -10,7 +10,7 @@ public class Method {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private io.swagger.model.Method.TypeOfMethodEnum typeOfMethod;
     private String methodValue;
     private String methodComment;
@@ -27,11 +27,11 @@ public class Method {
         methodReference = swaggerObject.getMethodReference();
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

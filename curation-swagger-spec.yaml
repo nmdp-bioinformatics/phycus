@@ -15,7 +15,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id that the haplotype frequencies were submitted under
       responses:
@@ -31,7 +32,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id
       responses:
@@ -47,7 +49,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id
       responses:
@@ -63,7 +66,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id
       responses:
@@ -79,7 +83,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id
       responses:
@@ -95,7 +100,8 @@ paths:
       parameters:
         - name: submissionId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The submission id
       responses:
@@ -151,7 +157,8 @@ paths:
       parameters:
         - name: populationId
           in: path
-          type: string
+          type: integer
+          format: int64
           required: true
           description: The population id
       responses:
@@ -164,7 +171,7 @@ paths:
 
 definitions:
   HFCurationListResponse:
-    title: HFCurationResponseList
+    title: HFCurationListResponse
     type: object
     properties:
       HFCurationResponses:
@@ -178,28 +185,36 @@ definitions:
       - SubmissionID
     properties:
       SubmissionID:
-        type: string
+        type: integer
+        format: int64
         description: Reference to a submission
       PopulationID:
-        type: string
+        type: integer
+        format: int64
         description: Reference to a population
       CohortID:
-        type: string
+        type: integer
+        format: "int64"
         description: References a cohort
       MethodSetID:
-        type: string
+        type: integer
+        format: int64
         description: References a method set
       LabelID:
-        type: string
+        type: integer
+        format: int64
         description: References a label
       HaplotypeListID:
-        type: string
+        type: integer
+        format: int64
         description: References a haplotype list
       ScopeID:
-        type: string
+        type: integer
+        format: int64
         description: References a scope
       AccessID:
-        type: string
+        type: integer
+        format: "int64"
         description: References a access controls
 
   PopulationSubmissionResponse:
@@ -229,22 +244,26 @@ definitions:
       - PopulationID
     properties:
       PopulationID:
-        type: string
+        type: integer
+        format: int64
         description: Reference to a population
       PopulationData:
         $ref: '#/definitions/PopulationData'
       CohortID:
-        type: string
+        type: integer
+        format: int64
         description: Cohort ID or genotype list
       CohortData:
         $ref: '#/definitions/CohortData'
       MethodSetID:
-        type: string
+        type: integer
+        format: int64
         description: References a method set
       MethodData:
         $ref: '#/definitions/MethodData'
       LabelID:
-        type: string
+        type: integer
+        format: int64
         description: References a label
       LabelData:
         $ref: '#/definitions/LabelData'
@@ -254,12 +273,14 @@ definitions:
       HaplotypeFrequencyData:
         $ref: '#/definitions/HaplotypeFrequencyData'
       ScopeID:
-        type: string
+        type: integer
+        format: int64
         description: References a scope
       ScopeData:
         $ref: '#/definitions/ScopeData'
       AccessID:
-        type: string
+        type: integer
+        format: "int64"
         description: References a access controls
       AccessData:
         $ref: '#/definitions/AccessData'
@@ -381,7 +402,8 @@ definitions:
         type: array
         description: submissions that describe the population
         items:
-          type: string
+          type: integer
+          format: int64
 
   PopulationData:
     title: PopulationData
@@ -391,7 +413,8 @@ definitions:
     properties: #this is just a placeholder for now
       id:
         title: id
-        type: string
+        type: integer
+        format: int64
         description: id of the population
       name:
         title: Name

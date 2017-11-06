@@ -1,35 +1,41 @@
 package io.swagger.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * HFCurationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class HFCurationRequest   {
+public class HFCurationRequest  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("PopulationID")
-  private String populationID = null;
+  private Long populationID = null;
 
   @JsonProperty("PopulationData")
   private PopulationData populationData = null;
 
   @JsonProperty("CohortID")
-  private String cohortID = null;
+  private Long cohortID = null;
 
   @JsonProperty("CohortData")
   private CohortData cohortData = null;
 
   @JsonProperty("MethodSetID")
-  private String methodSetID = null;
+  private Long methodSetID = null;
 
   @JsonProperty("MethodData")
   private MethodData methodData = null;
 
   @JsonProperty("LabelID")
-  private String labelID = null;
+  private Long labelID = null;
 
   @JsonProperty("LabelData")
   private LabelData labelData = null;
@@ -41,18 +47,18 @@ public class HFCurationRequest   {
   private HaplotypeFrequencyData haplotypeFrequencyData = null;
 
   @JsonProperty("ScopeID")
-  private String scopeID = null;
+  private Long scopeID = null;
 
   @JsonProperty("ScopeData")
   private ScopeData scopeData = null;
 
   @JsonProperty("AccessID")
-  private String accessID = null;
+  private Long accessID = null;
 
   @JsonProperty("AccessData")
   private AccessData accessData = null;
 
-  public HFCurationRequest populationID(String populationID) {
+  public HFCurationRequest populationID(Long populationID) {
     this.populationID = populationID;
     return this;
   }
@@ -63,11 +69,13 @@ public class HFCurationRequest   {
   **/
   @ApiModelProperty(required = true, value = "Reference to a population")
   @NotNull
-  public String getPopulationID() {
+
+
+  public Long getPopulationID() {
     return populationID;
   }
 
-  public void setPopulationID(String populationID) {
+  public void setPopulationID(Long populationID) {
     this.populationID = populationID;
   }
 
@@ -81,6 +89,9 @@ public class HFCurationRequest   {
    * @return populationData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public PopulationData getPopulationData() {
     return populationData;
   }
@@ -89,7 +100,7 @@ public class HFCurationRequest   {
     this.populationData = populationData;
   }
 
-  public HFCurationRequest cohortID(String cohortID) {
+  public HFCurationRequest cohortID(Long cohortID) {
     this.cohortID = cohortID;
     return this;
   }
@@ -99,11 +110,13 @@ public class HFCurationRequest   {
    * @return cohortID
   **/
   @ApiModelProperty(value = "Cohort ID or genotype list")
-  public String getCohortID() {
+
+
+  public Long getCohortID() {
     return cohortID;
   }
 
-  public void setCohortID(String cohortID) {
+  public void setCohortID(Long cohortID) {
     this.cohortID = cohortID;
   }
 
@@ -117,6 +130,9 @@ public class HFCurationRequest   {
    * @return cohortData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public CohortData getCohortData() {
     return cohortData;
   }
@@ -125,7 +141,7 @@ public class HFCurationRequest   {
     this.cohortData = cohortData;
   }
 
-  public HFCurationRequest methodSetID(String methodSetID) {
+  public HFCurationRequest methodSetID(Long methodSetID) {
     this.methodSetID = methodSetID;
     return this;
   }
@@ -135,11 +151,13 @@ public class HFCurationRequest   {
    * @return methodSetID
   **/
   @ApiModelProperty(value = "References a method set")
-  public String getMethodSetID() {
+
+
+  public Long getMethodSetID() {
     return methodSetID;
   }
 
-  public void setMethodSetID(String methodSetID) {
+  public void setMethodSetID(Long methodSetID) {
     this.methodSetID = methodSetID;
   }
 
@@ -153,6 +171,9 @@ public class HFCurationRequest   {
    * @return methodData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public MethodData getMethodData() {
     return methodData;
   }
@@ -161,7 +182,7 @@ public class HFCurationRequest   {
     this.methodData = methodData;
   }
 
-  public HFCurationRequest labelID(String labelID) {
+  public HFCurationRequest labelID(Long labelID) {
     this.labelID = labelID;
     return this;
   }
@@ -171,11 +192,13 @@ public class HFCurationRequest   {
    * @return labelID
   **/
   @ApiModelProperty(value = "References a label")
-  public String getLabelID() {
+
+
+  public Long getLabelID() {
     return labelID;
   }
 
-  public void setLabelID(String labelID) {
+  public void setLabelID(Long labelID) {
     this.labelID = labelID;
   }
 
@@ -189,6 +212,9 @@ public class HFCurationRequest   {
    * @return labelData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public LabelData getLabelData() {
     return labelData;
   }
@@ -207,6 +233,8 @@ public class HFCurationRequest   {
    * @return haplotypeFrequencyDataID
   **/
   @ApiModelProperty(value = "References a haplotype list")
+
+
   public String getHaplotypeFrequencyDataID() {
     return haplotypeFrequencyDataID;
   }
@@ -225,6 +253,9 @@ public class HFCurationRequest   {
    * @return haplotypeFrequencyData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public HaplotypeFrequencyData getHaplotypeFrequencyData() {
     return haplotypeFrequencyData;
   }
@@ -233,7 +264,7 @@ public class HFCurationRequest   {
     this.haplotypeFrequencyData = haplotypeFrequencyData;
   }
 
-  public HFCurationRequest scopeID(String scopeID) {
+  public HFCurationRequest scopeID(Long scopeID) {
     this.scopeID = scopeID;
     return this;
   }
@@ -243,11 +274,13 @@ public class HFCurationRequest   {
    * @return scopeID
   **/
   @ApiModelProperty(value = "References a scope")
-  public String getScopeID() {
+
+
+  public Long getScopeID() {
     return scopeID;
   }
 
-  public void setScopeID(String scopeID) {
+  public void setScopeID(Long scopeID) {
     this.scopeID = scopeID;
   }
 
@@ -261,6 +294,9 @@ public class HFCurationRequest   {
    * @return scopeData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public ScopeData getScopeData() {
     return scopeData;
   }
@@ -269,7 +305,7 @@ public class HFCurationRequest   {
     this.scopeData = scopeData;
   }
 
-  public HFCurationRequest accessID(String accessID) {
+  public HFCurationRequest accessID(Long accessID) {
     this.accessID = accessID;
     return this;
   }
@@ -279,11 +315,13 @@ public class HFCurationRequest   {
    * @return accessID
   **/
   @ApiModelProperty(value = "References a access controls")
-  public String getAccessID() {
+
+
+  public Long getAccessID() {
     return accessID;
   }
 
-  public void setAccessID(String accessID) {
+  public void setAccessID(Long accessID) {
     this.accessID = accessID;
   }
 
@@ -297,6 +335,9 @@ public class HFCurationRequest   {
    * @return accessData
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public AccessData getAccessData() {
     return accessData;
   }

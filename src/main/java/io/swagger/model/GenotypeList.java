@@ -9,19 +9,24 @@ import io.swagger.model.Genotype;
 import io.swagger.model.License;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * List of Genotypes
  */
 @ApiModel(description = "List of Genotypes")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class GenotypeList   {
+public class GenotypeList  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("License")
   private License license = null;
 
   @JsonProperty("Genotype")
-  private List<Genotype> genotype = new ArrayList<Genotype>();
+  private List<Genotype> genotype = null;
 
   public GenotypeList license(License license) {
     this.license = license;
@@ -33,6 +38,9 @@ public class GenotypeList   {
    * @return license
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public License getLicense() {
     return license;
   }
@@ -47,6 +55,9 @@ public class GenotypeList   {
   }
 
   public GenotypeList addGenotypeItem(Genotype genotypeItem) {
+    if (this.genotype == null) {
+      this.genotype = new ArrayList<Genotype>();
+    }
     this.genotype.add(genotypeItem);
     return this;
   }
@@ -56,6 +67,9 @@ public class GenotypeList   {
    * @return genotype
   **/
   @ApiModelProperty(value = "Additional Information on genotype")
+
+  @Valid
+
   public List<Genotype> getGenotype() {
     return genotype;
   }

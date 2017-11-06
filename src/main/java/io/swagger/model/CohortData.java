@@ -1,18 +1,21 @@
 package io.swagger.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.GenotypeList;
-import javax.validation.constraints.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * CohortData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class CohortData   {
+public class CohortData  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("GenotypeList")
   private GenotypeList genotypeList = null;
 
@@ -25,7 +28,11 @@ public class CohortData   {
    * Get genotypeList
    * @return genotypeList
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
   public GenotypeList getGenotypeList() {
     return genotypeList;
   }

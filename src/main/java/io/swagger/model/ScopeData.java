@@ -8,13 +8,18 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.ScopeElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * ScopeData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class ScopeData   {
+public class ScopeData  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("ScopeElement")
   private List<ScopeElement> scopeElement = new ArrayList<ScopeElement>();
 
@@ -34,6 +39,9 @@ public class ScopeData   {
   **/
   @ApiModelProperty(required = true, value = "Additional Information on genotype")
   @NotNull
+
+  @Valid
+
   public List<ScopeElement> getScopeElement() {
     return scopeElement;
   }

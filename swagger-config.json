@@ -10,5 +10,6 @@
 
   "java8": true,
   "serializableModel":"true",
-  "dateLibrary": "java8"
+  "dateLibrary": "java8",
+  "useBeanValidation": true
 }

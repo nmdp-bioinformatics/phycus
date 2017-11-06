@@ -55,7 +55,8 @@ if ( $action =~ /get_sub/i && !$submission_id ) {
    print "\n$prg: Submission ID missing for action $action\n";
    exit 1;
 }
-my $base = "http://hfcus.b12x.org:8080";
+#my $base = "http://hfcus.b12x.org:8080";
+my $base = "http://localhost:8080";
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 $api_instance->{api_client}->{base_url} = $base;
@@ -120,8 +121,8 @@ sub push_haplotypes {
 
    close HFR;
 
-   $HFCurReq->{population_id} = "1";
-   #   $HFCurReq->{population_data}          = $PopData;
+   #$HFCurReq->{population_id} = "1";
+   $HFCurReq->{population_data}          = $PopData;
    $HFCurReq->{haplotype_frequency_data} = $HapFreqData;
    my $response = $api_instance->hfc_post( hf_curation_request => $HFCurReq );
 

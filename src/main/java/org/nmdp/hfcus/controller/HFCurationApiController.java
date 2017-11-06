@@ -43,9 +43,9 @@ public class HFCurationApiController implements HfcApi{
     }
 
     @Override
-    public ResponseEntity<HFCurationResponseList> hfcGet() {
+    public ResponseEntity<HFCurationListResponse> hfcGet() {
 
-        HFCurationResponseList response = new HFCurationResponseList();
+        HFCurationListResponse response = new HFCurationListResponse();
 
         Iterable<HFCuration> curations = repositoryContainer.getCurationRepository().findAll();
         for (HFCuration curation : curations) {
@@ -68,7 +68,7 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<HaplotypeFrequencyData> hfcSubmissionIdHaplotypesGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ){
         HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
         return ResponseEntity.ok(curation.getHaplotypeFrequencyData().toSwaggerObject());
@@ -87,14 +87,14 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<PopulationSubmissionResponse> hfcPopulationPopulationIdGet(
-            @ApiParam(value = "The populationId id",required=true ) @PathVariable("populationId") String populationId
+            @ApiParam(value = "The populationId id",required=true ) @PathVariable("populationId") Long populationId
     ) {
         PopulationSubmissionResponse response = new PopulationSubmissionResponse();
         Iterable<HFCuration> curations = repositoryContainer.getCurationRepository().findBypopulationDataId(populationId);
         PopulationSubmissionData pop = new PopulationSubmissionData();
         Population population = repositoryContainer.getPopulationRepository().findOne(populationId);
         pop.setPopulation(population.toSwaggerObject());
-        List<String> subs = new ArrayList<>();
+        List<Long> subs = new ArrayList<>();
         for (HFCuration curation: curations) {
             subs.add(curation.getId());
         }
@@ -105,7 +105,7 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<CohortData> hfcSubmissionIdCohortGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
         Cohort cohort = repositoryContainer.getCurationRepository().findOne(submissionId).getCohortData();
         return ResponseEntity.ok(cohort.toSwaggerObject());
@@ -113,14 +113,14 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<HFCurationResponse> hfcSubmissionIdGet(
-            @ApiParam(value = "The submission id that the haplotype frequencies were submitted under",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id that the haplotype frequencies were submitted under",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
         return ResponseEntity.ok(repositoryContainer.getCurationRepository().findOne(submissionId).toSwaggerObject());
     }
 
     @Override
     public ResponseEntity<LabelData> hfcSubmissionIdLabelsGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
         LabelSet label = repositoryContainer.getCurationRepository().findOne(submissionId).getLabelData();
         return ResponseEntity.ok(label.toSwaggerObject());
@@ -128,7 +128,7 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<PopulationData> hfcSubmissionIdPopulationGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
         Population population = repositoryContainer.getCurationRepository().findOne(submissionId).getPopulationData();
         return ResponseEntity.ok(population.toSwaggerObject());
@@ -136,7 +136,7 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<ScopeData> hfcSubmissionIdScopeGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") String submissionId
+            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
         ScopeList scopeList = repositoryContainer.getCurationRepository().findOne(submissionId).getScopeData();
         return ResponseEntity.ok(scopeList.toSwaggerObject());

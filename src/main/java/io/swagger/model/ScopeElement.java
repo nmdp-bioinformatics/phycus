@@ -6,13 +6,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * ScopeElement
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class ScopeElement   {
+public class ScopeElement  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("name")
   private String name = null;
 
@@ -63,6 +68,8 @@ public class ScopeElement   {
    * @return name
   **/
   @ApiModelProperty(value = "label name")
+
+
   public String getName() {
     return name;
   }
@@ -81,6 +88,8 @@ public class ScopeElement   {
    * @return freeName
   **/
   @ApiModelProperty(value = "label name")
+
+
   public String getFreeName() {
     return freeName;
   }
@@ -99,6 +108,8 @@ public class ScopeElement   {
    * @return typeOfScope
   **/
   @ApiModelProperty(value = "type of label")
+
+
   public TypeOfScopeEnum getTypeOfScope() {
     return typeOfScope;
   }

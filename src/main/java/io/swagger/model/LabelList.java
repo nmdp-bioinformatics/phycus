@@ -8,16 +8,21 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.Label;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * List of labels
  */
 @ApiModel(description = "List of labels")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class LabelList   {
+public class LabelList  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("Label")
-  private List<Label> label = new ArrayList<Label>();
+  private List<Label> label = null;
 
   public LabelList label(List<Label> label) {
     this.label = label;
@@ -25,6 +30,9 @@ public class LabelList   {
   }
 
   public LabelList addLabelItem(Label labelItem) {
+    if (this.label == null) {
+      this.label = new ArrayList<Label>();
+    }
     this.label.add(labelItem);
     return this;
   }
@@ -34,6 +42,9 @@ public class LabelList   {
    * @return label
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public List<Label> getLabel() {
     return label;
   }

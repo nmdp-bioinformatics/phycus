@@ -1,34 +1,34 @@
 package io.swagger.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.HaplotypeFrequency;
-import io.swagger.model.License;
-import io.swagger.model.Quality;
-import io.swagger.model.ResolutionInfo;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.*;
+import java.util.Objects;
+
 /**
  * HaplotypeFrequencyData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class HaplotypeFrequencyData   {
+public class HaplotypeFrequencyData  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("License")
   private License license = null;
 
   @JsonProperty("ResolutionData")
-  private List<ResolutionInfo> resolutionData = new ArrayList<ResolutionInfo>();
+  private ResolutionData resolutionData = null;
 
   @JsonProperty("HaplotypeFrequencyList")
   private List<HaplotypeFrequency> haplotypeFrequencyList = new ArrayList<HaplotypeFrequency>();
 
   @JsonProperty("QualityList")
-  private List<Quality> qualityList = new ArrayList<Quality>();
+  private List<Quality> qualityList = null;
 
   public HaplotypeFrequencyData license(License license) {
     this.license = license;
@@ -39,7 +39,11 @@ public class HaplotypeFrequencyData   {
    * Get license
    * @return license
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
   public License getLicense() {
     return license;
   }
@@ -48,26 +52,24 @@ public class HaplotypeFrequencyData   {
     this.license = license;
   }
 
-  public HaplotypeFrequencyData resolutionData(List<ResolutionInfo> resolutionData) {
+  public HaplotypeFrequencyData resolutionData(ResolutionData resolutionData) {
     this.resolutionData = resolutionData;
     return this;
   }
 
-  public HaplotypeFrequencyData addResolutionDataItem(ResolutionInfo resolutionDataItem) {
-    this.resolutionData.add(resolutionDataItem);
-    return this;
-  }
-
    /**
-   * List of Method
+   * Get resolutionData
    * @return resolutionData
   **/
-  @ApiModelProperty(value = "List of Method")
-  public List<ResolutionInfo> getResolutionData() {
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public ResolutionData getResolutionData() {
     return resolutionData;
   }
 
-  public void setResolutionData(List<ResolutionInfo> resolutionData) {
+  public void setResolutionData(ResolutionData resolutionData) {
     this.resolutionData = resolutionData;
   }
 
@@ -87,6 +89,9 @@ public class HaplotypeFrequencyData   {
   **/
   @ApiModelProperty(required = true, value = "List of HaplotypeFrequencys")
   @NotNull
+
+  @Valid
+
   public List<HaplotypeFrequency> getHaplotypeFrequencyList() {
     return haplotypeFrequencyList;
   }
@@ -101,6 +106,9 @@ public class HaplotypeFrequencyData   {
   }
 
   public HaplotypeFrequencyData addQualityListItem(Quality qualityListItem) {
+    if (this.qualityList == null) {
+      this.qualityList = new ArrayList<Quality>();
+    }
     this.qualityList.add(qualityListItem);
     return this;
   }
@@ -110,6 +118,9 @@ public class HaplotypeFrequencyData   {
    * @return qualityList
   **/
   @ApiModelProperty(value = "List of Quality")
+
+  @Valid
+
   public List<Quality> getQualityList() {
     return qualityList;
   }

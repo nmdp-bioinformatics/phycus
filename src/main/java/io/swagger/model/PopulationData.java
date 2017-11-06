@@ -5,20 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * PopulationData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class PopulationData   {
+public class PopulationData  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("id")
-  private String id = null;
+  private Long id = null;
 
   @JsonProperty("name")
   private String name = null;
 
-  public PopulationData id(String id) {
+  public PopulationData id(Long id) {
     this.id = id;
     return this;
   }
@@ -28,11 +33,13 @@ public class PopulationData   {
    * @return id
   **/
   @ApiModelProperty(value = "id of the population")
-  public String getId() {
+
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -47,6 +54,8 @@ public class PopulationData   {
   **/
   @ApiModelProperty(required = true, value = "Name of the population")
   @NotNull
+
+
   public String getName() {
     return name;
   }

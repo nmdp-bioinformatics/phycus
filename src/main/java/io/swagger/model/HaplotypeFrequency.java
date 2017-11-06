@@ -8,13 +8,18 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.FrequencyError;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * HaplotypeFrequency
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class HaplotypeFrequency   {
+public class HaplotypeFrequency  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("haplotypeString")
   private String haplotypeString = null;
 
@@ -22,7 +27,7 @@ public class HaplotypeFrequency   {
   private Double frequency = null;
 
   @JsonProperty("FrequencyErrorList")
-  private List<FrequencyError> frequencyErrorList = new ArrayList<FrequencyError>();
+  private List<FrequencyError> frequencyErrorList = null;
 
   public HaplotypeFrequency haplotypeString(String haplotypeString) {
     this.haplotypeString = haplotypeString;
@@ -35,6 +40,8 @@ public class HaplotypeFrequency   {
   **/
   @ApiModelProperty(required = true, value = "GL string describing the haplotype")
   @NotNull
+
+
   public String getHaplotypeString() {
     return haplotypeString;
   }
@@ -54,6 +61,8 @@ public class HaplotypeFrequency   {
   **/
   @ApiModelProperty(required = true, value = "value of frequency")
   @NotNull
+
+
   public Double getFrequency() {
     return frequency;
   }
@@ -68,6 +77,9 @@ public class HaplotypeFrequency   {
   }
 
   public HaplotypeFrequency addFrequencyErrorListItem(FrequencyError frequencyErrorListItem) {
+    if (this.frequencyErrorList == null) {
+      this.frequencyErrorList = new ArrayList<FrequencyError>();
+    }
     this.frequencyErrorList.add(frequencyErrorListItem);
     return this;
   }
@@ -77,6 +89,9 @@ public class HaplotypeFrequency   {
    * @return frequencyErrorList
   **/
   @ApiModelProperty(value = "List of frequency errors")
+
+  @Valid
+
   public List<FrequencyError> getFrequencyErrorList() {
     return frequencyErrorList;
   }

@@ -8,18 +8,23 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.GenotypeMethod;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * Genotype
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class Genotype   {
+public class Genotype  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("genotypeString")
   private String genotypeString = null;
 
   @JsonProperty("genotypingMethods")
-  private List<GenotypeMethod> genotypingMethods = new ArrayList<GenotypeMethod>();
+  private List<GenotypeMethod> genotypingMethods = null;
 
   public Genotype genotypeString(String genotypeString) {
     this.genotypeString = genotypeString;
@@ -32,6 +37,8 @@ public class Genotype   {
   **/
   @ApiModelProperty(required = true, value = "GL string of the genotype")
   @NotNull
+
+
   public String getGenotypeString() {
     return genotypeString;
   }
@@ -46,6 +53,9 @@ public class Genotype   {
   }
 
   public Genotype addGenotypingMethodsItem(GenotypeMethod genotypingMethodsItem) {
+    if (this.genotypingMethods == null) {
+      this.genotypingMethods = new ArrayList<GenotypeMethod>();
+    }
     this.genotypingMethods.add(genotypingMethodsItem);
     return this;
   }
@@ -55,6 +65,9 @@ public class Genotype   {
    * @return genotypingMethods
   **/
   @ApiModelProperty(value = "Additional Information on genotype")
+
+  @Valid
+
   public List<GenotypeMethod> getGenotypingMethods() {
     return genotypingMethods;
   }

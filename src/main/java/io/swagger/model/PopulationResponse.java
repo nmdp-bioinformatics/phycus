@@ -5,17 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.PopulationData;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * PopulationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class PopulationResponse   {
+public class PopulationResponse  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("PopulationList")
-  private List<PopulationData> populationList = new ArrayList<PopulationData>();
+  private List<PopulationData> populationList = null;
 
   public PopulationResponse populationList(List<PopulationData> populationList) {
     this.populationList = populationList;
@@ -23,6 +29,9 @@ public class PopulationResponse   {
   }
 
   public PopulationResponse addPopulationListItem(PopulationData populationListItem) {
+    if (this.populationList == null) {
+      this.populationList = new ArrayList<PopulationData>();
+    }
     this.populationList.add(populationListItem);
     return this;
   }
@@ -32,6 +41,9 @@ public class PopulationResponse   {
    * @return populationList
   **/
   @ApiModelProperty(value = "List of populations")
+
+  @Valid
+
   public List<PopulationData> getPopulationList() {
     return populationList;
   }

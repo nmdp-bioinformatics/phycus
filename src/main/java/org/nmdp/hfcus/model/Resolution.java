@@ -20,15 +20,15 @@ public class Resolution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private String scopeElement;
     private io.swagger.model.ResolutionInfo.ResolutionEnum resolution;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

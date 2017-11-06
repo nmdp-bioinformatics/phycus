@@ -6,13 +6,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * ResolutionInfo
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class ResolutionInfo   {
+public class ResolutionInfo  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("scopeElement")
   private String scopeElement = null;
 
@@ -74,6 +79,8 @@ public class ResolutionInfo   {
    * @return scopeElement
   **/
   @ApiModelProperty(value = "")
+
+
   public String getScopeElement() {
     return scopeElement;
   }
@@ -92,6 +99,8 @@ public class ResolutionInfo   {
    * @return resolution
   **/
   @ApiModelProperty(value = "resolution of the data")
+
+
   public ResolutionEnum getResolution() {
     return resolution;
   }

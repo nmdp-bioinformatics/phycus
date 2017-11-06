@@ -6,14 +6,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * GenotypeMethod Record
  */
 @ApiModel(description = "GenotypeMethod Record")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class GenotypeMethod   {
+public class GenotypeMethod  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   /**
    * Type of method label
    */
@@ -73,6 +78,8 @@ public class GenotypeMethod   {
    * @return methodLabel
   **/
   @ApiModelProperty(value = "Type of method label")
+
+
   public MethodLabelEnum getMethodLabel() {
     return methodLabel;
   }
@@ -91,6 +98,8 @@ public class GenotypeMethod   {
    * @return methodValue
   **/
   @ApiModelProperty(value = "Value of method")
+
+
   public String getMethodValue() {
     return methodValue;
   }
@@ -109,6 +118,8 @@ public class GenotypeMethod   {
    * @return methodComment
   **/
   @ApiModelProperty(value = "Comment on method")
+
+
   public String getMethodComment() {
     return methodComment;
   }
@@ -127,6 +138,8 @@ public class GenotypeMethod   {
    * @return methodReference
   **/
   @ApiModelProperty(value = "To be used to refer to an external source")
+
+
   public String getMethodReference() {
     return methodReference;
   }

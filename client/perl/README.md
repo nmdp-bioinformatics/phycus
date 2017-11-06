@@ -14,3 +14,5 @@ Perl Client
 - Date::Parse
 - DateTime
 - Moose::Role
+- LWP::UserAgent
+- Class::Accessor

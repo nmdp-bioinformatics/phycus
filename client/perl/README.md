@@ -3,7 +3,10 @@
 Haplotype Frequency Curation Service
 Perl Client
 
-
+## Install
+```
+sudo make
+```
 
 # Requirements
 - Module::Find

@@ -12,7 +12,7 @@ generate: ## remove build artifacts
 	cp setup.py api
 	mkdir api/bin
 	cp hfcus-* api/bin
-	chmod a+rwx api/bin/*
+	chmod a+x api/bin/*
 	mv -i api/swagger_client api/pyhfcus
 
 clean:

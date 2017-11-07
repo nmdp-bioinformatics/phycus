@@ -11,7 +11,8 @@ generate: ## remove build artifacts
 	swagger-codegen generate --lang python --input-spec ../../curation-swagger-spec.yaml --output api
 	cp setup.py api
 	mkdir api/bin
-	cp hfcus-*.py api/bin
+	cp hfcus-* api/bin
+	chmod a+x api/bin/*
 	mv -i api/swagger_client api/pyhfcus
 
 clean:

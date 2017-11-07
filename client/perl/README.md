@@ -16,3 +16,4 @@ Perl Client
 - Moose::Role
 - LWP::UserAgent
 - Class::Accessor
+- JSON

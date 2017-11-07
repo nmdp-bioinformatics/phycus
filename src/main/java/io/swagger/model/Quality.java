@@ -6,13 +6,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * Quality
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class Quality   {
+public class Quality  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("value")
   private Double value = null;
 
@@ -97,6 +102,8 @@ public class Quality   {
   **/
   @ApiModelProperty(required = true, value = "value of quality")
   @NotNull
+
+
   public Double getValue() {
     return value;
   }
@@ -116,6 +123,8 @@ public class Quality   {
   **/
   @ApiModelProperty(required = true, value = "type of quality")
   @NotNull
+
+
   public TypeOfQualityEnum getTypeOfQuality() {
     return typeOfQuality;
   }

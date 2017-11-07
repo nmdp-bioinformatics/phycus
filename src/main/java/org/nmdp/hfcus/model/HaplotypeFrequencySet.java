@@ -37,7 +37,7 @@ public class HaplotypeFrequencySet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private License.TypeOfLicenseEnum license;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Resolution> resolutionList;
@@ -47,12 +47,20 @@ public class HaplotypeFrequencySet {
     private List<Quality> qualityList;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Resolution> getResolutionList() {
+        return resolutionList;
+    }
+
+    public void setResolutionList(List<Resolution> resolutionList) {
+        this.resolutionList = resolutionList;
     }
 
     public License.TypeOfLicenseEnum getLicense() {

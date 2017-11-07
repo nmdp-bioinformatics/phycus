@@ -18,25 +18,25 @@ public class HFCuration implements Serializable {
     public HFCuration(RepositoryContainer repositoryContainer, HFCurationRequest data){
         if (data.getPopulationData() != null){
             populationData = new Population(data.getPopulationData());
-        }else if (data.getPopulationID() != null && !Objects.equals(data.getPopulationID(), "")){
+        }else if (data.getPopulationID() != null){
             populationData = repositoryContainer.getPopulationRepository().findOne(data.getPopulationID());
         }
 
         if (data.getCohortData() != null){
             cohortData = new Cohort(data.getCohortData());
-        }else if (data.getCohortData() != null && !Objects.equals(data.getCohortID(), "")){
+        }else if (data.getCohortData() != null){
             cohortData = repositoryContainer.getCohortRepository().findOne(data.getCohortID());
         }
 
         if (data.getMethodData() != null){
             methodData = new MethodSet(data.getMethodData());
-        }else if (data.getMethodSetID() != null && !Objects.equals(data.getMethodSetID(), "")){
+        }else if (data.getMethodSetID() != null){
             methodData = repositoryContainer.getMethodSetRepository().findOne(data.getMethodSetID());
         }
 
         if (data.getLabelData() != null){
             labelData = new LabelSet(data.getLabelData());
-        }else if (data.getLabelID() != null && !Objects.equals(data.getLabelID(), "")){
+        }else if (data.getLabelID() != null){
             labelData = repositoryContainer.getLabelSetRepository().findOne(data.getLabelID());
         }
 
@@ -48,20 +48,20 @@ public class HFCuration implements Serializable {
 
         if (data.getAccessData() != null){
             accessData = new Access(data.getAccessData());
-        }else if (data.getAccessID() != null && !Objects.equals(data.getAccessID(), "")){
+        }else if (data.getAccessID() != null){
             accessData = repositoryContainer.getAccessRepository().findOne(data.getAccessID());
         }
 
         if (data.getScopeData() != null){
             scopeData = new ScopeList(data.getScopeData());
-        }else if (data.getScopeID() != null && !Objects.equals(data.getScopeID(), "")){
+        }else if (data.getScopeID() != null){
             scopeData = repositoryContainer.getScopeListRepository().findOne(data.getScopeID());
         }
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Population populationData;
@@ -84,11 +84,11 @@ public class HFCuration implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Access accessData;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

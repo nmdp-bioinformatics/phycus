@@ -20,16 +20,16 @@ public class Scope {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String scopeId;
+    private Long scopeId;
     private String name;
     private String freeName;
     private ScopeElement.TypeOfScopeEnum typeOfScope;
 
-    public String getScopeId() {
+    public Long getScopeId() {
         return scopeId;
     }
 
-    public void setScopeId(String scopeId) {
+    public void setScopeId(Long scopeId) {
         this.scopeId = scopeId;
     }
 

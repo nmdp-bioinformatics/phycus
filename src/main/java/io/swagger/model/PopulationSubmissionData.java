@@ -5,21 +5,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.PopulationData;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * Contains all submissions for a population
  */
 @ApiModel(description = "Contains all submissions for a population")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class PopulationSubmissionData   {
+public class PopulationSubmissionData  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("population")
   private PopulationData population = null;
 
   @JsonProperty("submissions")
-  private List<String> submissions = new ArrayList<String>();
+  private List<Long> submissions = null;
 
   public PopulationSubmissionData population(PopulationData population) {
     this.population = population;
@@ -30,7 +36,11 @@ public class PopulationSubmissionData   {
    * Get population
    * @return population
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
   public PopulationData getPopulation() {
     return population;
   }
@@ -39,12 +49,15 @@ public class PopulationSubmissionData   {
     this.population = population;
   }
 
-  public PopulationSubmissionData submissions(List<String> submissions) {
+  public PopulationSubmissionData submissions(List<Long> submissions) {
     this.submissions = submissions;
     return this;
   }
 
-  public PopulationSubmissionData addSubmissionsItem(String submissionsItem) {
+  public PopulationSubmissionData addSubmissionsItem(Long submissionsItem) {
+    if (this.submissions == null) {
+      this.submissions = new ArrayList<Long>();
+    }
     this.submissions.add(submissionsItem);
     return this;
   }
@@ -54,11 +67,13 @@ public class PopulationSubmissionData   {
    * @return submissions
   **/
   @ApiModelProperty(value = "submissions that describe the population")
-  public List<String> getSubmissions() {
+
+
+  public List<Long> getSubmissions() {
     return submissions;
   }
 
-  public void setSubmissions(List<String> submissions) {
+  public void setSubmissions(List<Long> submissions) {
     this.submissions = submissions;
   }
 

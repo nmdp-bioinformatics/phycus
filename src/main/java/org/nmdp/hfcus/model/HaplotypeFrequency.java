@@ -1,7 +1,11 @@
 package org.nmdp.hfcus.model;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +27,17 @@ public class HaplotypeFrequency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private String haplotypeString;
     private Double frequency;
     @OneToMany(cascade = CascadeType.ALL)
     private List<FrequencyError> errorList;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

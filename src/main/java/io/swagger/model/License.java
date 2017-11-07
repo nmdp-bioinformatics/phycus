@@ -1,19 +1,24 @@
 package io.swagger.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * License models, there will be a default license if one is not provided
  */
 @ApiModel(description = "License models, there will be a default license if one is not provided")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class License   {
+public class License  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   /**
    * Type of creative commons license
    */
@@ -69,6 +74,8 @@ public class License   {
   **/
   @ApiModelProperty(required = true, value = "Type of creative commons license")
   @NotNull
+
+
   public TypeOfLicenseEnum getTypeOfLicense() {
     return typeOfLicense;
   }

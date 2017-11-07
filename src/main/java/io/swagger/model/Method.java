@@ -6,14 +6,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * Method Record
  */
 @ApiModel(description = "Method Record")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class Method   {
+public class Method  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   /**
    * Type of method label
    */
@@ -89,6 +94,8 @@ public class Method   {
    * @return typeOfMethod
   **/
   @ApiModelProperty(value = "Type of method label")
+
+
   public TypeOfMethodEnum getTypeOfMethod() {
     return typeOfMethod;
   }
@@ -107,6 +114,8 @@ public class Method   {
    * @return methodValue
   **/
   @ApiModelProperty(value = "Value of method")
+
+
   public String getMethodValue() {
     return methodValue;
   }
@@ -125,6 +134,8 @@ public class Method   {
    * @return methodComment
   **/
   @ApiModelProperty(value = "Comment on method")
+
+
   public String getMethodComment() {
     return methodComment;
   }
@@ -143,6 +154,8 @@ public class Method   {
    * @return methodReference
   **/
   @ApiModelProperty(value = "To be used to refer to an external source")
+
+
   public String getMethodReference() {
     return methodReference;
   }

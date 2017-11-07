@@ -23,15 +23,15 @@ public class ScopeList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Scope> scopeList;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

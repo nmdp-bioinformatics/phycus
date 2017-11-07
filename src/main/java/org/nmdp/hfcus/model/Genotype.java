@@ -9,7 +9,7 @@ public class Genotype {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String genotypeId;
+    private Long genotypeId;
     private String genotypeString;
     @OneToMany(cascade = CascadeType.ALL)
     private List<GenotypeMethod> genotypingMethods;
@@ -28,11 +28,11 @@ public class Genotype {
         }
     }
 
-    public String getGenotypeId() {
+    public Long getGenotypeId() {
         return genotypeId;
     }
 
-    public void setGenotypeId(String genotypeId) {
+    public void setGenotypeId(Long genotypeId) {
         this.genotypeId = genotypeId;
     }
 

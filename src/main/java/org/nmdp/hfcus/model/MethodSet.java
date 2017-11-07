@@ -25,15 +25,15 @@ public class MethodSet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Method> methodList;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

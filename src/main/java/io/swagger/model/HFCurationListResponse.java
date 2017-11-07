@@ -5,17 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.HFCurationResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 /**
  * HFCurationListResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-30T13:04:33.940Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
 
-public class HFCurationListResponse   {
+public class HFCurationListResponse  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @JsonProperty("HFCurationResponses")
-  private List<HFCurationResponse> hfCurationResponses = new ArrayList<HFCurationResponse>();
+  private List<HFCurationResponse> hfCurationResponses = null;
 
   public HFCurationListResponse hfCurationResponses(List<HFCurationResponse> hfCurationResponses) {
     this.hfCurationResponses = hfCurationResponses;
@@ -23,6 +29,9 @@ public class HFCurationListResponse   {
   }
 
   public HFCurationListResponse addHfCurationResponsesItem(HFCurationResponse hfCurationResponsesItem) {
+    if (this.hfCurationResponses == null) {
+      this.hfCurationResponses = new ArrayList<HFCurationResponse>();
+    }
     this.hfCurationResponses.add(hfCurationResponsesItem);
     return this;
   }
@@ -32,6 +41,9 @@ public class HFCurationListResponse   {
    * @return hfCurationResponses
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public List<HFCurationResponse> getHfCurationResponses() {
     return hfCurationResponses;
   }

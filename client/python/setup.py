@@ -45,7 +45,7 @@ setup(
     long_description=readme,
     author="Mike Halagan",
     author_email='mhalagan@nmdp.org',
-    url='https://github.com/mhalagan-nmdp/pyhfcus',
+    url='https://github.com/nmdp-bioinformatics/service-haplotype-frequency-curation',
     packages=[
         'pyhfcus',
         'pyhfcus.models',
@@ -71,6 +71,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
+    scripts=['bin/hfcus-import', 'bin/hfcus-extract'],
     test_suite='tests',
     tests_require=test_requirements
 )

@@ -1,5 +1,5 @@
 generate: ## remove build artifacts
-	swagger-codegen generate --lang python --input-spec ../../curation-swagger-spec.yaml --output api -Dmodels -Dapis
+	swagger-codegen generate --lang python --input-spec ../../curation-swagger-spec.yaml --output api
 	cp setup.py api
 	cp requirements.txt api
 	mkdir api/bin

@@ -1,4 +1,8 @@
-install:clean generate
+build:clean generate
+	cd api && \
+		python setup.py install
+
+install:
 	cd api && \
 		python setup.py install
 

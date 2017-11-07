@@ -5,3 +5,10 @@ generate: ## remove build artifacts
 	mkdir api/bin
 	cp hfcus-*.py api/bin
 	mv -i api/swagger_client api/pyhfcus
+
+clean:
+	rm -rf api
+
+install:
+	cd api
+	python setup.py install

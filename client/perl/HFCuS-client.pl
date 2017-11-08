@@ -55,8 +55,8 @@ if ( $action =~ /get_sub/i && !$submission_id ) {
    print "\n$prg: Submission ID missing for action $action\n";
    exit 1;
 }
-#my $base = "http://hfcus.b12x.org:8080";
-my $base = "http://localhost:8080";
+my $base = "http://hfcus.b12x.org:8080";
+#my $base = "http://localhost:8080";
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 $api_instance->{api_client}->{base_url} = $base;
@@ -178,7 +178,7 @@ Purpose
    Client for HFCuS
 Syntax
    $prg [--help]
-   $prg [--verbose] action=[get|push]
+   $prg [--verbose] --action=[get_sub|get_all|push]
 Options and arguments
    --help                show this help
    --[no]verbose         set verbose mode; default: $def_v

@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * List of labels
  */
 @ApiModel(description = "List of labels")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:04:42.031-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:39:49.392-06:00")
 
 public class LabelList  implements Serializable {
   private static final long serialVersionUID = 1L;

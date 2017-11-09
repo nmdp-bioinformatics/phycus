@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 /**
  * Quality
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:04:42.031-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:39:49.392-06:00")
 
 public class Quality  implements Serializable {
   private static final long serialVersionUID = 1L;

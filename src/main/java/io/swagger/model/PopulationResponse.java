@@ -1,16 +1,19 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.Valid;
-import java.io.Serializable;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.PopulationData;
+import java.io.Serializable;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * PopulationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:04:42.031-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:39:49.392-06:00")
 
 public class PopulationResponse  implements Serializable {
   private static final long serialVersionUID = 1L;

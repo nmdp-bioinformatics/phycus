@@ -169,6 +169,78 @@ paths:
         500:
           $ref: '#/responses/Standard500ErrorResponse'
 
+  /population:
+    post:
+      tags:
+        - Population API
+      summary: Create Population
+      operationId: createPopulation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: populationRequest
+          description: Population Request
+          required: true
+          schema:
+            $ref: '#/definitions/PopulationRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulationData'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    get:
+      tags:
+        - Population API
+      summary: Get a list of all populations
+      operationId: getAllPopulations
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PopulationResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
+
+  /population/{populationId}:
+    get:
+      tags:
+        - Population API
+      summary: Get Population Given an Id
+      operationId: getPopulationForId
+      produces:
+        - application/json
+      parameters:
+        - name: populationId
+          description: Population ID
+          in: path
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulationData'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+
 definitions:
   HFCurationListResponse:
     title: HFCurationListResponse
@@ -247,8 +319,6 @@ definitions:
         type: integer
         format: int64
         description: Reference to a population
-      PopulationData:
-        $ref: '#/definitions/PopulationData'
       CohortID:
         type: integer
         format: int64
@@ -420,6 +490,10 @@ definitions:
         title: Name
         type: string
         description: Name of the population
+      description:
+        title: description
+        type: string
+        description: Description of the population
 
   ScopeElement:
     title: ScopeElement
@@ -457,7 +531,6 @@ definitions:
         description: list of methods
         items:
           $ref: '#/definitions/Method'
-
 
   LabelData:
     title: LabelData
@@ -640,6 +713,14 @@ definitions:
        type: string
        description: type of error
 
+  PopulationRequest:
+    title: PopulationRequest
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
 
   Error:
     properties:

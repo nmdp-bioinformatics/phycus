@@ -10,58 +10,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * List of Genotypes
+ * PopulationRequest
  */
-@ApiModel(description = "List of Genotypes")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T15:23:31.951-06:00")
 
-public class Label  implements Serializable {
+public class PopulationRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("value")
-  private String value = null;
+  @JsonProperty("name")
+  private String name = null;
 
-  @JsonProperty("typeOfLabel")
-  private String typeOfLabel = null;
+  @JsonProperty("description")
+  private String description = null;
 
-  public Label value(String value) {
-    this.value = value;
+  public PopulationRequest name(String name) {
+    this.name = name;
     return this;
   }
 
    /**
-   * label name
-   * @return value
+   * Get name
+   * @return name
   **/
-  @ApiModelProperty(value = "label name")
+  @ApiModelProperty(value = "")
 
 
-  public String getValue() {
-    return value;
+  public String getName() {
+    return name;
   }
 
-  public void setValue(String value) {
-    this.value = value;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public Label typeOfLabel(String typeOfLabel) {
-    this.typeOfLabel = typeOfLabel;
+  public PopulationRequest description(String description) {
+    this.description = description;
     return this;
   }
 
    /**
-   * type of label
-   * @return typeOfLabel
+   * Get description
+   * @return description
   **/
-  @ApiModelProperty(value = "type of label")
+  @ApiModelProperty(value = "")
 
 
-  public String getTypeOfLabel() {
-    return typeOfLabel;
+  public String getDescription() {
+    return description;
   }
 
-  public void setTypeOfLabel(String typeOfLabel) {
-    this.typeOfLabel = typeOfLabel;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 
@@ -73,23 +72,23 @@ public class Label  implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Label label = (Label) o;
-    return Objects.equals(this.value, label.value) &&
-        Objects.equals(this.typeOfLabel, label.typeOfLabel);
+    PopulationRequest populationRequest = (PopulationRequest) o;
+    return Objects.equals(this.name, populationRequest.name) &&
+        Objects.equals(this.description, populationRequest.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(value, typeOfLabel);
+    return Objects.hash(name, description);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Label {\n");
+    sb.append("class PopulationRequest {\n");
     
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    typeOfLabel: ").append(toIndentedString(typeOfLabel)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -16,12 +16,14 @@ public class HFCuration implements Serializable {
     }
 
     public HFCuration(RepositoryContainer repositoryContainer, HFCurationRequest data){
-        if (data.getPopulationData() != null){
-            populationData = new Population(data.getPopulationData());
-        }else if (data.getPopulationID() != null){
-            populationData = repositoryContainer.getPopulationRepository().findOne(data.getPopulationID());
+        // Require a populationData ID
+        if (data.getPopulationID() == null){
+            throw new RuntimeException("Requires Population ID");
         }
-
+        populationData = repositoryContainer.getPopulationRepository().findOne(data.getPopulationID());
+        if (populationData == null) {
+            throw new RuntimeException("Not a valid Population ID");
+        }
         if (data.getCohortData() != null){
             cohortData = new Cohort(data.getCohortData());
         }else if (data.getCohortData() != null){

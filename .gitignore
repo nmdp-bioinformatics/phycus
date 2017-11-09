@@ -39,3 +39,4 @@ buildNumber.properties
 *.iml
 .idea/
 /src/main/java/io/swagger/api/HfcApiController.java
+/src/main/java/io/swagger/api/PopulationApiController.java

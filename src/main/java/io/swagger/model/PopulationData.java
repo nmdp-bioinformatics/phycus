@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 /**
  * PopulationData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:04:42.031-06:00")
 
 public class PopulationData  implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -22,6 +22,9 @@ public class PopulationData  implements Serializable {
 
   @JsonProperty("name")
   private String name = null;
+
+  @JsonProperty("description")
+  private String description = null;
 
   public PopulationData id(Long id) {
     this.id = id;
@@ -64,6 +67,26 @@ public class PopulationData  implements Serializable {
     this.name = name;
   }
 
+  public PopulationData description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Description of the population
+   * @return description
+  **/
+  @ApiModelProperty(value = "Description of the population")
+
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -75,12 +98,13 @@ public class PopulationData  implements Serializable {
     }
     PopulationData populationData = (PopulationData) o;
     return Objects.equals(this.id, populationData.id) &&
-        Objects.equals(this.name, populationData.name);
+        Objects.equals(this.name, populationData.name) &&
+        Objects.equals(this.description, populationData.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, name, description);
   }
 
   @Override
@@ -90,6 +114,7 @@ public class PopulationData  implements Serializable {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

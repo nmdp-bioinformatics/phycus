@@ -28,6 +28,13 @@ public class Population implements Serializable {
 
     private String name;
 
+    private String description;
+
+    public Population(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -44,10 +51,19 @@ public class Population implements Serializable {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public PopulationData toSwaggerObject(){
         PopulationData data = new PopulationData();
         data.setId(id);
         data.setName(name);
+        data.setDescription(description);
         return data;
     }
 }

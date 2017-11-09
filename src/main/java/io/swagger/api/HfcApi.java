@@ -16,9 +16,9 @@ import io.swagger.model.HFCurationListResponse;
 import io.swagger.model.HFCurationRequest;
 import io.swagger.model.HFCurationResponse;
 import io.swagger.model.HaplotypeFrequencyData;
+import io.swagger.model.HfcPopulationResponse;
 import io.swagger.model.LabelData;
 import io.swagger.model.PopulationData;
-import io.swagger.model.PopulationResponse;
 import io.swagger.model.PopulationSubmissionResponse;
 import io.swagger.model.ScopeData;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-03T12:15:20.805-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:04:42.031-06:00")
 
 @Api(value = "hfc", description = "the hfc API")
 public interface HfcApi {
@@ -47,16 +47,16 @@ public interface HfcApi {
     }
 
 
-    @ApiOperation(value = "", notes = "Get a list of all populations ", response = PopulationResponse.class, tags={  })
+    @ApiOperation(value = "", notes = "Get a list of all populations ", response = HfcPopulationResponse.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Successful response", response = PopulationResponse.class),
+        @ApiResponse(code = 200, message = "Successful response", response = HfcPopulationResponse.class),
         @ApiResponse(code = 500, message = "An unexpected error ocurred", response = Error.class) })
     
     @RequestMapping(value = "/hfc/population",
         method = RequestMethod.GET)
-    default ResponseEntity<PopulationResponse> hfcPopulationGet() {
+    default ResponseEntity<HfcPopulationResponse> hfcPopulationGet() {
         // do some magic!
-        return new ResponseEntity<PopulationResponse>(HttpStatus.OK);
+        return new ResponseEntity<HfcPopulationResponse>(HttpStatus.OK);
     }
 
 

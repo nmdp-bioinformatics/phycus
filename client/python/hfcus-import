@@ -5,6 +5,12 @@ import time
 import pyhfcus
 from pyhfcus.rest import ApiException
 from pprint import pprint
+from pyhfcus.models.population_data import PopulationData
+from pyhfcus.models.license import License
+from pyhfcus.models.resolution_info import ResolutionInfo
+from pyhfcus.models.haplotype_frequency_data import HaplotypeFrequencyData
+from pyhfcus.models.haplotype_frequency import HaplotypeFrequency
+from pyhfcus.models.hf_curation_request import HFCurationRequest
 
 import json
 import time
@@ -46,9 +52,36 @@ def main():
     config = args.config
     client = pyhfcus.ApiClient(host=url)
     api_instance = pyhfcus.DefaultApi(api_client=client)
-    with open(config) as data_file:    
-        data = json.load(data_file)
-    print(data)
+    with open(config) as data_file:
+        config = json.load(data_file)
+
+    resolution = config['resolution']
+    license_type = config['license_type']
+    popname = config['population_name']
+    resinfo = [ResolutionInfo(resolution=resolution)]
+    license = License(type_of_license=license_type)
+    hapfreqdata = HaplotypeFrequencyData()
+    popdata = PopulationData(name=popname)
+
+    hapfreqs = []
+    with open(freqfile, 'r') as f:
+        for line in f:
+            line = line.rstrip()
+            haplotype, freq = line.split(",")
+            hapfreq = HaplotypeFrequency(haplotype_string=haplotype,
+                                         frequency=freq)
+            hapfreqs.append(hapfreq)
+        f.close()
+
+    hapfreqdata = HaplotypeFrequencyData(haplotype_frequency_list=hapfreqs,
+                                         resolution_data=resinfo,
+                                         license=license)
+    cur_request = HFCurationRequest(population_data=popdata,
+                                    haplotype_frequency_data=hapfreqdata)
+
+    response = api_instance.hfc_post(hf_curation_request=cur_request)
+
+    print(response)
 
 if __name__ == '__main__':
     """The following will be run if file is executed directly,

@@ -319,8 +319,6 @@ definitions:
         type: integer
         format: int64
         description: Reference to a population
-      PopulationData:
-        $ref: '#/definitions/PopulationData'
       CohortID:
         type: integer
         format: int64

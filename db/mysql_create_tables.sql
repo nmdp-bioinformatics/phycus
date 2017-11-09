@@ -263,7 +263,7 @@ CREATE TABLE `hfcuration` (
   CONSTRAINT `FK_9jlimklf3bkwxokm0q2pj8kpu` FOREIGN KEY (`access_data_id`) REFERENCES `access` (`id`),
   CONSTRAINT `FK_engl2apk35n8xnm8c2n86cofi` FOREIGN KEY (`method_data_id`) REFERENCES `method_set` (`id`),
   CONSTRAINT `FK_h6b55dk6r8fd6aq6dj3ptebt` FOREIGN KEY (`label_data_id`) REFERENCES `label_set` (`id`),
-  CONSTRAINT `FK_jw2gci8cigcu5ybw7hqsxjypn` FOREIGN KEY (`population_data_id`) REFERENCES `population` (`id`),
+  CONSTRAINT `FK_jw2gci8cigcu5ybw7hqsxjypn` FOREIGN KEY (`population_data_id`) REFERENCES `populationData` (`id`),
   CONSTRAINT `FK_magkcpru3tc648pwfy178vwwp` FOREIGN KEY (`haplotype_frequency_data_id`) REFERENCES `haplotype_frequency_set` (`id`),
   CONSTRAINT `FK_o38qmuh3ggnue4hhtsh488742` FOREIGN KEY (`cohort_data_id`) REFERENCES `cohort` (`id`),
   CONSTRAINT `FK_pmtff7qwyr3bexc6nnh6w6yvs` FOREIGN KEY (`scope_data_id`) REFERENCES `scope_list` (`id`)
@@ -363,13 +363,13 @@ CREATE TABLE `method_set_method_list` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `population`
+-- Table structure for table `populationData`
 --
 
-DROP TABLE IF EXISTS `population`;
+DROP TABLE IF EXISTS `populationData`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `population` (
+CREATE TABLE `populationData` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,

@@ -23,12 +23,16 @@ my $opt_help;
 my $opt_verbose = 0;
 my $action      = "";
 my $submission_id;
+my $base = "http://hfcus.b12x.org:8080";
+my $opt_local;
+
 
 my $prg = basename($0);
 
 if (
    !&GetOptions(
       "help"     => \$opt_help,
+      "local"    => \$opt_local,
       "verbose!" => \$opt_verbose,     # -verbose, -noverbose
       "action=s" => \$action,
       "sub=s"    => \$submission_id,
@@ -44,6 +48,11 @@ if ($opt_help) {
    exit 0;
 }
 
+if($opt_local) {
+    $base = "http://localhost:8080";
+}
+print "Connecting to $base\n";
+
 print "$prg: $action\n" if $opt_verbose;
 
 if ( $action !~ /(get_sub|get_all|push)/i ) {
@@ -55,8 +64,6 @@ if ( $action =~ /get_sub/i && !$submission_id ) {
    print "\n$prg: Submission ID missing for action $action\n";
    exit 1;
 }
-my $base = "http://hfcus.b12x.org:8080";
-#my $base = "http://localhost:8080";
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 $api_instance->{api_client}->{base_url} = $base;
@@ -101,6 +108,7 @@ sub push_haplotypes {
 
    print Dumper($HapFreqData) if $opt_verbose;
    #  $PopData->{id}                 = "1";
+   # Use /population to create a new Population
    $PopData->{name}                     = "US-CAU";
    $Lic->{type_of_license}              = "CC0";
    $ResInfo->{resolution}               = "4-Field";
@@ -121,8 +129,7 @@ sub push_haplotypes {
 
    close HFR;
 
-   #$HFCurReq->{population_id} = "1";
-   $HFCurReq->{population_data}          = $PopData;
+   $HFCurReq->{population_id} = 1;
    $HFCurReq->{haplotype_frequency_data} = $HapFreqData;
    my $response = $api_instance->hfc_post( hf_curation_request => $HFCurReq );
 

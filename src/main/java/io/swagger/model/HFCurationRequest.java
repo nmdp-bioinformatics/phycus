@@ -10,7 +10,6 @@ import io.swagger.model.CohortData;
 import io.swagger.model.HaplotypeFrequencyData;
 import io.swagger.model.LabelData;
 import io.swagger.model.MethodData;
-import io.swagger.model.PopulationData;
 import io.swagger.model.ScopeData;
 import java.io.Serializable;
 import javax.validation.Valid;
@@ -19,16 +18,13 @@ import javax.validation.constraints.*;
 /**
  * HFCurationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T14:35:44.303-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T15:23:31.951-06:00")
 
 public class HFCurationRequest  implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("PopulationID")
   private Long populationID = null;
-
-  @JsonProperty("PopulationData")
-  private PopulationData populationData = null;
 
   @JsonProperty("CohortID")
   private Long cohortID = null;
@@ -85,27 +81,6 @@ public class HFCurationRequest  implements Serializable {
 
   public void setPopulationID(Long populationID) {
     this.populationID = populationID;
-  }
-
-  public HFCurationRequest populationData(PopulationData populationData) {
-    this.populationData = populationData;
-    return this;
-  }
-
-   /**
-   * Get populationData
-   * @return populationData
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public PopulationData getPopulationData() {
-    return populationData;
-  }
-
-  public void setPopulationData(PopulationData populationData) {
-    this.populationData = populationData;
   }
 
   public HFCurationRequest cohortID(Long cohortID) {
@@ -365,7 +340,6 @@ public class HFCurationRequest  implements Serializable {
     }
     HFCurationRequest hfCurationRequest = (HFCurationRequest) o;
     return Objects.equals(this.populationID, hfCurationRequest.populationID) &&
-        Objects.equals(this.populationData, hfCurationRequest.populationData) &&
         Objects.equals(this.cohortID, hfCurationRequest.cohortID) &&
         Objects.equals(this.cohortData, hfCurationRequest.cohortData) &&
         Objects.equals(this.methodSetID, hfCurationRequest.methodSetID) &&
@@ -382,7 +356,7 @@ public class HFCurationRequest  implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(populationID, populationData, cohortID, cohortData, methodSetID, methodData, labelID, labelData, haplotypeFrequencyDataID, haplotypeFrequencyData, scopeID, scopeData, accessID, accessData);
+    return Objects.hash(populationID, cohortID, cohortData, methodSetID, methodData, labelID, labelData, haplotypeFrequencyDataID, haplotypeFrequencyData, scopeID, scopeData, accessID, accessData);
   }
 
   @Override
@@ -391,7 +365,6 @@ public class HFCurationRequest  implements Serializable {
     sb.append("class HFCurationRequest {\n");
     
     sb.append("    populationID: ").append(toIndentedString(populationID)).append("\n");
-    sb.append("    populationData: ").append(toIndentedString(populationData)).append("\n");
     sb.append("    cohortID: ").append(toIndentedString(cohortID)).append("\n");
     sb.append("    cohortData: ").append(toIndentedString(cohortData)).append("\n");
     sb.append("    methodSetID: ").append(toIndentedString(methodSetID)).append("\n");

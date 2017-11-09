@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 /**
  * LabelData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:39:49.392-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T14:35:44.303-06:00")
 
 public class LabelData  implements Serializable {
   private static final long serialVersionUID = 1L;

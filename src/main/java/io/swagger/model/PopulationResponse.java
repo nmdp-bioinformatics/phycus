@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.model.PopulationData;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -13,33 +15,41 @@ import javax.validation.constraints.*;
 /**
  * PopulationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T13:39:49.392-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T14:35:44.303-06:00")
 
 public class PopulationResponse  implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonProperty("population")
-  private PopulationData population = null;
+  @JsonProperty("PopulationList")
+  private List<PopulationData> populationList = null;
 
-  public PopulationResponse population(PopulationData population) {
-    this.population = population;
+  public PopulationResponse populationList(List<PopulationData> populationList) {
+    this.populationList = populationList;
+    return this;
+  }
+
+  public PopulationResponse addPopulationListItem(PopulationData populationListItem) {
+    if (this.populationList == null) {
+      this.populationList = new ArrayList<PopulationData>();
+    }
+    this.populationList.add(populationListItem);
     return this;
   }
 
    /**
-   * Saved Population
-   * @return population
+   * List of populations
+   * @return populationList
   **/
-  @ApiModelProperty(value = "Saved Population")
+  @ApiModelProperty(value = "List of populations")
 
   @Valid
 
-  public PopulationData getPopulation() {
-    return population;
+  public List<PopulationData> getPopulationList() {
+    return populationList;
   }
 
-  public void setPopulation(PopulationData population) {
-    this.population = population;
+  public void setPopulationList(List<PopulationData> populationList) {
+    this.populationList = populationList;
   }
 
 
@@ -52,12 +62,12 @@ public class PopulationResponse  implements Serializable {
       return false;
     }
     PopulationResponse populationResponse = (PopulationResponse) o;
-    return Objects.equals(this.population, populationResponse.population);
+    return Objects.equals(this.populationList, populationResponse.populationList);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(population);
+    return Objects.hash(populationList);
   }
 
   @Override
@@ -65,7 +75,7 @@ public class PopulationResponse  implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class PopulationResponse {\n");
     
-    sb.append("    population: ").append(toIndentedString(population)).append("\n");
+    sb.append("    populationList: ").append(toIndentedString(populationList)).append("\n");
     sb.append("}");
     return sb.toString();
   }

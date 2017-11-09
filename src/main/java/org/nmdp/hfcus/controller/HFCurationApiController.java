@@ -7,9 +7,9 @@ import io.swagger.model.HFCurationListResponse;
 import io.swagger.model.HFCurationRequest;
 import io.swagger.model.HFCurationResponse;
 import io.swagger.model.HaplotypeFrequencyData;
-import io.swagger.model.HfcPopulationResponse;
 import io.swagger.model.LabelData;
 import io.swagger.model.PopulationData;
+import io.swagger.model.PopulationResponse;
 import io.swagger.model.PopulationSubmissionData;
 import io.swagger.model.PopulationSubmissionResponse;
 import io.swagger.model.ScopeData;
@@ -97,8 +97,8 @@ public class HFCurationApiController implements HfcApi{
     }
 
     @Override
-    public ResponseEntity<HfcPopulationResponse> hfcPopulationGet() {
-        HfcPopulationResponse response = new HfcPopulationResponse();
+    public ResponseEntity<PopulationResponse> hfcPopulationGet() {
+        PopulationResponse response = new PopulationResponse();
 
         Iterable<Population> populations = repositoryContainer.getPopulationRepository().findAll();
         for (Population data: populations){

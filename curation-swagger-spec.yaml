@@ -148,7 +148,7 @@ paths:
         200:
           description: Successful response
           schema:
-            $ref: '#/definitions/HfcPopulationResponse'
+            $ref: '#/definitions/PopulationResponse'
         500:
           $ref: '#/responses/Standard500ErrorResponse'
   /hfc/population/{populationId}:
@@ -190,7 +190,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PopulationResponse'
+            $ref: '#/definitions/PopulationData'
         '201':
           description: Created
         '401':
@@ -199,6 +199,20 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+    get:
+      tags:
+        - Population API
+      summary: Get a list of all populations
+      operationId: getAllPopulations
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PopulationResponse'
+        500:
+          $ref: '#/responses/Standard500ErrorResponse'
 
   /population/{populationId}:
     get:
@@ -219,7 +233,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PopulationResponse'
+            $ref: '#/definitions/PopulationData'
         '401':
           description: Unauthorized
         '403':
@@ -285,8 +299,8 @@ definitions:
         items:
           $ref: '#/definitions/PopulationSubmissionData'
 
-  HfcPopulationResponse:
-    title: HfcPopulationResponse
+  PopulationResponse:
+    title: PopulationResponse
     type: object
     properties:
       PopulationList:
@@ -709,15 +723,6 @@ definitions:
         type: string
       description:
         type: string
-
-  PopulationResponse:
-    title: PopulationResponse
-    type: object
-    properties:
-      population:
-        description: Saved Population
-        $ref: '#/definitions/PopulationData'
-
 
   Error:
     properties:

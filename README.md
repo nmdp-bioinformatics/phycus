@@ -36,4 +36,6 @@ Start your server as a simple java application
 
 You can view the api documentation in swagger-ui by pointing to  [http://localhost:8080](http://localhost:8080/)
 
+### Using the service
+See [client/] directory for examples on using it from various languages. Eg. for [Perl](client/perl)
 

@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.6
+    container_name: hfcus_mysql
+    restart: always
+    # Open the port in dev so you can connect from the application and SQL Tools eg. SQLDeveloper
+    ports:
+      - 3306:3306
+    environment:
+        MYSQL_DATABASE: hfcusdb
+        MYSQL_ROOT_PASSWORD: hfucsdb_root
+        MYSQL_USER: hfcus_user
+        MYSQL_PASSWORD: hfcus_user1
+    volumes:
+      - $PWD/:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+       PMA_HOST=db
+    restart: always
+    ports:
+     - 9999:80

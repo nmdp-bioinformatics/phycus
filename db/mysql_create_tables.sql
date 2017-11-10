@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.38, for Linux (x86_64)
 --
 -- Host: localhost    Database: hfcusdb
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	5.6.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -263,7 +263,7 @@ CREATE TABLE `hfcuration` (
   CONSTRAINT `FK_9jlimklf3bkwxokm0q2pj8kpu` FOREIGN KEY (`access_data_id`) REFERENCES `access` (`id`),
   CONSTRAINT `FK_engl2apk35n8xnm8c2n86cofi` FOREIGN KEY (`method_data_id`) REFERENCES `method_set` (`id`),
   CONSTRAINT `FK_h6b55dk6r8fd6aq6dj3ptebt` FOREIGN KEY (`label_data_id`) REFERENCES `label_set` (`id`),
-  CONSTRAINT `FK_jw2gci8cigcu5ybw7hqsxjypn` FOREIGN KEY (`population_data_id`) REFERENCES `populationData` (`id`),
+  CONSTRAINT `FK_jw2gci8cigcu5ybw7hqsxjypn` FOREIGN KEY (`population_data_id`) REFERENCES `population` (`id`),
   CONSTRAINT `FK_magkcpru3tc648pwfy178vwwp` FOREIGN KEY (`haplotype_frequency_data_id`) REFERENCES `haplotype_frequency_set` (`id`),
   CONSTRAINT `FK_o38qmuh3ggnue4hhtsh488742` FOREIGN KEY (`cohort_data_id`) REFERENCES `cohort` (`id`),
   CONSTRAINT `FK_pmtff7qwyr3bexc6nnh6w6yvs` FOREIGN KEY (`scope_data_id`) REFERENCES `scope_list` (`id`)
@@ -363,18 +363,18 @@ CREATE TABLE `method_set_method_list` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `populationData`
+-- Table structure for table `population`
 --
 
-DROP TABLE IF EXISTS `populationData`;
+DROP TABLE IF EXISTS `population`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `populationData` (
+CREATE TABLE `population` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,4 +462,4 @@ CREATE TABLE `scope_list_scope_list` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-09 20:25:11
+-- Dump completed on 2017-11-10  2:31:51

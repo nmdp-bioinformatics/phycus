@@ -107,9 +107,6 @@ sub push_haplotypes {
    my $ResInfo = WWW::SwaggerClient::Object::ResolutionInfo->new();
 
    print Dumper($HapFreqData) if $opt_verbose;
-   #  $PopData->{id}                 = "1";
-   # Use /population to create a new Population
-   $PopData->{name}                     = "US-CAU";
    $Lic->{type_of_license}              = "CC0";
    $ResInfo->{resolution}               = "4-Field";
    $HapFreqData->{license}              = $Lic;
@@ -129,6 +126,8 @@ sub push_haplotypes {
 
    close HFR;
 
+   # Use /population to create a new Population
+   # See Population-client.pl
    $HFCurReq->{population_id} = 1;
    $HFCurReq->{haplotype_frequency_data} = $HapFreqData;
    my $response = $api_instance->hfc_post( hf_curation_request => $HFCurReq );

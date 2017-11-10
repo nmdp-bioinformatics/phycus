@@ -29,9 +29,16 @@ Use `docker-compose stop` and `docker-compose rm` to stop and remove the db cont
 
 ### Run the application
 Start your server as a simple java application  
+Check your JDK version with `java -version`
 
+With Java 8:
 ```bash
  java -jar target/service-haplotype-frequency-curation-0.0.1.jar
+```
+
+With Java 9:
+```bash
+java --add-modules java.xml.bind -jar target/service-haplotype-frequency-curation-0.0.1.jar
 ```
 
 You can view the api documentation in swagger-ui by pointing to  [http://localhost:8080](http://localhost:8080/)

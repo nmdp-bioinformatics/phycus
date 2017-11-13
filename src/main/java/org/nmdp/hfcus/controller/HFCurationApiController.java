@@ -119,18 +119,27 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<PopulationSubmissionResponse> hfcPopulationPopulationIdGet(
             @ApiParam(value = "The populationId id",required=true ) @PathVariable("populationId") Long populationId
     ) {
-        PopulationSubmissionResponse response = new PopulationSubmissionResponse();
-        Iterable<HFCuration> curations = repositoryContainer.getCurationRepository().findBypopulationDataId(populationId);
-        PopulationSubmissionData pop = new PopulationSubmissionData();
         Population population = repositoryContainer.getPopulationRepository().findOne(populationId);
-        pop.setPopulation(population.toSwaggerObject());
-        List<Long> subs = new ArrayList<>();
-        for (HFCuration curation: curations) {
-            subs.add(curation.getId());
+        ResponseEntity<PopulationSubmissionResponse> responseEntity;
+        if (population != null) {
+            PopulationSubmissionData pop = new PopulationSubmissionData();
+            pop.setPopulation(population.toSwaggerObject());
+            Iterable<HFCuration> curations = repositoryContainer.getCurationRepository().findBypopulationDataId(populationId);
+            List<Long> subs = new ArrayList<>();
+            for (HFCuration curation : curations) {
+                subs.add(curation.getId());
+            }
+            pop.setSubmissions(subs);
+            PopulationSubmissionResponse response = new PopulationSubmissionResponse();
+            response.addPopulationSubmissionListItem(pop);
+
+            responseEntity = ResponseEntity.ok(response);
         }
-        pop.setSubmissions(subs);
-        response.addPopulationSubmissionListItem(pop);
-        return ResponseEntity.ok(response);
+        else
+        {
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
     }
 
     @Override

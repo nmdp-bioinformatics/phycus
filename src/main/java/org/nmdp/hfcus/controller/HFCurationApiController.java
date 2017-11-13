@@ -178,8 +178,7 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<LabelData> hfcSubmissionIdLabelsGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        LabelSet label = repositoryContainer.getCurationRepository().findOne(submissionId).getLabelData();
-        return ResponseEntity.ok(label.toSwaggerObject());
+        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getLabelData());
     }
 
     @Override

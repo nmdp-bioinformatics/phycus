@@ -8,6 +8,7 @@ import io.swagger.model.PopulationResponse;
 import org.nmdp.hfcus.dao.PopulationRepository;
 import org.nmdp.hfcus.model.Population;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,15 @@ public class PopulationApiController implements PopulationApi {
     @Override
     public ResponseEntity<PopulationData> getPopulationForId(@ApiParam(value = "Population ID",required=true ) @PathVariable("populationId") Long populationId) {
         Population population = populationRepository.findOne(populationId);
-        return ResponseEntity.ok(population.toSwaggerObject());
+        ResponseEntity<PopulationData> responseEntity;
+        if (population != null) {
+            responseEntity = ResponseEntity.ok(population.toSwaggerObject());
+        }
+        else
+        {
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
     }
 
     @Override

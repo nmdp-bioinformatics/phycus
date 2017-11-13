@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class HaplotypeFrequency {
+public class HaplotypeFrequency implements ICurationDataModel<io.swagger.model.HaplotypeFrequency> {
     public HaplotypeFrequency(){
         //intentionally left empty
     }
@@ -65,6 +65,7 @@ public class HaplotypeFrequency {
         this.errorList = errorList;
     }
 
+    @Override
     public io.swagger.model.HaplotypeFrequency toSwaggerObject(){
         io.swagger.model.HaplotypeFrequency data = new io.swagger.model.HaplotypeFrequency();
         data.setHaplotypeString(haplotypeString);

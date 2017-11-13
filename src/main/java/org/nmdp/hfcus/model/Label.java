@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Label {
+public class Label implements ICurationDataModel<io.swagger.model.Label> {
     public Label(){
         //intentionally left empty
     }
@@ -46,6 +46,7 @@ public class Label {
         this.typeOfLabel = typeOfLabel;
     }
 
+    @Override
     public io.swagger.model.Label toSwaggerObject(){
         io.swagger.model.Label data = new io.swagger.model.Label();
         data.setValue(value);

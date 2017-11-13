@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Population implements Serializable {
+public class Population implements Serializable, ICurationDataModel<PopulationData> {
 
     public Population(){
         //intentionally left empty
@@ -59,6 +59,7 @@ public class Population implements Serializable {
         this.description = description;
     }
 
+    @Override
     public PopulationData toSwaggerObject(){
         PopulationData data = new PopulationData();
         data.setId(id);

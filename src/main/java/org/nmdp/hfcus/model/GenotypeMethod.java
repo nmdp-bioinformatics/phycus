@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class GenotypeMethod {
+public class GenotypeMethod implements ICurationDataModel<io.swagger.model.GenotypeMethod> {
 
     public GenotypeMethod(){
         //intentionally left empty
@@ -68,6 +68,7 @@ public class GenotypeMethod {
         this.methodReference = methodReference;
     }
 
+    @Override
     public io.swagger.model.GenotypeMethod toSwaggerObject(){
         io.swagger.model.GenotypeMethod data = new io.swagger.model.GenotypeMethod();
         data.setMethodLabel(methodLabel);

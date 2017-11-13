@@ -146,8 +146,23 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<CohortData> hfcSubmissionIdCohortGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        Cohort cohort = repositoryContainer.getCurationRepository().findOne(submissionId).getCohortData();
-        return ResponseEntity.ok(cohort.toSwaggerObject());
+        HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
+        ResponseEntity<CohortData> responseEntity;
+        if (curation != null){
+            Cohort cohort = curation.getCohortData();
+            if (cohort != null) {
+                responseEntity = ResponseEntity.ok(cohort.toSwaggerObject());
+            }
+            else
+            {
+                responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        else
+        {
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return responseEntity;
     }
 
     @Override

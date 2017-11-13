@@ -26,7 +26,7 @@ public class HFCuration implements Serializable {
         }
         if (data.getCohortData() != null){
             cohortData = new Cohort(data.getCohortData());
-        }else if (data.getCohortData() != null){
+        }else if (data.getCohortID() != null){
             cohortData = repositoryContainer.getCohortRepository().findOne(data.getCohortID());
         }
 

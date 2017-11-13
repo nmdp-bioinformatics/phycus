@@ -192,7 +192,6 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<ScopeData> hfcSubmissionIdScopeGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        ScopeList scopeList = repositoryContainer.getCurationRepository().findOne(submissionId).getScopeData();
-        return ResponseEntity.ok(scopeList.toSwaggerObject());
+        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getScopeData());
     }
 }

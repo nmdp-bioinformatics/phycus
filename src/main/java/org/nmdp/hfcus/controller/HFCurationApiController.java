@@ -93,7 +93,15 @@ public class HFCurationApiController implements HfcApi{
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ){
         HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
-        return ResponseEntity.ok(curation.getHaplotypeFrequencyData().toSwaggerObject());
+        ResponseEntity<HaplotypeFrequencyData> response;
+        if (curation != null){
+            response = ResponseEntity.ok(curation.getHaplotypeFrequencyData().toSwaggerObject());
+        }
+        else
+        {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return response;
     }
 
     @Override

@@ -141,6 +141,21 @@ public class HFCurationApiController implements HfcApi{
     }
 
     @Override
+    public ResponseEntity<Void> hfcSubmissionIdDelete(
+            @ApiParam(value = "",required=true ) @PathVariable("submissionId") Long submissionId
+    ) {
+        HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
+          if (curation!=null){
+            curation.setPopulationData(null);
+            repositoryContainer.getCurationRepository().delete(curation);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+          }
+          else{
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+          }
+    }
+
+    @Override
     public ResponseEntity<LabelData> hfcSubmissionIdLabelsGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {

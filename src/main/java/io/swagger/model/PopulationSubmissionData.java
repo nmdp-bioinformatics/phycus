@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * Contains all submissions for a population
  */
 @ApiModel(description = "Contains all submissions for a population")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-09T15:23:31.951-06:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-13T16:03:03.769+01:00")
 
 public class PopulationSubmissionData  implements Serializable {
   private static final long serialVersionUID = 1L;

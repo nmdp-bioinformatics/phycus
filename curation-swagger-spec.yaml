@@ -1,15 +1,25 @@
----
 swagger: '2.0'
-
-# Document metadata
 info:
-  version: "1.0.0"
+  version: 1.0.0
   title: Haplotype Frequency Curation Service
   description: Allows to store and return haplotype frequency data
-
-# Describe paths here
 paths:
-  /hfc/{submissionId}:
+  '/hfc/{submissionId}':
+    delete:
+      description: Delete based on submissionId
+      parameters:
+        - name: submissionId
+          in: path
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '204':
+          description: Delete Success = OK
+        '404':
+          description: Not Found
+        '500':
+          $ref: '#/responses/Standard500ErrorResponse'
     get:
       description: Returns a submission of haplotypes
       parameters:
@@ -18,15 +28,17 @@ paths:
           type: integer
           format: int64
           required: true
-          description: The submission id that the haplotype frequencies were submitted under
+          description: >-
+            The submission id that the haplotype frequencies were submitted
+            under
       responses:
-        200:
+        '200':
           description: Returns the data set containing all references
           schema:
             $ref: '#/definitions/HFCurationResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/{submissionId}/haplotypes:
+  '/hfc/{submissionId}/haplotypes':
     get:
       description: Returns the list of haplotypes attached to the given submission
       parameters:
@@ -37,13 +49,13 @@ paths:
           required: true
           description: The submission id
       responses:
-        200:
+        '200':
           description: Returns the haplotype frequency data
           schema:
             $ref: '#/definitions/HaplotypeFrequencyData'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/{submissionId}/cohort:
+  '/hfc/{submissionId}/cohort':
     get:
       description: Returns the list of haplotypes attached to the given submission
       parameters:
@@ -54,13 +66,13 @@ paths:
           required: true
           description: The submission id
       responses:
-        200:
+        '200':
           description: Returns the cohort data and genotypes if available
           schema:
             $ref: '#/definitions/CohortData'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/{submissionId}/population:
+  '/hfc/{submissionId}/population':
     get:
       description: Returns the population of the given submission
       parameters:
@@ -71,13 +83,13 @@ paths:
           required: true
           description: The submission id
       responses:
-        200:
+        '200':
           description: Returns the population
           schema:
             $ref: '#/definitions/PopulationData'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/{submissionId}/labels:
+  '/hfc/{submissionId}/labels':
     get:
       description: Returns the labels associated to the submission
       parameters:
@@ -88,15 +100,17 @@ paths:
           required: true
           description: The submission id
       responses:
-        200:
+        '200':
           description: Returns label set
           schema:
             $ref: '#/definitions/LabelData'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/{submissionId}/scope:
+  '/hfc/{submissionId}/scope':
     get:
-      description: Returns the scope of the genotypes used for creating the submitted haplotypes
+      description: >-
+        Returns the scope of the genotypes used for creating the submitted
+        haplotypes
       parameters:
         - name: submissionId
           in: path
@@ -105,11 +119,11 @@ paths:
           required: true
           description: The submission id
       responses:
-        200:
+        '200':
           description: Returns scope set
           schema:
             $ref: '#/definitions/ScopeData'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
   /hfc:
     post:
@@ -121,37 +135,36 @@ paths:
           description: Haplotype Frequency Curation Data
           required: true
           schema:
-            $ref:  '#/definitions/HFCurationRequest'
+            $ref: '#/definitions/HFCurationRequest'
       responses:
-        # Response code
-        200:
+        '200':
           description: Successful response
           schema:
             $ref: '#/definitions/HFCurationResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
     get:
       description: |
         Gets a list of all submission data sets
       responses:
-        200:
+        '200':
           description: Successful response
           schema:
             $ref: '#/definitions/HFCurationListResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
   /hfc/population:
     get:
       description: |
         Get a list of all populations
       responses:
-        200:
+        '200':
           description: Successful response
           schema:
             $ref: '#/definitions/PopulationResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-  /hfc/population/{populationId}:
+  '/hfc/population/{populationId}':
     get:
       description: Returns a population with its attached submissions
       parameters:
@@ -162,13 +175,12 @@ paths:
           required: true
           description: The population id
       responses:
-        200:
+        '200':
           description: Returns the population including all attached submissions
           schema:
             $ref: '#/definitions/PopulationSubmissionResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-
   /population:
     post:
       tags:
@@ -207,14 +219,13 @@ paths:
       produces:
         - application/json
       responses:
-        200:
+        '200':
           description: Successful response
           schema:
             $ref: '#/definitions/PopulationResponse'
-        500:
+        '500':
           $ref: '#/responses/Standard500ErrorResponse'
-
-  /population/{populationId}:
+  '/population/{populationId}':
     get:
       tags:
         - Population API
@@ -240,7 +251,6 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-
 definitions:
   HFCurationListResponse:
     title: HFCurationListResponse
@@ -266,7 +276,7 @@ definitions:
         description: Reference to a population
       CohortID:
         type: integer
-        format: "int64"
+        format: int64
         description: References a cohort
       MethodSetID:
         type: integer
@@ -286,9 +296,8 @@ definitions:
         description: References a scope
       AccessID:
         type: integer
-        format: "int64"
+        format: int64
         description: References a access controls
-
   PopulationSubmissionResponse:
     title: PopulationSubmissionResponse
     type: object
@@ -298,7 +307,6 @@ definitions:
         description: List of populations together with all attached submissions
         items:
           $ref: '#/definitions/PopulationSubmissionData'
-
   PopulationResponse:
     title: PopulationResponse
     type: object
@@ -308,7 +316,6 @@ definitions:
         description: List of populations
         items:
           $ref: '#/definitions/PopulationData'
-
   HFCurationRequest:
     title: HFCurationRequest
     type: object
@@ -350,11 +357,10 @@ definitions:
         $ref: '#/definitions/ScopeData'
       AccessID:
         type: integer
-        format: "int64"
+        format: int64
         description: References a access controls
       AccessData:
         $ref: '#/definitions/AccessData'
-
   AccessData:
     title: AccessData
     type: object
@@ -364,7 +370,6 @@ definitions:
       typeOfAccess:
         type: string
         description: There will be a default license if one is not provided
-    
   HaplotypeFrequencyData:
     title: HaplotypeFrequencyData
     type: object
@@ -387,8 +392,6 @@ definitions:
         description: List of Quality
         items:
           $ref: '#/definitions/Quality'
-
-
   HaplotypeFrequency:
     title: HaplotypeFrequency
     type: object
@@ -397,9 +400,9 @@ definitions:
       - frequency
     properties:
       haplotypeString:
-        type: string #glstring
+        type: string
         description: GL string describing the haplotype
-      frequency: 
+      frequency:
         type: number
         format: double
         description: value of frequency
@@ -408,7 +411,6 @@ definitions:
         description: List of frequency errors
         items:
           $ref: '#/definitions/FrequencyError'
-
   Quality:
     title: Quality
     type: object
@@ -417,34 +419,33 @@ definitions:
       - typeOfQuality
     properties:
       value:
-        type:  number
+        type: number
         format: double
         description: value of quality
-      typeOfQuality: 
+      typeOfQuality:
         type: string
         description: type of quality
         enum:
-        - DIV_LAMBDA
-        - DIV_50         
-        - DIV_50_REL
-        - SAM_SIZE
-        - SAM_POP
-        - DIV_PGD
-        - DIV_HEAVY_TAIL
-        - RES_TRS_COUNT
-        - RES_TRS
-        - RES_SHARE_AMBIG
-        - RES_MISS_LOCI
-        - DEV_HWE
-        - ERR_STD
-        - ERR_SAMP_80_100
-        - SUM_FREQ_GAP
-        - ERR_OFFSET
-        - LD_MEASURE
-        - KFOLD_IMPUTE
-        - KFOLD_PRED_ACTUAL
-        - KFOLD_N
-
+          - DIV_LAMBDA
+          - DIV_50
+          - DIV_50_REL
+          - SAM_SIZE
+          - SAM_POP
+          - DIV_PGD
+          - DIV_HEAVY_TAIL
+          - RES_TRS_COUNT
+          - RES_TRS
+          - RES_SHARE_AMBIG
+          - RES_MISS_LOCI
+          - DEV_HWE
+          - ERR_STD
+          - ERR_SAMP_80_100
+          - SUM_FREQ_GAP
+          - ERR_OFFSET
+          - LD_MEASURE
+          - KFOLD_IMPUTE
+          - KFOLD_PRED_ACTUAL
+          - KFOLD_N
   ScopeData:
     title: ScopeData
     type: object
@@ -457,14 +458,13 @@ definitions:
         description: Additional Information on genotype
         items:
           $ref: '#/definitions/ScopeElement'
-
   PopulationSubmissionData:
     title: PopulationSubmissionData
     description: Contains all submissions for a population
     type: object
     required:
       - population
-    properties: #this is just a placeholder for now
+    properties:
       population:
         $ref: '#/definitions/PopulationData'
       submissions:
@@ -474,13 +474,12 @@ definitions:
         items:
           type: integer
           format: int64
-
   PopulationData:
     title: PopulationData
     type: object
     required:
       - name
-    properties: #this is just a placeholder for now
+    properties:
       id:
         title: id
         type: integer
@@ -494,24 +493,22 @@ definitions:
         title: description
         type: string
         description: Description of the population
-
   ScopeElement:
     title: ScopeElement
     type: object
     properties:
       name:
-        type: string 
+        type: string
         description: label name
       freeName:
-        type: string 
+        type: string
         description: label name
-      typeOfScope: 
+      typeOfScope:
         type: string
         description: type of label
         enum:
-        - gene
-        - feature
-
+          - gene
+          - feature
   MethodData:
     title: MethodData
     type: object
@@ -520,7 +517,6 @@ definitions:
     properties:
       MethodList:
         $ref: '#/definitions/MethodList'
-
   MethodList:
     type: object
     title: MethodList
@@ -531,7 +527,6 @@ definitions:
         description: list of methods
         items:
           $ref: '#/definitions/Method'
-
   LabelData:
     title: LabelData
     type: object
@@ -540,7 +535,6 @@ definitions:
     properties:
       LabelList:
         $ref: '#/definitions/LabelList'
-
   LabelList:
     type: object
     description: List of labels
@@ -549,28 +543,25 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Label'
-
   Label:
     title: Label
     type: object
     description: List of Genotypes
     properties:
       value:
-        type: string 
+        type: string
         description: label name
-      typeOfLabel: 
+      typeOfLabel:
         type: string
         description: type of label
-
   CohortData:
-    title: CohortData #this will also contain meta information about the sample of the population
+    title: CohortData
     type: object
     required:
       - GenotypeList
     properties:
       GenotypeList:
         $ref: '#/definitions/GenotypeList'
-
   GenotypeList:
     title: GenotypeList
     type: object
@@ -584,7 +575,6 @@ definitions:
         description: Additional Information on genotype
         items:
           $ref: '#/definitions/Genotype'
-  
   Genotype:
     title: Genotype
     type: object
@@ -600,7 +590,6 @@ definitions:
         description: Additional Information on genotype
         items:
           $ref: '#/definitions/GenotypeMethod'
-
   GenotypeMethod:
     title: GenotypeMethod
     type: object
@@ -610,11 +599,11 @@ definitions:
         type: string
         description: Type of method label
         enum:
-        - TYPING_METHOD
-        - TYPING_REF
-        - TYPING_DATE
-        - TYPING_IMGT_VER
-        - MIRING_REF
+          - TYPING_METHOD
+          - TYPING_REF
+          - TYPING_DATE
+          - TYPING_IMGT_VER
+          - MIRING_REF
       methodValue:
         type: string
         description: Value of method
@@ -624,11 +613,10 @@ definitions:
       methodReference:
         type: string
         description: To be used to refer to an external source
-
   License:
     title: License
     type: object
-    description: License models, there will be a default license if one is not provided
+    description: 'License models, there will be a default license if one is not provided'
     required:
       - typeOfLicense
     properties:
@@ -636,14 +624,13 @@ definitions:
         type: string
         description: Type of creative commons license
         enum:
-        - CC0
-        - by
-        - by-sa
-        - by-nd
-        - by-nc
-        - by-nc-sa
-        - by-nc-nd
-
+          - CC0
+          - by
+          - by-sa
+          - by-nd
+          - by-nc
+          - by-nc-sa
+          - by-nc-nd
   Method:
     title: Method
     type: object
@@ -653,19 +640,19 @@ definitions:
         type: string
         description: Type of method label
         enum:
-        - EM_ALGORITHM
-        - EM_VERSION
-        - EM_ALG_REF
-        - MAC_SERVICE
-        - MAC_SER_REF
-        - MAC_VERSION
-        - ARS_SERVICE
-        - ARS_SERV_REF
-        - ARS_VERSION
-        - HWE_METHOD
-        - HWE_REF
-        - LD_METHOD
-        - LD_METHOD_REF
+          - EM_ALGORITHM
+          - EM_VERSION
+          - EM_ALG_REF
+          - MAC_SERVICE
+          - MAC_SER_REF
+          - MAC_VERSION
+          - ARS_SERVICE
+          - ARS_SERV_REF
+          - ARS_VERSION
+          - HWE_METHOD
+          - HWE_REF
+          - LD_METHOD
+          - LD_METHOD_REF
       methodValue:
         type: string
         description: Value of method
@@ -675,44 +662,40 @@ definitions:
       methodReference:
         type: string
         description: To be used to refer to an external source
-
   ResolutionData:
     title: ResolutionData
     type: array
     description: List of Method
     items:
       $ref: '#/definitions/ResolutionInfo'
-      
   ResolutionInfo:
     title: ResolutionInfo
     properties:
-     scopeElement:
-       type: string
-     resolution:
-       type: string
-       description: resolution of the data
-       enum:
-        - G
-        - P
-        - gNMDP
-        - gDKMS
-        - 2-Field
-        - 4-Field
-        - 6-Field
-        - 8-Field
-        - Serology
-
+      scopeElement:
+        type: string
+      resolution:
+        type: string
+        description: resolution of the data
+        enum:
+          - G
+          - P
+          - gNMDP
+          - gDKMS
+          - 2-Field
+          - 4-Field
+          - 6-Field
+          - 8-Field
+          - Serology
   FrequencyError:
     title: FrequencyError
     properties:
-     value:
-       type: number
-       format: double
-       description: value of error
-     typeOfError:
-       type: string
-       description: type of error
-
+      value:
+        type: number
+        format: double
+        description: value of error
+      typeOfError:
+        type: string
+        description: type of error
   PopulationRequest:
     title: PopulationRequest
     type: object
@@ -721,14 +704,12 @@ definitions:
         type: string
       description:
         type: string
-
   Error:
     properties:
-     code:
-       type: string
-     message:
-       type: string
-
+      code:
+        type: string
+      message:
+        type: string
 responses:
   Standard500ErrorResponse:
     description: An unexpected error ocurred

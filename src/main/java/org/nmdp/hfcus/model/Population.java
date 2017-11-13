@@ -15,13 +15,6 @@ public class Population implements Serializable {
         //intentionally left empty
     }
 
-    public Population(PopulationData swaggerObject){
-        if (swaggerObject.getId() != null){
-            id = swaggerObject.getId();
-        }
-        name = swaggerObject.getName();
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -32,6 +32,7 @@ gradlew
 gradlew.bat
 settings.gradle
 .travis.yml
+README.md
 
 #eclipse files
 .settings

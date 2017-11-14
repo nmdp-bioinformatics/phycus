@@ -34,6 +34,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class HFCurationApiController implements HfcApi{
     }
 
     @Override
-    public ResponseEntity<HFCurationResponse> hfcPost(@RequestBody HFCurationRequest hfCurationRequest) {
+    public ResponseEntity<HFCurationResponse> hfcPost(@Valid @RequestBody HFCurationRequest hfCurationRequest) {
         if (hfCurationRequest != null) {
             HFCuration curation = new HFCuration(repositoryContainer, hfCurationRequest);
             curation = repositoryContainer.getCurationRepository().save(curation);

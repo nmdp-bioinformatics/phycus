@@ -558,10 +558,16 @@ definitions:
     title: CohortData
     type: object
     required:
+      - name
       - GenotypeList
     properties:
       GenotypeList:
         $ref: '#/definitions/GenotypeList'
+      name:
+        title: Name
+        type: string
+        description: Name of the population
+
   GenotypeList:
     title: GenotypeList
     type: object

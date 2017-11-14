@@ -13,6 +13,7 @@ public class Cohort {
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     private GenotypeList genotypeList;
+    private String name;
 
     public Cohort(){
         //intentionally left empty
@@ -22,6 +23,7 @@ public class Cohort {
         if (swaggerObject.getGenotypeList() != null) {
             genotypeList = new GenotypeList(swaggerObject.getGenotypeList());
         }
+        name = swaggerObject.getName();
     }
 
     public Long getId() {
@@ -39,10 +41,19 @@ public class Cohort {
     public void setGenotypeList(GenotypeList genotypeList) {
         this.genotypeList = genotypeList;
     }
+    
+    public String getName() {
+    	return name;
+    }
+    
+    public void setName(String name) {
+    	this.name = name;
+    }
 
     public CohortData toSwaggerObject(){
         CohortData data = new CohortData();
         data.setGenotypeList(genotypeList.toSwaggerObject());
+        data.setName(name);
         return data;
     }
 }

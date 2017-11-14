@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Scope {
+public class Scope implements ICurationDataModel<ScopeElement> {
     public Scope(){
         //intentionally left empty
     }
@@ -57,6 +57,7 @@ public class Scope {
         this.typeOfScope = typeOfScope;
     }
 
+    @Override
     public ScopeElement toSwaggerObject(){
         ScopeElement data = new ScopeElement();
         data.setName(name);

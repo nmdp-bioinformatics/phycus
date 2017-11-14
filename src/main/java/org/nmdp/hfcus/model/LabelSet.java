@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class LabelSet {
+public class LabelSet implements ICurationDataModel<LabelData> {
     public LabelSet(){
         //intentionally left empty
     }
@@ -44,6 +44,7 @@ public class LabelSet {
         this.labelList = labelList;
     }
 
+    @Override
     public LabelData toSwaggerObject(){
         LabelData data = new LabelData();
         if (labelList != null){

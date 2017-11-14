@@ -65,13 +65,6 @@ public class HFCurationApiController implements HfcApi{
         repositoryContainer.setScopeListRepository(scopeListRepository);
     }
 
-    @ExceptionHandler(RequiredFieldInvalidException.class)
-    private ResponseEntity<Error> requiredFieldInvalidExceptionHandler(RequiredFieldInvalidException ex){
-        Error error = new Error();
-        error.setMessage(ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-
     private <T> ResponseEntity<T> RetrieveSubdataFromDatabase(Long submissionId, Function<HFCuration, ICurationDataModel<T>> converter){
         HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
         ResponseEntity<T> responseEntity;

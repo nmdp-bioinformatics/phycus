@@ -4,6 +4,7 @@ import io.swagger.model.HaplotypeFrequencyData;
 import io.swagger.model.License;
 import io.swagger.model.ResolutionData;
 import io.swagger.model.ResolutionInfo;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,15 +18,28 @@ public class HaplotypeFrequencySet {
 
     public HaplotypeFrequencySet(HaplotypeFrequencyData swaggerObject){
         license = swaggerObject.getLicense().getTypeOfLicense();
+        if (license == null){
+            throw new RequiredFieldInvalidException("requires a license");
+        }
         if (swaggerObject.getResolutionData() != null) {
             resolutionList = new ArrayList<>();
             for (ResolutionInfo resolutionInfo :swaggerObject.getResolutionData()) {
                 resolutionList.add(new Resolution(resolutionInfo));
             }
         }
-        frequencyList = new ArrayList<>();
-        for (io.swagger.model.HaplotypeFrequency frequency: swaggerObject.getHaplotypeFrequencyList()) {
-            frequencyList.add(new HaplotypeFrequency(frequency));
+        List<io.swagger.model.HaplotypeFrequency> swaggerFrequencyList = swaggerObject.getHaplotypeFrequencyList();
+        if (swaggerFrequencyList != null) {
+            frequencyList = new ArrayList<>();
+            for (io.swagger.model.HaplotypeFrequency frequency: swaggerFrequencyList) {
+                frequencyList.add(new HaplotypeFrequency(frequency));
+            }
+            if (frequencyList.size() == 0){
+                throw new RequiredFieldInvalidException("frequency list must not be empty");
+            }
+        }
+        else
+        {
+            throw new RequiredFieldInvalidException("requires a frequency list");
         }
         if (swaggerObject.getQualityList() != null){
             qualityList = new ArrayList<>();

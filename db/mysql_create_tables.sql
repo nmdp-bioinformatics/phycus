@@ -38,6 +38,7 @@ DROP TABLE IF EXISTS `cohort`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cohort` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   `genotype_list_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_km5dlx9po75b02v7ol0xm447m` (`genotype_list_id`),

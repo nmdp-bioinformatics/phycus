@@ -20,6 +20,9 @@ public class CohortData  implements Serializable {
 
   @JsonProperty("GenotypeList")
   private GenotypeList genotypeList = null;
+  
+  @JsonProperty("name")
+  private String name = null;
 
   public CohortData genotypeList(GenotypeList genotypeList) {
     this.genotypeList = genotypeList;
@@ -42,6 +45,27 @@ public class CohortData  implements Serializable {
   public void setGenotypeList(GenotypeList genotypeList) {
     this.genotypeList = genotypeList;
   }
+  
+  public CohortData name(String name) {
+	    this.name = name;
+	    return this;
+	  }
+
+   /**
+    * Name of the Cohort
+    * @return name
+    **/
+	  @ApiModelProperty(required = true, value = "Name of the cohort")
+	  @NotNull
+
+
+	  public String getName() {
+	    return name;
+	  }
+
+	  public void setName(String name) {
+	    this.name = name;
+	  }
 
 
   @Override
@@ -53,7 +77,8 @@ public class CohortData  implements Serializable {
       return false;
     }
     CohortData cohortData = (CohortData) o;
-    return Objects.equals(this.genotypeList, cohortData.genotypeList);
+    return Objects.equals(this.genotypeList, cohortData.genotypeList) &&
+            Objects.equals(this.name, cohortData.name);
   }
 
   @Override
@@ -65,7 +90,7 @@ public class CohortData  implements Serializable {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CohortData {\n");
-    
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    genotypeList: ").append(toIndentedString(genotypeList)).append("\n");
     sb.append("}");
     return sb.toString();

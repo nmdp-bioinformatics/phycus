@@ -2,6 +2,7 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.LabelData;
 import io.swagger.model.LabelList;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,11 +15,18 @@ public class LabelSet {
     }
 
     public LabelSet(LabelData swaggerObject) {
-        if (swaggerObject.getLabelList().getLabel() != null){
+        if (swaggerObject.getLabelList() != null && swaggerObject.getLabelList().getLabel() != null){
             labelList = new ArrayList<>();
             for (io.swagger.model.Label method : swaggerObject.getLabelList().getLabel() ){
                 labelList.add(new Label(method));
             }
+            if (labelList.size() == 0){
+                throw new RequiredFieldInvalidException("label list must not be empty");
+            }
+        }
+        else
+        {
+            throw new RequiredFieldInvalidException("requires label list");
         }
     }
 

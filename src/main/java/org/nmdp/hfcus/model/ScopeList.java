@@ -2,6 +2,7 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.ScopeData;
 import io.swagger.model.ScopeElement;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +19,13 @@ public class ScopeList {
             for (ScopeElement scope: swaggerObject.getScopeElement()) {
                 scopeList.add(new Scope(scope));
             }
+            if (scopeList.size() == 0){
+                throw new RequiredFieldInvalidException("scopeList must not be empty");
+            }
+        }
+        else
+        {
+            throw new RequiredFieldInvalidException("requires scopeList");
         }
     }
 

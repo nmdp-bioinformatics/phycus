@@ -73,12 +73,6 @@
       <version>1.1</version>
       <scope>compile</scope>
     </dependency>
-     <dependency>
-      <groupId>org.nmdp.ngs</groupId>
-      <artifactId>ngs-hml</artifactId>
-      <version>1.8.3</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 
 

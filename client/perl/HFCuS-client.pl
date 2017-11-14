@@ -23,7 +23,7 @@ my $opt_help;
 my $opt_verbose = 0;
 my $action      = "";
 my $submission_id;
-my $base = "http://localhost:8080"; 
+my $base = "http://phycus.b12x.org:8080"; 
 # my $base = "http://hfcus.b12x.org:8080";
 my $opt_local;
 
@@ -51,7 +51,6 @@ if ($opt_help) {
 
 if($opt_local) {
     $base = "http://localhost:8080";
-    # $base = "http://hfcus.b12x.org:8080";
 }
 print "Connecting to $base\n";
 
@@ -218,6 +217,7 @@ Options and arguments
                          push: push HF set <file>
                          get_all: get all submissions
                          del_sub: deleting HF set by submission ID -sub <submission_id>
+   --local               connects to localhost:8080 as the server instead of http://phycus.b12x.org:8080
    The action push requires a file with HF data as argument.   
 __END_OF_HELP__
 

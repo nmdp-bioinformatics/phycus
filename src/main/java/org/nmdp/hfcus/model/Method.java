@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Method {
+public class Method implements ICurationDataModel<io.swagger.model.Method> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,6 +67,7 @@ public class Method {
         this.methodReference = methodReference;
     }
 
+    @Override
     public io.swagger.model.Method toSwaggerObject(){
         io.swagger.model.Method data = new io.swagger.model.Method();
         data.setTypeOfMethod(typeOfMethod);

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class HFCuration implements Serializable {
+public class HFCuration implements Serializable, ICurationDataModel<HFCurationResponse> {
 
     public HFCuration(){
         // intentionally left empty
@@ -151,6 +151,7 @@ public class HFCuration implements Serializable {
         this.accessData = accessData;
     }
 
+    @Override
     public HFCurationResponse toSwaggerObject(){
         HFCurationResponse data = new HFCurationResponse();
         data.setSubmissionID(id);

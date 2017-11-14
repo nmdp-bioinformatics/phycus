@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class FrequencyError {
+public class FrequencyError implements ICurationDataModel<io.swagger.model.FrequencyError> {
     public FrequencyError(){
         //intentionally left empty
     }
@@ -46,6 +46,7 @@ public class FrequencyError {
         this.typeOfError = typeOfError;
     }
 
+    @Override
     public io.swagger.model.FrequencyError toSwaggerObject(){
         io.swagger.model.FrequencyError data = new io.swagger.model.FrequencyError();
         data.setValue(value);

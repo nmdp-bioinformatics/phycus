@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ScopeList {
+public class ScopeList implements ICurationDataModel<ScopeData> {
     public ScopeList(){
         //intentionally left empty
     }
@@ -51,6 +51,7 @@ public class ScopeList {
         this.scopeList = scopeList;
     }
 
+    @Override
     public ScopeData toSwaggerObject(){
         ScopeData data = new ScopeData();
         if (scopeList != null){

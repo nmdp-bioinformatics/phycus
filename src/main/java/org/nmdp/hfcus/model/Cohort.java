@@ -7,7 +7,7 @@ import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 import javax.persistence.*;
 
 @Entity
-public class Cohort {
+public class Cohort implements ICurationDataModel<CohortData> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,6 +56,7 @@ public class Cohort {
     	this.name = name;
     }
 
+    @Override
     public CohortData toSwaggerObject(){
         CohortData data = new CohortData();
         data.setGenotypeList(genotypeList.toSwaggerObject());

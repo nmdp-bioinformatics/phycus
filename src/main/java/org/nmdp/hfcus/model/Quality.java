@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Quality {
+public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
     public Quality(){
         //intentionally left empty
     }
@@ -54,6 +54,7 @@ public class Quality {
         this.typeOfQuality = typeOfQuality;
     }
 
+    @Override
     public io.swagger.model.Quality toSwaggerObject(){
         io.swagger.model.Quality data = new io.swagger.model.Quality();
         data.setValue(value);

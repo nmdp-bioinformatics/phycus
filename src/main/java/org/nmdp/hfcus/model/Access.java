@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Access {
+public class Access implements ICurationDataModel<AccessData> {
     public Access(){
         //intentionally left empty
     }
@@ -42,7 +42,8 @@ public class Access {
         this.typeOfAccess = typeOfAccess;
     }
 
-    public AccessData toSwaggerObject(){
+    @Override
+    public  AccessData toSwaggerObject(){
         AccessData data = new AccessData();
         data.setTypeOfAccess(typeOfAccess);
         return data;

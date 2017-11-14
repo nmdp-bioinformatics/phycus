@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class MethodSet {
+public class MethodSet implements ICurationDataModel<MethodData> {
 
     public MethodSet(){
         //intentionally left empty
@@ -53,6 +53,7 @@ public class MethodSet {
         this.methodList = methodList;
     }
 
+    @Override
     public MethodData toSwaggerObject(){
         MethodData data = new MethodData();
         if (methodList != null){

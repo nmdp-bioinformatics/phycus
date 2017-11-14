@@ -40,3 +40,6 @@ buildNumber.properties
 .idea/
 /src/main/java/io/swagger/api/HfcApiController.java
 /src/main/java/io/swagger/api/PopulationApiController.java
+/.settings/
+/.classpath
+/.project

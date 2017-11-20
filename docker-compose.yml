@@ -1,6 +1,20 @@
 version: '3.1'
 
 services:
+  web:
+    depends_on:
+      - db
+    image: curation:latest
+    container_name: curation-interface
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - MYSQL_DATABASE_URL=jdbc:mysql://db:3306/hfcusdb
+      - MYSQL_USER=hfcus_user
+      - MYSQL_PASSWORD=hfcus_user1
+    command:
+      - /app/bash-start-java-tomcat.sh
   db:
     image: mysql:5.6
     container_name: hfcus_mysql
@@ -14,7 +28,7 @@ services:
         MYSQL_USER: hfcus_user
         MYSQL_PASSWORD: hfcus_user1
     volumes:
-      - $PWD/:/docker-entrypoint-initdb.d
+      - $PWD/db:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

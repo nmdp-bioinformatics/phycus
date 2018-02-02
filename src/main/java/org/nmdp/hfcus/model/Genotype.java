@@ -1,5 +1,7 @@
 package org.nmdp.hfcus.model;
 
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,9 @@ public class Genotype implements ICurationDataModel<io.swagger.model.Genotype> {
 
     public Genotype(io.swagger.model.Genotype swaggerObject){
         genotypeString = swaggerObject.getGenotypeString();
+        if (genotypeString == null){
+            throw new RequiredFieldInvalidException("Requires a genotype string");
+        }
         if (swaggerObject.getGenotypingMethods() != null){
             genotypingMethods = new ArrayList<>();
             for (io.swagger.model.GenotypeMethod method :swaggerObject.getGenotypingMethods()) {

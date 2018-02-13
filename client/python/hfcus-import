@@ -50,18 +50,21 @@ def main():
     url = args.url
     freqfile = args.freqfile
     config = args.config
-    client = pyhfcus.ApiClient(host=url)
+    api_config = pyhfcus.Configuration()
+    api_config.host = url
+
+    client = pyhfcus.ApiClient(configuration=api_config)
     api_instance = pyhfcus.DefaultApi(api_client=client)
     with open(config) as data_file:
         config = json.load(data_file)
 
-    resolution = config['resolution']
     license_type = config['license_type']
-    popname = config['population_name']
-    resinfo = [ResolutionInfo(resolution=resolution)]
     license = License(type_of_license=license_type)
-    hapfreqdata = HaplotypeFrequencyData()
-    popdata = PopulationData(name=popname)
+
+    pop_id = config['population_id']
+
+    resolution = config['resolution']
+    resinfo = [ResolutionInfo(resolution=resolution)]
 
     hapfreqs = []
     with open(freqfile, 'r') as f:
@@ -73,10 +76,11 @@ def main():
             hapfreqs.append(hapfreq)
         f.close()
 
-    hapfreqdata = HaplotypeFrequencyData(haplotype_frequency_list=hapfreqs,
-                                         resolution_data=resinfo,
-                                         license=license)
-    cur_request = HFCurationRequest(population_data=popdata,
+    hapfreqdata = HaplotypeFrequencyData(license=license,
+                        haplotype_frequency_list=hapfreqs,
+                        resolution_data=resinfo)
+
+    cur_request = HFCurationRequest(population_id=pop_id,
                                     haplotype_frequency_data=hapfreqdata)
 
     response = api_instance.hfc_post(hf_curation_request=cur_request)

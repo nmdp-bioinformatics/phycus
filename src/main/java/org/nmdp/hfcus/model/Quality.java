@@ -1,19 +1,27 @@
 package org.nmdp.hfcus.model;
 
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Quality {
+public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
     public Quality(){
         //intentionally left empty
     }
 
     public Quality(io.swagger.model.Quality swaggerObject){
         value = swaggerObject.getValue();
+        if (value == null){
+            throw new RequiredFieldInvalidException("requires value");
+        }
         typeOfQuality = swaggerObject.getTypeOfQuality();
+        if (typeOfQuality == null){
+            throw new RequiredFieldInvalidException("requires typeOfQuality");
+        }
     }
 
     @Id
@@ -46,6 +54,7 @@ public class Quality {
         this.typeOfQuality = typeOfQuality;
     }
 
+    @Override
     public io.swagger.model.Quality toSwaggerObject(){
         io.swagger.model.Quality data = new io.swagger.model.Quality();
         data.setValue(value);

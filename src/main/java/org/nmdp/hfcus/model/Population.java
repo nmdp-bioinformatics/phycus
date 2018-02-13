@@ -1,6 +1,7 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.PopulationData;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Population implements Serializable {
+public class Population implements Serializable, ICurationDataModel<PopulationData> {
 
     public Population(){
         //intentionally left empty
@@ -25,6 +26,9 @@ public class Population implements Serializable {
 
     public Population(String name, String description) {
         this.name = name;
+        if (this.name == null){
+            throw new RequiredFieldInvalidException("requires name");
+        }
         this.description = description;
     }
 
@@ -52,6 +56,7 @@ public class Population implements Serializable {
         this.description = description;
     }
 
+    @Override
     public PopulationData toSwaggerObject(){
         PopulationData data = new PopulationData();
         data.setId(id);

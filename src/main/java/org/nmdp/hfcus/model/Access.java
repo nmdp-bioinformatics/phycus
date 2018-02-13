@@ -1,6 +1,7 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.AccessData;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Access {
+public class Access implements ICurationDataModel<AccessData> {
     public Access(){
         //intentionally left empty
     }
 
     public Access(AccessData swaggerObject) {
         typeOfAccess = swaggerObject.getTypeOfAccess();
+        if (typeOfAccess == null){
+            throw new RequiredFieldInvalidException("Requires type of access");
+        }
     }
 
     @Id
@@ -38,7 +42,8 @@ public class Access {
         this.typeOfAccess = typeOfAccess;
     }
 
-    public AccessData toSwaggerObject(){
+    @Override
+    public  AccessData toSwaggerObject(){
         AccessData data = new AccessData();
         data.setTypeOfAccess(typeOfAccess);
         return data;

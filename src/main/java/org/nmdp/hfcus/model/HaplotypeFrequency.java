@@ -1,5 +1,7 @@
 package org.nmdp.hfcus.model;
 
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,13 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class HaplotypeFrequency {
+public class HaplotypeFrequency implements ICurationDataModel<io.swagger.model.HaplotypeFrequency> {
     public HaplotypeFrequency(){
         //intentionally left empty
     }
     public HaplotypeFrequency(io.swagger.model.HaplotypeFrequency swaggerObject) {
         haplotypeString = swaggerObject.getHaplotypeString();
+        if (haplotypeString == null){
+            throw new RequiredFieldInvalidException("requires a haplotype string");
+        }
         frequency = swaggerObject.getFrequency();
+        if (frequency == null){
+            throw new RequiredFieldInvalidException("requires a frequency");
+        }
         if (swaggerObject.getFrequencyErrorList() != null){
             errorList = new ArrayList<>();
             for (io.swagger.model.FrequencyError error: swaggerObject.getFrequencyErrorList()) {
@@ -65,6 +73,7 @@ public class HaplotypeFrequency {
         this.errorList = errorList;
     }
 
+    @Override
     public io.swagger.model.HaplotypeFrequency toSwaggerObject(){
         io.swagger.model.HaplotypeFrequency data = new io.swagger.model.HaplotypeFrequency();
         data.setHaplotypeString(haplotypeString);

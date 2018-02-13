@@ -49,7 +49,7 @@ setup(
     packages=[
         'pyhfcus',
         'pyhfcus.models',
-        'pyhfcus.apis'
+        'pyhfcus.api'
     ],
     package_dir={'pyhfcus':
                  'pyhfcus'},

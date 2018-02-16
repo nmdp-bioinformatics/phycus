@@ -1,9 +1,9 @@
 use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
-use WWW::SwaggerClient::PopulationAPIApi;
+use WWW::SwaggerClient::PopulationApiApi;
 use WWW::SwaggerClient::Object::PopulationRequest;
 
-my $api_instance = WWW::SwaggerClient::PopulationAPIApi->new();
+my $api_instance = WWW::SwaggerClient::PopulationApiApi->new();
 my $population_request = WWW::SwaggerClient::Object::PopulationRequest->new(); # PopulationRequest | Population Request
 $population_request->{name} = "CAU-US";
 $population_request->{description} = "US Caucasian";
@@ -17,5 +17,5 @@ eval {
     print "The Population ID is ${popId}\n";
 };
 if ($@) {
-    warn "Exception when calling PopulationAPIApi->create_population: $@\n";
+    warn "Exception when calling PopulationApiApi->create_population: $@\n";
 }

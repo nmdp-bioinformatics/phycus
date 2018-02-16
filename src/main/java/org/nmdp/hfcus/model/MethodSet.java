@@ -2,24 +2,32 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.MethodData;
 import io.swagger.model.MethodList;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class MethodSet {
+public class MethodSet implements ICurationDataModel<MethodData> {
 
     public MethodSet(){
         //intentionally left empty
     }
 
     public MethodSet(MethodData swaggerObject) {
-        if (swaggerObject.getMethodList().getMethod() != null){
+        if (swaggerObject.getMethodList() != null && swaggerObject.getMethodList().getMethod() != null){
             methodList = new ArrayList<>();
             for (io.swagger.model.Method method : swaggerObject.getMethodList().getMethod() ){
                 methodList.add(new Method(method));
             }
+            if (methodList.size() == 0){
+                throw new RequiredFieldInvalidException("method list must not be empty");
+            }
+        }
+        else
+        {
+            throw new RequiredFieldInvalidException("requires method list");
         }
     }
 
@@ -45,6 +53,7 @@ public class MethodSet {
         this.methodList = methodList;
     }
 
+    @Override
     public MethodData toSwaggerObject(){
         MethodData data = new MethodData();
         if (methodList != null){

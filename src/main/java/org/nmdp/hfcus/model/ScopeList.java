@@ -2,13 +2,14 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.ScopeData;
 import io.swagger.model.ScopeElement;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ScopeList {
+public class ScopeList implements ICurationDataModel<ScopeData> {
     public ScopeList(){
         //intentionally left empty
     }
@@ -18,6 +19,13 @@ public class ScopeList {
             for (ScopeElement scope: swaggerObject.getScopeElement()) {
                 scopeList.add(new Scope(scope));
             }
+            if (scopeList.size() == 0){
+                throw new RequiredFieldInvalidException("scopeList must not be empty");
+            }
+        }
+        else
+        {
+            throw new RequiredFieldInvalidException("requires scopeList");
         }
     }
 
@@ -43,6 +51,7 @@ public class ScopeList {
         this.scopeList = scopeList;
     }
 
+    @Override
     public ScopeData toSwaggerObject(){
         ScopeData data = new ScopeData();
         if (scopeList != null){

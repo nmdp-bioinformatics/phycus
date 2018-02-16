@@ -44,7 +44,7 @@ import org.dishevelled.commandline.argument.URLArgument;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DefaultApi;
-import io.swagger.client.api.PopulationAPIApi;
+import io.swagger.client.api.PopulationApiApi;
 import io.swagger.client.model.CohortData;
 import io.swagger.client.model.HFCurationRequest;
 import io.swagger.client.model.HFCurationResponse;
@@ -134,9 +134,12 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		reader.close();
 		
 		ApiClient apiClient = new ApiClient();
+		apiClient.setConnectTimeout(60000);
+		apiClient.setReadTimeout(60000);
+		apiClient.setWriteTimeout(60000);
 		apiClient.setBasePath(url.toString());
 		DefaultApi api = new DefaultApi(apiClient);
-		PopulationAPIApi popApi = new PopulationAPIApi(apiClient);
+		PopulationApiApi popApi = new PopulationApiApi(apiClient);
 		
 		for (String populationName : populationMap.keySet()) {
 	        HFCurationRequest hfCurationRequest = new HFCurationRequest();
@@ -144,10 +147,10 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	        PopulationRequest populationRequest = new PopulationRequest();
 	        populationRequest.setName(populationName);
 	        
-	        CohortData cohortData = new CohortData();
-	        cohortData.setName(inputFile.getName());
+	        //CohortData cohortData = new CohortData();
+	        //cohortData.setName(inputFile.getName());
 	        
-	        hfCurationRequest.setCohortData(cohortData);
+	        //hfCurationRequest.setCohortData(cohortData);
 	        
 	        PopulationData populationData = popApi.createPopulation(populationRequest);
 	        System.out.println(populationData);

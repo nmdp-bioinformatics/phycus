@@ -23,7 +23,8 @@ my $opt_help;
 my $opt_verbose = 0;
 my $action      = "";
 my $submission_id;
-my $base = "http://hfcus.b12x.org:8080";
+my $base = "http://phycus.b12x.org:8080"; 
+# my $base = "http://hfcus.b12x.org:8080";
 my $opt_local;
 
 
@@ -55,12 +56,17 @@ print "Connecting to $base\n";
 
 print "$prg: $action\n" if $opt_verbose;
 
-if ( $action !~ /(get_sub|get_all|push)/i ) {
+if ( $action !~ /(get_sub|get_all|push|del_sub)/i ) {
    print "\n$prg: wrong action $action\n";
    exit 1;
 }
 
 if ( $action =~ /get_sub/i && !$submission_id ) {
+   print "\n$prg: Submission ID missing for action $action\n";
+   exit 1;
+}
+
+if ( $action =~ /del_sub/i && !$submission_id ) {
    print "\n$prg: Submission ID missing for action $action\n";
    exit 1;
 }
@@ -72,6 +78,9 @@ print Dumper($api_instance) if $opt_verbose;
 
 if ( $action eq "get_sub" ) {
    &get_haplotypes( $api_instance, $submission_id );
+}
+elsif ( $action eq "del_sub" ) {
+   &delete_submission( $api_instance, $submission_id );
 }
 elsif ( $action eq "push" ) {
    my $file;
@@ -136,6 +145,22 @@ sub push_haplotypes {
 
 }
 
+sub delete_submission {
+   my ( $api_instance, $submission_id ) = @_;
+   eval {
+      my $response = $api_instance->hfc_submission_id_delete(
+         submission_id => $submission_id );
+      print "Submission ID: " . $submission_id . " deleted.\n";
+   };
+
+   if ($@) {
+      warn
+         "Exception when calling DefaultApi->hfc_submission_id_delete: $@\n";
+   }   
+}
+
+
+
 sub get_haplotypes {
    my ( $api_instance, $submission_id ) = @_;
    eval {
@@ -184,13 +209,15 @@ Purpose
    Client for HFCuS
 Syntax
    $prg [--help]
-   $prg [--verbose] --action=[get_sub|get_all|push]
+   $prg [--verbose] --action=[get_sub|get_all|push|del_sub]
 Options and arguments
    --help                show this help
    --[no]verbose         set verbose mode; default: $def_v
    --action              get_sub: getting HF set by submission ID -sub <submission_id>
                          push: push HF set <file>
                          get_all: get all submissions
+                         del_sub: deleting HF set by submission ID -sub <submission_id>
+   --local               connects to localhost:8080 as the server instead of http://phycus.b12x.org:8080
    The action push requires a file with HF data as argument.   
 __END_OF_HELP__
 

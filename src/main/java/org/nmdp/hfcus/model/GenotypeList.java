@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class GenotypeList {
+public class GenotypeList implements ICurationDataModel<io.swagger.model.GenotypeList> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,6 +56,7 @@ public class GenotypeList {
         this.genotypeList = genotypeList;
     }
 
+    @Override
     public io.swagger.model.GenotypeList toSwaggerObject(){
         io.swagger.model.GenotypeList data = new io.swagger.model.GenotypeList();
         if (license != null) {

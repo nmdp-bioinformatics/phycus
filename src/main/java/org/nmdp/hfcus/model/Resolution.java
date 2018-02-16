@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Resolution {
+public class Resolution implements ICurationDataModel<ResolutionInfo> {
     public Resolution(){
         //intentionally left empty
     }
@@ -48,6 +48,7 @@ public class Resolution {
         this.resolution = resolution;
     }
 
+    @Override
     public ResolutionInfo toSwaggerObject(){
         ResolutionInfo data = new ResolutionInfo();
         data.setScopeElement(scopeElement);

@@ -19,22 +19,6 @@ hs_err_pid*
 target
 .gradle
 build
-
-#generated files
-docs
-src
-gradle
-build.gradle
-build.sbt
-git_push.sh
-gradle.properties
-gradlew
-gradlew.bat
-settings.gradle
-.travis.yml
-README.md
-
-#eclipse files
-.settings
-.classpath
-.project
+/.project
+/.classpath
+/.settings/

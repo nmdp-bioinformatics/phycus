@@ -19,7 +19,6 @@ mvn clean package
 
 The project is setup to use mysql Docker instance for local development.
 ```bash
-cd db
 docker-compose up -d
 ```
 The phpMyAdmin page should be available at [http://localhost:9999/](http://localhost:9999/)

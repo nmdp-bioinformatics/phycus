@@ -2,11 +2,12 @@ package org.nmdp.hfcus.model;
 
 
 import io.swagger.model.CohortData;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 
 @Entity
-public class Cohort {
+public class Cohort implements ICurationDataModel<CohortData> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +24,17 @@ public class Cohort {
         if (swaggerObject.getGenotypeList() != null) {
             genotypeList = new GenotypeList(swaggerObject.getGenotypeList());
         }
+        else
+        {
+            throw new RequiredFieldInvalidException("Requires list of genotypes");
+        }
         name = swaggerObject.getName();
+        if (name == null){
+            throw new RequiredFieldInvalidException("Requires name for the cohort");
+        }
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
@@ -50,6 +56,7 @@ public class Cohort {
     	this.name = name;
     }
 
+    @Override
     public CohortData toSwaggerObject(){
         CohortData data = new CohortData();
         data.setGenotypeList(genotypeList.toSwaggerObject());

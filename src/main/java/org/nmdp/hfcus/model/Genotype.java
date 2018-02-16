@@ -1,11 +1,13 @@
 package org.nmdp.hfcus.model;
 
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Genotype {
+public class Genotype implements ICurationDataModel<io.swagger.model.Genotype> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +22,9 @@ public class Genotype {
 
     public Genotype(io.swagger.model.Genotype swaggerObject){
         genotypeString = swaggerObject.getGenotypeString();
+        if (genotypeString == null){
+            throw new RequiredFieldInvalidException("Requires a genotype string");
+        }
         if (swaggerObject.getGenotypingMethods() != null){
             genotypingMethods = new ArrayList<>();
             for (io.swagger.model.GenotypeMethod method :swaggerObject.getGenotypingMethods()) {
@@ -52,6 +57,7 @@ public class Genotype {
         this.genotypingMethods = genotypingMethods;
     }
 
+    @Override
     public io.swagger.model.Genotype toSwaggerObject(){
         io.swagger.model.Genotype data = new io.swagger.model.Genotype();
         data.setGenotypeString(genotypeString);

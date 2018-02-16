@@ -2,6 +2,7 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.*;
 import org.nmdp.hfcus.dao.RepositoryContainer;
+import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 
@@ -9,20 +10,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class HFCuration implements Serializable {
+public class HFCuration implements Serializable, ICurationDataModel<HFCurationResponse> {
 
     public HFCuration(){
         // intentionally left empty
     }
 
-    public HFCuration(RepositoryContainer repositoryContainer, HFCurationRequest data){
+    public HFCuration(RepositoryContainer repositoryContainer, HFCurationRequest data) {
         // Require a populationData ID
         if (data.getPopulationID() == null){
-            throw new RuntimeException("Requires Population ID");
+            throw new RequiredFieldInvalidException("Requires Population ID");
         }
         populationData = repositoryContainer.getPopulationRepository().findOne(data.getPopulationID());
         if (populationData == null) {
-            throw new RuntimeException("Not a valid Population ID");
+            throw new RequiredFieldInvalidException("Not a valid Population ID");
         }
         if (data.getCohortData() != null){
             cohortData = new Cohort(data.getCohortData());
@@ -150,6 +151,7 @@ public class HFCuration implements Serializable {
         this.accessData = accessData;
     }
 
+    @Override
     public HFCurationResponse toSwaggerObject(){
         HFCurationResponse data = new HFCurationResponse();
         data.setSubmissionID(id);

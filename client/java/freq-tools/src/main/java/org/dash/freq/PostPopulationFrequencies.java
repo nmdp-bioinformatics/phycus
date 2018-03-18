@@ -46,6 +46,7 @@ import io.swagger.client.ApiException;
 import io.swagger.client.api.DefaultApi;
 import io.swagger.client.api.PopulationApiApi;
 import io.swagger.client.model.CohortData;
+import io.swagger.client.model.GenotypeList;
 import io.swagger.client.model.HFCurationRequest;
 import io.swagger.client.model.HFCurationResponse;
 import io.swagger.client.model.HaplotypeFrequency;
@@ -63,76 +64,76 @@ import io.swagger.client.model.PopulationRequest;
  *
  */
 public class PostPopulationFrequencies implements Callable<Integer> {
-	
-    private final File inputFile;
-    private final String gtRegistry;
-    private final String estEntity;
-    private final URL url;
 
-    private static final String USAGE = "post-population-frequencies [args]";
+	private final File inputFile;
+	private final String gtRegistry;
+	private final String estEntity;
+	private final URL url;
 
+	private static final String USAGE = "post-population-frequencies [args]";
 
-    /**
-     * Post population frequencies to the frequency curation service
-     *
-     * @param inputFile input file
-     * @param accessId
-     * @param cohortId
-     * @throws MalformedURLException 
-     */
-    public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url) throws MalformedURLException {
-        this.inputFile = inputFile;
-        this.gtRegistry = gtRegistry;
-        this.estEntity = estEntity;
-        if (url == null) {
-        	this.url = new URL("http://localhost:8080");
-        } else {
-        	this.url = url;
-        }
-    }
-    
-    @Override
-    public Integer call() throws Exception {
-    	postPopulationFrequencies(reader(inputFile));
-    	
-    	return 0;
-	}  
-    
+	/**
+	 * Post population frequencies to the frequency curation service
+	 *
+	 * @param inputFile
+	 *            input file
+	 * @param accessId
+	 * @param cohortId
+	 * @throws MalformedURLException
+	 */
+	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
+			throws MalformedURLException {
+		this.inputFile = inputFile;
+		this.gtRegistry = gtRegistry;
+		this.estEntity = estEntity;
+		if (url == null) {
+			this.url = new URL("http://localhost:8080");
+		} else {
+			this.url = url;
+		}
+	}
+
+	@Override
+	public Integer call() throws Exception {
+		postPopulationFrequencies(reader(inputFile));
+
+		return 0;
+	}
+
 	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
 		String row;
 		String[] columns;
 
 		HashMap<String, HaplotypeFrequencyData> populationMap = new HashMap<String, HaplotypeFrequencyData>();
 		HaplotypeFrequencyData haplotypeFrequencyData;
-                
-        License license = new License();
-        license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
-                
-		while ((row = reader.readLine()) != null) {		
+
+		License license = new License();
+		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
+
+		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");
-						
+
 			String race = columns[0];
 			String haplotype = columns[1];
 			Double frequency = new Double(columns[2]);
-			
+
 			if (populationMap.containsKey(race)) {
 				haplotypeFrequencyData = populationMap.get(race);
-			}
-			else {
+			} else {
 				haplotypeFrequencyData = new HaplotypeFrequencyData();
-		        haplotypeFrequencyData.setLicense(license);
+				haplotypeFrequencyData.setLicense(license);
 			}
-									
-	        HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
-	        hapFrequency.setFrequency(new Double(frequency));
-	        hapFrequency.setHaplotypeString(haplotype);
-	        haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
 
-	        populationMap.put(race, haplotypeFrequencyData);
+			HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
+			hapFrequency.setFrequency(new Double(frequency));
+			hapFrequency.setHaplotypeString(haplotype);
+			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
+
+			populationMap.put(race, haplotypeFrequencyData);
 		}
-		
+
 		reader.close();
-		
+
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
@@ -140,82 +141,82 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		apiClient.setBasePath(url.toString());
 		DefaultApi api = new DefaultApi(apiClient);
 		PopulationApiApi popApi = new PopulationApiApi(apiClient);
-		
-		for (String populationName : populationMap.keySet()) {
-	        HFCurationRequest hfCurationRequest = new HFCurationRequest();
-	        
-	        PopulationRequest populationRequest = new PopulationRequest();
-	        populationRequest.setName(populationName);
-	        
-	        //CohortData cohortData = new CohortData();
-	        //cohortData.setName(inputFile.getName());
-	        
-	        //hfCurationRequest.setCohortData(cohortData);
-	        
-	        PopulationData populationData = popApi.createPopulation(populationRequest);
-	        System.out.println(populationData);
 
-	        hfCurationRequest.setPopulationID(populationData.getId());
-	        hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
-	        LabelData labelData = new LabelData();
-	        LabelList labelList = new LabelList();
-	        Label label = new Label();
-	        label.setTypeOfLabel("GT_REGISTRY");
-	        label.setValue(gtRegistry);
-	        label.setTypeOfLabel("HT_ESTIMATION_ENT");
-	        label.setValue(estEntity);
-	        
-	        labelList.addLabelItem(label);
-	        labelData.setLabelList(labelList);
-	        hfCurationRequest.setLabelData(labelData);
-	        
-	        HFCurationResponse response = api.hfcPost(hfCurationRequest);
-	        System.out.println(response);
+		for (String populationName : populationMap.keySet()) {
+			HFCurationRequest hfCurationRequest = new HFCurationRequest();
+
+			PopulationRequest populationRequest = new PopulationRequest();
+			populationRequest.setName(populationName);
+
+			CohortData cohortData = new CohortData();
+			cohortData.setName(inputFile.getName());
+			cohortData.setGenotypeList(new GenotypeList());
+
+			hfCurationRequest.setCohortData(cohortData);
+
+			PopulationData populationData = popApi.createPopulation(populationRequest);
+			System.out.println(populationData);
+
+			hfCurationRequest.setPopulationID(populationData.getId());
+			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
+			LabelData labelData = new LabelData();
+			LabelList labelList = new LabelList();
+			Label label = new Label();
+			label.setTypeOfLabel("GT_REGISTRY");
+			label.setValue(gtRegistry);
+			label.setTypeOfLabel("HT_ESTIMATION_ENT");
+			label.setValue(estEntity);
+
+			labelList.addLabelItem(label);
+			labelData.setLabelList(labelList);
+			hfCurationRequest.setLabelData(labelData);
+
+			HFCurationResponse response = api.hfcPost(hfCurationRequest);
+			System.out.println(response);
 		}
 	}
 
-    /**
-     * Main.
-     *
-     * @param args command line args
-     * @throws MalformedURLException 
-     */
-    public static void main(final String[] args) throws MalformedURLException {
-        Switch about = new Switch("a", "about", "display about message");
-        Switch help  = new Switch("h", "help", "display help message");
-        FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
-        StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
-        StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
-        URLArgument url = new URLArgument("u", "url", "frequency service url", false);
+	/**
+	 * Main.
+	 *
+	 * @param args
+	 *            command line args
+	 * @throws MalformedURLException
+	 */
+	public static void main(final String[] args) throws MalformedURLException {
+		Switch about = new Switch("a", "about", "display about message");
+		Switch help = new Switch("h", "help", "display help message");
+		FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
+		StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
+		StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
+		URLArgument url = new URLArgument("u", "url", "frequency service url", false);
 
-        ArgumentList arguments  = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
-        CommandLine commandLine = new CommandLine(args);
+		ArgumentList arguments = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
+		CommandLine commandLine = new CommandLine(args);
 
-        PostPopulationFrequencies postPopulationFrequencies = null;
-        try
-        {
-            CommandLineParser.parse(commandLine, arguments);
-            if (about.wasFound()) {
-                About.about(System.out);
-                System.exit(0);
-            }
-            if (help.wasFound()) {
-                Usage.usage(USAGE, null, commandLine, arguments, System.out);
-                System.exit(0);
-            }
-            postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(), estEntity.getValue(), url.getValue());
-        }
-        catch (CommandLineParseException | IllegalArgumentException e) {
-            Usage.usage(USAGE, e, commandLine, arguments, System.err);
-            System.exit(-1);
-        }
-        try {
-            System.exit(postPopulationFrequencies.call());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
-    
+		PostPopulationFrequencies postPopulationFrequencies = null;
+		try {
+			CommandLineParser.parse(commandLine, arguments);
+			if (about.wasFound()) {
+				About.about(System.out);
+				System.exit(0);
+			}
+			if (help.wasFound()) {
+				Usage.usage(USAGE, null, commandLine, arguments, System.out);
+				System.exit(0);
+			}
+			postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
+					estEntity.getValue(), url.getValue());
+		} catch (CommandLineParseException | IllegalArgumentException e) {
+			Usage.usage(USAGE, e, commandLine, arguments, System.err);
+			System.exit(-1);
+		}
+		try {
+			System.exit(postPopulationFrequencies.call());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+
 }

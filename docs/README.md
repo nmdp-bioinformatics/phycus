@@ -17,9 +17,9 @@ We have implemented a Public Haplotype Frequency Curation Service (PHYCuS).  The
 
 ## Implementation of ideas in PHYCuS
 
-The development of PHYCuS started with the definition of a (swagger specification)[../curation-swagger-spec.yaml]
+The development of PHYCuS started with the definition of a [swagger specification](../curation-swagger-spec.yaml)
 
 ## Installation
 
-See top level (README.md)[../README.md]
+See top level [README.md](../README.md)
 

@@ -45,16 +45,9 @@ import io.swagger.client.api.CohortApi;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DefaultApi;
-<<<<<<< HEAD
 import io.swagger.client.api.PopulationApi;
-=======
-import io.swagger.client.api.PopulationApiApi;
->>>>>>> refs/remotes/upstream/master
 import io.swagger.client.model.CohortData;
-<<<<<<< HEAD
 import io.swagger.client.model.CohortRequest;
-=======
->>>>>>> refs/remotes/upstream/master
 import io.swagger.client.model.GenotypeList;
 import io.swagger.client.model.HFCurationRequest;
 import io.swagger.client.model.HFCurationResponse;
@@ -73,7 +66,6 @@ import io.swagger.client.model.PopulationRequest;
  *
  */
 public class PostPopulationFrequencies implements Callable<Integer> {
-<<<<<<< HEAD
 
 	private final File inputFile;
 	private final String gtRegistry;
@@ -102,49 +94,6 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			this.url = url;
 		}
 	}
-=======
->>>>>>> refs/remotes/upstream/master
-
-<<<<<<< HEAD
-	@Override
-	public Integer call() throws Exception {
-		postPopulationFrequencies(reader(inputFile));
-=======
-	private final File inputFile;
-	private final String gtRegistry;
-	private final String estEntity;
-	private final URL url;
->>>>>>> refs/remotes/upstream/master
-
-<<<<<<< HEAD
-		return 0;
-	}
-=======
-	private static final String USAGE = "post-population-frequencies [args]";
->>>>>>> refs/remotes/upstream/master
-
-<<<<<<< HEAD
-=======
-	/**
-	 * Post population frequencies to the frequency curation service
-	 *
-	 * @param inputFile
-	 *            input file
-	 * @param accessId
-	 * @param cohortId
-	 * @throws MalformedURLException
-	 */
-	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
-			throws MalformedURLException {
-		this.inputFile = inputFile;
-		this.gtRegistry = gtRegistry;
-		this.estEntity = estEntity;
-		if (url == null) {
-			this.url = new URL("http://localhost:8080");
-		} else {
-			this.url = url;
-		}
-	}
 
 	@Override
 	public Integer call() throws Exception {
@@ -153,7 +102,6 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		return 0;
 	}
 
->>>>>>> refs/remotes/upstream/master
 	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
 		String row;
 		String[] columns;
@@ -187,14 +135,13 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		}
 
 		reader.close();
-
+		
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
 		apiClient.setWriteTimeout(60000);
 		apiClient.setBasePath(url.toString());
 		DefaultApi api = new DefaultApi(apiClient);
-<<<<<<< HEAD
 		PopulationApi popApi = new PopulationApi(apiClient);
 		CohortApi cohortApi = new CohortApi(apiClient);
 		
@@ -231,11 +178,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			populationRequest.setName(populationName);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
-=======
-		PopulationApiApi popApi = new PopulationApiApi(apiClient);
->>>>>>> refs/remotes/upstream/master
 
-<<<<<<< HEAD
 			PopulationData populationData = popApi.createPopulation(populationRequest);
 			
 			hfCurationRequest.setPopulationID(populationData.getId());
@@ -289,86 +232,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
-=======
-		for (String populationName : populationMap.keySet()) {
-			HFCurationRequest hfCurationRequest = new HFCurationRequest();
-
-			PopulationRequest populationRequest = new PopulationRequest();
-			populationRequest.setName(populationName);
-
-			CohortData cohortData = new CohortData();
-			cohortData.setName(inputFile.getName());
-			cohortData.setGenotypeList(new GenotypeList());
-
-			hfCurationRequest.setCohortData(cohortData);
-
-			PopulationData populationData = popApi.createPopulation(populationRequest);
-			System.out.println(populationData);
-
-			hfCurationRequest.setPopulationID(populationData.getId());
-			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
-			LabelData labelData = new LabelData();
-			LabelList labelList = new LabelList();
-			Label label = new Label();
-			label.setTypeOfLabel("GT_REGISTRY");
-			label.setValue(gtRegistry);
-			label.setTypeOfLabel("HT_ESTIMATION_ENT");
-			label.setValue(estEntity);
-
-			labelList.addLabelItem(label);
-			labelData.setLabelList(labelList);
-			hfCurationRequest.setLabelData(labelData);
-
-			HFCurationResponse response = api.hfcPost(hfCurationRequest);
-			System.out.println(response);
->>>>>>> refs/remotes/upstream/master
 		}
 	}
 
-<<<<<<< HEAD
-=======
-	/**
-	 * Main.
-	 *
-	 * @param args
-	 *            command line args
-	 * @throws MalformedURLException
-	 */
-	public static void main(final String[] args) throws MalformedURLException {
-		Switch about = new Switch("a", "about", "display about message");
-		Switch help = new Switch("h", "help", "display help message");
-		FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
-		StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
-		StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
-		URLArgument url = new URLArgument("u", "url", "frequency service url", false);
-
-		ArgumentList arguments = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
-		CommandLine commandLine = new CommandLine(args);
-
-		PostPopulationFrequencies postPopulationFrequencies = null;
-		try {
-			CommandLineParser.parse(commandLine, arguments);
-			if (about.wasFound()) {
-				About.about(System.out);
-				System.exit(0);
-			}
-			if (help.wasFound()) {
-				Usage.usage(USAGE, null, commandLine, arguments, System.out);
-				System.exit(0);
-			}
-			postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
-					estEntity.getValue(), url.getValue());
-		} catch (CommandLineParseException | IllegalArgumentException e) {
-			Usage.usage(USAGE, e, commandLine, arguments, System.err);
-			System.exit(-1);
-		}
-		try {
-			System.exit(postPopulationFrequencies.call());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
-
->>>>>>> refs/remotes/upstream/master
 }

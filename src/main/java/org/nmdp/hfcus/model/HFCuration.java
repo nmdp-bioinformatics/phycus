@@ -1,18 +1,30 @@
 package org.nmdp.hfcus.model;
 
-import io.swagger.model.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import org.nmdp.hfcus.dao.RepositoryContainer;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
-import javax.persistence.*;
-
-import java.io.Serializable;
-import java.util.Objects;
+import io.swagger.model.HFCurationRequest;
+import io.swagger.model.HFCurationResponse;
 
 @Entity
 public class HFCuration implements Serializable, ICurationDataModel<HFCurationResponse> {
 
-    public HFCuration(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3603411156062614289L;
+
+	public HFCuration(){
         // intentionally left empty
     }
 
@@ -25,11 +37,11 @@ public class HFCuration implements Serializable, ICurationDataModel<HFCurationRe
         if (populationData == null) {
             throw new RequiredFieldInvalidException("Not a valid Population ID");
         }
-        if (data.getCohortData() != null){
-            cohortData = new Cohort(data.getCohortData());
-        }else if (data.getCohortID() != null){
-            cohortData = repositoryContainer.getCohortRepository().findOne(data.getCohortID());
-        }
+        
+        cohortData = repositoryContainer.getCohortRepository().findOne(data.getCohortID());
+        	if (cohortData == null) {
+        		throw new RequiredFieldInvalidException("Not a valid Cohort ID");
+        	}
 
         if (data.getMethodData() != null){
             methodData = new MethodSet(data.getMethodData());

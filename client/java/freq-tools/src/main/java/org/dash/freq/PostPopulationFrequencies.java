@@ -41,11 +41,13 @@ import org.dishevelled.commandline.argument.FileArgument;
 import org.dishevelled.commandline.argument.StringArgument;
 import org.dishevelled.commandline.argument.URLArgument;
 
+import io.swagger.client.api.CohortApi;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DefaultApi;
-import io.swagger.client.api.PopulationApiApi;
+import io.swagger.client.api.PopulationApi;
 import io.swagger.client.model.CohortData;
+import io.swagger.client.model.CohortRequest;
 import io.swagger.client.model.GenotypeList;
 import io.swagger.client.model.HFCurationRequest;
 import io.swagger.client.model.HFCurationResponse;
@@ -71,7 +73,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	private final URL url;
 
 	private static final String USAGE = "post-population-frequencies [args]";
-
+	
 	/**
 	 * Post population frequencies to the frequency curation service
 	 *
@@ -133,47 +135,61 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		}
 
 		reader.close();
-
+		
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
 		apiClient.setWriteTimeout(60000);
 		apiClient.setBasePath(url.toString());
 		DefaultApi api = new DefaultApi(apiClient);
-		PopulationApiApi popApi = new PopulationApiApi(apiClient);
+		PopulationApi popApi = new PopulationApi(apiClient);
+		CohortApi cohortApi = new CohortApi(apiClient);
+		
+		CohortRequest cohortRequest = new CohortRequest();
+		
+		CohortData cohortData = new CohortData();
+		cohortData.setName(inputFile.getName());
+		cohortData.setGenotypeList(new GenotypeList());
+		
+		cohortRequest.setCohortData(cohortData);
+		
+		System.out.println("Creating cohort: " + cohortData.getName());
 
+		cohortData = cohortApi.createCohort(cohortRequest);
+		
+		LabelData labelData = new LabelData();
+		LabelList labelList = new LabelList();
+		Label registryLabel = new Label();
+		registryLabel.setTypeOfLabel("GT_REGISTRY");
+		registryLabel.setValue(gtRegistry);
+		labelList.addLabelItem(registryLabel);
+		
+		Label estimatorLabel = new Label();
+		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
+		estimatorLabel.setValue(estEntity);
+		labelList.addLabelItem(estimatorLabel);
+		
+		labelData.setLabelList(labelList);
+		
 		for (String populationName : populationMap.keySet()) {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
-
 			PopulationRequest populationRequest = new PopulationRequest();
+			
 			populationRequest.setName(populationName);
-
-			CohortData cohortData = new CohortData();
-			cohortData.setName(inputFile.getName());
-			cohortData.setGenotypeList(new GenotypeList());
-
-			hfCurationRequest.setCohortData(cohortData);
+			
+			System.out.println("Creating population: " + populationRequest.getName());
 
 			PopulationData populationData = popApi.createPopulation(populationRequest);
-			System.out.println(populationData);
-
+			
 			hfCurationRequest.setPopulationID(populationData.getId());
+			hfCurationRequest.setCohortID(cohortData.getId());
 			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
-			LabelData labelData = new LabelData();
-			LabelList labelList = new LabelList();
-			Label label = new Label();
-			label.setTypeOfLabel("GT_REGISTRY");
-			label.setValue(gtRegistry);
-			label.setTypeOfLabel("HT_ESTIMATION_ENT");
-			label.setValue(estEntity);
 
-			labelList.addLabelItem(label);
-			labelData.setLabelList(labelList);
 			hfCurationRequest.setLabelData(labelData);
 
+			System.out.println("Submitting frequencies for population: " + populationData.getName());
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
-			System.out.println(response);
-		}
+		}		
 	}
 
 	/**

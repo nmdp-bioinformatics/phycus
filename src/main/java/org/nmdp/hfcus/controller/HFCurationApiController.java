@@ -1,19 +1,11 @@
 package org.nmdp.hfcus.controller;
 
-import io.swagger.annotations.ApiParam;
-import io.swagger.api.HfcApi;
-import io.swagger.model.CohortData;
-import io.swagger.model.Error;
-import io.swagger.model.HFCurationListResponse;
-import io.swagger.model.HFCurationRequest;
-import io.swagger.model.HFCurationResponse;
-import io.swagger.model.HaplotypeFrequencyData;
-import io.swagger.model.LabelData;
-import io.swagger.model.PopulationData;
-import io.swagger.model.PopulationResponse;
-import io.swagger.model.PopulationSubmissionData;
-import io.swagger.model.PopulationSubmissionResponse;
-import io.swagger.model.ScopeData;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+import javax.validation.Valid;
+
 import org.nmdp.hfcus.dao.AccessRepository;
 import org.nmdp.hfcus.dao.CohortRepository;
 import org.nmdp.hfcus.dao.HFCurationRepository;
@@ -23,20 +15,31 @@ import org.nmdp.hfcus.dao.MethodSetRepository;
 import org.nmdp.hfcus.dao.PopulationRepository;
 import org.nmdp.hfcus.dao.RepositoryContainer;
 import org.nmdp.hfcus.dao.ScopeListRepository;
-import org.nmdp.hfcus.model.*;
-import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
+import org.nmdp.hfcus.model.HFCuration;
+import org.nmdp.hfcus.model.ICurationDataModel;
+import org.nmdp.hfcus.model.LabelSet;
+import org.nmdp.hfcus.model.Population;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
+import io.swagger.annotations.ApiParam;
+import io.swagger.api.HfcApi;
+import io.swagger.model.CohortData;
+import io.swagger.model.HFCurationListResponse;
+import io.swagger.model.HFCurationRequest;
+import io.swagger.model.HFCurationResponse;
+import io.swagger.model.HaplotypeFrequencyData;
+import io.swagger.model.LabelData;
+import io.swagger.model.LabelResponse;
+import io.swagger.model.PopulationData;
+import io.swagger.model.PopulationResponse;
+import io.swagger.model.PopulationSubmissionData;
+import io.swagger.model.PopulationSubmissionResponse;
+import io.swagger.model.ScopeData;
 
 @Controller
 public class HFCurationApiController implements HfcApi{
@@ -126,6 +129,23 @@ public class HFCurationApiController implements HfcApi{
         }
         return ResponseEntity.ok(response);
     }
+    
+    @Override 
+    public ResponseEntity<LabelResponse> hfcLabelGet() {
+		LabelResponse response = new LabelResponse();
+		Iterable<LabelSet> labels = repositoryContainer.getLabelSetRepository().findAll();
+		List<LabelData> labelsList = new ArrayList<LabelData>();
+		LabelData labelData = null;
+		for (LabelSet labelSet : labels) {
+			labelData = labelSet.toSwaggerObject();
+			
+			if (!labelsList.contains(labelData)) {
+				labelsList.add(labelData);
+			}
+			response.setLabelsList(labelsList);
+		}
+		return ResponseEntity.ok(response);
+}
 
     @Override
     public ResponseEntity<PopulationSubmissionResponse> hfcPopulationPopulationIdGet(

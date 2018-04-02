@@ -43,5 +43,7 @@ java --add-modules java.xml.bind -jar target/service-haplotype-frequency-curatio
 You can view the api documentation in swagger-ui by pointing to  [http://localhost:8080](http://localhost:8080/)
 
 ### Using the service
-See [client/] directory for examples on using it from various languages. Eg. for [Perl](client/perl)
+See [client/](client/) directory for examples on using it from various languages. Eg. for [Perl](client/perl)
 
+### Read the User Guide
+See [docs/](docs/) directory for a user guide and examples of how the service is used in practice.

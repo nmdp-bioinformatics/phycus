@@ -61,6 +61,7 @@ public class Cohort implements ICurationDataModel<CohortData> {
         CohortData data = new CohortData();
         data.setGenotypeList(genotypeList.toSwaggerObject());
         data.setName(name);
+        data.setId(id);
         return data;
     }
 }

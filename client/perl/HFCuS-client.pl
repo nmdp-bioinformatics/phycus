@@ -72,7 +72,7 @@ if ( $action =~ /del_sub/i && !$submission_id ) {
 }
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-$api_instance->{api_client}->{base_url} = $base;
+$api_instance->{api_client}->{config}{base_url} = $base;
 $api_instance->{api_client}->{ua}->env_proxy;
 print Dumper($api_instance) if $opt_verbose;
 

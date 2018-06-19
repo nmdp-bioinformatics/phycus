@@ -32,8 +32,11 @@ if($opt_local) {
 my $api_instance = WWW::SwaggerClient::CohortApi->new();
 my $genotype_list = WWW::SwaggerClient::Object::GenotypeList->new();
 my $cohort_request = WWW::SwaggerClient::Object::CohortRequest->new();
-$cohort_request->{name} = "Cohort1";
-$cohort_request->{genotype_list} = $genotype_list;
+my $cohort_data = WWW::SwaggerClient::Object::CohortData->new();
+$cohort_data->{name} = "Cohort1";
+$cohort_data->{genotype_list} = $genotype_list;
+
+$cohort_request->{cohort_data} = $cohort_data;
 
 $api_instance->{api_client}->{config}{base_url} = $base;
 $api_instance->{api_client}->{ua}->env_proxy;

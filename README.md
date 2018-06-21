@@ -19,14 +19,21 @@ mvn clean package
 
 The project is setup to use mysql Docker instance for local development.
 ```bash
+cd db/
 docker-compose up -d
 ```
-The phpMyAdmin page should be available at [http://localhost:9999/](http://localhost:9999/)
+The phpMyAdmin page should be available at [http://localhost:9999/](http://localhost:9999/). For Windows, you will need to use the IP of the docker VM instead of `localhost`. You can retrieve the IP with `docker-machine ip`. Usually it's `192.168.99.100`. 
 Login with `hfcus_user` user and `hfcus_user1` as password.
 
 Use `docker-compose stop` and `docker-compose rm` to stop and remove the db containers.
 
 ### Run the application
+
+#### Special step on windows
+On Windows, you need to change `src/main/resources/application.properties` and replace `localhost` with the IP of your docker machine, then recompile. Use `docker-machine ip` to retrieve it.
+
+#### Starting the application
+
 Start your server as a simple java application  
 Check your JDK version with `java -version`
 

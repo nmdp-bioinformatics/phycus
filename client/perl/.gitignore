@@ -1,1 +1,3 @@
 api/
+lib/WWW/SwaggerClient/
+swagger-codegen-cli.jar

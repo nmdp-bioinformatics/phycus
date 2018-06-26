@@ -72,7 +72,7 @@ if ( $action =~ /del_sub/i && !$submission_id ) {
 }
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-$api_instance->{api_client}->{base_url} = $base;
+$api_instance->{api_client}->{config}{base_url} = $base;
 $api_instance->{api_client}->{ua}->env_proxy;
 print Dumper($api_instance) if $opt_verbose;
 
@@ -137,7 +137,10 @@ sub push_haplotypes {
 
    # Use /population to create a new Population
    # See Population-client.pl
+   # Use /cohort to create a new Cohort
+   # See Cohort-client.pl
    $HFCurReq->{population_id} = 1;
+   $HFCurReq->{cohort_id} = 1;
    $HFCurReq->{haplotype_frequency_data} = $HapFreqData;
    my $response = $api_instance->hfc_post( hf_curation_request => $HFCurReq );
 

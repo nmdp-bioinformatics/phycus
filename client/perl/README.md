@@ -16,9 +16,20 @@ Install the following Perl libraries.
 - JSON
 
 ### Install API
-Generate and build the API. May require sudo. 
+Generate and build the API. The current client was tested with the swagger
+generator version `2.3.1`.
+
+#### For macOS
+Requires the `swagger-codegen` tool from homebrew. May require sudo. 
 ```
 sudo make
+```
+
+#### For Windows
+Using the powershell:
+```ps1
+Invoke-WebRequest -OutFile swagger-codegen-cli.jar http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
+java -jar swagger-codegen-cli.jar generate --lang perl --input-spec ..\..\curation-swagger-spec.yaml
 ```
 
 ### Test the API 

@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `genotype_list`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genotype_list` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `license` int(11) DEFAULT NULL,
+  `license` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS `genotype_method`;
 CREATE TABLE `genotype_method` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `method_comment` varchar(255) DEFAULT NULL,
-  `method_label` int(11) DEFAULT NULL,
+  `method_label` varchar(255) DEFAULT NULL,
   `method_reference` varchar(255) DEFAULT NULL,
   `method_value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -181,7 +181,7 @@ DROP TABLE IF EXISTS `haplotype_frequency_set`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `haplotype_frequency_set` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `license` int(11) DEFAULT NULL,
+  `license` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -328,7 +328,7 @@ CREATE TABLE `method` (
   `method_comment` varchar(255) DEFAULT NULL,
   `method_reference` varchar(255) DEFAULT NULL,
   `method_value` varchar(255) DEFAULT NULL,
-  `type_of_method` int(11) DEFAULT NULL,
+  `type_of_method` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -387,7 +387,7 @@ DROP TABLE IF EXISTS `quality`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quality` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `type_of_quality` int(11) DEFAULT NULL,
+  `type_of_quality` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -402,7 +402,7 @@ DROP TABLE IF EXISTS `resolution`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resolution` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `resolution` int(11) DEFAULT NULL,
+  `resolution` varchar(255) DEFAULT NULL,
   `scope_element` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -419,7 +419,7 @@ CREATE TABLE `scope` (
   `scope_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `free_name` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `type_of_scope` int(11) DEFAULT NULL,
+  `type_of_scope` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`scope_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

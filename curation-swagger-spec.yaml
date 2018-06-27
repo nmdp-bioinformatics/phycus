@@ -788,10 +788,10 @@ definitions:
           - P
           - gNMDP
           - gDKMS
+          - 1-Field
           - 2-Field
+          - 3-Field
           - 4-Field
-          - 6-Field
-          - 8-Field
           - Serology
   FrequencyError:
     title: FrequencyError

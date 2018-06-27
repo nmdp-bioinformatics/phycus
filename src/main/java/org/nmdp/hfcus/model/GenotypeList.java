@@ -12,6 +12,7 @@ public class GenotypeList implements ICurationDataModel<io.swagger.model.Genotyp
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Genotype> genotypeList;

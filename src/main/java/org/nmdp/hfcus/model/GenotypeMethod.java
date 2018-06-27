@@ -1,10 +1,7 @@
 package org.nmdp.hfcus.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class GenotypeMethod implements ICurationDataModel<io.swagger.model.GenotypeMethod> {
@@ -23,6 +20,7 @@ public class GenotypeMethod implements ICurationDataModel<io.swagger.model.Genot
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private io.swagger.model.GenotypeMethod.MethodLabelEnum methodLabel;
     private String methodValue;
     private String methodComment;

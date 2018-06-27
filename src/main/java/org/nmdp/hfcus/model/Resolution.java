@@ -2,10 +2,7 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.ResolutionInfo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Resolution implements ICurationDataModel<ResolutionInfo> {
@@ -22,6 +19,7 @@ public class Resolution implements ICurationDataModel<ResolutionInfo> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String scopeElement;
+    @Enumerated(EnumType.STRING)
     private io.swagger.model.ResolutionInfo.ResolutionEnum resolution;
 
     public Long getId() {

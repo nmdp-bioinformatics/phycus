@@ -2,10 +2,7 @@ package org.nmdp.hfcus.model;
 
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
@@ -28,6 +25,7 @@ public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double value;
+    @Enumerated(EnumType.STRING)
     private io.swagger.model.Quality.TypeOfQualityEnum typeOfQuality;
 
     public Long getId() {

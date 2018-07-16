@@ -33,10 +33,16 @@ jobs:
 
       # build the package
       - run: mvn clean package
+      # build the docker image and tag it
       - setup_remote_docker
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t curation:$TAG .
+          docker build -t frequency-curation:latest -t frequency-curation:$TAG .
+
+      # upload the docker image to docker hub
+      - run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push nmdpbioinformatics/frequency-curation
   test:
     docker:
       - image: circleci/openjdk:8-jdk

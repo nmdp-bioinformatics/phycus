@@ -2,10 +2,7 @@ package org.nmdp.hfcus.model;
 
 import io.swagger.model.ScopeElement;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Scope implements ICurationDataModel<ScopeElement> {
@@ -23,6 +20,7 @@ public class Scope implements ICurationDataModel<ScopeElement> {
     private Long scopeId;
     private String name;
     private String freeName;
+    @Enumerated(EnumType.STRING)
     private ScopeElement.TypeOfScopeEnum typeOfScope;
 
     public Long getScopeId() {

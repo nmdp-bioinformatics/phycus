@@ -52,6 +52,7 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Resolution> resolutionList;

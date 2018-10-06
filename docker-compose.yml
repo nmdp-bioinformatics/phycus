@@ -4,7 +4,7 @@ services:
   web:
     depends_on:
       - db
-    image: curation:latest
+    image: nmdpbioinformatics/phycus:latest 
     container_name: curation-interface
     restart: always
     ports:

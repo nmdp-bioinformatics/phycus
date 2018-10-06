@@ -34,10 +34,23 @@ public class QualityService {
 
     @Async
     public void run() throws InterruptedException {
-        while (true){
+        curationRepository
+                .findAllStreamable()
+                .filter(hfCuration -> {
+                    List<Quality> qualityList = hfCuration.getHaplotypeFrequencyData().getQualityList();
+                    return qualityList == null || qualityList.size() < metricCalculators.size();
+                })
+                .forEach(hfCuration -> {
+                    try {
+                        queue.put(hfCuration);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+        while (true) {
             HFCuration value = queue.take();
-            for (IQualityMetricCalculator calculator: metricCalculators){
-                if (calculator.calculationNeeded(value)){
+            for (IQualityMetricCalculator calculator : metricCalculators) {
+                if (calculator.calculationNeeded(value)) {
                     calculator.calculateMetric(value);
                     curationRepository.save(value);
                 }

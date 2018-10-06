@@ -19,7 +19,7 @@ public class Div50Calculator implements IQualityMetricCalculator {
         }
         return qualityList
                 .stream()
-                .anyMatch(quality -> quality.getTypeOfQuality() == io.swagger.model.Quality.TypeOfQualityEnum.DIV_50);
+                .noneMatch(quality -> quality.getTypeOfQuality() == io.swagger.model.Quality.TypeOfQualityEnum.DIV_50);
     }
 
     @Override

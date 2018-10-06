@@ -1,10 +1,18 @@
-FROM openjdk:8 
+FROM maven:3.5-jdk-8
 
 MAINTAINER Jason Brelsford or (jbrelsf@nmdp.org)
-
-WORKDIR /app
+MAINTAINER Florian Scheel
 
 EXPOSE 8080
 
-COPY ./target/service-haplotype-frequency-curation-0.0.1.jar /app/service-haplotype-frequency-curation-0.0.1.jar
+WORKDIR /src
+COPY . /src
+RUN mvn clean package
+
+WORKDIR /app
+RUN cp /src/target/service-haplotype-frequency-curation-0.0.1.jar /app/service-haplotype-frequency-curation-0.0.1.jar
 COPY bash-start-java-tomcat.sh /app/bash-start-java-tomcat.sh
+
+RUN rm -rf /src
+
+ENTRYPOINT ["/app/bash-start-java-tomcat.sh"]

@@ -55,6 +55,26 @@ paths:
             $ref: '#/definitions/HaplotypeFrequencyData'
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
+  '/hfc/{submissionId}/quality':
+    get:
+      description: Returns the list of quality measures for the given submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: integer
+          format: int64
+          required: true
+          description: The submission id
+      responses:
+        '200':
+          description: Returns the list of quality measures for the given submission
+          schema:
+            type: array
+            description: List of Quality
+            items:
+              $ref: '#/definitions/Quality'
+        '500':
+          $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/cohort':
     get:
       description: Returns the list of haplotypes attached to the given submission

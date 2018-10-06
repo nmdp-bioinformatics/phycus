@@ -118,7 +118,8 @@ public class HFCurationApiController implements HfcApi{
             try {
                 qualityService.addToQueue(curation);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                throw new RuntimeException(e);
             }
             return ResponseEntity.ok(curation.toSwaggerObject());
         }

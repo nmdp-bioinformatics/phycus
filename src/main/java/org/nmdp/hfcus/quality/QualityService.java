@@ -44,9 +44,12 @@ public class QualityService {
                     try {
                         queue.put(hfCuration);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Thread.currentThread().interrupt();
                     }
                 });
+        if (Thread.currentThread().isInterrupted()){
+            throw new InterruptedException();
+        }
         while (true) {
             HFCuration value = queue.take();
             for (IQualityMetricCalculator calculator : metricCalculators) {

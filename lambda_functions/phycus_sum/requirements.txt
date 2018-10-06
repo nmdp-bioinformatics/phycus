@@ -1,0 +1,5 @@
+certifi==2018.8.24
+phycus==0.0.1
+python-dateutil==2.7.3
+six==1.11.0
+urllib3==1.23

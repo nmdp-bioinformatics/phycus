@@ -1,7 +1,7 @@
 FROM maven:3.5-jdk-8
 
 MAINTAINER Jason Brelsford or (jbrelsf@nmdp.org)
-MAINTAINER Florian Scheel
+MAINTAINER Florian Scheel or (florian.scheel@zkrd.de)
 
 EXPOSE 8080
 

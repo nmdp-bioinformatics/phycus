@@ -39,12 +39,6 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
         } else {
             throw new RequiredFieldInvalidException("requires a frequency list");
         }
-        if (swaggerObject.getQualityList() != null) {
-            qualityList = new ArrayList<>();
-            for (io.swagger.model.Quality quality : swaggerObject.getQualityList()) {
-                qualityList.add(new Quality(quality));
-            }
-        }
     }
 
     @Id

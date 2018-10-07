@@ -134,8 +134,6 @@ paths:
           description: Returns label set
           schema:
             $ref: '#/definitions/LabelData'
-        '204':
-          description: There were no labels on the submission
         '404':
           description: Submission not found.
         '500':
@@ -157,8 +155,6 @@ paths:
           description: Returns scope set
           schema:
             $ref: '#/definitions/ScopeData'
-        '204':
-          description: There were no scopes on the submission
         '404':
           description: Submission not found.
         '500':

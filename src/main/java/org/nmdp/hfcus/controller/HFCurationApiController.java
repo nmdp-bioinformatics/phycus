@@ -67,7 +67,7 @@ public class HFCurationApiController implements HfcApi {
             if (dataModel != null) {
                 responseEntity = ResponseEntity.ok(converter.apply(dataModel));
             } else {
-                responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                responseEntity = new ResponseEntity<>(HttpStatus.OK);
             }
         } else {
             responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);

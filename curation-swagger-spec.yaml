@@ -71,10 +71,10 @@ paths:
           description: The submission id
       responses:
         '200':
-          description: Returns the list of quality measures for the given submission
+          description: Returns the list of quality measures for the given submission. The response body may be empty if there are no quality measures for the submission.
           schema:
             type: array
-            description: List of Quality
+            description: List of quality measures
             items:
               $ref: '#/definitions/Quality'
         '404':
@@ -131,7 +131,7 @@ paths:
           description: The submission id
       responses:
         '200':
-          description: Returns label set
+          description: Returns label set. The response body may be empty if there are no quality measures for the submission.
           schema:
             $ref: '#/definitions/LabelData'
         '404':

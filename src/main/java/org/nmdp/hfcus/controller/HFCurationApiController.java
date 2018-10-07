@@ -6,6 +6,8 @@ import java.util.function.Function;
 
 import javax.validation.Valid;
 
+import io.swagger.model.*;
+import io.swagger.model.Quality;
 import org.nmdp.hfcus.dao.AccessRepository;
 import org.nmdp.hfcus.dao.CohortRepository;
 import org.nmdp.hfcus.dao.HFCurationRepository;
@@ -15,10 +17,7 @@ import org.nmdp.hfcus.dao.MethodSetRepository;
 import org.nmdp.hfcus.dao.PopulationRepository;
 import org.nmdp.hfcus.dao.RepositoryContainer;
 import org.nmdp.hfcus.dao.ScopeListRepository;
-import org.nmdp.hfcus.model.HFCuration;
-import org.nmdp.hfcus.model.ICurationDataModel;
-import org.nmdp.hfcus.model.LabelSet;
-import org.nmdp.hfcus.model.Population;
+import org.nmdp.hfcus.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,18 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import io.swagger.annotations.ApiParam;
 import io.swagger.api.HfcApi;
-import io.swagger.model.CohortData;
-import io.swagger.model.HFCurationListResponse;
-import io.swagger.model.HFCurationRequest;
-import io.swagger.model.HFCurationResponse;
-import io.swagger.model.HaplotypeFrequencyData;
-import io.swagger.model.LabelData;
-import io.swagger.model.LabelResponse;
-import io.swagger.model.PopulationData;
-import io.swagger.model.PopulationResponse;
-import io.swagger.model.PopulationSubmissionData;
-import io.swagger.model.PopulationSubmissionResponse;
-import io.swagger.model.ScopeData;
 
 @Controller
 public class HFCurationApiController implements HfcApi{
@@ -68,21 +55,21 @@ public class HFCurationApiController implements HfcApi{
         repositoryContainer.setScopeListRepository(scopeListRepository);
     }
 
-    private <T> ResponseEntity<T> RetrieveSubdataFromDatabase(Long submissionId, Function<HFCuration, ICurationDataModel<T>> converter){
+    private <ModelType, ResponseType> ResponseEntity<ResponseType> RetrieveSubdataFromDatabase(
+            Long submissionId,
+            Function<HFCuration, ModelType> getDataItem,
+            Function<ModelType, ResponseType> converter
+    ) {
+        ResponseEntity<ResponseType> responseEntity;
         HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
-        ResponseEntity<T> responseEntity;
-        if (curation != null){
-            ICurationDataModel<T> dataModel = converter.apply(curation);
+        if (curation != null) {
+            ModelType dataModel = getDataItem.apply(curation);
             if (dataModel != null) {
-                responseEntity = ResponseEntity.ok(dataModel.toSwaggerObject());
+                responseEntity = ResponseEntity.ok(converter.apply(dataModel));
+            } else {
+                responseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            else
-            {
-                responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-        else
-        {
+        } else {
             responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return responseEntity;
@@ -114,9 +101,9 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<HaplotypeFrequencyData> hfcSubmissionIdHaplotypesGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
-    ){
-        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getHaplotypeFrequencyData());
+            @ApiParam(value = "The submission id", required = true) @PathVariable("submissionId") Long submissionId
+    ) {
+        return RetrieveSubdataFromDatabase(submissionId, HFCuration::getHaplotypeFrequencyData, HaplotypeFrequencySet::toSwaggerObject);
     }
 
     @Override
@@ -178,24 +165,14 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<CohortData> hfcSubmissionIdCohortGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getCohortData());
+        return RetrieveSubdataFromDatabase(submissionId, HFCuration::getCohortData, Cohort::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<HFCurationResponse> hfcSubmissionIdGet(
             @ApiParam(value = "The submission id that the haplotype frequencies were submitted under",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
-        ResponseEntity<HFCurationResponse> responseEntity;
-        if (curation != null)
-        {
-            responseEntity = ResponseEntity.ok(curation.toSwaggerObject());
-        }
-        else
-        {
-            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return responseEntity;
+        return RetrieveSubdataFromDatabase(submissionId, hfCuration -> hfCuration, HFCuration::toSwaggerObject);
     }
 
     @Override
@@ -217,20 +194,31 @@ public class HFCurationApiController implements HfcApi{
     public ResponseEntity<LabelData> hfcSubmissionIdLabelsGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getLabelData());
+        return RetrieveSubdataFromDatabase(submissionId, HFCuration::getLabelData, LabelSet::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<PopulationData> hfcSubmissionIdPopulationGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getPopulationData());
+        return RetrieveSubdataFromDatabase(submissionId, HFCuration::getPopulationData, Population::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<ScopeData> hfcSubmissionIdScopeGet(
             @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
     ) {
-        return RetrieveSubdataFromDatabase(submissionId, (curation) -> curation.getScopeData());
+        return RetrieveSubdataFromDatabase(submissionId, HFCuration::getScopeData, ScopeList::toSwaggerObject);
+    }
+
+    @Override
+    public ResponseEntity<List<Quality>> hfcSubmissionIdQualityGet(Long submissionId) {
+        return RetrieveSubdataFromDatabase(submissionId, hfCuration -> hfCuration.getHaplotypeFrequencyData().getQualityList(), qualities -> {
+            List<Quality> qualityList = new ArrayList<>();
+            for (org.nmdp.hfcus.model.Quality dbQuality : qualities) {
+                qualityList.add(dbQuality.toSwaggerObject());
+            }
+            return qualityList;
+        });
     }
 }

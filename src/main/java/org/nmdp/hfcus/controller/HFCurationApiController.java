@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.api.HfcApi;
 
 @Controller
-public class HFCurationApiController implements HfcApi{
+public class HFCurationApiController implements HfcApi {
 
     private final RepositoryContainer repositoryContainer;
 
@@ -111,32 +111,32 @@ public class HFCurationApiController implements HfcApi{
         PopulationResponse response = new PopulationResponse();
 
         Iterable<Population> populations = repositoryContainer.getPopulationRepository().findAll();
-        for (Population data: populations){
+        for (Population data : populations) {
             response.addPopulationListItem(data.toSwaggerObject());
         }
         return ResponseEntity.ok(response);
     }
-    
-    @Override 
+
+    @Override
     public ResponseEntity<LabelResponse> hfcLabelGet() {
-		LabelResponse response = new LabelResponse();
-		Iterable<LabelSet> labels = repositoryContainer.getLabelSetRepository().findAll();
-		List<LabelData> labelsList = new ArrayList<LabelData>();
-		LabelData labelData = null;
-		for (LabelSet labelSet : labels) {
-			labelData = labelSet.toSwaggerObject();
-			
-			if (!labelsList.contains(labelData)) {
-				labelsList.add(labelData);
-			}
-			response.setLabelsList(labelsList);
-		}
-		return ResponseEntity.ok(response);
-}
+        LabelResponse response = new LabelResponse();
+        Iterable<LabelSet> labels = repositoryContainer.getLabelSetRepository().findAll();
+        List<LabelData> labelsList = new ArrayList<>();
+        LabelData labelData;
+        for (LabelSet labelSet : labels) {
+            labelData = labelSet.toSwaggerObject();
+
+            if (!labelsList.contains(labelData)) {
+                labelsList.add(labelData);
+            }
+        }
+        response.setLabelsList(labelsList);
+        return ResponseEntity.ok(response);
+    }
 
     @Override
     public ResponseEntity<PopulationSubmissionResponse> hfcPopulationPopulationIdGet(
-            @ApiParam(value = "The populationId id",required=true ) @PathVariable("populationId") Long populationId
+            @ApiParam(value = "The populationId id", required = true) @PathVariable("populationId") Long populationId
     ) {
         Population population = repositoryContainer.getPopulationRepository().findOne(populationId);
         ResponseEntity<PopulationSubmissionResponse> responseEntity;
@@ -153,9 +153,7 @@ public class HFCurationApiController implements HfcApi{
             response.addPopulationSubmissionListItem(pop);
 
             responseEntity = ResponseEntity.ok(response);
-        }
-        else
-        {
+        } else {
             responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return responseEntity;
@@ -163,50 +161,49 @@ public class HFCurationApiController implements HfcApi{
 
     @Override
     public ResponseEntity<CohortData> hfcSubmissionIdCohortGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "The submission id", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         return RetrieveSubdataFromDatabase(submissionId, HFCuration::getCohortData, Cohort::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<HFCurationResponse> hfcSubmissionIdGet(
-            @ApiParam(value = "The submission id that the haplotype frequencies were submitted under",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "The submission id that the haplotype frequencies were submitted under", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         return RetrieveSubdataFromDatabase(submissionId, hfCuration -> hfCuration, HFCuration::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<Void> hfcSubmissionIdDelete(
-            @ApiParam(value = "",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
-          if (curation!=null){
+        if (curation != null) {
             curation.setPopulationData(null);
             repositoryContainer.getCurationRepository().delete(curation);
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-          }
-          else{
+        } else {
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-          }
+        }
     }
 
     @Override
     public ResponseEntity<LabelData> hfcSubmissionIdLabelsGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "The submission id", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         return RetrieveSubdataFromDatabase(submissionId, HFCuration::getLabelData, LabelSet::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<PopulationData> hfcSubmissionIdPopulationGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "The submission id", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         return RetrieveSubdataFromDatabase(submissionId, HFCuration::getPopulationData, Population::toSwaggerObject);
     }
 
     @Override
     public ResponseEntity<ScopeData> hfcSubmissionIdScopeGet(
-            @ApiParam(value = "The submission id",required=true ) @PathVariable("submissionId") Long submissionId
+            @ApiParam(value = "The submission id", required = true) @PathVariable("submissionId") Long submissionId
     ) {
         return RetrieveSubdataFromDatabase(submissionId, HFCuration::getScopeData, ScopeList::toSwaggerObject);
     }

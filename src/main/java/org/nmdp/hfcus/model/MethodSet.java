@@ -1,7 +1,6 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.MethodData;
-import io.swagger.model.MethodList;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;

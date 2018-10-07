@@ -1,7 +1,6 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.LabelData;
-import io.swagger.model.LabelList;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;

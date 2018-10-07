@@ -36,6 +36,8 @@ paths:
           description: Returns the data set containing all references
           schema:
             $ref: '#/definitions/HFCurationResponse'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/haplotypes':
@@ -53,6 +55,8 @@ paths:
           description: Returns the haplotype frequency data
           schema:
             $ref: '#/definitions/HaplotypeFrequencyData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/quality':
@@ -73,6 +77,8 @@ paths:
             description: List of Quality
             items:
               $ref: '#/definitions/Quality'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/cohort':
@@ -90,6 +96,8 @@ paths:
           description: Returns the cohort data and genotypes if available
           schema:
             $ref: '#/definitions/CohortData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/population':
@@ -107,6 +115,8 @@ paths:
           description: Returns the population
           schema:
             $ref: '#/definitions/PopulationData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/labels':
@@ -126,6 +136,8 @@ paths:
             $ref: '#/definitions/LabelData'
         '204':
           description: There were no labels on the submission
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/scope':
@@ -147,6 +159,8 @@ paths:
             $ref: '#/definitions/ScopeData'
         '204':
           description: There were no scopes on the submission
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   /hfc:

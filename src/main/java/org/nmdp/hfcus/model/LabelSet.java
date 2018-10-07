@@ -1,7 +1,6 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.LabelData;
-import io.swagger.model.LabelList;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -10,22 +9,20 @@ import java.util.List;
 
 @Entity
 public class LabelSet implements ICurationDataModel<LabelData> {
-    public LabelSet(){
+    public LabelSet() {
         //intentionally left empty
     }
 
     public LabelSet(LabelData swaggerObject) {
-        if (swaggerObject.getLabelList() != null && swaggerObject.getLabelList().getLabel() != null){
+        if (swaggerObject.getLabelList() != null) {
             labelList = new ArrayList<>();
-            for (io.swagger.model.Label method : swaggerObject.getLabelList().getLabel() ){
+            for (io.swagger.model.Label method : swaggerObject.getLabelList()) {
                 labelList.add(new Label(method));
             }
-            if (labelList.size() == 0){
+            if (labelList.size() == 0) {
                 throw new RequiredFieldInvalidException("label list must not be empty");
             }
-        }
-        else
-        {
+        } else {
             throw new RequiredFieldInvalidException("requires label list");
         }
     }
@@ -53,16 +50,14 @@ public class LabelSet implements ICurationDataModel<LabelData> {
     }
 
     @Override
-    public LabelData toSwaggerObject(){
+    public LabelData toSwaggerObject() {
         LabelData data = new LabelData();
-        if (labelList != null){
-            List<io.swagger.model.Label> methods = new ArrayList<>();
-            for (Label label: labelList) {
-                methods.add(label.toSwaggerObject());
+        if (labelList != null) {
+            List<io.swagger.model.Label> labels = new ArrayList<>();
+            for (Label label : labelList) {
+                labels.add(label.toSwaggerObject());
             }
-            LabelList list = new LabelList();
-            list.setLabel(methods);
-            data.setLabelList(list);
+            data.setLabelList(labels);
         }
         return data;
     }

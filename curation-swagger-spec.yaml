@@ -613,12 +613,6 @@ definitions:
       - MethodList
     properties:
       MethodList:
-        $ref: '#/definitions/MethodList'
-  MethodList:
-    type: object
-    title: MethodList
-    properties:
-      Method:
         title: Method
         type: array
         description: list of methods
@@ -631,12 +625,6 @@ definitions:
       - LabelList
     properties:
       LabelList:
-        $ref: '#/definitions/LabelList'
-  LabelList:
-    type: object
-    description: List of labels
-    properties:
-      Label:
         type: array
         items:
           $ref: '#/definitions/Label'

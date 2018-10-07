@@ -16,9 +16,9 @@ public class MethodSet implements ICurationDataModel<MethodData> {
     }
 
     public MethodSet(MethodData swaggerObject) {
-        if (swaggerObject.getMethodList() != null && swaggerObject.getMethodList().getMethod() != null){
+        if (swaggerObject.getMethodList() != null){
             methodList = new ArrayList<>();
-            for (io.swagger.model.Method method : swaggerObject.getMethodList().getMethod() ){
+            for (io.swagger.model.Method method : swaggerObject.getMethodList() ){
                 methodList.add(new Method(method));
             }
             if (methodList.size() == 0){
@@ -61,9 +61,7 @@ public class MethodSet implements ICurationDataModel<MethodData> {
             for (Method method: methodList) {
                 methods.add(method.toSwaggerObject());
             }
-            MethodList list = new MethodList();
-            list.setMethod(methods);
-            data.setMethodList(list);
+            data.setMethodList(methods);
         }
         return data;
     }

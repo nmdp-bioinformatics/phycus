@@ -36,6 +36,8 @@ paths:
           description: Returns the data set containing all references
           schema:
             $ref: '#/definitions/HFCurationResponse'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/haplotypes':
@@ -53,6 +55,30 @@ paths:
           description: Returns the haplotype frequency data
           schema:
             $ref: '#/definitions/HaplotypeFrequencyData'
+        '404':
+          description: Submission not found.
+        '500':
+          $ref: '#/responses/Standard500ErrorResponse'
+  '/hfc/{submissionId}/quality':
+    get:
+      description: Returns the list of quality measures for the given submission
+      parameters:
+        - name: submissionId
+          in: path
+          type: integer
+          format: int64
+          required: true
+          description: The submission id
+      responses:
+        '200':
+          description: Returns the list of quality measures for the given submission. The response body may be empty if there are no quality measures for the submission.
+          schema:
+            type: array
+            description: List of quality measures
+            items:
+              $ref: '#/definitions/Quality'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/cohort':
@@ -70,6 +96,8 @@ paths:
           description: Returns the cohort data and genotypes if available
           schema:
             $ref: '#/definitions/CohortData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/population':
@@ -87,6 +115,8 @@ paths:
           description: Returns the population
           schema:
             $ref: '#/definitions/PopulationData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/labels':
@@ -101,9 +131,11 @@ paths:
           description: The submission id
       responses:
         '200':
-          description: Returns label set
+          description: Returns label set. The response body may be empty if there are no quality measures for the submission.
           schema:
             $ref: '#/definitions/LabelData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   '/hfc/{submissionId}/scope':
@@ -123,6 +155,8 @@ paths:
           description: Returns scope set
           schema:
             $ref: '#/definitions/ScopeData'
+        '404':
+          description: Submission not found.
         '500':
           $ref: '#/responses/Standard500ErrorResponse'
   /hfc:

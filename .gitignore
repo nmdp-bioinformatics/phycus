@@ -43,3 +43,6 @@ buildNumber.properties
 /.settings/
 /.classpath
 /.project
+
+# Prevent Windows env customization from eating Mac installation
+/src/main/resources/application.properties

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.dash.freq;
+package org.dash.util;
 
 //import java.util.*;
 import java.util.ArrayList;
@@ -29,7 +29,8 @@ public class ErrorCodes {
         errorCodes.put(3, "The values for the \"race\" column must be identical");
         errorCodes.put(4, "The values for the \"race\" column must be strings");
         errorCodes.put(5, "");
-        
+        errorCodes.put(6, "");
+        errorCodes.put(7, "");
         // errorCodes.put(, );
         
         

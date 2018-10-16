@@ -22,7 +22,7 @@ public class SwaggerDocumentationConfig {
                 .licenseUrl("https://www.gnu.org/licenses/lgpl-3.0.txt")
                 .termsOfServiceUrl("")
                 .version("1.0.0")
-                .contact(new Contact("Pradeep Bashyal","https://github.com/nmdp-bioinformatics/service-haplotype-frequency-curation", ""))
+                .contact(new Contact("Pradeep Bashyal","https://github.com/nmdp-bioinformatics/phycus", ""))
                 .build();
     }
 

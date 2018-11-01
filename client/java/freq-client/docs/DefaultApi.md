@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**hfcSubmissionIdHaplotypesGet**](DefaultApi.md#hfcSubmissionIdHaplotypesGet) | **GET** /hfc/{submissionId}/haplotypes | 
 [**hfcSubmissionIdLabelsGet**](DefaultApi.md#hfcSubmissionIdLabelsGet) | **GET** /hfc/{submissionId}/labels | 
 [**hfcSubmissionIdPopulationGet**](DefaultApi.md#hfcSubmissionIdPopulationGet) | **GET** /hfc/{submissionId}/population | 
+[**hfcSubmissionIdQualityGet**](DefaultApi.md#hfcSubmissionIdQualityGet) | **GET** /hfc/{submissionId}/quality | 
 [**hfcSubmissionIdScopeGet**](DefaultApi.md#hfcSubmissionIdScopeGet) | **GET** /hfc/{submissionId}/scope | 
 
 
@@ -490,6 +491,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PopulationData**](PopulationData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="hfcSubmissionIdQualityGet"></a>
+# **hfcSubmissionIdQualityGet**
+> List&lt;Quality&gt; hfcSubmissionIdQualityGet(submissionId)
+
+
+
+Returns the list of quality measures for the given submission
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.DefaultApi;
+
+
+DefaultApi apiInstance = new DefaultApi();
+Long submissionId = 789L; // Long | The submission id
+try {
+    List<Quality> result = apiInstance.hfcSubmissionIdQualityGet(submissionId);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DefaultApi#hfcSubmissionIdQualityGet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submissionId** | **Long**| The submission id |
+
+### Return type
+
+[**List&lt;Quality&gt;**](Quality.md)
 
 ### Authorization
 

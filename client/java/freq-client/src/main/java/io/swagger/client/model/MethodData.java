@@ -21,32 +21,39 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.MethodList;
+import io.swagger.client.model.Method;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MethodData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-12T09:58:25.177-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-11-01T08:14:07.511-07:00")
 public class MethodData {
   @SerializedName("MethodList")
-  private MethodList methodList = null;
+  private List<Method> methodList = new ArrayList<Method>();
 
-  public MethodData methodList(MethodList methodList) {
+  public MethodData methodList(List<Method> methodList) {
     this.methodList = methodList;
     return this;
   }
 
+  public MethodData addMethodListItem(Method methodListItem) {
+    this.methodList.add(methodListItem);
+    return this;
+  }
+
    /**
-   * Get methodList
+   * list of methods
    * @return methodList
   **/
-  @ApiModelProperty(required = true, value = "")
-  public MethodList getMethodList() {
+  @ApiModelProperty(required = true, value = "list of methods")
+  public List<Method> getMethodList() {
     return methodList;
   }
 
-  public void setMethodList(MethodList methodList) {
+  public void setMethodList(List<Method> methodList) {
     this.methodList = methodList;
   }
 

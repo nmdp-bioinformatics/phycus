@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**labelList** | [**LabelList**](LabelList.md) |  | 
+**labelList** | [**List&lt;Label&gt;**](Label.md) |  | 
 
 
 

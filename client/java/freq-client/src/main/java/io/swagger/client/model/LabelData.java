@@ -21,19 +21,26 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.LabelList;
+import io.swagger.client.model.Label;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * LabelData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-12T09:58:25.177-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-11-01T08:14:07.511-07:00")
 public class LabelData {
   @SerializedName("LabelList")
-  private LabelList labelList = null;
+  private List<Label> labelList = new ArrayList<Label>();
 
-  public LabelData labelList(LabelList labelList) {
+  public LabelData labelList(List<Label> labelList) {
     this.labelList = labelList;
+    return this;
+  }
+
+  public LabelData addLabelListItem(Label labelListItem) {
+    this.labelList.add(labelListItem);
     return this;
   }
 
@@ -42,11 +49,11 @@ public class LabelData {
    * @return labelList
   **/
   @ApiModelProperty(required = true, value = "")
-  public LabelList getLabelList() {
+  public List<Label> getLabelList() {
     return labelList;
   }
 
-  public void setLabelList(LabelList labelList) {
+  public void setLabelList(List<Label> labelList) {
     this.labelList = labelList;
   }
 

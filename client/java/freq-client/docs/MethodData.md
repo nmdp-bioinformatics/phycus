@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**methodList** | [**MethodList**](MethodList.md) |  | 
+**methodList** | [**List&lt;Method&gt;**](Method.md) | list of methods | 
 
 
 

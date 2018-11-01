@@ -65,7 +65,8 @@ import io.swagger.client.model.PopulationRequest;
  * PostPopulationFrequencies
  *
  */
-public class PostPopulationFrequencies implements Callable<Integer> {
+public class PostPopulationFrequencies implements Callable<Integer> 
+{
 
 	private final File inputFile;
 	private final String gtRegistry;
@@ -84,25 +85,29 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	 * @throws MalformedURLException
 	 */
 	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
-			throws MalformedURLException {
+			throws MalformedURLException 
+        {
 		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
 		this.estEntity = estEntity;
 		if (url == null) {
 			this.url = new URL("http://localhost:8080");
-		} else {
+		} else 
+                {
 			this.url = url;
 		}
 	}
 
 	@Override
-	public Integer call() throws Exception {
+	public Integer call() throws Exception 
+        {
 		postPopulationFrequencies(reader(inputFile));
 
 		return 0;
 	}
 
-	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
+	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException 
+        {
 		String row;
 		String[] columns;
 
@@ -112,16 +117,19 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		License license = new License();
 		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 
-		while ((row = reader.readLine()) != null) {
+		while ((row = reader.readLine()) != null) 
+                {
 			columns = row.split(",");
 
 			String race = columns[0];
 			String haplotype = columns[1];
 			Double frequency = new Double(columns[2]);
 
-			if (populationMap.containsKey(race)) {
+			if (populationMap.containsKey(race)) 
+                        {
 				haplotypeFrequencyData = populationMap.get(race);
-			} else {
+			} else 
+                        {
 				haplotypeFrequencyData = new HaplotypeFrequencyData();
 				haplotypeFrequencyData.setLicense(license);
 			}
@@ -158,22 +166,18 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
 		LabelData labelData = new LabelData();
-//		LabelList labelList = new LabelList();
 		Label registryLabel = new Label();
 		registryLabel.setTypeOfLabel("GT_REGISTRY");
 		registryLabel.setValue(gtRegistry);
                 labelData.addLabelListItem(registryLabel);
-//		labelList.addLabelItem(registryLabel);
-		
+                
 		Label estimatorLabel = new Label();
 		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
 		estimatorLabel.setValue(estEntity);
                 labelData.addLabelListItem(estimatorLabel);
-//		labelList.addLabelItem(estimatorLabel);
 		
-//		labelData.setLabelList(labelList);
-		
-		for (String populationName : populationMap.keySet()) {
+		for (String populationName : populationMap.keySet()) 
+                {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
 			PopulationRequest populationRequest = new PopulationRequest();
 			
@@ -213,25 +217,31 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		CommandLine commandLine = new CommandLine(args);
 
 		PostPopulationFrequencies postPopulationFrequencies = null;
-		try {
+		try 
+                {
 			CommandLineParser.parse(commandLine, arguments);
-			if (about.wasFound()) {
+			if (about.wasFound()) 
+                        {
 				About.about(System.out);
 				System.exit(0);
 			}
-			if (help.wasFound()) {
+			if (help.wasFound()) 
+                        {
 				Usage.usage(USAGE, null, commandLine, arguments, System.out);
 				System.exit(0);
 			}
 			postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
 					estEntity.getValue(), url.getValue());
-		} catch (CommandLineParseException | IllegalArgumentException e) {
+		} catch (CommandLineParseException | IllegalArgumentException e) 
+                {
 			Usage.usage(USAGE, e, commandLine, arguments, System.err);
 			System.exit(-1);
-		}
-		try {
+		} 
+                try 
+                {
 			System.exit(postPopulationFrequencies.call());
-		} catch (Exception e) {
+		} catch (Exception e) 
+                {
 			e.printStackTrace();
 			System.exit(1);
 		}

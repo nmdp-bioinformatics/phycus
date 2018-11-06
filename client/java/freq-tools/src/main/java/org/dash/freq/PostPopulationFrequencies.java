@@ -86,7 +86,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			throws MalformedURLException {
 		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
-		this.estEntity = estEntity;
+                this.estEntity = estEntity;
 		if (url == null) {
 			this.url = new URL("http://localhost:8080");
 		} else {
@@ -125,7 +125,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 				haplotypeFrequencyData.setLicense(license);
 			}
 
-			HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
+                        HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
 			hapFrequency.setFrequency(new Double(frequency));
 			hapFrequency.setHaplotypeString(haplotype);
 			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
@@ -156,13 +156,13 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
-		LabelData labelData = new LabelData();
-		Label registryLabel = new Label();
+                LabelData labelData = new LabelData();
+                Label registryLabel = new Label();
 		registryLabel.setTypeOfLabel("GT_REGISTRY");
-		registryLabel.setValue(gtRegistry);
+                registryLabel.setValue(gtRegistry);
                 labelData.addLabelListItem(registryLabel);
-                
-		Label estimatorLabel = new Label();
+
+                Label estimatorLabel = new Label();
 		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
 		estimatorLabel.setValue(estEntity);
                 labelData.addLabelListItem(estimatorLabel);

@@ -158,18 +158,15 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
 		LabelData labelData = new LabelData();
-		LabelList labelList = new LabelList();
 		Label registryLabel = new Label();
 		registryLabel.setTypeOfLabel("GT_REGISTRY");
 		registryLabel.setValue(gtRegistry);
-		labelList.addLabelItem(registryLabel);
-		
+                labelData.addLabelListItem(registryLabel);
+                
 		Label estimatorLabel = new Label();
 		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
 		estimatorLabel.setValue(estEntity);
-		labelList.addLabelItem(estimatorLabel);
-		
-		labelData.setLabelList(labelList);
+                labelData.addLabelListItem(estimatorLabel);
 		
 		for (String populationName : populationMap.keySet()) {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();

@@ -55,7 +55,6 @@ import io.swagger.client.model.HaplotypeFrequency;
 import io.swagger.client.model.HaplotypeFrequencyData;
 import io.swagger.client.model.Label;
 import io.swagger.client.model.LabelData;
-import io.swagger.client.model.LabelList;
 import io.swagger.client.model.License;
 import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;

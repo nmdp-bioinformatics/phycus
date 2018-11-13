@@ -34,47 +34,85 @@ public class DataChecks {
         
     }
     
-	public static List<Integer> raceCheck(String raceFirst, String race)
+	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes)
 	{
-		List<Integer> errorCodes = new ArrayList<>();
 		boolean flag = true;
-//		String first = raceArray.get(0);
-//		if (first.getClass() != String.class)
-//		{
-//			errorCodes.add(4);
-//			flag = false;
-//		}
-//		for(int i = 1; i < raceArray.size() && flag; i++)
-//		{
-			if (race != raceFirst)
-			{
-				flag = false;
-				errorCodes.add(3);
-				if (raceFirst.getClass() != String.class) errorCodes.add(4);
-			}
-//		}
-		if (flag) System.out.println("ok");
-		return errorCodes;
+		System.out.println("-----------");
+		System.out.println(raceFirst);
+		System.out.println(race);
+		System.out.println(errorCodes);
+		System.out.println("-----------");
+
+
+
+		if (race != raceFirst)
+		{
+			flag = false;
+			errorCodes.add(3);
+			return flag;
+		}
+		return flag;
 	}
 
-	public void populationDataCheck(BufferedReader reader) throws IOException, ApiException 
-	{
+	public static boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException 
+	{	
+		// while loop variables
 		String row;
 		String[] columns;
+		
+		// read first line
+		row = reader.readLine();
+		columns = row.split(",");
+		
+		// set variables for assorted checks
+		System.out.println("Setting initial variables");
 
-		HashMap<String, HaplotypeFrequencyData> populationMap = new HashMap<String, HaplotypeFrequencyData>();
-		HaplotypeFrequencyData haplotypeFrequencyData;
+		boolean flag = true;
+		List<Integer> errorCodes = new ArrayList<>();
+		System.out.println("Error codes array: " + errorCodes);
+
+		// frequency totals up to 1.0000
+		double freqTotal = new Double(columns[2]);
+		System.out.println(freqTotal);
+
+		// confirm populations are all the same
+		String raceFirst = columns[0];
+		System.out.println(raceFirst);
+
 
 		// read through the file, consolodate the data for checking
-		while ((row = reader.readLine()) != null) 
+		while ((row = reader.readLine()) != null) //&& flag == true) 
 		{
+			System.out.println(row);
 			columns = row.split(",");
-
 			String race = columns[0];
 			String haplotype = columns[1];
 			Double frequency = new Double(columns[2]);
+			System.out.println(race);
 
-			haplotypeFrequencyData = populationMap.get(race);
+//			flag = raceCheck(raceFirst, race, errorCodes);
+//			if (!raceFirst.equals(race))
+//			{
+//				flag = false;
+//				errorCodes.add(3);
+//			}
+			freqTotal += frequency;
+			System.out.println("While loop frequency total: " + freqTotal);
 		}
+		try
+		{
+			System.out.println(freqTotal);
+			if (flag == false) 
+			{
+				System.out.println(errorCodes);
+				throw new Exception();
+			}
+			
+		} catch (Exception ex) {
+            System.out.println(ex); 
+        }
+		
+		return flag;
+//		System.out.println(errorCodes);
 	}
 }

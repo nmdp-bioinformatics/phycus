@@ -96,7 +96,15 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
-		postPopulationFrequencies(reader(inputFile));
+		try 
+		{
+			if (DataChecks.populationDataCheck(reader(inputFile)))
+			{
+				postPopulationFrequencies(reader(inputFile));
+			}
+		} catch (Exception ex) {
+            System.out.println(ex); 
+        }
 
 		return 0;
 	}
@@ -158,13 +166,13 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		
                 LabelData labelData = new LabelData();
                 Label registryLabel = new Label();
-		registryLabel.setTypeOfLabel("GT_REGISTRY");
+				registryLabel.setTypeOfLabel("GT_REGISTRY");
                 registryLabel.setValue(gtRegistry);
                 labelData.addLabelListItem(registryLabel);
 
                 Label estimatorLabel = new Label();
-		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
-		estimatorLabel.setValue(estEntity);
+				estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
+				estimatorLabel.setValue(estEntity);
                 labelData.addLabelListItem(estimatorLabel);
 		
 		for (String populationName : populationMap.keySet()) {

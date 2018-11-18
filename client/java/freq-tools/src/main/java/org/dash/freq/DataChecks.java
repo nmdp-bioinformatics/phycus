@@ -18,7 +18,7 @@
 
     > http://www.gnu.org/licenses/lgpl.html
 
-*/
+ */
 package org.dash.freq;
 
 import io.swagger.client.ApiException;
@@ -30,12 +30,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class DataChecks {
+
 	public DataChecks() {
-        
-    }
-    
-	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes)
-	{
+
+	}
+
+	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
 		System.out.println("-----------");
 		System.out.println(raceFirst);
@@ -43,10 +43,7 @@ public class DataChecks {
 		System.out.println(errorCodes);
 		System.out.println("-----------");
 
-
-
-		if (race != raceFirst)
-		{
+		if (race != raceFirst) {
 			flag = false;
 			errorCodes.add(3);
 			return flag;
@@ -54,16 +51,15 @@ public class DataChecks {
 		return flag;
 	}
 
-	public static boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException 
-	{	
+	public static boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException {
 		// while loop variables
 		String row;
 		String[] columns;
-		
+
 		// read first line
 		row = reader.readLine();
 		columns = row.split(",");
-		
+
 		// set variables for assorted checks
 		System.out.println("Setting initial variables");
 
@@ -73,12 +69,12 @@ public class DataChecks {
 
 		// frequency totals up to 1.0000
 		double freqTotal = new Double(columns[2]);
+		double freqThreshold = new Double(1.0000);
 		System.out.println(freqTotal);
 
 		// confirm populations are all the same
 		String raceFirst = columns[0];
 		System.out.println(raceFirst);
-
 
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) //&& flag == true) 
@@ -97,22 +93,25 @@ public class DataChecks {
 //				errorCodes.add(3);
 //			}
 			freqTotal += frequency;
-			System.out.println("While loop frequency total: " + freqTotal);
+			System.out.println("While-loop frequency total: " + freqTotal);
 		}
-		try
+		try 
 		{
 			System.out.println(freqTotal);
+			if (freqTotal > freqThreshold || freqTotal < freqThreshold) 
+				throw new Error();
+			
 			if (flag == false) 
 			{
 				System.out.println(errorCodes);
-				throw new Exception();
+				throw new Error();
 			}
-			
-		} catch (Exception ex) {
-            System.out.println(ex); 
-        }
-		
+
+		} catch (Exception ex) 
+		{
+			System.out.println(ex);
+		}
+
 		return flag;
-//		System.out.println(errorCodes);
 	}
 }

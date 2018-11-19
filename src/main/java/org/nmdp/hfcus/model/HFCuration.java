@@ -2,6 +2,7 @@ package org.nmdp.hfcus.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,44 +34,60 @@ public class HFCuration implements Serializable, ICurationDataModel<HFCurationRe
         if (data.getPopulationID() == null){
             throw new RequiredFieldInvalidException("Requires Population ID");
         }
-        populationData = repositoryContainer.getPopulationRepository().findOne(data.getPopulationID());
-        if (populationData == null) {
-            throw new RequiredFieldInvalidException("Not a valid Population ID");
-        }
-        
-        cohortData = repositoryContainer.getCohortRepository().findOne(data.getCohortID());
-        	if (cohortData == null) {
-        		throw new RequiredFieldInvalidException("Not a valid Cohort ID");
-        	}
+
+        populationData = repositoryContainer
+                .getPopulationRepository()
+                .findById(data.getPopulationID())
+                .orElseThrow(() -> new RequiredFieldInvalidException("Not a valid Population ID"));
+
+        cohortData = repositoryContainer
+                .getCohortRepository()
+                .findById(data.getCohortID())
+                .orElseThrow(() -> new RequiredFieldInvalidException("Not a valid Cohort ID"));
 
         if (data.getMethodData() != null){
             methodData = new MethodSet(data.getMethodData());
         }else if (data.getMethodSetID() != null){
-            methodData = repositoryContainer.getMethodSetRepository().findOne(data.getMethodSetID());
+            methodData = repositoryContainer
+                    .getMethodSetRepository()
+                    .findById(data.getMethodSetID())
+                    .orElse(null);
         }
 
         if (data.getLabelData() != null){
             labelData = new LabelSet(data.getLabelData());
         }else if (data.getLabelID() != null){
-            labelData = repositoryContainer.getLabelSetRepository().findOne(data.getLabelID());
+            labelData = repositoryContainer
+                    .getLabelSetRepository()
+                    .findById(data.getLabelID())
+                    .orElse(null);
         }
 
         if (data.getHaplotypeFrequencyData() != null){
             haplotypeFrequencyData = new HaplotypeFrequencySet(data.getHaplotypeFrequencyData());
         }else if (data.getHaplotypeFrequencyDataID() != null && !Objects.equals(data.getHaplotypeFrequencyDataID(), "")){
-            haplotypeFrequencyData = repositoryContainer.getHaplotypeFrequencySetRepository().findOne(data.getHaplotypeFrequencyDataID());
+            haplotypeFrequencyData = repositoryContainer
+                    .getHaplotypeFrequencySetRepository()
+                    .findById(data.getHaplotypeFrequencyDataID())
+                    .orElse(null);
         }
 
         if (data.getAccessData() != null){
             accessData = new Access(data.getAccessData());
         }else if (data.getAccessID() != null){
-            accessData = repositoryContainer.getAccessRepository().findOne(data.getAccessID());
+            accessData = repositoryContainer
+                    .getAccessRepository()
+                    .findById(data.getAccessID())
+                    .orElse(null);
         }
 
         if (data.getScopeData() != null){
             scopeData = new ScopeList(data.getScopeData());
         }else if (data.getScopeID() != null){
-            scopeData = repositoryContainer.getScopeListRepository().findOne(data.getScopeID());
+            scopeData = repositoryContainer
+                    .getScopeListRepository()
+                    .findById(data.getScopeID())
+                    .orElse(null);
         }
     }
 

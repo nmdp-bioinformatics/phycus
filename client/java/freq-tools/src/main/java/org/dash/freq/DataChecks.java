@@ -25,6 +25,7 @@ import io.swagger.client.ApiException;
 import io.swagger.client.model.HaplotypeFrequencyData;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -68,9 +69,9 @@ public class DataChecks {
 		System.out.println("Error codes array: " + errorCodes);
 
 		// frequency totals up to 1.0000
-		double freqTotal = new Double(columns[2]);
-		double freqThreshold = new Double(1.0000);
+		BigDecimal freqTotal = new BigDecimal(columns[2]);
 		System.out.println(freqTotal);
+//		@Range(min = new BigDecimal(0.0), max = new BigDecimal(10.0))
 
 		// confirm populations are all the same
 		String raceFirst = columns[0];
@@ -83,7 +84,7 @@ public class DataChecks {
 			columns = row.split(",");
 			String race = columns[0];
 			String haplotype = columns[1];
-			Double frequency = new Double(columns[2]);
+			BigDecimal frequency = new BigDecimal(columns[2]);
 			System.out.println(race);
 
 //			flag = raceCheck(raceFirst, race, errorCodes);
@@ -92,13 +93,15 @@ public class DataChecks {
 //				flag = false;
 //				errorCodes.add(3);
 //			}
-			freqTotal += frequency;
+
+			// add the current line's frequency to the total frequency
+			freqTotal = frequency.add(freqTotal);
 			System.out.println("While-loop frequency total: " + freqTotal);
 		}
 		try 
 		{
-			System.out.println(freqTotal);
-			if (freqTotal > freqThreshold || freqTotal < freqThreshold) 
+			System.out.println(freqTotal.setScale(4, BigDecimal.ROUND_CEILING));
+			if (freqTotal.setScale(4, BigDecimal.ROUND_CEILING).equals(BigDecimal.ONE)) 
 				throw new Error();
 			
 			if (flag == false) 

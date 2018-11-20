@@ -101,7 +101,7 @@ public class DataChecks {
 		try 
 		{
 			System.out.println(freqTotal.setScale(4, BigDecimal.ROUND_CEILING));
-			if (freqTotal.setScale(4, BigDecimal.ROUND_CEILING).equals(BigDecimal.ONE)) 
+			if (freqTotal.setScale(4, BigDecimal.ROUND_CEILING).equals(1.0000)) 
 				throw new Error();
 			
 			if (flag == false) 

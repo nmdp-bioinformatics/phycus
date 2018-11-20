@@ -132,8 +132,8 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 				haplotypeFrequencyData = new HaplotypeFrequencyData();
 				haplotypeFrequencyData.setLicense(license);
 			}
-
-                        HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
+			
+			HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
 			hapFrequency.setFrequency(new Double(frequency));
 			hapFrequency.setHaplotypeString(haplotype);
 			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);

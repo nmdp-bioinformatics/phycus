@@ -98,7 +98,8 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	public Integer call() throws Exception {
 		try 
 		{
-			if (DataChecks.populationDataCheck(reader(inputFile)))
+			DataChecks dataChecks = new DataChecks();
+			if (dataChecks.populationDataCheck(reader(inputFile)))
 			{
 				postPopulationFrequencies(reader(inputFile));
 			}

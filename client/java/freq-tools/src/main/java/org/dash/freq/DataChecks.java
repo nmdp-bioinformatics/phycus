@@ -35,6 +35,15 @@ public class DataChecks {
 	public DataChecks() {
 
 	}
+	
+	// custom error messages
+	class FrequencyError extends Error
+	{
+		public FrequencyError(String message)
+		{
+			super("The frequencies do not total to 1.0000");
+		}
+	}
 
 	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
@@ -52,7 +61,7 @@ public class DataChecks {
 		return flag;
 	}
 
-	public static boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException {
+	public boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException {
 		// while loop variables
 		String row;
 		String[] columns;
@@ -102,7 +111,10 @@ public class DataChecks {
 		{
 			System.out.println(freqTotal.setScale(4, BigDecimal.ROUND_UNNECESSARY));
 			if (!freqTotal.setScale(4, BigDecimal.ROUND_UNNECESSARY).equals(1.0000)) 
-				throw new Error();
+			{
+				System.out.println();
+				throw new FrequencyError("The frequencies do not total to 1.0000");
+			}
 			
 			if (flag == false) 
 			{

@@ -36,15 +36,15 @@ public class DataChecks {
 
 	}
 	
-	// custom error messages
-	class FrequencyError extends Error
+	// custom exception messages
+	class CustomException extends Exception
 	{
-		public FrequencyError(String message)
+		public FrequencyException(String message)
 		{
-			super("The frequencies do not total to 1.0000");
+			super(message);
 		}
-	}
-
+	}	
+	
 	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
 		System.out.println("-----------");
@@ -65,22 +65,23 @@ public class DataChecks {
 		// while loop variables
 		String row;
 		String[] columns;
+		boolean flag = true;
 
 		// read first line
 		row = reader.readLine();
 		columns = row.split(",");
 
-		// set variables for assorted checks
-		System.out.println("Setting initial variables");
-
-		boolean flag = true;
-		List<Integer> errorCodes = new ArrayList<>();
-		System.out.println("Error codes array: " + errorCodes);
+//		List<Integer> errorCodes = new ArrayList<>();
+//		System.out.println("Error codes array: " + errorCodes);
 
 		// frequency totals up to 1.0000
 		BigDecimal freqTotal = new BigDecimal(columns[2]);
 		System.out.println(freqTotal);
-//		@Range(min = new BigDecimal(0.0), max = new BigDecimal(10.0))
+		
+		// resolution of the total frequencies & target frequency
+		int scale = 4;
+		BigDecimal targetFrequency = new BigDecimal(1)
+				.setScale(scale, BigDecimal.ROUND_HALF_UP);
 
 		// confirm populations are all the same
 		String raceFirst = columns[0];
@@ -109,17 +110,18 @@ public class DataChecks {
 		}
 		try 
 		{
-			System.out.println(freqTotal.setScale(4, BigDecimal.ROUND_UNNECESSARY));
-			if (!freqTotal.setScale(4, BigDecimal.ROUND_UNNECESSARY).equals(1.0000)) 
+			System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
+			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
 			{
 				System.out.println();
-				throw new FrequencyError("The frequencies do not total to 1.0000");
+				flag = false;
+				throw new FrequencyException("The frequencies do not total to " + targetFrequency);
 			}
 			
 			if (flag == false) 
 			{
-				System.out.println(errorCodes);
-				throw new Error();
+//				System.out.println(errorCodes);
+//				throw new Error();
 			}
 
 		} catch (Exception ex) 

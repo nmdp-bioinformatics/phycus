@@ -32,8 +32,8 @@ public class ErrorCodes {
 		TreeMap<Integer, String> errorCodes = new TreeMap<Integer, String>();
 
 		errorCodes.put(2, "Haplotype frequencies do not total 1.0000");
-		errorCodes.put(3, "The values for the \"race\" column must be identical");
-		errorCodes.put(4, "The values for the \"race\" column must be strings");
+		errorCodes.put(3, "The values for the \"population\" column must be identical");
+		errorCodes.put(4, "");
 		errorCodes.put(5, "");
 
 		// errorCodes.put(, )

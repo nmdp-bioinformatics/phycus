@@ -97,7 +97,7 @@ public class DataChecks {
 		System.out.println(raceFirst);
 
 		// read through the file, consolodate the data for checking
-		while ((row = reader.readLine()) != null && flag == true) 
+		while ((row = reader.readLine()) != null) 
 		{
 			System.out.println(row);
 			columns = row.split(",");
@@ -106,13 +106,12 @@ public class DataChecks {
 			BigDecimal frequency = new BigDecimal(columns[2]);
 			System.out.println(race);
 
-			flag = raceCheck(raceFirst, race, errorCodes);
-			if( flag == false) break;
-//			if (!raceFirst.equals(race))
-//			{
-//				flag = false;
-//				errorCodes.add(3);
-//			}
+			// run the pop check only while flag equals true
+			// This is so it only adds one mismatch to the errorCode list
+			if (flag == true)
+			{
+				flag = raceCheck(raceFirst, race, errorCodes);
+			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
@@ -121,16 +120,21 @@ public class DataChecks {
 		try 
 		{
 			System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency) 
-					&& flag == true) 
+			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
 			{
 				System.out.println();
 				flag = false;
-				throw new PopulationDataException("The frequencies do not total to " + targetFrequency);
+				errorCodes.add(2);
+//				throw new PopulationDataException("The frequencies do not total to " + targetFrequency);
 			}
 			
 			if (flag == false) 
 			{
+				System.out.println(errorCodes);
+				for (int x:errorCodes)
+				{
+					System.out.println(x);
+				}
 //				System.out.println(errorCodes);
 //				throw new Error();
 			}

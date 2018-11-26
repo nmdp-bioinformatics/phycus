@@ -37,15 +37,15 @@ public class DataChecks {
 	}
 	
 	// custom exception messages
-	class CustomException extends Exception
+	class PopulationDataException extends Exception
 	{
-		public FrequencyException(String message)
+		public PopulationDataException(String message)
 		{
 			super(message);
 		}
 	}	
 	
-	public static boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
+	public boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
 		System.out.println("-----------");
 		System.out.println(raceFirst);
@@ -53,11 +53,20 @@ public class DataChecks {
 		System.out.println(errorCodes);
 		System.out.println("-----------");
 
-		if (race != raceFirst) {
-			flag = false;
-			errorCodes.add(3);
-			return flag;
+		try
+		{
+			if (!race.equals(raceFirst)) {
+				flag = false;
+				errorCodes.add(3);
+
+				throw new PopulationDataException("The population cohort names are not all the same.");
+			}
 		}
+		catch (Exception ex)
+		{
+			System.out.println(ex);
+		}
+		
 		return flag;
 	}
 
@@ -71,7 +80,7 @@ public class DataChecks {
 		row = reader.readLine();
 		columns = row.split(",");
 
-//		List<Integer> errorCodes = new ArrayList<>();
+		List<Integer> errorCodes = new ArrayList<>();
 //		System.out.println("Error codes array: " + errorCodes);
 
 		// frequency totals up to 1.0000
@@ -88,7 +97,7 @@ public class DataChecks {
 		System.out.println(raceFirst);
 
 		// read through the file, consolodate the data for checking
-		while ((row = reader.readLine()) != null) //&& flag == true) 
+		while ((row = reader.readLine()) != null && flag == true) 
 		{
 			System.out.println(row);
 			columns = row.split(",");
@@ -97,7 +106,8 @@ public class DataChecks {
 			BigDecimal frequency = new BigDecimal(columns[2]);
 			System.out.println(race);
 
-//			flag = raceCheck(raceFirst, race, errorCodes);
+			flag = raceCheck(raceFirst, race, errorCodes);
+			if( flag == false) break;
 //			if (!raceFirst.equals(race))
 //			{
 //				flag = false;
@@ -111,11 +121,12 @@ public class DataChecks {
 		try 
 		{
 			System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
+			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency) 
+					&& flag == true) 
 			{
 				System.out.println();
 				flag = false;
-				throw new FrequencyException("The frequencies do not total to " + targetFrequency);
+				throw new PopulationDataException("The frequencies do not total to " + targetFrequency);
 			}
 			
 			if (flag == false) 

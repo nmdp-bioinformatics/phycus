@@ -36,19 +36,14 @@ public class DataChecks {
 
 	}
 	
+	// are all the population names the same?
 	public boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
-		System.out.println("-----------");
-		System.out.println(raceFirst);
-		System.out.println(race);
-		System.out.println("-----------");
-
 
 		if (!race.equals(raceFirst)) {
 			flag = false;
 			errorCodes.add(3);
 		}
-		
 		return flag;
 	}
 
@@ -75,18 +70,15 @@ public class DataChecks {
 
 		// confirm populations are all the same
 		String raceFirst = columns[0];
-		System.out.println(raceFirst);
 
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
 			// break the row down into useable pieces
-			System.out.println(row);
 			columns = row.split(",");
 			String race = columns[0];
 			String haplotype = columns[1];
 			BigDecimal frequency = new BigDecimal(columns[2]);
-			System.out.println(race);
 
 			// run the population check only while flag equals true
 			// This is so it only adds one mismatch to the errorCode list
@@ -97,12 +89,14 @@ public class DataChecks {
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
-			System.out.println("While-loop frequency total: " + freqTotal);
+//			System.out.println("While-loop frequency total: " + freqTotal);
 		}
 		
 		// does the frequency fall withing the target range?
-		System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
+		System.out.println("Frequency total: " 
+				+ freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
+		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
+				.equals(targetFrequency)) 
 		{
 			flag = false;
 			errorCodeList.add(2);
@@ -113,7 +107,7 @@ public class DataChecks {
 		{
 			for (int x:errorCodeList)
 			{
-				System.out.println(ErrorCodes.ErrorList().get(x));
+				System.out.println("* " + ErrorCodes.ErrorList().get(x));
 			}
 		}
 

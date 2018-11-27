@@ -36,35 +36,17 @@ public class DataChecks {
 
 	}
 	
-	// custom exception messages
-	class PopulationDataException extends Exception
-	{
-		public PopulationDataException(String message)
-		{
-			super(message);
-		}
-	}	
-	
 	public boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
 		boolean flag = true;
 		System.out.println("-----------");
 		System.out.println(raceFirst);
 		System.out.println(race);
-		System.out.println(errorCodes);
 		System.out.println("-----------");
 
-		try
-		{
-			if (!race.equals(raceFirst)) {
-				flag = false;
-				errorCodes.add(3);
 
-				throw new PopulationDataException("The population cohort names are not all the same.");
-			}
-		}
-		catch (Exception ex)
-		{
-			System.out.println(ex);
+		if (!race.equals(raceFirst)) {
+			flag = false;
+			errorCodes.add(3);
 		}
 		
 		return flag;
@@ -80,12 +62,11 @@ public class DataChecks {
 		row = reader.readLine();
 		columns = row.split(",");
 
-		List<Integer> errorCodes = new ArrayList<>();
-//		System.out.println("Error codes array: " + errorCodes);
+		// list to collect error codes
+		List<Integer> errorCodeList = new ArrayList<>();
 
 		// frequency totals up to 1.0000
 		BigDecimal freqTotal = new BigDecimal(columns[2]);
-		System.out.println(freqTotal);
 		
 		// resolution of the total frequencies & target frequency
 		int scale = 4;
@@ -99,6 +80,7 @@ public class DataChecks {
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
+			// break the row down into useable pieces
 			System.out.println(row);
 			columns = row.split(",");
 			String race = columns[0];
@@ -106,42 +88,33 @@ public class DataChecks {
 			BigDecimal frequency = new BigDecimal(columns[2]);
 			System.out.println(race);
 
-			// run the pop check only while flag equals true
+			// run the population check only while flag equals true
 			// This is so it only adds one mismatch to the errorCode list
 			if (flag == true)
 			{
-				flag = raceCheck(raceFirst, race, errorCodes);
+				flag = raceCheck(raceFirst, race, errorCodeList);
 			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
 			System.out.println("While-loop frequency total: " + freqTotal);
 		}
-		try 
+		
+		// does the frequency fall withing the target range?
+		System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
+		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
 		{
-			System.out.println(freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-			if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP).equals(targetFrequency)) 
-			{
-				System.out.println();
-				flag = false;
-				errorCodes.add(2);
-//				throw new PopulationDataException("The frequencies do not total to " + targetFrequency);
-			}
-			
-			if (flag == false) 
-			{
-				System.out.println(errorCodes);
-				for (int x:errorCodes)
-				{
-					System.out.println(x);
-				}
-//				System.out.println(errorCodes);
-//				throw new Error();
-			}
+			flag = false;
+			errorCodeList.add(2);
+		}
 
-		} catch (Exception ex) 
+		// if flag is false, print out the errors to the command line
+		if (flag == false) 
 		{
-			System.out.println(ex);
+			for (int x:errorCodeList)
+			{
+				System.out.println(ErrorCodes.ErrorList().get(x));
+			}
 		}
 
 		return flag;

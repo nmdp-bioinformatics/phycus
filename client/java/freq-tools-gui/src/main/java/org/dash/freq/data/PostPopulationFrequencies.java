@@ -19,8 +19,9 @@
     > http://www.gnu.org/licenses/lgpl.html
 
 */
-package org.dash.freq.gui;
+package org.dash.freq.data;
 
+import org.dash.freq.data.DataChecks;
 import static org.dishevelled.compress.Readers.reader;
 
 import java.io.BufferedReader;
@@ -83,11 +84,13 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	 * @throws MalformedURLException
 	 */
 	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
-			throws MalformedURLException {
+			throws MalformedURLException 
+	{
 		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
-                this.estEntity = estEntity;
-		if (url == null) {
+		this.estEntity = estEntity;
+		if (url == null) 
+		{
 			this.url = new URL("http://localhost:8080");
 		} else {
 			this.url = url;

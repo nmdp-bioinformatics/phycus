@@ -32,10 +32,9 @@ public class GUIJFrame extends javax.swing.JFrame {
         fileChooserUpload = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         fileOpenButton = new javax.swing.JButton();
-        fileLocationScrollPane = new javax.swing.JScrollPane();
         fileLocationTextArea = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        outputScrollPane = new javax.swing.JScrollPane();
+        outputTextArea = new javax.swing.JTextArea();
         uploadButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -48,34 +47,30 @@ public class GUIJFrame extends javax.swing.JFrame {
             }
         });
 
-        fileLocationScrollPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        fileLocationScrollPane.setBorder(null);
-        fileLocationScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        fileLocationScrollPane.setEnabled(false);
-        fileLocationScrollPane.setFocusTraversalKeysEnabled(false);
-        fileLocationScrollPane.setFocusable(false);
-        fileLocationScrollPane.setOpaque(false);
-        fileLocationScrollPane.setRequestFocusEnabled(false);
-
         fileLocationTextArea.setEditable(false);
         fileLocationTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         fileLocationTextArea.setColumns(20);
         fileLocationTextArea.setLineWrap(true);
         fileLocationTextArea.setRows(5);
         fileLocationTextArea.setWrapStyleWord(true);
+        fileLocationTextArea.setAutoscrolls(false);
         fileLocationTextArea.setBorder(null);
         fileLocationTextArea.setDragEnabled(false);
         fileLocationTextArea.setFocusTraversalKeysEnabled(false);
         fileLocationTextArea.setFocusable(false);
         fileLocationTextArea.setOpaque(false);
         fileLocationTextArea.setRequestFocusEnabled(false);
-        fileLocationScrollPane.setViewportView(fileLocationTextArea);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        outputTextArea.setColumns(20);
+        outputTextArea.setRows(5);
+        outputScrollPane.setViewportView(outputTextArea);
 
         uploadButton.setText("Upload");
+        uploadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uploadButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,30 +84,31 @@ public class GUIJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(uploadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(uploadButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton))
+                            .addComponent(outputScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(fileOpenButton)
+                        .addGap(12, 12, 12)
+                        .addComponent(fileLocationTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(fileOpenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileLocationScrollPane)
-                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileLocationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fileOpenButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileOpenButton)
+                    .addComponent(fileLocationTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(outputScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(uploadButton)
@@ -150,6 +146,21 @@ public class GUIJFrame extends javax.swing.JFrame {
 		System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
+        System.out.println("THIS IS A DEMO FOR REDIRECTING OUTPUT TO GUI");
+
+
+		System.out.println("--------------------------------------------");
+
+		for(int i = 0; i < 30; i++)
+		{
+			System.out.print(Math.random()+"\t");
+			System.out.println("<<End");
+		}
+
+		System.out.println("--------------------------------------------");
+    }//GEN-LAST:event_uploadButtonActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -177,6 +188,10 @@ public class GUIJFrame extends javax.swing.JFrame {
 		}
 		//</editor-fold>
 
+		// redirect console to gui
+		GUIConsole redirect = new GUIConsole();
+		redirect.redirectSystemStreams();
+		
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -188,12 +203,11 @@ public class GUIJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JFileChooser fileChooserUpload;
-    private javax.swing.JScrollPane fileLocationScrollPane;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane outputScrollPane;
+    protected static javax.swing.JTextArea outputTextArea;
     private javax.swing.JButton uploadButton;
     // End of variables declaration//GEN-END:variables
 }

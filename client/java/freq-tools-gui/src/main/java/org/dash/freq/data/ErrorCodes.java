@@ -1,3 +1,5 @@
+package org.dash.freq.data;
+
 /*
 
     Copyright (c) 2014-2015 National Marrow Donor Program (NMDP)
@@ -19,7 +21,7 @@
     > http://www.gnu.org/licenses/lgpl.html
 
 */
-package org.dash.freq;
+
 
 import java.util.TreeMap;
 

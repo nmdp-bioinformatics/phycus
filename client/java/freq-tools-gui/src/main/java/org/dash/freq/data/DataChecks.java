@@ -19,7 +19,7 @@
     > http://www.gnu.org/licenses/lgpl.html
 
  */
-package org.dash.freq.gui;
+package org.dash.freq.data;
 
 import io.swagger.client.ApiException;
 //import io.swagger.client.model.HaplotypeFrequencyData;
@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 //import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import org.dash.freq.gui.ErrorCodes;
 
 public class DataChecks {
 

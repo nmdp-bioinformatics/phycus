@@ -1,15 +1,17 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.ScopeElement;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Scope implements ICurationDataModel<ScopeElement> {
-    public Scope(){
-        //intentionally left empty
-    }
-    public Scope(ScopeElement swaggerObject) {
+
+    Scope(ScopeElement swaggerObject) {
         name = swaggerObject.getName();
         freeName = swaggerObject.getFreeName();
         typeOfScope = swaggerObject.getTypeOfScope();
@@ -22,38 +24,6 @@ public class Scope implements ICurationDataModel<ScopeElement> {
     private String freeName;
     @Enumerated(EnumType.STRING)
     private ScopeElement.TypeOfScopeEnum typeOfScope;
-
-    public Long getScopeId() {
-        return scopeId;
-    }
-
-    public void setScopeId(Long scopeId) {
-        this.scopeId = scopeId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFreeName() {
-        return freeName;
-    }
-
-    public void setFreeName(String freeName) {
-        this.freeName = freeName;
-    }
-
-    public ScopeElement.TypeOfScopeEnum getTypeOfScope() {
-        return typeOfScope;
-    }
-
-    public void setTypeOfScope(ScopeElement.TypeOfScopeEnum typeOfScope) {
-        this.typeOfScope = typeOfScope;
-    }
 
     @Override
     public ScopeElement toSwaggerObject(){

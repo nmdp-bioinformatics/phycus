@@ -31,7 +31,7 @@ public class MethodSet implements ICurationDataModel<MethodData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Method> methodList;

@@ -36,7 +36,7 @@ public class HaplotypeFrequency implements ICurationDataModel<io.swagger.model.H
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String haplotypeString;
     private Double frequency;

@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Method implements ICurationDataModel<io.swagger.model.Method> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private io.swagger.model.Method.TypeOfMethodEnum typeOfMethod;

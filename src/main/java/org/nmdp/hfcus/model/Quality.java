@@ -23,7 +23,7 @@ public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double value;
     @Enumerated(EnumType.STRING)

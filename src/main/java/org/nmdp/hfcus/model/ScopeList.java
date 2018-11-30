@@ -32,7 +32,7 @@ public class ScopeList implements ICurationDataModel<ScopeData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Scope> scopeList;

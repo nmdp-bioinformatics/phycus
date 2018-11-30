@@ -18,7 +18,7 @@ public class Scope implements ICurationDataModel<ScopeElement> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scopeId;
     private String name;
     private String freeName;

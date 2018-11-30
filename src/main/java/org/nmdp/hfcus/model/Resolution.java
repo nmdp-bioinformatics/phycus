@@ -17,7 +17,7 @@ public class Resolution implements ICurationDataModel<ResolutionInfo> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String scopeElement;
     @Enumerated(EnumType.STRING)

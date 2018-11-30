@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class Population implements Serializable, ICurationDataModel<PopulationData> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

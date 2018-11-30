@@ -51,7 +51,7 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;

@@ -19,7 +19,7 @@ public class FrequencyError implements ICurationDataModel<io.swagger.model.Frequ
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double value;
     private String typeOfError;

@@ -14,7 +14,7 @@ import java.util.List;
 public class Genotype implements ICurationDataModel<io.swagger.model.Genotype> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long genotypeId;
     private String genotypeString;
     @OneToMany(cascade = CascadeType.ALL)

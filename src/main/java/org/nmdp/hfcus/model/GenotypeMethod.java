@@ -19,7 +19,7 @@ public class GenotypeMethod implements ICurationDataModel<io.swagger.model.Genot
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private io.swagger.model.GenotypeMethod.MethodLabelEnum methodLabel;

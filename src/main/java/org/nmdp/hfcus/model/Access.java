@@ -23,7 +23,7 @@ public class Access implements ICurationDataModel<AccessData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String typeOfAccess;
 

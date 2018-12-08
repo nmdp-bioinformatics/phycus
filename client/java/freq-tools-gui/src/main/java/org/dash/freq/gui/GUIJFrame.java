@@ -6,13 +6,19 @@
 package org.dash.freq.gui;
 
 import java.io.File;
-
+import java.net.URL;
+import org.dash.freq.data.*;
 /**
  *
  * @author katrinaeaton
  */
 public class GUIJFrame extends javax.swing.JFrame {
 
+	
+	File selectedFile;
+	private String gtRegistry;
+	private String estEntity;
+	private URL url;
 	/**
 	 * Creates new form GUIJFrame
 	 */
@@ -31,8 +37,8 @@ public class GUIJFrame extends javax.swing.JFrame {
 
         fileChooserUpload = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-        fileOpenButton = new javax.swing.JButton();
         fileLocationTextArea = new javax.swing.JTextArea();
+        fileOpenButton = new javax.swing.JButton();
         outputScrollPane = new javax.swing.JScrollPane();
         outputTextArea = new javax.swing.JTextArea();
         uploadButton = new javax.swing.JButton();
@@ -40,15 +46,8 @@ public class GUIJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        fileOpenButton.setText("Select File");
-        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileOpenButtonActionPerformed(evt);
-            }
-        });
-
         fileLocationTextArea.setEditable(false);
-        fileLocationTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        fileLocationTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("window"));
         fileLocationTextArea.setColumns(20);
         fileLocationTextArea.setLineWrap(true);
         fileLocationTextArea.setRows(5);
@@ -60,6 +59,13 @@ public class GUIJFrame extends javax.swing.JFrame {
         fileLocationTextArea.setFocusable(false);
         fileLocationTextArea.setOpaque(false);
         fileLocationTextArea.setRequestFocusEnabled(false);
+
+        fileOpenButton.setText("Select File");
+        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileOpenButtonActionPerformed(evt);
+            }
+        });
 
         outputTextArea.setColumns(20);
         outputTextArea.setRows(5);
@@ -97,17 +103,17 @@ public class GUIJFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(fileOpenButton)
                         .addGap(12, 12, 12)
-                        .addComponent(fileLocationTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(fileLocationTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fileOpenButton)
                     .addComponent(fileLocationTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(outputScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -135,7 +141,7 @@ public class GUIJFrame extends javax.swing.JFrame {
 		int returnValue = fileChooserUpload.showOpenDialog(null);
 		if (returnValue == fileChooserUpload.APPROVE_OPTION)//JFileChooser.APPROVE_OPTION) 
 		{
-			File selectedFile = fileChooserUpload.getSelectedFile();
+			selectedFile = fileChooserUpload.getSelectedFile();
 			System.out.println(selectedFile.getName());
 			String absolutePath = selectedFile.getAbsolutePath();
 			fileLocationTextArea.setText( absolutePath );
@@ -149,7 +155,6 @@ public class GUIJFrame extends javax.swing.JFrame {
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         System.out.println("THIS IS A DEMO FOR REDIRECTING OUTPUT TO GUI");
 
-
 		System.out.println("--------------------------------------------");
 
 		for(int i = 0; i < 30; i++)
@@ -159,6 +164,16 @@ public class GUIJFrame extends javax.swing.JFrame {
 		}
 
 		System.out.println("--------------------------------------------");
+		PostPopulationFrequencies postPopulationFrequencies = null;
+		try
+		{
+			postPopulationFrequencies = new PostPopulationFrequencies(selectedFile, gtRegistry,
+						estEntity, url);
+			postPopulationFrequencies.call();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
     }//GEN-LAST:event_uploadButtonActionPerformed
 
 	/**

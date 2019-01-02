@@ -19,7 +19,7 @@
     > http://www.gnu.org/licenses/lgpl.html
 
 */
-package org.dash.freq;
+package org.dash.freq.model;
 
 import java.util.TreeMap;
 

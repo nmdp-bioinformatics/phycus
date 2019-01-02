@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.dash.freq.gui;
+package org.dash.freq.view;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
 import javax.swing.SwingUtilities;
 
 /**
@@ -28,7 +27,7 @@ public class GUIConsole {
 		{
 			public void run() 
 			{
-				GUIJFrame.outputTextArea.append(text);
+				PhycusGui.outputTextArea.append(text);
 			}
 		});
 	}

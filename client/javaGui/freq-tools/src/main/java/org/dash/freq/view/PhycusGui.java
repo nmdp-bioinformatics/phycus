@@ -141,17 +141,6 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_fileOpenButtonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
-        System.out.println("THIS IS A DEMO FOR REDIRECTING OUTPUT TO GUI");
-
-        System.out.println("--------------------------------------------");
-
-        for(int i = 0; i < 30; i++)
-        {
-            System.out.print(Math.random()+"\t");
-            System.out.println("<<End");
-        }
-
-        System.out.println("--------------------------------------------");
         try
         {	url = new URL ("http://localhost:8080");
 			PostPopulationFrequencies ppf = new PostPopulationFrequencies(
@@ -210,7 +199,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton fileOpenButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane outputScrollPane;
-    protected static javax.swing.JTextArea outputTextArea;
+    public static javax.swing.JTextArea outputTextArea;
     private javax.swing.JButton uploadButton;
     // End of variables declaration//GEN-END:variables
 }

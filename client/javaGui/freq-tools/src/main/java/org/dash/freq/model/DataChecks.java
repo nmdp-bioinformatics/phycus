@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import org.dash.freq.view.PhycusGui;
 
 public class DataChecks {
 
@@ -108,6 +109,8 @@ public class DataChecks {
 			for (int x:errorCodeList)
 			{
 				System.out.println("* " + ErrorCodes.ErrorList().get(x));
+				PhycusGui.outputTextArea.append("* " + ErrorCodes.ErrorList().get(x));
+				PhycusGui.outputTextArea.append(System.lineSeparator());
 			}
 		}
 

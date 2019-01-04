@@ -21,6 +21,8 @@
 */
 package org.dash.freq.model;
 
+import org.dash.freq.view.PhycusGui;
+
 import static org.dishevelled.compress.Readers.reader;
 
 import java.io.BufferedReader;
@@ -104,7 +106,10 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 				postPopulationFrequencies(reader(inputFile));
 			}
 		} catch (Exception ex) {
-            System.out.println(ex); 
+            System.out.println(ex);
+			PhycusGui.outputTextArea.append(ex.toString());
+			PhycusGui.outputTextArea.append(System.lineSeparator());
+
         }
 
 		return 0;
@@ -162,6 +167,8 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 		cohortRequest.setCohortData(cohortData);
 		
 		System.out.println("Creating cohort: " + cohortData.getName());
+		PhycusGui.outputTextArea.append("Creating cohort: " + cohortData.getName());
+		PhycusGui.outputTextArea.append(System.lineSeparator());
 
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
@@ -183,6 +190,8 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			populationRequest.setName(populationName);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
+			PhycusGui.outputTextArea.append("Creating population: " + populationRequest.getName());
+			PhycusGui.outputTextArea.append(System.lineSeparator());
 
 			PopulationData populationData = popApi.createPopulation(populationRequest);
 			
@@ -193,6 +202,9 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			hfCurationRequest.setLabelData(labelData);
 
 			System.out.println("Submitting frequencies for population: " + populationData.getName());
+			PhycusGui.outputTextArea.append("Submitting frequencies for population: " + populationData.getName());
+			PhycusGui.outputTextArea.append(System.lineSeparator());
+
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
 		}		
 	}

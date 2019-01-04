@@ -46,6 +46,8 @@ public class PhycusGui extends javax.swing.JFrame {
         outputTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Phycus Upload Interface");
+        setLocationByPlatform(true);
 
         fileOpenButton.setText("Select File");
         fileOpenButton.addActionListener(new java.awt.event.ActionListener() {

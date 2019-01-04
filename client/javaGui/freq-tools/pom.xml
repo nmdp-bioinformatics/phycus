@@ -113,7 +113,8 @@
           <programs>
              <program>
             	<id>post-population-frequencies</id>
-            	<mainClass>org.dash.freq.PostPopulationFrequencies</mainClass>
+                <mainClass>org.dash.freq.view.PhycusGui</mainClass>
+            	<!--<mainClass>org.dash.freq.PostPopulationFrequencies</mainClass>-->
             </program>
           </programs>
         </configuration>

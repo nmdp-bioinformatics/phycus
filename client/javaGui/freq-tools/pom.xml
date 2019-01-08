@@ -107,6 +107,9 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>appassembler-maven-plugin</artifactId>
         <configuration>
+<descriptorRefs>
+<descriptorRef>jar-with-dependencies</descriptorRef>
+</descriptorRefs>
           <repositoryLayout>flat</repositoryLayout>
           <repositoryName>lib</repositoryName>
           <installArtifacts>false</installArtifacts>
@@ -114,7 +117,6 @@
              <program>
             	<id>post-population-frequencies</id>
                 <mainClass>org.dash.freq.view.PhycusGui</mainClass>
-            	<!--<mainClass>org.dash.freq.PostPopulationFrequencies</mainClass>-->
             </program>
           </programs>
         </configuration>
@@ -138,6 +140,7 @@
         </configuration>
         <executions>
           <execution>
+<id>make-assembly</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>

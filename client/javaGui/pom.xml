@@ -199,21 +199,21 @@
     </pluginManagement>
  </build>
   <dependencies>
-  	<dependency>
-  		<groupId>com.google.guava</groupId>
-  		<artifactId>guava</artifactId>
-  		<version>18.0</version>
-  	</dependency>
-      <dependency>
-        <groupId>org.dishevelled</groupId>
-        <artifactId>dsh-commandline</artifactId>
-        <version>1.1</version>
-      </dependency>
-      <dependency>
-        <groupId>org.dishevelled</groupId>
-        <artifactId>dsh-compress</artifactId>
-        <version>1.1</version>
-      </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>18.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.dishevelled</groupId>
+      <artifactId>dsh-commandline</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.dishevelled</groupId>
+      <artifactId>dsh-compress</artifactId>
+      <version>1.1</version>
+    </dependency>
     <!-- test dependencies -->
     <dependency>
       <groupId>junit</groupId>
@@ -223,20 +223,20 @@
     </dependency>
   </dependencies>
   <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>joda-time</groupId>
-  			<artifactId>joda-time</artifactId>
-  			<version>${jodatime-version}</version>
-  		</dependency>
-  	</dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${jodatime-version}</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 
   <description>Tools for the Frequency Curation Service</description>
   <issueManagement>
-  	<system>Git Hub</system>
+    <system>Git Hub</system>
   </issueManagement>
-      <developers>
+  <developers>
       <developer>
         <id>mpresteg</id>
         <name>Matt Prestegaard</name>
@@ -247,11 +247,11 @@
         </roles>
         <timezone>-6</timezone>
       </developer>
-    </developers>
+  </developers>
 
-      <inceptionYear>2017</inceptionYear>
-      <organization>
-      	<name>Be The Match</name>
-      	<url>http://www.bethematch.org</url>
-      </organization>
+  <inceptionYear>2017</inceptionYear>
+  <organization>
+    <name>Be The Match</name>
+    <url>http://www.bethematch.org</url>
+  </organization>
 </project>

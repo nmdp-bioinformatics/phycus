@@ -7,6 +7,7 @@ package org.dash.freq.view;
 
 import java.io.File;
 import java.net.URL;
+import javax.swing.JFileChooser;
 
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -35,26 +36,24 @@ public class PhycusGui extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         fileChooserUpload = new javax.swing.JFileChooser();
-        fileOpenButton = new javax.swing.JButton();
+        fileOrFolder = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         fileLocationTextArea = new javax.swing.JTextArea();
         uploadButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         outputScrollPane = new javax.swing.JScrollPane();
         outputTextArea = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        fileOpenButton = new javax.swing.JButton();
+        jRBFile = new javax.swing.JRadioButton();
+        jRBFolder = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
         setLocationByPlatform(true);
-
-        fileOpenButton.setText("Select File");
-        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileOpenButtonActionPerformed(evt);
-            }
-        });
 
         jScrollPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         jScrollPane1.setBorder(null);
@@ -89,6 +88,54 @@ public class PhycusGui extends javax.swing.JFrame {
         outputTextArea.setRows(5);
         outputScrollPane.setViewportView(outputTextArea);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        fileOpenButton.setText("Select File");
+        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileOpenButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
+        jPanel1.add(fileOpenButton, gridBagConstraints);
+
+        fileOrFolder.add(jRBFile);
+        jRBFile.setSelected(true);
+        jRBFile.setText("File");
+        jRBFile.setName("file"); // NOI18N
+        jRBFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBFileActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
+        jPanel1.add(jRBFile, gridBagConstraints);
+
+        fileOrFolder.add(jRBFolder);
+        jRBFolder.setText("Folder");
+        jRBFolder.setName("folder"); // NOI18N
+        jRBFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBFolderActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
+        jPanel1.add(jRBFolder, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,12 +144,12 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(outputScrollPane)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(fileOpenButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                        .addComponent(outputScrollPane)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -117,7 +164,7 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fileOpenButton))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addComponent(outputScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -159,6 +206,16 @@ public class PhycusGui extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
+		fileOpenButton.setText("Select File");
+		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    }//GEN-LAST:event_jRBFileActionPerformed
+
+    private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
+		fileOpenButton.setText("Select Folder");
+		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    }//GEN-LAST:event_jRBFolderActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -199,6 +256,10 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooserUpload;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
+    private javax.swing.ButtonGroup fileOrFolder;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRBFile;
+    private javax.swing.JRadioButton jRBFolder;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane outputScrollPane;
     public static javax.swing.JTextArea outputTextArea;

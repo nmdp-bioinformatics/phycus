@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URL;
 import javax.swing.JFileChooser;
 
+import org.dash.freq.controller.BatchUploader;
 import org.dash.freq.model.PostPopulationFrequencies;
 
 /**
@@ -21,6 +22,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	private String gtRegistry;
 	private String estEntity;
 	private URL url;
+	private boolean folder = false;
 	/**
 	 * Creates new form PhycusGui
 	 */
@@ -191,11 +193,19 @@ public class PhycusGui extends javax.swing.JFrame {
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         try
-        {	url = new URL ("http://localhost:8080");
-			PostPopulationFrequencies ppf = new PostPopulationFrequencies(
-					selectedFile, gtRegistry, estEntity, url);
-
-            ppf.call();
+        {	
+			
+			if (folder == false)
+			{
+				PostPopulationFrequencies ppf = new PostPopulationFrequencies(
+						gtRegistry, estEntity, null);
+				ppf.setFile(selectedFile);
+				ppf.call();
+			}
+			else if (folder == true)
+			{
+				BatchUploader.uploadFiles(selectedFile.toString());
+			}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,11 +219,13 @@ public class PhycusGui extends javax.swing.JFrame {
     private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
 		fileOpenButton.setText("Select File");
 		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		folder = false;
     }//GEN-LAST:event_jRBFileActionPerformed
 
     private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
 		fileOpenButton.setText("Select Folder");
 		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		folder = true;
     }//GEN-LAST:event_jRBFolderActionPerformed
 
 	/**

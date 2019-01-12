@@ -66,9 +66,10 @@ import io.swagger.client.model.PopulationRequest;
  * PostPopulationFrequencies
  *
  */
-public class PostPopulationFrequencies implements Callable<Integer> {
+public class PostPopulationFrequencies implements Callable<Integer> 
+{
 
-	private final File inputFile;
+	private File inputFile;
 	private final String gtRegistry;
 	private final String estEntity;
 	private final URL url;
@@ -84,9 +85,9 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 	 * @param cohortId
 	 * @throws MalformedURLException
 	 */
-	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
+	public PostPopulationFrequencies(String gtRegistry, String estEntity, URL url) //File inputFile, 
 			throws MalformedURLException {
-		this.inputFile = inputFile;
+//		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
                 this.estEntity = estEntity;
 		if (url == null) {
@@ -95,7 +96,11 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			this.url = url;
 		}
 	}
-
+	public void setFile(File incomingFile)
+	{
+		inputFile = incomingFile;
+	}
+	
 	@Override
 	public Integer call() throws Exception {
 		try 

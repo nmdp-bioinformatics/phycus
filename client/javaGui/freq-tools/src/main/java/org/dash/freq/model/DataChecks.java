@@ -23,12 +23,14 @@ package org.dash.freq.model;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.HaplotypeFrequencyData;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
 
 public class DataChecks {
@@ -109,8 +111,8 @@ public class DataChecks {
 			for (int x:errorCodeList)
 			{
 				System.out.println("* " + ErrorCodes.ErrorList().get(x));
-				PhycusGui.outputTextArea.append("* " + ErrorCodes.ErrorList().get(x));
-				PhycusGui.outputTextArea.append(System.lineSeparator());
+				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			}
 		}
 

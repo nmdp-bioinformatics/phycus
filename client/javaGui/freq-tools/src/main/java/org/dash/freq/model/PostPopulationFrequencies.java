@@ -61,6 +61,8 @@ import io.swagger.client.model.License;
 import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
+import java.awt.Color;
+import org.dash.freq.view.AppendText;
 
 /**
  * PostPopulationFrequencies
@@ -109,12 +111,12 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			if (dataChecks.populationDataCheck(reader(inputFile)))
 			{
 				postPopulationFrequencies(reader(inputFile));
+				return 1;
 			}
 		} catch (Exception ex) {
             System.out.println(ex);
-			PhycusGui.outputTextArea.append(ex.toString());
-			PhycusGui.outputTextArea.append(System.lineSeparator());
-
+			AppendText.appendToPane(PhycusGui.outputTextPane, ex.toString(), Color.RED);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
 
 		return 0;
@@ -172,9 +174,10 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		cohortRequest.setCohortData(cohortData);
 		
 		System.out.println("Creating cohort: " + cohortData.getName());
-		PhycusGui.outputTextArea.append("Creating cohort: " + cohortData.getName());
-		PhycusGui.outputTextArea.append(System.lineSeparator());
-
+//		PhycusGui.outputTextArea.append("Creating cohort: " + cohortData.getName());
+//		PhycusGui.outputTextArea.append(System.lineSeparator());
+		AppendText.appendToPane(PhycusGui.outputTextPane, "Creating cohort: " + cohortData.getName(), Color.BLACK);
+		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
 		LabelData labelData = new LabelData();
@@ -197,6 +200,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			System.out.println("Creating population: " + populationRequest.getName());
 			PhycusGui.outputTextArea.append("Creating population: " + populationRequest.getName());
 			PhycusGui.outputTextArea.append(System.lineSeparator());
+			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+
 
 			PopulationData populationData = popApi.createPopulation(populationRequest);
 			
@@ -207,9 +213,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			hfCurationRequest.setLabelData(labelData);
 
 			System.out.println("Submitting frequencies for population: " + populationData.getName());
-			PhycusGui.outputTextArea.append("Submitting frequencies for population: " + populationData.getName());
-			PhycusGui.outputTextArea.append(System.lineSeparator());
-
+			AppendText.appendToPane(PhycusGui.outputTextPane, "Submitting frequencies for population: " + populationData.getName(), Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
 		}		
 	}

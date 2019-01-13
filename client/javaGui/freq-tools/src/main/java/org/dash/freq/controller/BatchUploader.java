@@ -43,17 +43,18 @@ public class BatchUploader {
 			// for each file in the folder
 			for (File file : dir.listFiles()) {
 				
-				// print file name
-				AppendText.appendToPane(PhycusGui.outputTextPane, file.getName() + ": ", Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				
-				// set file and process
-				ppf.setFile(file);
-				Boolean processed = ppf.call() != 0;
-//				if (ppf.call() != 0) flag = true;
-//				else flag = false;
-				processedFiles.put(file.getName(), processed);
-//				ppf.call();
+				String fileName = file.getName();
+				if (fileName.toLowerCase().endsWith(".csv"))
+				{
+					// print file name
+					AppendText.appendToPane(PhycusGui.outputTextPane, file.getName() + ":", Color.BLUE);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+
+					// set file and process
+					ppf.setFile(file);
+					Boolean processed = ppf.call() != 0;
+					processedFiles.put(file.getName(), processed);
+				}
 			}
 			
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Files uploaded: ", Color.BLACK);
@@ -62,7 +63,7 @@ public class BatchUploader {
 			for(Map.Entry<String,Boolean> entry : processedFiles.entrySet()) {
 				if (entry.getValue()) 
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.GREEN);
+					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.BLUE);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				}
 				String key = entry.getKey();

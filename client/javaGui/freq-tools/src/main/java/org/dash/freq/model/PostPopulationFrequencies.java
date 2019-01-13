@@ -198,11 +198,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			populationRequest.setName(populationName);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
-			PhycusGui.outputTextArea.append("Creating population: " + populationRequest.getName());
-			PhycusGui.outputTextArea.append(System.lineSeparator());
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
 
 			PopulationData populationData = popApi.createPopulation(populationRequest);
 			

@@ -43,6 +43,7 @@ public class BatchUploader {
 			// for each file in the folder
 			for (File file : dir.listFiles()) {
 				
+				// if file is a csv file
 				String fileName = file.getName();
 				if (fileName.toLowerCase().endsWith(".csv"))
 				{

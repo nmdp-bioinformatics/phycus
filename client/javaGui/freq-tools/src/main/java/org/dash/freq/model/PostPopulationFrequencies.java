@@ -21,6 +21,9 @@
 */
 package org.dash.freq.model;
 
+import org.dash.freq.controller.DataChecks;
+import org.dash.freq.controller.HeaderProcessor;
+import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
 
 import static org.dishevelled.compress.Readers.reader;
@@ -62,7 +65,6 @@ import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.awt.Color;
-import org.dash.freq.view.AppendText;
 
 /**
  * PostPopulationFrequencies
@@ -107,6 +109,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	public Integer call() throws Exception {
 		try 
 		{
+			HeaderProcessor hp = new HeaderProcessor();
+			hp.readHeader(reader(inputFile));
 			DataChecks dataChecks = new DataChecks();
 			if (dataChecks.populationDataCheck(reader(inputFile)))
 			{

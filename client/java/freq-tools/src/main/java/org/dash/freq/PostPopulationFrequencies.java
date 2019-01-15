@@ -60,6 +60,8 @@ import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 
+import org.dash.freq.controller.DataChecks;
+
 /**
  * PostPopulationFrequencies
  *
@@ -86,7 +88,7 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			throws MalformedURLException {
 		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
-                this.estEntity = estEntity;
+		this.estEntity = estEntity;
 		if (url == null) {
 			this.url = new URL("http://localhost:8080");
 		} else {

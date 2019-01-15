@@ -1,0 +1,7 @@
+pop=US_CAU,cohort="test data",license=CC0,resolution=G
+
+required:
+pop, cohort
+
+optional:
+license, resolution

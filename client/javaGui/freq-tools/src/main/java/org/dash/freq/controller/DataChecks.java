@@ -19,7 +19,7 @@
     > http://www.gnu.org/licenses/lgpl.html
 
  */
-package org.dash.freq.model;
+package org.dash.freq.controller;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.HaplotypeFrequencyData;

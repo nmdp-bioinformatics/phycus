@@ -25,13 +25,16 @@ public class HeaderProcessor {
 	
 	}
 	
-	public void readHeader(BufferedReader reader)
+	public TreeMap<String, String> readHeader(BufferedReader reader, 
+								String population, 
+								String license,
+								String cohort)
 			throws IOException, ApiException 
 	{
 		// header variables
 		String header;
 		String[] attributes;
-		TreeMap<String, String> headerContent = new TreeMap<String, String>();
+		TreeMap<String, String> headerContent = new TreeMap<>();
 		
 		// list to collect error codes
 		List<Integer> errorCodeList = new ArrayList<>();
@@ -56,6 +59,7 @@ public class HeaderProcessor {
 		if (headerContent.containsKey("pop")) 
 		{
 			popFlag = true;
+			population = headerContent.get("pop");
 			flag = checkPop(headerContent.get("pop"), errorCodeList);
 		}
 				
@@ -63,13 +67,21 @@ public class HeaderProcessor {
 		if (headerContent.containsKey("cohort")) 
 		{
 			cohortFlag = true;
+			cohort = headerContent.get("cohort");
 			flag = checkCohort(headerContent.get("cohort"), errorCodeList);
+		}
+		if (headerContent.containsKey("license"))
+		{
+			license = headerContent.get("license");
 		}
 
 		// add error codes for missing mandatory attributes
-		if (!popFlag) errorCodeList.add(4); flag = false;
-		if (!cohortFlag) errorCodeList.add(5); flag = false;
+		if (!popFlag) errorCodeList.add(4);
+		if (!cohortFlag) errorCodeList.add(5);
+		if (!popFlag || !cohortFlag) flag = false;
 		
+		headerContent.put("flag", String.valueOf(flag));		
+		return headerContent;
 	}
 	
 	public String[] parseAttribute(String att)

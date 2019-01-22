@@ -56,15 +56,21 @@ public class DataChecks {
 		String[] columns;
 		boolean flag = true;
 
-		// read first line
+		// skip header line
 		row = reader.readLine();
+		System.out.println(row);
+		
+		// read second line
+		row = reader.readLine();
+		System.out.println(row);
+
 		columns = row.split(",");
 
 		// list to collect error codes
 		List<Integer> errorCodeList = new ArrayList<>();
 
 		// frequency totals up to 1.0000
-		BigDecimal freqTotal = new BigDecimal(columns[2]);
+		BigDecimal freqTotal = new BigDecimal(columns[1]);
 		
 		// resolution of the total frequencies & target frequency
 		int scale = 4;
@@ -72,23 +78,23 @@ public class DataChecks {
 				.setScale(scale, BigDecimal.ROUND_HALF_UP);
 
 		// confirm populations are all the same
-		String raceFirst = columns[0];
+//		String raceFirst = columns[0];
 
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
 			// break the row down into useable pieces
 			columns = row.split(",");
-			String race = columns[0];
-			String haplotype = columns[1];
-			BigDecimal frequency = new BigDecimal(columns[2]);
+//			String race = columns[0];
+			String haplotype = columns[0];
+			BigDecimal frequency = new BigDecimal(columns[1]);
 
 			// run the population check only while flag equals true
 			// This is so it only adds one mismatch to the errorCode list
-			if (flag == true)
-			{
-				flag = raceCheck(raceFirst, race, errorCodeList);
-			}
+//			if (flag == true)
+//			{
+//				flag = raceCheck(raceFirst, race, errorCodeList);
+//			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
@@ -112,6 +118,8 @@ public class DataChecks {
 			{
 				System.out.println("* " + ErrorCodes.ErrorList().get(x));
 				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, "  - Frequency totals: " + freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			}
 		}

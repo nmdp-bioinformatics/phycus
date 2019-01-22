@@ -65,6 +65,7 @@ import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.awt.Color;
+import java.util.TreeMap;
 
 /**
  * PostPopulationFrequencies
@@ -107,14 +108,27 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	
 	@Override
 	public Integer call() throws Exception {
+		boolean headerFlag = false;
+		boolean dataFlag = false;
 		try 
 		{
-//			HeaderProcessor hp = new HeaderProcessor();
-//			hp.readHeader(reader(inputFile));
+			String population = new String();
+			String license = new String();
+			String cohort = new String();
+			TreeMap<String, String> headers = new TreeMap<>();
+
+			HeaderProcessor hp = new HeaderProcessor();
+			headers = hp.readHeader(reader(inputFile), population, license, cohort);
+			headerFlag = Boolean.valueOf(headers.get("flag"));
+			System.out.println("Header flag: " + headerFlag);
+			
 			DataChecks dataChecks = new DataChecks();
-			if (dataChecks.populationDataCheck(reader(inputFile)))
+			dataFlag = dataChecks.populationDataCheck(reader(inputFile));
+			System.out.println("Data flag: " + dataFlag);
+			
+			if (headerFlag && dataFlag)
 			{
-				postPopulationFrequencies(reader(inputFile));
+				postPopulationFrequencies(reader(inputFile), headers, population, license, cohort);
 				return 1;
 			}
 		} catch (Exception ex) {
@@ -126,22 +140,29 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		return 0;
 	}
 
-	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
+	public void postPopulationFrequencies(BufferedReader reader,
+										TreeMap<String, String> headers,
+										String pop, 
+										String licenseType,
+										String cohort) 
+			throws IOException, ApiException {
 		String row;
 		String[] columns;
 
 		HashMap<String, HaplotypeFrequencyData> populationMap = new HashMap<String, HaplotypeFrequencyData>();
 		HaplotypeFrequencyData haplotypeFrequencyData;
 
+		row = reader.readLine();
+		String race = headers.get("pop");
 		License license = new License();
 		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");
-
-			String race = columns[0];
-			String haplotype = columns[1];
-			Double frequency = new Double(columns[2]);
+			
+//			String race = pop;
+			String haplotype = columns[0];
+			Double frequency = new Double(columns[1]);
 
 			if (populationMap.containsKey(race)) {
 				haplotypeFrequencyData = populationMap.get(race);
@@ -155,7 +176,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			hapFrequency.setHaplotypeString(haplotype);
 			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
 
-			populationMap.put(race, haplotypeFrequencyData);
+			populationMap.put(pop, haplotypeFrequencyData);
+//			populationMap.put(race, haplotypeFrequencyData);
 		}
 
 		reader.close();
@@ -172,7 +194,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		CohortRequest cohortRequest = new CohortRequest();
 		
 		CohortData cohortData = new CohortData();
-		cohortData.setName(inputFile.getName());
+//		cohortData.setName(inputFile.getName());
+		cohortData.setName(headers.get("cohort"));
 		cohortData.setGenotypeList(new GenotypeList());
 		
 		cohortRequest.setCohortData(cohortData);
@@ -199,7 +222,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
 			PopulationRequest populationRequest = new PopulationRequest();
 			
-			populationRequest.setName(populationName);
+//			populationRequest.setName(populationName);
+			populationRequest.setName(pop);
+			System.out.println("Pop request set name: " + pop);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);

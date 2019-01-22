@@ -109,8 +109,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	public Integer call() throws Exception {
 		try 
 		{
-			HeaderProcessor hp = new HeaderProcessor();
-			hp.readHeader(reader(inputFile));
+//			HeaderProcessor hp = new HeaderProcessor();
+//			hp.readHeader(reader(inputFile));
 			DataChecks dataChecks = new DataChecks();
 			if (dataChecks.populationDataCheck(reader(inputFile)))
 			{

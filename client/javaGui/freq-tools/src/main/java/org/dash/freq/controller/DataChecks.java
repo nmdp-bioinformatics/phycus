@@ -50,7 +50,7 @@ public class DataChecks {
 		return flag;
 	}
 
-	public boolean populationDataCheck(BufferedReader reader) throws IOException, ApiException {
+	public boolean populationDataCheck(BufferedReader reader, List<Integer> errorCodeList) throws IOException, ApiException {
 		// while loop variables
 		String row;
 		String[] columns;
@@ -67,7 +67,7 @@ public class DataChecks {
 		columns = row.split(",");
 
 		// list to collect error codes
-		List<Integer> errorCodeList = new ArrayList<>();
+//		List<Integer> errorCodeList = new ArrayList<>();
 
 		// frequency totals up to 1.0000
 		BigDecimal freqTotal = new BigDecimal(columns[1]);
@@ -119,8 +119,12 @@ public class DataChecks {
 				System.out.println("* " + ErrorCodes.ErrorList().get(x));
 				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, "  - Frequency totals: " + freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP), Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				if (x == 2)
+				{
+					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+
+				}
 			}
 		}
 

@@ -21,7 +21,13 @@
 */
 package org.dash.freq.controller;
 
+import java.awt.Color;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
+import org.dash.freq.view.AppendText;
+import org.dash.freq.view.PhycusGui;
 
 public class ErrorCodes {
 	public ErrorCodes() {
@@ -35,7 +41,7 @@ public class ErrorCodes {
 		errorCodes.put(3, "The values for the population column must be identical");
 		errorCodes.put(4, "A population value must be included in the header. See help for more information.");
 		errorCodes.put(5, "A cohort value must be included in the header. See help for more information.");
-		errorCodes.put(6, "The cohort value must be fewer than 256 characters.");
+		errorCodes.put(6, "The cohort value must be fewer than 255 characters.");
 		errorCodes.put(7, "A cohort value must be included in the header. See help for more information.");
 		errorCodes.put(8, "");
 		errorCodes.put(9, "");
@@ -45,4 +51,20 @@ public class ErrorCodes {
 		
 		return errorCodes;
 	}
+	
+//	public void printErrors(List<Integer> errorCodeList)
+//	{
+//		for (int x:errorCodeList)
+//		{
+//			System.out.println("* " + ErrorCodes.ErrorList().get(x));
+//			AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
+//			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+//			if (x == 2)
+//			{
+//				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
+//				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+//
+//			}
+//		}
+//	}
 }

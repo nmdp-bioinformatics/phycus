@@ -65,6 +65,8 @@ import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -112,23 +114,23 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		boolean dataFlag = false;
 		try 
 		{
-			String population = new String();
-			String license = new String();
-			String cohort = new String();
+	
 			TreeMap<String, String> headers = new TreeMap<>();
+			List<Integer> errorCodeList = new ArrayList<>();
 
 			HeaderProcessor hp = new HeaderProcessor();
-			headers = hp.readHeader(reader(inputFile), population, license, cohort);
+			headers = hp.readHeader(reader(inputFile), errorCodeList);
 			headerFlag = Boolean.valueOf(headers.get("flag"));
 			System.out.println("Header flag: " + headerFlag);
 			
 			DataChecks dataChecks = new DataChecks();
-			dataFlag = dataChecks.populationDataCheck(reader(inputFile));
+			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList);
 			System.out.println("Data flag: " + dataFlag);
+			System.out.println("ErrorCodeList: " + errorCodeList);
 			
 			if (headerFlag && dataFlag)
 			{
-				postPopulationFrequencies(reader(inputFile), headers, population, license, cohort);
+				postPopulationFrequencies(reader(inputFile), headers);
 				return 1;
 			}
 		} catch (Exception ex) {
@@ -141,10 +143,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	}
 
 	public void postPopulationFrequencies(BufferedReader reader,
-										TreeMap<String, String> headers,
-										String pop, 
-										String licenseType,
-										String cohort) 
+										TreeMap<String, String> headers) 
 			throws IOException, ApiException {
 		String row;
 		String[] columns;
@@ -176,8 +175,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			hapFrequency.setHaplotypeString(haplotype);
 			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
 
-			populationMap.put(pop, haplotypeFrequencyData);
-//			populationMap.put(race, haplotypeFrequencyData);
+//			populationMap.put(pop, haplotypeFrequencyData);
+			populationMap.put(race, haplotypeFrequencyData);
 		}
 
 		reader.close();
@@ -222,9 +221,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
 			PopulationRequest populationRequest = new PopulationRequest();
 			
-//			populationRequest.setName(populationName);
-			populationRequest.setName(pop);
-			System.out.println("Pop request set name: " + pop);
+			populationRequest.setName(populationName);
+//			populationRequest.setName(pop);
+//			System.out.println("Pop request set name: " + pop);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);

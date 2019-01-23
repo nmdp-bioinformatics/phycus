@@ -25,10 +25,8 @@ public class HeaderProcessor {
 	
 	}
 	
-	public TreeMap<String, String> readHeader(BufferedReader reader, 
-								String population, 
-								String license,
-								String cohort)
+	public TreeMap<String, String> readHeader(BufferedReader reader,
+												List<Integer> errorCodeList)
 			throws IOException, ApiException 
 	{
 		// header variables
@@ -37,7 +35,7 @@ public class HeaderProcessor {
 		TreeMap<String, String> headerContent = new TreeMap<>();
 		
 		// list to collect error codes
-		List<Integer> errorCodeList = new ArrayList<>();
+//		List<Integer> errorCodeList = new ArrayList<>();
 		
 		// flags
 		boolean flag = true;
@@ -58,27 +56,24 @@ public class HeaderProcessor {
 		// check population
 		if (headerContent.containsKey("pop")) 
 		{
-			popFlag = true;
-			population = headerContent.get("pop");
-			flag = checkPop(headerContent.get("pop"), errorCodeList);
+			popFlag = checkPop(headerContent.get("pop"), errorCodeList);
+			System.out.println("popFlag status: " + popFlag);
 		}
 				
 		// check cohort
 		if (headerContent.containsKey("cohort")) 
 		{
-			cohortFlag = true;
-			cohort = headerContent.get("cohort");
-			flag = checkCohort(headerContent.get("cohort"), errorCodeList);
-		}
-		if (headerContent.containsKey("license"))
-		{
-			license = headerContent.get("license");
+			cohortFlag = checkCohort(headerContent.get("cohort"), errorCodeList);
+			System.out.println("cohortFlag status: " + cohortFlag);
 		}
 
+		System.out.println("header content flag check: " + flag);
 		// add error codes for missing mandatory attributes
 		if (!popFlag) errorCodeList.add(4);
 		if (!cohortFlag) errorCodeList.add(5);
 		if (!popFlag || !cohortFlag) flag = false;
+		
+		System.out.println("after pop and cohort check: " + flag);
 		
 		headerContent.put("flag", String.valueOf(flag));		
 		return headerContent;
@@ -102,18 +97,22 @@ public class HeaderProcessor {
 		return parsedAttribute;
 	}
 	
-	public boolean checkPop(String value, List<Integer> errorCodeList)
+	public boolean checkPop(String popValue, List<Integer> errorCodeList)
 	{
 		boolean flag = true;
 		
 		return flag;
 	}
 	
-	public boolean checkCohort(String value, List<Integer> errorCodeList)
+	public boolean checkCohort(String cohortValue, List<Integer> errorCodeList)
 	{
 		boolean flag = true;
-
-		if (value.length() > 255) errorCodeList.add(6); flag = false;
+		
+		if (cohortValue.length() >= 255) 
+		{
+			errorCodeList.add(6); 
+			flag = false;
+		}
 		
 		return flag;
 	}

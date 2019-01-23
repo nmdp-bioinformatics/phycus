@@ -35,6 +35,8 @@ import org.dash.freq.view.PhycusGui;
 
 public class DataChecks {
 
+	public BigDecimal freqTotal;
+
 	public DataChecks() {
 
 	}
@@ -70,7 +72,7 @@ public class DataChecks {
 //		List<Integer> errorCodeList = new ArrayList<>();
 
 		// frequency totals up to 1.0000
-		BigDecimal freqTotal = new BigDecimal(columns[1]);
+		freqTotal = new BigDecimal(columns[1]);
 		
 		// resolution of the total frequencies & target frequency
 		int scale = 4;
@@ -112,7 +114,7 @@ public class DataChecks {
 		}
 
 		// if flag is false, print out the errors to the command line
-		if (flag == false) 
+		if (!errorCodeList.isEmpty()) 
 		{
 			for (int x:errorCodeList)
 			{
@@ -129,5 +131,10 @@ public class DataChecks {
 		}
 
 		return flag;
+	}
+	
+	public BigDecimal getTotal ()
+	{
+		return freqTotal;
 	}
 }

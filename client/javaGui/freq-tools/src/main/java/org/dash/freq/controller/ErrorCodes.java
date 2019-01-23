@@ -52,7 +52,7 @@ public class ErrorCodes {
 		return errorCodes;
 	}
 	
-//	public void printErrors(List<Integer> errorCodeList)
+//	public static void printErrors(List<Integer> errorCodeList)
 //	{
 //		for (int x:errorCodeList)
 //		{

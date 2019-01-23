@@ -132,7 +132,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			{
 				postPopulationFrequencies(reader(inputFile), headers);
 				return 1;
-			}
+			} 
+			
 		} catch (Exception ex) {
             System.out.println(ex);
 			AppendText.appendToPane(PhycusGui.outputTextPane, ex.toString(), Color.RED);

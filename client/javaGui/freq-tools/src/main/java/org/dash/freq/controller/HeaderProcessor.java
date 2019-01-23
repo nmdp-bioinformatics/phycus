@@ -34,9 +34,6 @@ public class HeaderProcessor {
 		String[] attributes;
 		TreeMap<String, String> headerContent = new TreeMap<>();
 		
-		// list to collect error codes
-//		List<Integer> errorCodeList = new ArrayList<>();
-		
 		// flags
 		boolean flag = true;
 		boolean popFlag = false;
@@ -59,40 +56,38 @@ public class HeaderProcessor {
 			popFlag = checkPop(headerContent.get("pop"), errorCodeList);
 			System.out.println("popFlag status: " + popFlag);
 		}
-				
+		else errorCodeList.add(4);
+			
 		// check cohort
 		if (headerContent.containsKey("cohort")) 
 		{
 			cohortFlag = checkCohort(headerContent.get("cohort"), errorCodeList);
 			System.out.println("cohortFlag status: " + cohortFlag);
 		}
+		else errorCodeList.add(5);
 
-		System.out.println("header content flag check: " + flag);
-		// add error codes for missing mandatory attributes
-		if (!popFlag) errorCodeList.add(4);
-		if (!cohortFlag) errorCodeList.add(5);
+		// if either cohort or pop missing, do not upload data
 		if (!popFlag || !cohortFlag) flag = false;
-		
 		System.out.println("after pop and cohort check: " + flag);
 		
+		// return pass/fail data in headerContent
 		headerContent.put("flag", String.valueOf(flag));		
 		return headerContent;
 	}
 	
 	public String[] parseAttribute(String att)
 	{
+		// pattern to match and string to check
 		String[] parsedAttribute = new String[2];
 		Pattern p = Pattern.compile("^([a-zA-Z]+)=(.+)$");
 		Matcher m = p.matcher(att);
 		
+		// if match is found
 		if (m.find())
 		{
 			parsedAttribute[0] = m.group(1);
 			parsedAttribute[1] = m.group(2);
 		}
-		
-		System.out.println(parsedAttribute[0]);
-		System.out.println(parsedAttribute[1]);
 		
 		return parsedAttribute;
 	}
@@ -108,6 +103,7 @@ public class HeaderProcessor {
 	{
 		boolean flag = true;
 		
+		// make sure the cohort data will fit in the database
 		if (cohortValue.length() >= 255) 
 		{
 			errorCodeList.add(6); 

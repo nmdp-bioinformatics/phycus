@@ -28,12 +28,16 @@ import org.dash.freq.view.PhycusGui;
 
 import static org.dishevelled.compress.Readers.reader;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
 import org.dishevelled.commandline.ArgumentList;
@@ -64,10 +68,7 @@ import io.swagger.client.model.License;
 import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+
 
 /**
  * PostPopulationFrequencies
@@ -110,24 +111,30 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	
 	@Override
 	public Integer call() throws Exception {
+		
+		// flags
 		boolean headerFlag = false;
 		boolean dataFlag = false;
+		
+		// data receptacles
+		TreeMap<String, String> headers = new TreeMap<>();
+		List<Integer> errorCodeList = new ArrayList<>();
+		
 		try 
 		{
-	
-			TreeMap<String, String> headers = new TreeMap<>();
-			List<Integer> errorCodeList = new ArrayList<>();
-
+			// process the header
 			HeaderProcessor hp = new HeaderProcessor();
 			headers = hp.readHeader(reader(inputFile), errorCodeList);
 			headerFlag = Boolean.valueOf(headers.get("flag"));
 			System.out.println("Header flag: " + headerFlag);
 			
+			// check the data for consistancy
 			DataChecks dataChecks = new DataChecks();
 			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList);
 			System.out.println("Data flag: " + dataFlag);
 			System.out.println("ErrorCodeList: " + errorCodeList);
 			
+			// if the header and data both check out, post the data
 			if (headerFlag && dataFlag)
 			{
 				postPopulationFrequencies(reader(inputFile), headers);

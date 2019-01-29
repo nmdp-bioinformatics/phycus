@@ -68,6 +68,7 @@ import org.dash.freq.controller.DataChecks;
  */
 public class PostPopulationFrequencies implements Callable<Integer> {
 
+
 	private final File inputFile;
 	private final String gtRegistry;
 	private final String estEntity;
@@ -241,5 +242,4 @@ public class PostPopulationFrequencies implements Callable<Integer> {
 			System.exit(1);
 		}
 	}
-
 }

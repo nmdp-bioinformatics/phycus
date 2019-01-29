@@ -43,17 +43,23 @@ public class PhycusGui extends javax.swing.JFrame {
 
         fileChooserUpload = new javax.swing.JFileChooser();
         fileOrFolder = new javax.swing.ButtonGroup();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        UploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         fileLocationTextArea = new javax.swing.JTextArea();
         uploadButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        SelectFilePanel = new javax.swing.JPanel();
         fileOpenButton = new javax.swing.JButton();
         jRBFile = new javax.swing.JRadioButton();
         jRBFolder = new javax.swing.JRadioButton();
+        cancelButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
         CsvNotificationLabel = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        AddPopPanel = new javax.swing.JPanel();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
@@ -84,14 +90,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        SelectFilePanel.setLayout(new java.awt.GridBagLayout());
 
         fileOpenButton.setText("Select File");
         fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +104,7 @@ public class PhycusGui extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
-        jPanel1.add(fileOpenButton, gridBagConstraints);
+        SelectFilePanel.add(fileOpenButton, gridBagConstraints);
 
         fileOrFolder.add(jRBFile);
         jRBFile.setSelected(true);
@@ -121,7 +120,7 @@ public class PhycusGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
-        jPanel1.add(jRBFile, gridBagConstraints);
+        SelectFilePanel.add(jRBFile, gridBagConstraints);
 
         fileOrFolder.add(jRBFolder);
         jRBFolder.setText("Folder");
@@ -137,53 +136,112 @@ public class PhycusGui extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
-        jPanel1.add(jRBFolder, gridBagConstraints);
+        SelectFilePanel.add(jRBFolder, gridBagConstraints);
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(outputTextPane);
 
         CsvNotificationLabel.setText("CSV files only.");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "by - Attribution", "by-sa - ShareAlike", "by-nc - NonCommercial", "by-nc-sa - Attribution - NonCommercial - ShareAlike", "by-nc-nd - Attribution - NonCommercial - NoDerivatives" }));
+
+        jLabel1.setText("Licensing type:");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/37171Small (1).png"))); // NOI18N
+        jLabel2.setLabelFor(jLabel1);
+
+        javax.swing.GroupLayout UploadFilesPanelLayout = new javax.swing.GroupLayout(UploadFilesPanel);
+        UploadFilesPanel.setLayout(UploadFilesPanelLayout);
+        UploadFilesPanelLayout.setHorizontalGroup(
+            UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                        .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
+                        .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                        .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        UploadFilesPanelLayout.setVerticalGroup(
+            UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(uploadButton))
+                .addGap(9, 9, 9))
+        );
+
+        jTabbedPane1.addTab("Upload Files", UploadFilesPanel);
+
+        javax.swing.GroupLayout AddPopPanelLayout = new javax.swing.GroupLayout(AddPopPanel);
+        AddPopPanel.setLayout(AddPopPanelLayout);
+        AddPopPanelLayout.setHorizontalGroup(
+            AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+        );
+        AddPopPanelLayout.setVerticalGroup(
+            AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 565, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Add Population", AddPopPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(uploadButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)
-                        .addGap(152, 152, 152))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CsvNotificationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(uploadButton)
-                    .addComponent(cancelButton))
-                .addContainerGap())
+            .addGap(0, 593, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
 
         pack();
@@ -236,7 +294,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
 		fileOpenButton.setText("Select Folder");
 		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		CsvNotificationLabel.setText("Only CSV files will be processed, other files and folders will be ignored.");
+		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
 		folder = true;
     }//GEN-LAST:event_jRBFolderActionPerformed
 
@@ -276,17 +334,23 @@ public class PhycusGui extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddPopPanel;
     private javax.swing.JLabel CsvNotificationLabel;
+    private javax.swing.JPanel SelectFilePanel;
+    private javax.swing.JPanel UploadFilesPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JFileChooser fileChooserUpload;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRBFile;
     private javax.swing.JRadioButton jRBFolder;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton uploadButton;
     // End of variables declaration//GEN-END:variables

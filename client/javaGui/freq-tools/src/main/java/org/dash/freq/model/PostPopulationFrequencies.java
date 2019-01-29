@@ -167,7 +167,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");
 			
-//			String race = pop;
 			String haplotype = columns[0];
 			Double frequency = new Double(columns[1]);
 
@@ -183,7 +182,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			hapFrequency.setHaplotypeString(haplotype);
 			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
 
-//			populationMap.put(pop, haplotypeFrequencyData);
 			populationMap.put(race, haplotypeFrequencyData);
 		}
 
@@ -201,15 +199,12 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		CohortRequest cohortRequest = new CohortRequest();
 		
 		CohortData cohortData = new CohortData();
-//		cohortData.setName(inputFile.getName());
 		cohortData.setName(headers.get("cohort"));
 		cohortData.setGenotypeList(new GenotypeList());
 		
 		cohortRequest.setCohortData(cohortData);
 		
 		System.out.println("Creating cohort: " + cohortData.getName());
-//		PhycusGui.outputTextArea.append("Creating cohort: " + cohortData.getName());
-//		PhycusGui.outputTextArea.append(System.lineSeparator());
 		AppendText.appendToPane(PhycusGui.outputTextPane, "Creating cohort: " + cohortData.getName(), Color.BLACK);
 		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		cohortData = cohortApi.createCohort(cohortRequest);
@@ -230,8 +225,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			PopulationRequest populationRequest = new PopulationRequest();
 			
 			populationRequest.setName(populationName);
-//			populationRequest.setName(pop);
-//			System.out.println("Pop request set name: " + pop);
 			
 			System.out.println("Creating population: " + populationRequest.getName());
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);

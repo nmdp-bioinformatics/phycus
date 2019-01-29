@@ -56,6 +56,9 @@ public class PhycusGui extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
         CsvNotificationLabel = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         AddPopPanel = new javax.swing.JPanel();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
@@ -146,6 +149,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         CsvNotificationLabel.setText("CSV files only.");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "by - Attribution", "by-sa - ShareAlike", "by-nc - NonCommercial", "by-nc-sa - Attribution - NonCommercial - ShareAlike", "by-nc-nd - Attribution - NonCommercial - NoDerivatives" }));
+
+        jLabel1.setText("Licensing type:");
+
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout UploadFilesPanelLayout = new javax.swing.GroupLayout(UploadFilesPanel);
         UploadFilesPanel.setLayout(UploadFilesPanelLayout);
         UploadFilesPanelLayout.setHorizontalGroup(
@@ -169,7 +178,15 @@ public class PhycusGui extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(UploadFilesPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                        .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         UploadFilesPanelLayout.setVerticalGroup(
             UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +198,13 @@ public class PhycusGui extends javax.swing.JFrame {
                         .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -319,6 +342,9 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRBFile;
     private javax.swing.JRadioButton jRBFolder;
     private javax.swing.JScrollPane jScrollPane1;

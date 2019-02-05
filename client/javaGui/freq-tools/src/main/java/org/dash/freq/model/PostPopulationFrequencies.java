@@ -1,6 +1,6 @@
 /*
 
-    Copyright (c) 2014-2015 National Marrow Donor Program (NMDP)
+    Copyright (c) 2014-2019 National Marrow Donor Program (NMDP)
 
     This library is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as published
@@ -23,6 +23,7 @@ package org.dash.freq.model;
 
 import org.dash.freq.controller.DataChecks;
 import org.dash.freq.controller.HeaderProcessor;
+import org.dash.freq.controller.LicenseType;
 import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
 
@@ -161,8 +162,10 @@ public class PostPopulationFrequencies implements Callable<Integer>
 
 		row = reader.readLine();
 		String race = headers.get("pop");
-		License license = new License();
-		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
+		License license = LicenseType.typeOfLicense();
+		System.out.println("Uploading license of type " + license);
+//		License license = new License();
+//		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");

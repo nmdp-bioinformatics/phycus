@@ -5,7 +5,10 @@
  */
 package org.dash.freq.view;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -149,12 +152,19 @@ public class PhycusGui extends javax.swing.JFrame {
 
         CsvNotificationLabel.setText("CSV files only.");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "by - Attribution", "by-sa - ShareAlike", "by-nc - NonCommercial", "by-nc-sa - Attribution - NonCommercial - ShareAlike", "by-nc-nd - Attribution - NonCommercial - NoDerivatives" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "by - Attribution", "by-sa - Attribution - ShareAlike", "by-nc - Attribution - NonCommercial", "by-nc-sa - Attribution - NonCommercial - ShareAlike", "by-nc-nd - Attribution - NonCommercial - NoDerivatives" }));
+        jComboBox1.setToolTipText("what are these?");
 
         jLabel1.setText("Licensing type:");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/37171Small (1).png"))); // NOI18N
         jLabel2.setLabelFor(jLabel1);
+        jLabel2.setToolTipText("A link to a description of the different licensing types");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout UploadFilesPanelLayout = new javax.swing.GroupLayout(UploadFilesPanel);
         UploadFilesPanel.setLayout(UploadFilesPanelLayout);
@@ -200,9 +210,9 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,6 +307,38 @@ public class PhycusGui extends javax.swing.JFrame {
 		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
 		folder = true;
     }//GEN-LAST:event_jRBFolderActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+		try {
+			URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
+			openWebpage(licenseTypes);
+		} catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+	public static boolean openWebpage(URI uri) {
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+			try {
+				desktop.browse(uri);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static boolean openWebpage(URL url) {
+		try {
+			return openWebpage(url.toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 
 	/**
 	 * @param args the command line arguments

@@ -112,4 +112,18 @@ public class HeaderProcessor {
 		
 		return flag;
 	}
+	
+	public void resolutionType(){
+//		description: resolution of the data
+//        enum:
+//          - G
+//          - P
+//          - gNMDP
+//          - gDKMS
+//          - 1-Field
+//          - 2-Field
+//          - 3-Field
+//          - 4-Field
+//          - Serology
+	}
 }

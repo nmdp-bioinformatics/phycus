@@ -36,47 +36,45 @@ public class LicenseType {
 	public static License typeOfLicense()
 	{
 		License newLicense = new License();
+		
+		// get chosen license from GUI
 		String selectedLicense = parseLicense((String)PhycusGui
-				.licenseComboBox
-				.getSelectedItem());
+				.licenseComboBox.getSelectedItem());
 		
 		switch (selectedLicense) {
             case "CC0":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.CC0);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.CC0);
+				break;
             case "BY":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY);
+				break;
 			case "BY_SA":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_SA);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_SA);
+				break;
 			case "BY_ND":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_ND);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_ND);
+				break;
 			case "BY_NC":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC);
+				break;
 			case "BY_NC_SA":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_SA);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_SA);
+				break;
 			case "BY_NC_ND":
-            newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_ND);
-            System.out.println("License type: " + selectedLicense);
-            break;
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_ND);
+				break;
+			default:
+				newLicense.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 		}
 		
+		System.out.println("License type: " + selectedLicense);
+
 		return newLicense;
 	}
 	
 	public static String parseLicense(String license)
 	{
-		// pattern to match and string to check
+		// pattern to match
 		String parsedLicense = new String();
 		Pattern p = Pattern.compile("^(\\w+)");
 		Matcher m = p.matcher(license);

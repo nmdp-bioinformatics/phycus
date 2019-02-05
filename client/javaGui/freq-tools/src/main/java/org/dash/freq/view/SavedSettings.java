@@ -6,15 +6,16 @@
 package org.dash.freq.view;
 
 import java.util.prefs.Preferences;
-/**
- *
- * @author katrinaeaton
- */
+
 public class SavedSettings {
 //	private Preferences prefs = Preferences.userNodeForPackage(org.dash.freq);
 	
+	private Preferences prefs;
+	
 	public void SavedSettings()
 	{
-		
+		prefs = Preferences.userNodeForPackage(this.getClass());
 	}
+	
+//	public void saveLastDirectory()
 }

@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,6 +26,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	File selectedFile;
 	private String gtRegistry;
 	private String estEntity;
+	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	private URL url;
 	private boolean folder = false;
 	/**
@@ -263,12 +265,13 @@ public class PhycusGui extends javax.swing.JFrame {
     private void fileOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileOpenButtonActionPerformed
         fileChooserUpload.setVisible(rootPaneCheckingEnabled);
         int returnValue = fileChooserUpload.showOpenDialog(null);
-        if (returnValue == fileChooserUpload.APPROVE_OPTION)//JFileChooser.APPROVE_OPTION)
+        if (returnValue == fileChooserUpload.APPROVE_OPTION)
         {
             selectedFile = fileChooserUpload.getSelectedFile();
             System.out.println(selectedFile.getName());
             String absolutePath = selectedFile.getAbsolutePath();
             fileLocationTextArea.setText( absolutePath );
+			prefs.put("LAST_OUTPUT_DIR", selectedFile.getAbsolutePath());
         }
     }//GEN-LAST:event_fileOpenButtonActionPerformed
 

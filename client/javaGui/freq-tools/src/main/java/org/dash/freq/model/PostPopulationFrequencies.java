@@ -66,7 +66,7 @@ import io.swagger.client.model.HaplotypeFrequencyData;
 import io.swagger.client.model.Label;
 import io.swagger.client.model.LabelData;
 import io.swagger.client.model.License;
-import io.swagger.client.model.License.TypeOfLicenseEnum;
+//import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 
@@ -98,7 +98,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			throws MalformedURLException {
 //		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
-                this.estEntity = estEntity;
+        this.estEntity = estEntity;
 		if (url == null) {
 			this.url = new URL("http://localhost:8080");
 		} else {
@@ -164,8 +164,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		String race = headers.get("pop");
 		License license = LicenseType.typeOfLicense();
 		System.out.println("Uploading license of type " + license);
-//		License license = new License();
-//		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");

@@ -295,7 +295,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         try
         {	
-			
 			if (folder == false)
 			{
 				PostPopulationFrequencies ppf = new PostPopulationFrequencies(
@@ -344,12 +343,10 @@ public class PhycusGui extends javax.swing.JFrame {
 		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
 			try {
 				desktop.browse(uri);
-//				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-//		return false;
 	}
 
 	// settings for uploading a file, used in custom code for jRBFile

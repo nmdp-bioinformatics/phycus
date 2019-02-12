@@ -168,6 +168,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         licenseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "BY - Attribution", "BY_SA - Attribution - ShareAlike", "BY_ND - Attribution - NoDerivatives", "BY_NC - Attribution - NonCommercial", "BY_NC_SA - Attribution - NonCommercial - ShareAlike", "BY_NC_ND - Attribution - NonCommercial - NoDerivatives" }));
         licenseComboBox.setToolTipText("");
+        licenseComboBox.setSelectedIndex(prefs.getInt("LICENSE", 0));
+        licenseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                licenseComboBoxActionPerformed(evt);
+            }
+        });
 
         licenseLabel.setText("Licensing type:");
 
@@ -283,7 +289,6 @@ public class PhycusGui extends javax.swing.JFrame {
             String absolutePath = selectedFile.getAbsolutePath();
             fileLocationTextArea.setText( absolutePath );
 			prefs.put("LAST_OUTPUT_DIR", absolutePath);
-			System.out.println(prefs.get("LAST_OUTPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
         }
     }//GEN-LAST:event_fileOpenButtonActionPerformed
 
@@ -313,21 +318,11 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
-//		fileOpenButton.setText("Select File");
-//		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//		CsvNotificationLabel.setText("CSV files only.");
-//		prefs.putBoolean("FILE_OR_FOLDER", true);
-//		folder = false;
-		setFile();
+		setFile();   // see below
     }//GEN-LAST:event_jRBFileActionPerformed
 
     private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
-//		fileOpenButton.setText("Select Folder");
-//		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
-//		prefs.putBoolean("FILE_OR_FOLDER", false);
-//		folder = true;
-		setFolder();
+		setFolder(); // see below
     }//GEN-LAST:event_jRBFolderActionPerformed
 
     private void licenseHelpIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_licenseHelpIconMouseClicked
@@ -339,6 +334,11 @@ public class PhycusGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_licenseHelpIconMouseClicked
 
+    private void licenseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseComboBoxActionPerformed
+		prefs.putInt("LICENSE", licenseComboBox.getSelectedIndex());
+    }//GEN-LAST:event_licenseComboBoxActionPerformed
+
+	// open links for help buttons
 	public static boolean openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
@@ -352,15 +352,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		return false;
 	}
 
-	public static boolean openWebpage(URL url) {
-		try {
-			return openWebpage(url.toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-
+	// settings for uploading a file, used in custom code for jRBFile
 	public void setFile() {
 		fileOpenButton.setText("Select File");
 		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -369,6 +361,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		folder = false;
 	}
 	
+	// settings for uploading a folder, used in custom code for jRBFile
 	public void setFolder() {
 		fileOpenButton.setText("Select Folder");
 		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

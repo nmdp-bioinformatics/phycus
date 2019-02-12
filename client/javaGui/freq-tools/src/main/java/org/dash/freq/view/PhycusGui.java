@@ -6,6 +6,7 @@
 package org.dash.freq.view;
 
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -53,6 +54,7 @@ public class PhycusGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         fileLocationTextArea = new javax.swing.JTextArea();
         uploadButton = new javax.swing.JButton();
+        CsvNotificationLabel = new javax.swing.JLabel();
         SelectFilePanel = new javax.swing.JPanel();
         fileOpenButton = new javax.swing.JButton();
         jRBFile = new javax.swing.JRadioButton();
@@ -60,7 +62,6 @@ public class PhycusGui extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
-        CsvNotificationLabel = new javax.swing.JLabel();
         licenseComboBox = new javax.swing.JComboBox<>();
         licenseLabel = new javax.swing.JLabel();
         licenseHelpIcon = new javax.swing.JLabel();
@@ -95,9 +96,13 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        CsvNotificationLabel.setText("CSV files only.");
+
         SelectFilePanel.setLayout(new java.awt.GridBagLayout());
 
         fileOpenButton.setText("Select File");
+        fileOpenButton.setMaximumSize(new java.awt.Dimension(100, 23));
+        fileOpenButton.setMinimumSize(new java.awt.Dimension(100, 23));
         fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fileOpenButtonActionPerformed(evt);
@@ -112,9 +117,15 @@ public class PhycusGui extends javax.swing.JFrame {
         SelectFilePanel.add(fileOpenButton, gridBagConstraints);
 
         fileOrFolder.add(jRBFile);
-        jRBFile.setSelected(true);
         jRBFile.setText("File");
         jRBFile.setName("file"); // NOI18N
+        if (prefs.getBoolean("FILE_OR_FOLDER", true)){
+            setFile();
+            jRBFile.setSelected(true);
+        } else {
+            setFolder();
+            jRBFolder.setSelected(true);
+        }
         jRBFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBFileActionPerformed(evt);
@@ -128,6 +139,9 @@ public class PhycusGui extends javax.swing.JFrame {
         SelectFilePanel.add(jRBFile, gridBagConstraints);
 
         fileOrFolder.add(jRBFolder);
+        if (!prefs.getBoolean("FILE_OR_FOLDER", true)){
+            jRBFolder.isSelected();
+        }
         jRBFolder.setText("Folder");
         jRBFolder.setName("folder"); // NOI18N
         jRBFolder.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +165,6 @@ public class PhycusGui extends javax.swing.JFrame {
         });
 
         jScrollPane2.setViewportView(outputTextPane);
-
-        CsvNotificationLabel.setText("CSV files only.");
 
         licenseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC0 - No rights reserved", "BY - Attribution", "BY_SA - Attribution - ShareAlike", "BY_ND - Attribution - NoDerivatives", "BY_NC - Attribution - NonCommercial", "BY_NC_SA - Attribution - NonCommercial - ShareAlike", "BY_NC_ND - Attribution - NonCommercial - NoDerivatives" }));
         licenseComboBox.setToolTipText("");
@@ -195,10 +207,10 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addGroup(UploadFilesPanelLayout.createSequentialGroup()
                         .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
-                                .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane2)
                             .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -234,7 +246,7 @@ public class PhycusGui extends javax.swing.JFrame {
         AddPopPanel.setLayout(AddPopPanelLayout);
         AddPopPanelLayout.setHorizontalGroup(
             AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
         AddPopPanelLayout.setVerticalGroup(
             AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,9 +259,9 @@ public class PhycusGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 564, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +282,7 @@ public class PhycusGui extends javax.swing.JFrame {
             System.out.println(selectedFile.getName());
             String absolutePath = selectedFile.getAbsolutePath();
             fileLocationTextArea.setText( absolutePath );
-			prefs.put("LAST_OUTPUT_DIR", selectedFile.getAbsolutePath());
+			prefs.put("LAST_OUTPUT_DIR", absolutePath);
 			System.out.println(prefs.get("LAST_OUTPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
         }
     }//GEN-LAST:event_fileOpenButtonActionPerformed
@@ -301,17 +313,21 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
-		fileOpenButton.setText("Select File");
-		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		CsvNotificationLabel.setText("CSV files only.");
-		folder = false;
+//		fileOpenButton.setText("Select File");
+//		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//		CsvNotificationLabel.setText("CSV files only.");
+//		prefs.putBoolean("FILE_OR_FOLDER", true);
+//		folder = false;
+		setFile();
     }//GEN-LAST:event_jRBFileActionPerformed
 
     private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
-		fileOpenButton.setText("Select Folder");
-		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
-		folder = true;
+//		fileOpenButton.setText("Select Folder");
+//		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
+//		prefs.putBoolean("FILE_OR_FOLDER", false);
+//		folder = true;
+		setFolder();
     }//GEN-LAST:event_jRBFolderActionPerformed
 
     private void licenseHelpIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_licenseHelpIconMouseClicked
@@ -345,6 +361,21 @@ public class PhycusGui extends javax.swing.JFrame {
 		return false;
 	}
 
+	public void setFile() {
+		fileOpenButton.setText("Select File");
+		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		CsvNotificationLabel.setText("CSV files only.");
+		prefs.putBoolean("FILE_OR_FOLDER", true);
+		folder = false;
+	}
+	
+	public void setFolder() {
+		fileOpenButton.setText("Select Folder");
+		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
+		prefs.putBoolean("FILE_OR_FOLDER", false);
+		folder = true;
+	}
 
 	/**
 	 * @param args the command line arguments

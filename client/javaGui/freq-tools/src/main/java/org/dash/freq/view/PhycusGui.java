@@ -339,34 +339,48 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_licenseComboBoxActionPerformed
 
 	// open links for help buttons
-	public static boolean openWebpage(URI uri) {
+	public static void openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
 			try {
 				desktop.browse(uri);
-				return true;
+//				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return false;
+//		return false;
 	}
 
 	// settings for uploading a file, used in custom code for jRBFile
 	public void setFile() {
-		fileOpenButton.setText("Select File");
+		// set file selection
 		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		
+		// visual cues
+		fileOpenButton.setText("Select File");
 		CsvNotificationLabel.setText("CSV files only.");
+		
+		// save choice to preferences
 		prefs.putBoolean("FILE_OR_FOLDER", true);
+		
+		// so uploader function knows whether it's a file or folder
 		folder = false;
 	}
 	
 	// settings for uploading a folder, used in custom code for jRBFile
 	public void setFolder() {
-		fileOpenButton.setText("Select Folder");
+		// set folder selection
 		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
+		// visual cues
+		fileOpenButton.setText("Select Folder");
 		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
+		
+		// save choice to preferences
 		prefs.putBoolean("FILE_OR_FOLDER", false);
+		
+		// so uploader function knows whether it's a file or folder
 		folder = true;
 	}
 

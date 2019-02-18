@@ -5,3 +5,6 @@ pop, cohort
 
 optional:
 license, resolution
+
+US_CAUS.csv
+other,0.0033

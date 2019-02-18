@@ -18,6 +18,7 @@ import org.nmdp.hfcus.dao.PopulationRepository;
 import org.nmdp.hfcus.dao.RepositoryContainer;
 import org.nmdp.hfcus.dao.ScopeListRepository;
 import org.nmdp.hfcus.model.*;
+import org.nmdp.hfcus.quality.QualityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ import io.swagger.api.HfcApi;
 public class HFCurationApiController implements HfcApi {
 
     private final RepositoryContainer repositoryContainer;
+    private final QualityService qualityService;
 
     @Autowired
     public HFCurationApiController(
@@ -42,7 +44,8 @@ public class HFCurationApiController implements HfcApi {
             LabelSetRepository labelSetRepository,
             HaplotypeFrequencySetRepository haplotypeFrequencySetRepository,
             AccessRepository accessRepository,
-            ScopeListRepository scopeListRepository
+            ScopeListRepository scopeListRepository,
+            QualityService qualityService
     ) {
         this.repositoryContainer = new RepositoryContainer();
         repositoryContainer.setCurationRepository(curationRepository);
@@ -53,6 +56,12 @@ public class HFCurationApiController implements HfcApi {
         repositoryContainer.setHaplotypeFrequencySetRepository(haplotypeFrequencySetRepository);
         repositoryContainer.setAccessRepository(accessRepository);
         repositoryContainer.setScopeListRepository(scopeListRepository);
+        this.qualityService = qualityService;
+        try {
+            qualityService.run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private <ModelType, ResponseType> ResponseEntity<ResponseType> RetrieveSubdataFromDatabase(
@@ -93,6 +102,12 @@ public class HFCurationApiController implements HfcApi {
         if (hfCurationRequest != null) {
             HFCuration curation = new HFCuration(repositoryContainer, hfCurationRequest);
             curation = repositoryContainer.getCurationRepository().save(curation);
+            try {
+                qualityService.addToQueue(curation);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException(e);
+            }
             return ResponseEntity.ok(curation.toSwaggerObject());
         }
 

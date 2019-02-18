@@ -4,6 +4,8 @@ import io.swagger.model.HaplotypeFrequencyData;
 import io.swagger.model.License;
 import io.swagger.model.ResolutionData;
 import io.swagger.model.ResolutionInfo;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.model.HaplotypeFrequencyData> {
     public HaplotypeFrequencySet() {
         //intentionally left empty
@@ -42,7 +46,7 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;

@@ -38,7 +38,7 @@ public class CohortApiController implements CohortApi {
 
     @Override
     public ResponseEntity<CohortData> getCohortForId(@ApiParam(value = "Cohort ID",required=true ) @PathVariable("cohortId") Long cohortId) {
-        Cohort cohort = cohortRepository.findOne(cohortId);
+        Cohort cohort = cohortRepository.findById(cohortId).orElse(null);
         ResponseEntity<CohortData> responseEntity;
         if (cohort != null) {
             responseEntity = ResponseEntity.ok(cohort.toSwaggerObject());

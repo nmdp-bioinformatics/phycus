@@ -70,7 +70,7 @@ public class HFCurationApiController implements HfcApi {
             Function<ModelType, ResponseType> converter
     ) {
         ResponseEntity<ResponseType> responseEntity;
-        HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
+        HFCuration curation = repositoryContainer.getCurationRepository().findById(submissionId).orElse(null);
         if (curation != null) {
             ModelType dataModel = getDataItem.apply(curation);
             if (dataModel != null) {
@@ -153,7 +153,7 @@ public class HFCurationApiController implements HfcApi {
     public ResponseEntity<PopulationSubmissionResponse> hfcPopulationPopulationIdGet(
             @ApiParam(value = "The populationId id", required = true) @PathVariable("populationId") Long populationId
     ) {
-        Population population = repositoryContainer.getPopulationRepository().findOne(populationId);
+        Population population = repositoryContainer.getPopulationRepository().findById(populationId).orElse(null);
         ResponseEntity<PopulationSubmissionResponse> responseEntity;
         if (population != null) {
             PopulationSubmissionData pop = new PopulationSubmissionData();
@@ -192,13 +192,13 @@ public class HFCurationApiController implements HfcApi {
     public ResponseEntity<Void> hfcSubmissionIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("submissionId") Long submissionId
     ) {
-        HFCuration curation = repositoryContainer.getCurationRepository().findOne(submissionId);
+        HFCuration curation = repositoryContainer.getCurationRepository().findById(submissionId).orElse(null);
         if (curation != null) {
             curation.setPopulationData(null);
             repositoryContainer.getCurationRepository().delete(curation);
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

@@ -1,50 +1,27 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.ResolutionInfo;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Resolution implements ICurationDataModel<ResolutionInfo> {
-    public Resolution(){
-        //intentionally left empty
-    }
 
-    public Resolution(ResolutionInfo swaggerObject) {
+    Resolution(ResolutionInfo swaggerObject) {
         scopeElement = swaggerObject.getScopeElement();
         resolution = swaggerObject.getResolution();
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String scopeElement;
     @Enumerated(EnumType.STRING)
     private io.swagger.model.ResolutionInfo.ResolutionEnum resolution;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getScopeElement() {
-        return scopeElement;
-    }
-
-    public void setScopeElement(String scopeElement) {
-        this.scopeElement = scopeElement;
-    }
-
-    public ResolutionInfo.ResolutionEnum getResolution() {
-        return resolution;
-    }
-
-    public void setResolution(ResolutionInfo.ResolutionEnum resolution) {
-        this.resolution = resolution;
-    }
 
     @Override
     public ResolutionInfo toSwaggerObject(){

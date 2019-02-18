@@ -1,6 +1,8 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.MethodData;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -8,13 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class MethodSet implements ICurationDataModel<MethodData> {
 
-    public MethodSet(){
-        //intentionally left empty
-    }
-
-    public MethodSet(MethodData swaggerObject) {
+    MethodSet(MethodData swaggerObject) {
         if (swaggerObject.getMethodList() != null){
             methodList = new ArrayList<>();
             for (io.swagger.model.Method method : swaggerObject.getMethodList() ){
@@ -31,26 +31,10 @@ public class MethodSet implements ICurationDataModel<MethodData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Method> methodList;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Method> getMethodList() {
-        return methodList;
-    }
-
-    public void setMethodList(List<Method> methodList) {
-        this.methodList = methodList;
-    }
 
     @Override
     public MethodData toSwaggerObject(){

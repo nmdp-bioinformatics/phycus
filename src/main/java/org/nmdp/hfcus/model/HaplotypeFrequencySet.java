@@ -4,6 +4,8 @@ import io.swagger.model.HaplotypeFrequencyData;
 import io.swagger.model.License;
 import io.swagger.model.ResolutionData;
 import io.swagger.model.ResolutionInfo;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -11,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.model.HaplotypeFrequencyData> {
-    public HaplotypeFrequencySet(){
-        //intentionally left empty
-    }
 
-    public HaplotypeFrequencySet(HaplotypeFrequencyData swaggerObject){
+    HaplotypeFrequencySet(HaplotypeFrequencyData swaggerObject){
         license = swaggerObject.getLicense().getTypeOfLicense();
         if (license == null){
             throw new RequiredFieldInvalidException("requires a license");
@@ -50,7 +51,7 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;
@@ -60,55 +61,6 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     private List<HaplotypeFrequency> frequencyList;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Quality> qualityList;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Resolution> getResolutionList() {
-        return resolutionList;
-    }
-
-    public void setResolutionList(List<Resolution> resolutionList) {
-        this.resolutionList = resolutionList;
-    }
-
-    public License.TypeOfLicenseEnum getLicense() {
-        return license;
-    }
-
-    public void setLicense(License.TypeOfLicenseEnum license) {
-        this.license = license;
-    }
-
-    public List<Resolution> getResolution() {
-        return resolutionList;
-    }
-
-    public void setResolution(List<Resolution> resolutionList) {
-        this.resolutionList = resolutionList;
-    }
-
-    public List<HaplotypeFrequency> getFrequencyList() {
-        return frequencyList;
-    }
-
-    public void setFrequencyList(List<HaplotypeFrequency> frequencyList) {
-        this.frequencyList = frequencyList;
-    }
-
-    public List<Quality> getQualityList() {
-        return qualityList;
-    }
-
-    public void setQualityList(List<Quality> qualityList) {
-        this.qualityList = qualityList;
-    }
 
     @Override
     public HaplotypeFrequencyData toSwaggerObject(){

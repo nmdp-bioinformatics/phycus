@@ -1,6 +1,8 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.LabelData;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -8,12 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class LabelSet implements ICurationDataModel<LabelData> {
-    public LabelSet() {
-        //intentionally left empty
-    }
 
-    public LabelSet(LabelData swaggerObject) {
+    LabelSet(LabelData swaggerObject) {
         if (swaggerObject.getLabelList() != null) {
             labelList = new ArrayList<>();
             for (io.swagger.model.Label method : swaggerObject.getLabelList()) {
@@ -28,26 +29,10 @@ public class LabelSet implements ICurationDataModel<LabelData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Label> labelList;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Label> getLabelList() {
-        return labelList;
-    }
-
-    public void setLabelList(List<Label> labelList) {
-        this.labelList = labelList;
-    }
 
     @Override
     public LabelData toSwaggerObject() {

@@ -16,11 +16,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.model.HaplotypeFrequencyData> {
-    public HaplotypeFrequencySet() {
-        //intentionally left empty
-    }
 
-    public HaplotypeFrequencySet(HaplotypeFrequencyData swaggerObject) {
+    HaplotypeFrequencySet(HaplotypeFrequencyData swaggerObject) {
         license = swaggerObject.getLicense().getTypeOfLicense();
         if (license == null) {
             throw new RequiredFieldInvalidException("requires a license");
@@ -57,63 +54,6 @@ public class HaplotypeFrequencySet implements ICurationDataModel<io.swagger.mode
     @OneToMany(cascade = CascadeType.ALL)
     private List<Quality> qualityList;
     private int numberOfCalculatedQualities = 0;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Resolution> getResolutionList() {
-        return resolutionList;
-    }
-
-    public void setResolutionList(List<Resolution> resolutionList) {
-        this.resolutionList = resolutionList;
-    }
-
-    public License.TypeOfLicenseEnum getLicense() {
-        return license;
-    }
-
-    public void setLicense(License.TypeOfLicenseEnum license) {
-        this.license = license;
-    }
-
-    public List<Resolution> getResolution() {
-        return resolutionList;
-    }
-
-    public void setResolution(List<Resolution> resolutionList) {
-        this.resolutionList = resolutionList;
-    }
-
-    public List<HaplotypeFrequency> getFrequencyList() {
-        return frequencyList;
-    }
-
-    public void setFrequencyList(List<HaplotypeFrequency> frequencyList) {
-        this.frequencyList = frequencyList;
-    }
-
-    public List<Quality> getQualityList() {
-        return qualityList;
-    }
-
-    public void setQualityList(List<Quality> qualityList) {
-        this.qualityList = qualityList;
-    }
-
-    public int getNumberOfCalculatedQualities() {
-        return numberOfCalculatedQualities;
-    }
-
-    public void setNumberOfCalculatedQualities(int numberOfCalculatedQualities) {
-        this.numberOfCalculatedQualities = numberOfCalculatedQualities;
-    }
 
     @Override
     public HaplotypeFrequencyData toSwaggerObject() {

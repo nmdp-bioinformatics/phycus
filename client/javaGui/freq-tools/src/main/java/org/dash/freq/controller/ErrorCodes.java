@@ -37,7 +37,7 @@ public class ErrorCodes {
 	static public TreeMap<Integer, String> ErrorList() {
 		TreeMap<Integer, String> errorCodes = new TreeMap<Integer, String>();
 
-		errorCodes.put(2, "Haplotype frequencies do not total 1.0000");
+		errorCodes.put(2, "Haplotype frequency is greater than 1.01");
 		errorCodes.put(3, "The population must already exist in the database. See the help tab for more information.");
 		errorCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
 		errorCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");
@@ -55,7 +55,7 @@ public class ErrorCodes {
 	static public TreeMap<Integer, String> WarningList() {
 		TreeMap<Integer, String> warningCodes = new TreeMap<Integer, String>();
 
-		warningCodes.put(2, "Haplotype frequencies do not total 1.0000");
+		warningCodes.put(2, "Haplotype frequencies do not total 1.00");
 		warningCodes.put(3, "The population must already exist in the database. See the help tab for more information.");
 		warningCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
 		warningCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");

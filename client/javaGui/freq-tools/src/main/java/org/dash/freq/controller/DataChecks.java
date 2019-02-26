@@ -78,9 +78,10 @@ public class DataChecks {
 		freqTotal = new BigDecimal(columns[1]);
 		
 		// resolution of the total frequencies & target frequency
-		int scale = 4;
-		BigDecimal targetFrequency = new BigDecimal(1)
-				.setScale(scale, BigDecimal.ROUND_HALF_UP);
+//		int scale = 4;
+//		BigDecimal targetFrequency = new BigDecimal(1)
+//				.setScale(scale, BigDecimal.ROUND_HALF_UP);
+		BigDecimal targetFrequency = new BigDecimal(1.01);
 
 		// confirm populations are all the same
 //		String raceFirst = columns[0];
@@ -107,13 +108,25 @@ public class DataChecks {
 		}
 		
 		// does the frequency fall withing the target range?
-		System.out.println("Frequency total: " 
-				+ freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
-				.equals(targetFrequency)) 
+//		System.out.println("Frequency total: " 
+//				+ freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
+//		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
+//				.equals(targetFrequency))
+//		if (freqTotal.compareTo(BigDecimal.ONE) >= 0 && freqTotal.compareTo(BigDecimal.ONE) <= 2)
+//		{
+//			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
+//			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+//		}
+//		else 
+		if (freqTotal.compareTo(targetFrequency) <= 0)
 		{
 //			flag = false;
 			warningCodeList.add(2);
+		}
+		else
+		{
+			flag = false;
+			errorCodeList.add(2);
 		}
 		
 		// if there are warnings, print out the warnings to the gui
@@ -130,7 +143,7 @@ public class DataChecks {
 				{
 					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency total: " + freqTotal), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized by the server to 1.0."), Color.BLACK);
+					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized by the server to 1.0."), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				}
 			}
@@ -146,12 +159,12 @@ AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be no
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//				if (x == 2)
-//				{
-//					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
-//					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//
-//				}
+				if (x == 2)
+				{
+					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+
+				}
 			}
 		}
 

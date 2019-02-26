@@ -122,15 +122,16 @@ public class DataChecks {
 			for (int x:warningCodeList)
 			{
 				System.out.println("* " + ErrorCodes.WarningList().get(x));
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Warnings: ", Color.CYAN);
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Warnings: ", Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.WarningList().get(x), Color.CYAN);
+				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.WarningList().get(x), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				if (x == 2)
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.CYAN);
+					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency total: " + freqTotal), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
+AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized to 1.0"), Color.BLACK);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				}
 			}
 		}

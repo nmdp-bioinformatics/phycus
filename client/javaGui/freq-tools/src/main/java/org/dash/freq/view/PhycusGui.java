@@ -276,9 +276,8 @@ public class PhycusGui extends javax.swing.JFrame {
         helpTextPane.setLineWrap(true);
         helpTextPane.setRows(5);
         helpTextPane.setWrapStyleWord(true);
-        try {
-            helpTextPane.setText(Help.getHelpText());
-        } catch (Exception ex) {System.out.println(ex);}
+        try { helpTextPane.setText(Help.getHelpText()); }
+        catch (Exception ex) { System.out.println(ex); }
         jScrollPane3.setViewportView(helpTextPane);
 
         javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);

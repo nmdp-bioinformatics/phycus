@@ -389,7 +389,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="wrapStyleWord" type="boolean" value="true" postCode="try {&#xa;    helpTextPane.setText(Help.getHelpText());&#xa;} catch (Exception ex) {System.out.println(ex);}"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true" postCode="try { helpTextPane.setText(Help.getHelpText()); } &#xa;catch (Exception ex) { System.out.println(ex); }"/>
                   </Properties>
                 </Component>
               </SubComponents>

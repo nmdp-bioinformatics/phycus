@@ -1,4 +1,4 @@
-pop=US_CAU,license=CC0,resolution=G,cohort="Proto test databbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+pop=US_CAU,license=CC0,resolution=G,cohort="Proto test data"
 A*01:01g~C*01:02g~B*15:01g~DRB1*01:01~DQB1*05:01,6e-05
 A*01:01g~C*01:02g~B*15:01g~DRB1*09:01~DQB1*03:03g,6e-05
 A*01:01g~C*01:02g~B*15:01g~DRB1*13:01~DQB1*06:03g,7e-05

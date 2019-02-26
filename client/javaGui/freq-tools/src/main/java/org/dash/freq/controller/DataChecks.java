@@ -52,7 +52,10 @@ public class DataChecks {
 		return flag;
 	}
 
-	public boolean populationDataCheck(BufferedReader reader, List<Integer> errorCodeList) throws IOException, ApiException {
+	public boolean populationDataCheck(BufferedReader reader, 
+										List<Integer> errorCodeList,
+										List<Integer> warningCodeList
+										) throws IOException, ApiException {
 		// while loop variables
 		String row;
 		String[] columns;
@@ -109,24 +112,45 @@ public class DataChecks {
 		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
 				.equals(targetFrequency)) 
 		{
-			flag = false;
-			errorCodeList.add(2);
+//			flag = false;
+			warningCodeList.add(2);
 		}
+		
+		// if there are warnings, print out the warnings to the gui
+		if (!warningCodeList.isEmpty()) 
+		{
+			for (int x:warningCodeList)
+			{
+				System.out.println("* " + ErrorCodes.WarningList().get(x));
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Warnings: ", Color.CYAN);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.WarningList().get(x), Color.CYAN);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				if (x == 2)
+				{
+					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.CYAN);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
-		// if flag is false, print out the errors to the command line
+				}
+			}
+		}
+		
+		// if there are errors, print out the errors to the gui
 		if (!errorCodeList.isEmpty()) 
 		{
 			for (int x:errorCodeList)
 			{
 				System.out.println("* " + ErrorCodes.ErrorList().get(x));
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Errors: ", Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				if (x == 2)
-				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
-				}
+//				if (x == 2)
+//				{
+//					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
+//					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+//
+//				}
 			}
 		}
 

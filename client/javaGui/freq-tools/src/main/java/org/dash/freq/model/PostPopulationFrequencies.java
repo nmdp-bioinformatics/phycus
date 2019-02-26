@@ -120,6 +120,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		// data receptacles
 		TreeMap<String, String> headers = new TreeMap<>();
 		List<Integer> errorCodeList = new ArrayList<>();
+		List<Integer> warningCodeList = new ArrayList<>();
 		
 		try 
 		{
@@ -131,7 +132,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			
 			// check the data for consistancy
 			DataChecks dataChecks = new DataChecks();
-			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList);
+			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList, warningCodeList);
 			System.out.println("Data flag: " + dataFlag);
 			System.out.println("ErrorCodeList: " + errorCodeList);
 			

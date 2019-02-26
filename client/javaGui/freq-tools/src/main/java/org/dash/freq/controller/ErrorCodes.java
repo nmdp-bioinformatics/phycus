@@ -38,11 +38,11 @@ public class ErrorCodes {
 		TreeMap<Integer, String> errorCodes = new TreeMap<Integer, String>();
 
 		errorCodes.put(2, "Haplotype frequencies do not total 1.0000");
-		errorCodes.put(3, "The values for the population column must be identical");
-		errorCodes.put(4, "A population value must be included in the header. See help for more information.");
-		errorCodes.put(5, "A cohort value must be included in the header. See help for more information.");
+		errorCodes.put(3, "The population must already exist in the database. See the help tab for more information.");
+		errorCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
+		errorCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");
 		errorCodes.put(6, "The cohort value must be fewer than 255 characters.");
-		errorCodes.put(7, "A cohort value must be included in the header. See help for more information.");
+		errorCodes.put(7, "A cohort value must be included in the header. See the help tab for more information.");
 		errorCodes.put(8, "");
 		errorCodes.put(9, "");
 		errorCodes.put(10, "");
@@ -52,6 +52,24 @@ public class ErrorCodes {
 		return errorCodes;
 	}
 	
+	static public TreeMap<Integer, String> WarningList() {
+		TreeMap<Integer, String> warningCodes = new TreeMap<Integer, String>();
+
+		warningCodes.put(2, "Haplotype frequencies do not total 1.0000");
+		warningCodes.put(3, "The population must already exist in the database. See the help tab for more information.");
+		warningCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
+		warningCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");
+		warningCodes.put(6, "The cohort value must be fewer than 255 characters.");
+		warningCodes.put(7, "A cohort value must be included in the header. See the help tab for more information.");
+		warningCodes.put(8, "");
+		warningCodes.put(9, "");
+		warningCodes.put(10, "");
+
+		// errorCodes.put(, )
+		
+		return warningCodes;
+	}
+	
 //	public static void printErrors(List<Integer> errorCodeList)
 //	{
 //		for (int x:errorCodeList)
@@ -59,12 +77,6 @@ public class ErrorCodes {
 //			System.out.println("* " + ErrorCodes.ErrorList().get(x));
 //			AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
 //			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//			if (x == 2)
-//			{
-//				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
-//				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//
-//			}
 //		}
 //	}
 }

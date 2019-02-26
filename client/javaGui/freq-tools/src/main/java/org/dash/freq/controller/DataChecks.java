@@ -130,7 +130,7 @@ public class DataChecks {
 				{
 					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency total: " + freqTotal), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized to 1.0"), Color.BLACK);
+AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized by the server to 1.0."), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				}
 			}

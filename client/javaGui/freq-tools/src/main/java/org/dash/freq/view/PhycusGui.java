@@ -65,7 +65,11 @@ public class PhycusGui extends javax.swing.JFrame {
         licenseComboBox = new javax.swing.JComboBox<>();
         licenseLabel = new javax.swing.JLabel();
         licenseHelpIcon = new javax.swing.JLabel();
-        AddPopPanel = new javax.swing.JPanel();
+        warningLabel = new javax.swing.JLabel();
+        SettingsPanel = new javax.swing.JPanel();
+        HelpPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        helpTextPane = new javax.swing.JTextArea();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
@@ -187,6 +191,8 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        warningLabel.setText("Warnings will not prevent a file from being uploaded. Errors will.");
+
         javax.swing.GroupLayout UploadFilesPanelLayout = new javax.swing.GroupLayout(UploadFilesPanel);
         UploadFilesPanel.setLayout(UploadFilesPanelLayout);
         UploadFilesPanelLayout.setHorizontalGroup(
@@ -210,15 +216,16 @@ public class PhycusGui extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(185, 185, 185))))
-                    .addGroup(UploadFilesPanelLayout.createSequentialGroup()
-                        .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UploadFilesPanelLayout.createSequentialGroup()
+                        .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(warningLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(UploadFilesPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2)
-                            .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         UploadFilesPanelLayout.setVerticalGroup(
@@ -237,7 +244,9 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(licenseHelpIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(warningLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -248,26 +257,50 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Upload Files", UploadFilesPanel);
 
-        javax.swing.GroupLayout AddPopPanelLayout = new javax.swing.GroupLayout(AddPopPanel);
-        AddPopPanel.setLayout(AddPopPanelLayout);
-        AddPopPanelLayout.setHorizontalGroup(
-            AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
+        javax.swing.GroupLayout SettingsPanelLayout = new javax.swing.GroupLayout(SettingsPanel);
+        SettingsPanel.setLayout(SettingsPanelLayout);
+        SettingsPanelLayout.setHorizontalGroup(
+            SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
-        AddPopPanelLayout.setVerticalGroup(
-            AddPopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        SettingsPanelLayout.setVerticalGroup(
+            SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 565, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Preferences", AddPopPanel);
+        jTabbedPane1.addTab("Preferences", SettingsPanel);
+
+        helpTextPane.setEditable(false);
+        helpTextPane.setColumns(20);
+        helpTextPane.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        helpTextPane.setLineWrap(true);
+        helpTextPane.setRows(5);
+        helpTextPane.setWrapStyleWord(true);
+        try {
+            helpTextPane.setText(Help.getHelpText());
+        } catch (Exception ex) {System.out.println(ex);}
+        jScrollPane3.setViewportView(helpTextPane);
+
+        javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);
+        HelpPanel.setLayout(HelpPanelLayout);
+        HelpPanelLayout.setHorizontalGroup(
+            HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+        );
+        HelpPanelLayout.setVerticalGroup(
+            HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Help", HelpPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+            .addGap(0, 531, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,24 +450,28 @@ public class PhycusGui extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AddPopPanel;
     private javax.swing.JLabel CsvNotificationLabel;
+    private javax.swing.JPanel HelpPanel;
     private javax.swing.JPanel SelectFilePanel;
+    private javax.swing.JPanel SettingsPanel;
     private javax.swing.JPanel UploadFilesPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JFileChooser fileChooserUpload;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
+    private javax.swing.JTextArea helpTextPane;
     private javax.swing.JRadioButton jRBFile;
     private javax.swing.JRadioButton jRBFolder;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JComboBox<String> licenseComboBox;
     private javax.swing.JLabel licenseHelpIcon;
     private javax.swing.JLabel licenseLabel;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton uploadButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

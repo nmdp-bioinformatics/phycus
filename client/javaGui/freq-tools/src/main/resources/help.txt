@@ -1,0 +1,3 @@
+Headers:
+
+At the minimum there must be a population and cohort header in each file. All others are optional and will over-write options selected in the interface.

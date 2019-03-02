@@ -59,6 +59,7 @@ public class PhycusGui extends javax.swing.JFrame {
         fileOpenButton = new javax.swing.JButton();
         jRBFile = new javax.swing.JRadioButton();
         jRBFolder = new javax.swing.JRadioButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         cancelButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
@@ -160,6 +161,7 @@ public class PhycusGui extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
         SelectFilePanel.add(jRBFolder, gridBagConstraints);
+        SelectFilePanel.add(filler1, new java.awt.GridBagConstraints());
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,9 +222,8 @@ public class PhycusGui extends javax.swing.JFrame {
                         .addGroup(UploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(warningLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(UploadFilesPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -459,6 +460,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JTextArea helpTextPane;
     private javax.swing.JRadioButton jRBFile;
     private javax.swing.JRadioButton jRBFolder;

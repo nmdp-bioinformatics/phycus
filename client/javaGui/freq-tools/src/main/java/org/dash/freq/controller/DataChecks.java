@@ -81,7 +81,7 @@ public class DataChecks {
 //		int scale = 4;
 //		BigDecimal targetFrequency = new BigDecimal(1)
 //				.setScale(scale, BigDecimal.ROUND_HALF_UP);
-		BigDecimal targetFrequency = new BigDecimal(1.01);
+		BigDecimal targetFrequency = new BigDecimal(1.0);
 
 		// confirm populations are all the same
 //		String raceFirst = columns[0];
@@ -112,13 +112,12 @@ public class DataChecks {
 //				+ freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
 //		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
 //				.equals(targetFrequency))
-//		if (freqTotal.compareTo(BigDecimal.ONE) >= 0 && freqTotal.compareTo(BigDecimal.ONE) <= 2)
-//		{
-//			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
-//			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//		}
-//		else 
-		if (freqTotal.compareTo(targetFrequency) <= 0)
+		if (freqTotal.compareTo(targetFrequency) == 0)
+		{
+			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+		else if (freqTotal.compareTo(targetFrequency) < 0)
 		{
 //			flag = false;
 			warningCodeList.add(2);

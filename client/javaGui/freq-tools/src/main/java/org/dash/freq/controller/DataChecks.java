@@ -83,24 +83,13 @@ public class DataChecks {
 //				.setScale(scale, BigDecimal.ROUND_HALF_UP);
 		BigDecimal targetFrequency = new BigDecimal(1.0);
 
-		// confirm populations are all the same
-//		String raceFirst = columns[0];
-
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
 			// break the row down into useable pieces
 			columns = row.split(",");
-//			String race = columns[0];
 			String haplotype = columns[0];
 			BigDecimal frequency = new BigDecimal(columns[1]);
-
-			// run the population check only while flag equals true
-			// This is so it only adds one mismatch to the errorCode list
-//			if (flag == true)
-//			{
-//				flag = raceCheck(raceFirst, race, errorCodeList);
-//			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
@@ -108,20 +97,19 @@ public class DataChecks {
 		}
 		
 		// does the frequency fall withing the target range?
-//		System.out.println("Frequency total: " 
-//				+ freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP));
-//		if (!freqTotal.setScale(scale, BigDecimal.ROUND_HALF_UP)
-//				.equals(targetFrequency))
+		// if frequencies total to 0 report total
 		if (freqTotal.compareTo(targetFrequency) == 0)
 		{
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
+		// if frequencies less than 0, give warning
 		else if (freqTotal.compareTo(targetFrequency) < 0)
 		{
 //			flag = false;
 			warningCodeList.add(2);
 		}
+		// if frequencies greater than 0, give error
 		else
 		{
 			flag = false;
@@ -170,7 +158,7 @@ public class DataChecks {
 		return flag;
 	}
 	
-	public BigDecimal getTotal ()
+	public BigDecimal getTotal()
 	{
 		return freqTotal;
 	}

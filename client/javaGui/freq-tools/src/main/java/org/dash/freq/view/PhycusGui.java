@@ -49,6 +49,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         fileChooserUpload = new javax.swing.JFileChooser(prefs.get("LAST_OUTPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
         fileOrFolder = new javax.swing.ButtonGroup();
+        GTRegistryPopupFrame = new javax.swing.JFrame();
+        GTResgistryTextField = new javax.swing.JTextField();
+        GTRegistryEnterButton = new javax.swing.JButton();
+        GTRegistryCloseButton = new javax.swing.JButton();
+        GTRegistryInstructions1 = new javax.swing.JLabel();
+        GTRegistryInstructions2 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         UploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -74,6 +80,62 @@ public class PhycusGui extends javax.swing.JFrame {
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
+
+        GTRegistryPopupFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        GTRegistryPopupFrame.setTitle("Genotyping Registry");
+        GTRegistryPopupFrame.setAlwaysOnTop(true);
+        GTRegistryPopupFrame.setEnabled(prefs.getBoolean("GTReg", true)
+        );
+
+        GTRegistryEnterButton.setText("Enter");
+
+        GTRegistryCloseButton.setText("Close");
+        GTRegistryCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GTRegistryCloseButtonActionPerformed(evt);
+            }
+        });
+
+        GTRegistryInstructions1.setText("Please enter the ION or other facility identification ");
+
+        GTRegistryInstructions2.setText("of the entity performing the genotyping:");
+
+        javax.swing.GroupLayout GTRegistryPopupFrameLayout = new javax.swing.GroupLayout(GTRegistryPopupFrame.getContentPane());
+        GTRegistryPopupFrame.getContentPane().setLayout(GTRegistryPopupFrameLayout);
+        GTRegistryPopupFrameLayout.setHorizontalGroup(
+            GTRegistryPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GTRegistryPopupFrameLayout.createSequentialGroup()
+                .addGroup(GTRegistryPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(GTRegistryPopupFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(GTRegistryPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(GTRegistryInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(GTRegistryInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(GTRegistryPopupFrameLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(GTResgistryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GTRegistryPopupFrameLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(GTRegistryEnterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(GTRegistryCloseButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        GTRegistryPopupFrameLayout.setVerticalGroup(
+            GTRegistryPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GTRegistryPopupFrameLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(GTRegistryInstructions1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(GTRegistryInstructions2)
+                .addGap(18, 18, 18)
+                .addComponent(GTResgistryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(GTRegistryPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GTRegistryEnterButton)
+                    .addComponent(GTRegistryCloseButton))
+                .addGap(18, 18, 18))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -370,6 +432,10 @@ public class PhycusGui extends javax.swing.JFrame {
 		prefs.putInt("LICENSE", licenseComboBox.getSelectedIndex());
     }//GEN-LAST:event_licenseComboBoxActionPerformed
 
+    private void GTRegistryCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GTRegistryCloseButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_GTRegistryCloseButtonActionPerformed
+
 	// open links for help buttons
 	public static void openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
@@ -451,6 +517,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CsvNotificationLabel;
+    private javax.swing.JButton GTRegistryCloseButton;
+    private javax.swing.JButton GTRegistryEnterButton;
+    private javax.swing.JLabel GTRegistryInstructions1;
+    private javax.swing.JLabel GTRegistryInstructions2;
+    private javax.swing.JFrame GTRegistryPopupFrame;
+    private javax.swing.JTextField GTResgistryTextField;
     private javax.swing.JPanel HelpPanel;
     private javax.swing.JPanel SelectFilePanel;
     private javax.swing.JPanel SettingsPanel;

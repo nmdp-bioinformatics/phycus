@@ -77,6 +77,8 @@ public class PhycusGui extends javax.swing.JFrame {
         EstEntityLabel1 = new javax.swing.JLabel();
         EstEntityLabelCode = new javax.swing.JLabel();
         SettingsPanel = new javax.swing.JPanel();
+        OptionsEstEntityLabel = new javax.swing.JLabel();
+        OptionsEstEntityButton = new javax.swing.JButton();
         HelpPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         helpTextPane = new javax.swing.JTextArea();
@@ -84,9 +86,12 @@ public class PhycusGui extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
 
+        EstEntityPopupFrame.setVisible(false);
         EstEntityPopupFrame.setTitle("Genotyping Registry");
         EstEntityPopupFrame.setAlwaysOnTop(true);
-        EstEntityPopupFrame.setEnabled(false);
+        EstEntityPopupFrame.setLocationByPlatform(true);
+        EstEntityPopupFrame.setMinimumSize(new java.awt.Dimension(300, 250));
+        EstEntityPopupFrame.setName("EstEntityFrame"); // NOI18N
 
         EstEntityEnterButton.setText("Enter");
         EstEntityEnterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +152,9 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(EstEntityCloseButton))
                 .addContainerGap())
         );
+
+        EstEntityPopupFrame.getAccessibleContext().setAccessibleName("");
+        // EstEntityPopupFrame.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -270,8 +278,10 @@ public class PhycusGui extends javax.swing.JFrame {
 
         EstEntityLabel1.setText("Haplotype Entity: ");
 
-        try {if(prefs.nodeExists("PHY_EST_ENTITY")){
-            EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", ""));
+        try {if(prefs.nodeExists("/org/dash/freq/view/PHY_EST_ENTITY")){
+            System.out.println(prefs.get("PHY_EST_ENTITY", "PHY_EST_ENTITY not found"));
+            EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "No code set"));
+            if(EstEntityLabelCode.getText().equals("No code set")){EstEntityPopupFrame.setVisible(true);}
         } else {
             EstEntityPopupFrame.setVisible(true);
         }} catch (Exception ex){ System.out.println(ex);}
@@ -348,15 +358,34 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Upload Files", UploadFilesPanel);
 
+        OptionsEstEntityLabel.setText("Reset Est Entity:");
+
+        OptionsEstEntityButton.setText("Reset");
+        OptionsEstEntityButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OptionsEstEntityButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SettingsPanelLayout = new javax.swing.GroupLayout(SettingsPanel);
         SettingsPanel.setLayout(SettingsPanelLayout);
         SettingsPanelLayout.setHorizontalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGroup(SettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(OptionsEstEntityLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OptionsEstEntityButton)
+                .addContainerGap(397, Short.MAX_VALUE))
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGroup(SettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(OptionsEstEntityLabel)
+                    .addComponent(OptionsEstEntityButton))
+                .addContainerGap(531, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Options", SettingsPanel);
@@ -467,10 +496,19 @@ public class PhycusGui extends javax.swing.JFrame {
     private void EstEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstEntityEnterButtonActionPerformed
         prefs.put("PHY_EST_ENTITY", EstEntityTextField.getText());
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
+		EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "blank"));
 		EstEntityPopupFrame.setVisible(false);
 
 
     }//GEN-LAST:event_EstEntityEnterButtonActionPerformed
+
+    private void OptionsEstEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsEstEntityButtonActionPerformed
+        System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
+		try { System.out.println(prefs.node("PHY_EST_ENTITY"));} catch (Exception ex){System.out.println(ex);}
+//		prefs.remove("PHY_EST_ENTITY");
+		EstEntityPopupFrame.setVisible(true);
+		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
+    }//GEN-LAST:event_OptionsEstEntityButtonActionPerformed
 
 	// open links for help buttons
 	public static void openWebpage(URI uri) {
@@ -563,6 +601,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JFrame EstEntityPopupFrame;
     private javax.swing.JTextField EstEntityTextField;
     private javax.swing.JPanel HelpPanel;
+    private javax.swing.JButton OptionsEstEntityButton;
+    private javax.swing.JLabel OptionsEstEntityLabel;
     private javax.swing.JPanel SelectFilePanel;
     private javax.swing.JPanel SettingsPanel;
     private javax.swing.JPanel UploadFilesPanel;

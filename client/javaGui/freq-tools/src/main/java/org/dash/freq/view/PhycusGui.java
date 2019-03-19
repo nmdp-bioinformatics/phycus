@@ -5,6 +5,7 @@
  */
 package org.dash.freq.view;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -27,7 +28,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	File selectedFile;
 	private String gtRegistry;
 	private String estEntity;
-	private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+	public Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	private URL url;
 	private boolean folder = false;
 	/**
@@ -109,7 +110,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         EstEntityInstructions1.setText("Please enter the ION or other facility identification ");
 
-        EstEntityInstructions2.setText("of the entity performing the genotyping:");
+        EstEntityInstructions2.setText("of the group performing the genotyping:");
 
         EstEntityInstructions3.setText("(This can be changed in the options tab)");
 
@@ -117,23 +118,24 @@ public class PhycusGui extends javax.swing.JFrame {
         EstEntityPopupFrame.getContentPane().setLayout(EstEntityPopupFrameLayout);
         EstEntityPopupFrameLayout.setHorizontalGroup(
             EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EstEntityPopupFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
                 .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EstEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addContainerGap()
+                        .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(EstEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EstEntityInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EstEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
                         .addComponent(EstEntityEnterButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(EstEntityCloseButton)))
-                .addGap(63, 63, 63))
-            .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(EstEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EstEntityInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EstEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EstEntityPopupFrameLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(EstEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         EstEntityPopupFrameLayout.setVerticalGroup(
             EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +146,9 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(EstEntityInstructions2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstEntityInstructions3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(EstEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EstEntityEnterButton)
                     .addComponent(EstEntityCloseButton))
@@ -276,7 +278,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         warningLabel.setText("Warnings will not prevent a file from being uploaded. Errors will.");
 
-        EstEntityLabel1.setText("Haplotype Entity: ");
+        EstEntityLabel1.setText("Haplotyping Group: ");
 
         try {if(prefs.nodeExists("/org/dash/freq/view/PHY_EST_ENTITY")){
             System.out.println(prefs.get("PHY_EST_ENTITY", "PHY_EST_ENTITY not found"));
@@ -358,7 +360,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Upload Files", UploadFilesPanel);
 
-        OptionsEstEntityLabel.setText("Reset Est Entity:");
+        OptionsEstEntityLabel.setText("Reset Haplotyping Group ID:");
 
         OptionsEstEntityButton.setText("Reset");
         OptionsEstEntityButton.addActionListener(new java.awt.event.ActionListener() {
@@ -376,7 +378,7 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(OptionsEstEntityLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(OptionsEstEntityButton)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         SettingsPanelLayout.setVerticalGroup(
             SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,16 +449,27 @@ public class PhycusGui extends javax.swing.JFrame {
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         try
         {	
-			if (folder == false)
+			if (!fileLocationTextArea.getText().isEmpty())
 			{
-				PostPopulationFrequencies ppf = new PostPopulationFrequencies(
-						gtRegistry, estEntity, null);
-				ppf.setFile(selectedFile);
-				ppf.call();
+				if (folder == false)
+				{
+					PostPopulationFrequencies ppf = new PostPopulationFrequencies(
+							gtRegistry, 
+							prefs.get("PHY_EST_ENTITY", null), //estEntity, 
+							null);
+					ppf.setFile(selectedFile);
+					ppf.call();
+				}
+				else if (folder == true)
+				{
+					BatchUploader bu = new BatchUploader();
+					bu.uploadFiles(selectedFile.toString());
+				}
 			}
-			else if (folder == true)
+			else 
 			{
-				BatchUploader.uploadFiles(selectedFile.toString());
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Please select a file or folder", Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			}
         } catch (Exception e) {
             e.printStackTrace();

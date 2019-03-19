@@ -36,27 +36,29 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="EstEntityTextField" alignment="0" min="-2" pref="203" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="EstEntityInstructions1" max="32767" attributes="0"/>
+                              <Component id="EstEntityInstructions2" max="32767" attributes="0"/>
+                              <Component id="EstEntityInstructions3" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           <Component id="EstEntityEnterButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="EstEntityCloseButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="EstEntityInstructions1" max="32767" attributes="0"/>
-                      <Component id="EstEntityInstructions2" max="32767" attributes="0"/>
-                      <Component id="EstEntityInstructions3" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="EstEntityTextField" min="-2" pref="203" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,9 +71,9 @@
                   <Component id="EstEntityInstructions2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="EstEntityInstructions3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Component id="EstEntityTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="EstEntityEnterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EstEntityCloseButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -107,7 +109,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="EstEntityInstructions2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="of the entity performing the genotyping:"/>
+            <Property name="text" type="java.lang.String" value="of the group performing the genotyping:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="EstEntityInstructions3">
@@ -456,7 +458,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="EstEntityLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Haplotype Entity: "/>
+                <Property name="text" type="java.lang.String" value="Haplotyping Group: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="EstEntityLabelCode">
@@ -483,7 +485,7 @@
                       <Component id="OptionsEstEntityLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="OptionsEstEntityButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="397" max="32767" attributes="0"/>
+                      <EmptySpace pref="340" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -503,7 +505,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="OptionsEstEntityLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reset Est Entity:"/>
+                <Property name="text" type="java.lang.String" value="Reset Haplotyping Group ID:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="OptionsEstEntityButton">

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.prefs.Preferences;
 
 import org.dash.freq.model.PostPopulationFrequencies;
 import org.dash.freq.view.AppendText;
@@ -20,15 +21,18 @@ import org.dash.freq.view.PhycusGui;
  */
 public class BatchUploader {
 	
-	private static String gtRegistry;
-	private static String estEntity;
+//	public Preferences prefs = Preferences.node("/org/dash/freq/view/");
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
+	private String gtRegistry;
+//	private static String estEntity;
+	private String estEntity = prefs.get("PHY_EST_ENTITY", null);
 	
 	public BatchUploader ()
 	{
 		
 	}
 	
-	public static void uploadFiles(String folder)
+	public  void uploadFiles(String folder)
 	{
 		File dir = new File(folder);
 		TreeMap<String, Boolean> processedFiles = new TreeMap<String, Boolean>();

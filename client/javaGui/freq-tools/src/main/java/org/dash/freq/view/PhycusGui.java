@@ -16,6 +16,7 @@ import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 import org.dash.freq.controller.BatchUploader;
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -81,8 +82,8 @@ public class PhycusGui extends javax.swing.JFrame {
         OptionsEstEntityLabel = new javax.swing.JLabel();
         OptionsEstEntityButton = new javax.swing.JButton();
         HelpPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        helpTextPane = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        helpEditorPane = new javax.swing.JEditorPane();
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
@@ -392,25 +393,24 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Options", SettingsPanel);
 
-        helpTextPane.setEditable(false);
-        helpTextPane.setColumns(20);
-        helpTextPane.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        helpTextPane.setLineWrap(true);
-        helpTextPane.setRows(5);
-        helpTextPane.setWrapStyleWord(true);
-        try { helpTextPane.setText(Help.getHelpText()); }
+        helpEditorPane.setEditable(false);
+        helpEditorPane.setContentType("text/html"); // NOI18N
+        helpEditorPane.setMaximumSize(new java.awt.Dimension(621, 572));
+        jScrollPane5.setViewportView(helpEditorPane);
+        try { helpEditorPane.setText(Help.getHelpText()); }
         catch (Exception ex) { System.out.println(ex); }
-        jScrollPane3.setViewportView(helpTextPane);
 
         javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);
         HelpPanel.setLayout(HelpPanelLayout);
         HelpPanelLayout.setHorizontalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
         );
         HelpPanelLayout.setVerticalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+            .addGroup(HelpPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Help", HelpPanel);
@@ -625,12 +625,12 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JTextArea helpTextPane;
+    private javax.swing.JEditorPane helpEditorPane;
     private javax.swing.JRadioButton jRBFile;
     private javax.swing.JRadioButton jRBFolder;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JComboBox<String> licenseComboBox;
     private javax.swing.JLabel licenseHelpIcon;

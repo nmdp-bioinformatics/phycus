@@ -513,38 +513,53 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_EstEntityCloseButtonActionPerformed
 
     private void EstEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstEntityEnterButtonActionPerformed
-        prefs.put("PHY_EST_ENTITY", EstEntityTextField.getText());
+		prefs.put("PHY_EST_ENTITY", EstEntityTextField.getText());
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
 		EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "blank"));
 		EstEntityPopupFrame.setVisible(false);
-
-
     }//GEN-LAST:event_EstEntityEnterButtonActionPerformed
 
     private void OptionsEstEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsEstEntityButtonActionPerformed
-        System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
+        
+		// what's there and where is it? Debugging info
+		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
 		try { System.out.println(prefs.node("PHY_EST_ENTITY"));} catch (Exception ex){System.out.println(ex);}
-//		prefs.remove("PHY_EST_ENTITY");
+		
+		// show Est entity popup
 		EstEntityPopupFrame.setVisible(true);
+		
+		// debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
     }//GEN-LAST:event_OptionsEstEntityButtonActionPerformed
 
     private void helpEditorPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_helpEditorPaneHyperlinkUpdate
-        if(evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+        
+		// the editor pane has to be told to respond to hyperlinks
+		if(evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+			
+			// get the descriptions in the link
 			String desc = evt.getDescription();
+			
+			// find non-anchor urls
 			if (desc == null || !desc.startsWith("#"))
 			{
 				try {
-				URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
-				openWebpage(licenseTypes);
+					// opens only this URL. Need to read the actual link to open others
+					// Set this way because of time crunch
+					URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
+					openWebpage(licenseTypes);
 				} catch (Exception ex){System.out.println(ex);}
 			}
+			
+			// select the first substring (ideally only substring), name
 			desc = desc.substring(1);
+			
+			// got to the anchor
 			helpEditorPane.scrollToReference(desc);
         }
     }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate
 
-	// open links for help buttons
+	// open links to external browser
 	public static void openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {

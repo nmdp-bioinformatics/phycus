@@ -532,14 +532,16 @@ public class PhycusGui extends javax.swing.JFrame {
     private void helpEditorPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_helpEditorPaneHyperlinkUpdate
         if(evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
 			String desc = evt.getDescription();
+			if (desc == null || !desc.startsWith("#"))
+			{
+				try {
+				URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
+				openWebpage(licenseTypes);
+				} catch (Exception ex){System.out.println(ex);}
+			}
 			desc = desc.substring(1);
 			helpEditorPane.scrollToReference(desc);
         }
-//		evt.getURL();
-//		String desc = evt.getDescription();
-////		if (desc == null || !desc.startsWith("#")) return;
-//		desc = desc.substring(1);
-//		helpEditorPane.scrollToReference(desc);
     }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate
 
 	// open links for help buttons

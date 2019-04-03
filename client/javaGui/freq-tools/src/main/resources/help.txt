@@ -1,9 +1,9 @@
 <a name="top"></a>
 ## 1. Contents
-[2. Headers](#headers)
-- [2.1 Population](#pop)
-- [2.2 Cohort](#cohort)
-- [2.3 License](#license)
+[2. Headers](#headers)<br>
+  - [2.1 Population](#pop)<br>
+  - [2.2 Cohort](#cohort)<br>
+  - [2.3 License](#license)<br>
 
 
 <a name="headers"></a>
@@ -45,6 +45,14 @@ The cohort is a mandatory header. You have 255 characters available to you to de
 The license is an optional header. If it is not provided, the license selected on the main page will be applied. If provided, the license in the header will override the option selected on the main page. There are 7 license options:
 
 - CC0: Creative Commons no rights reserved.
+- BY: Give Attribution.
+- BY_SA: Give Attribution and Share Alike.
+- BY_ND: Give Attribution and No Derivatives.
+- BY_NC: Give Attribution and Non-Commercial.
+- BY_NC_SA: Give Attribution and Non-Commercial and Share Alike.
+- BY_NC_ND: Give Attribution and Non-Commercial and No Derivatives.
+
+For more information, see [here](https://creativecommons.org/share-your-work/licensing-types-examples/).
 
 [back](#top)
 

@@ -1,33 +1,43 @@
+<a name="top"></a>
 ## 1. Contents
-[Headers](#2-headers)
-- [Population](#21-population)
-- [Cohort](#22-cohort)
-- [License](#23-license)
+[2. Headers](#headers)
+- [2.1 Population](#pop)
+- [2.2 Cohort](#cohort)
+- [2.3 License](#license)
 
 
-
+<a name="headers"></a>
 ## 2. Headers:
 
 At the minimum there must be a population and cohort header in each file. All others are optional and will over-write options selected in the interface.
 
-Headers must be separated by commas and spaces outside of descriptions in quotes are not allowed.
+Headers must be separated by commas and spaces (outside of quotes) are not allowed.
 
 A header example:
 
  > pop=OTH,cohort="Description of the cohort",license=CC0,resolution=G
 
+[back](#top)
+
+<a name="pop"></a>
 ### 2.1 Population
 
 > pop=POPULATION_TAG
 
 The population is a mandatory header, and to prevent duplicates, must use a population tag already found in the database. To add a population, please see the Options tab.
 
+[back](#top)
+
+<a name="cohort"></a>
 ### 2.2 Cohort
 
 > cohort="Description of the cohort"
 
 The cohort is a mandatory header. You have 255 characters available to you to describe your cohort. 
 
+[back](#top)
+
+<a name="license"></a>
 ### 2.3 License
 
 > license=CC0
@@ -36,12 +46,7 @@ The license is an optional header. If it is not provided, the license selected o
 
 - CC0: Creative Commons no rights reserved.
 
-
-
-
-
-
-
+[back](#top)
 
 
 

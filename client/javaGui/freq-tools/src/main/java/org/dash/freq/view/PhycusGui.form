@@ -558,8 +558,11 @@
                       <Dimension value="[621, 572]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="helpEditorPaneHyperlinkUpdate"/>
+                  </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try { helpEditorPane.setText(Help.getHelpText()); } &#xa;catch (Exception ex) { System.out.println(ex); }"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try { helpEditorPane.setText(Help.getHelpText()); } &#xa;catch (Exception ex) { System.out.println(ex); }&#xa;helpEditorPane.setCaretPosition(0);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

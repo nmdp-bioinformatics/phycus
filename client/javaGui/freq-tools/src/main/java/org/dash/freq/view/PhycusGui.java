@@ -396,9 +396,15 @@ public class PhycusGui extends javax.swing.JFrame {
         helpEditorPane.setEditable(false);
         helpEditorPane.setContentType("text/html"); // NOI18N
         helpEditorPane.setMaximumSize(new java.awt.Dimension(621, 572));
+        helpEditorPane.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                helpEditorPaneHyperlinkUpdate(evt);
+            }
+        });
         jScrollPane5.setViewportView(helpEditorPane);
         try { helpEditorPane.setText(Help.getHelpText()); }
         catch (Exception ex) { System.out.println(ex); }
+        helpEditorPane.setCaretPosition(0);
 
         javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);
         HelpPanel.setLayout(HelpPanelLayout);
@@ -522,6 +528,19 @@ public class PhycusGui extends javax.swing.JFrame {
 		EstEntityPopupFrame.setVisible(true);
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
     }//GEN-LAST:event_OptionsEstEntityButtonActionPerformed
+
+    private void helpEditorPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_helpEditorPaneHyperlinkUpdate
+        if(evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+			String desc = evt.getDescription();
+			desc = desc.substring(1);
+			helpEditorPane.scrollToReference(desc);
+        }
+//		evt.getURL();
+//		String desc = evt.getDescription();
+////		if (desc == null || !desc.startsWith("#")) return;
+//		desc = desc.substring(1);
+//		helpEditorPane.scrollToReference(desc);
+    }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate
 
 	// open links for help buttons
 	public static void openWebpage(URI uri) {

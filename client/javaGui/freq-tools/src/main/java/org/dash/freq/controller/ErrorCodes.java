@@ -42,8 +42,8 @@ public class ErrorCodes {
 		errorCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
 		errorCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");
 		errorCodes.put(6, "The cohort value must be fewer than 255 characters.");
-		errorCodes.put(7, "A cohort value must be included in the header. See the help tab for more information.");
-		errorCodes.put(8, "");
+		errorCodes.put(7, "An invalid license type is included in the header. See the help tab for more information.");
+		errorCodes.put(8, "An invalid resolution type is included in the header. See the help tab for more information.");
 		errorCodes.put(9, "");
 		errorCodes.put(10, "");
 

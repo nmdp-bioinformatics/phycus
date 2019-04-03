@@ -9,8 +9,11 @@ import io.swagger.client.ApiException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +23,15 @@ import java.util.regex.Pattern;
  * @author kaeaton
  */
 public class HeaderProcessor {
+
+	// license types
+	String[] licenseTypes = {"CC0", "BY", "BY_SA", "BY_ND", "BY_NC", "BY_NC_SA", "BY_NC_ND"};
+	Set<String> licenses = new HashSet(Arrays.asList(licenseTypes));
+	
+	// resolution types
+	String[] resolutionTypes = {"G", "P", "gNMDP", "gDKMS", "1-Field", "2-Field", "3-Field", "4-Field", "Serology"};
+	Set<String> resolutions = new HashSet(Arrays.asList(resolutionTypes));
+
 	public HeaderProcessor()
 	{
 	
@@ -70,6 +82,14 @@ public class HeaderProcessor {
 		if (!popFlag || !cohortFlag) flag = false;
 		System.out.println("after pop and cohort check: " + flag);
 		
+		// check header for license type if present
+		if (headerContent.containsKey("license")) 
+			flag = checkHeaderLicenseType(headerContent.get("license"), errorCodeList);
+		
+		// check header for resolution type if present
+		if (headerContent.containsKey("resolution")) 
+			flag = checkHeaderLicenseType(headerContent.get("resolution"), errorCodeList);
+		
 		// return pass/fail data in headerContent
 		headerContent.put("flag", String.valueOf(flag));		
 		return headerContent;
@@ -113,17 +133,25 @@ public class HeaderProcessor {
 		return flag;
 	}
 	
-	public void resolutionType(){
-//		description: resolution of the data
-//        enum:
-//          - G
-//          - P
-//          - gNMDP
-//          - gDKMS
-//          - 1-Field
-//          - 2-Field
-//          - 3-Field
-//          - 4-Field
-//          - Serology
+	public boolean checkHeaderLicenseType(String selectedLicense, List<Integer> errorCodeList)
+	{
+		boolean flag = false;
+		
+		if (licenses.contains(selectedLicense)) flag = true;
+		
+		if (!flag) errorCodeList.add(7);
+		
+		return flag;
+	}
+	
+	public boolean checkHeaderResolutionType(String selectedResolution, List<Integer> errorCodeList)
+	{
+		boolean flag = false;
+		
+		if (resolutions.contains(selectedResolution)) flag = true;
+		
+		if (!flag) errorCodeList.add(8);
+		
+		return flag;
 	}
 }

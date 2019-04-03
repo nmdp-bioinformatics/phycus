@@ -33,13 +33,15 @@ public class LicenseType {
 		
 	}
 	
-	public static License typeOfLicense()
-	{
-		License newLicense = new License();
-		
-		// get chosen license from GUI
-		String selectedLicense = parseLicense((String)PhycusGui
+	// get chosen license from GUI
+	private String selectedLicense = parseLicense((String)PhycusGui
 				.licenseComboBox.getSelectedItem());
+	
+	public License typeOfLicense(String license)
+	{
+//		String selectedLicense = parseLicense(license);
+		
+		License newLicense = new License();
 		
 		switch (selectedLicense) {
             case "CC0":
@@ -64,13 +66,20 @@ public class LicenseType {
 				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_ND);
 				break;
 			default:
-				newLicense.setTypeOfLicense(TypeOfLicenseEnum.CC0);
+				
 		}
 		
 		System.out.println("License type: " + selectedLicense);
 
 		return newLicense;
 	}
+	
+	public License typeOfLicense()
+	{
+		License newLicense = typeOfLicense(selectedLicense);
+		
+		return newLicense;
+	}	
 	
 	public static String parseLicense(String license)
 	{

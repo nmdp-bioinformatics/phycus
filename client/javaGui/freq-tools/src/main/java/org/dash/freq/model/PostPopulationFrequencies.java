@@ -163,7 +163,18 @@ public class PostPopulationFrequencies implements Callable<Integer>
 
 		row = reader.readLine();
 		String race = headers.get("pop");
-		License license = LicenseType.typeOfLicense();
+		
+		// license
+		License license = new License();
+		LicenseType lType = new LicenseType();
+		if (headers.containsKey("license")){
+			String headerLicense = headers.get("license");
+			license = lType.typeOfLicense(headerLicense);
+		}
+		else
+		{
+			license = lType.typeOfLicense();
+		}
 		System.out.println("Uploading license of type " + license);
 
 		while ((row = reader.readLine()) != null) {

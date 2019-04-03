@@ -84,11 +84,13 @@ public class HeaderProcessor {
 		
 		// check header for license type if present
 		if (headerContent.containsKey("license")) 
-			flag = checkHeaderLicenseType(headerContent.get("license"), errorCodeList);
+			System.out.println("license: " + headerContent.get("license"));
+			flag = checkHeaderLicenseType(headerContent.get("license").toString(), errorCodeList);
 		
 		// check header for resolution type if present
 		if (headerContent.containsKey("resolution")) 
-			flag = checkHeaderLicenseType(headerContent.get("resolution"), errorCodeList);
+			System.out.println("resolution: " + headerContent.get("resolution"));
+			flag = checkHeaderResolutionType(headerContent.get("resolution").toString(), errorCodeList);
 		
 		// return pass/fail data in headerContent
 		headerContent.put("flag", String.valueOf(flag));		

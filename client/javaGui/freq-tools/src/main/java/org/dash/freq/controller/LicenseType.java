@@ -43,7 +43,7 @@ public class LicenseType {
 		
 		License newLicense = new License();
 		
-		switch (selectedLicense) {
+		switch (license) {
             case "CC0":
 				newLicense.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 				break;

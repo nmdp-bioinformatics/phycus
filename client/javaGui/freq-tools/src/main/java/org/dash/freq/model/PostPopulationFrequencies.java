@@ -168,7 +168,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		License license = new License();
 		LicenseType lType = new LicenseType();
 		if (headers.containsKey("license")){
-			String headerLicense = headers.get("license");
+			String headerLicense = headers.get("license").toString();
 			license = lType.typeOfLicense(headerLicense);
 		}
 		else

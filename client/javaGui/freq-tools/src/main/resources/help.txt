@@ -33,7 +33,7 @@ The population is a mandatory header, and to prevent duplicates, must use a popu
 
 > cohort="Description of the cohort"
 
-The cohort is a mandatory header. You have 255 characters available to you to describe your cohort. Do not include commas. 
+The cohort is a mandatory header. You have 255 characters available to you to describe your cohort. Do not use commas. 
 
 [back](#top)
 

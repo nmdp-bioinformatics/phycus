@@ -23,8 +23,10 @@ package org.dash.freq.controller;
 
 import io.swagger.client.model.License;
 import io.swagger.client.model.License.TypeOfLicenseEnum;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.dash.freq.view.PhycusGui;
 
 public class LicenseType {

@@ -41,15 +41,15 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.Callable;
 
-import org.dishevelled.commandline.ArgumentList;
-import org.dishevelled.commandline.CommandLine;
-import org.dishevelled.commandline.CommandLineParseException;
-import org.dishevelled.commandline.CommandLineParser;
-import org.dishevelled.commandline.Switch;
-import org.dishevelled.commandline.Usage;
-import org.dishevelled.commandline.argument.FileArgument;
-import org.dishevelled.commandline.argument.StringArgument;
-import org.dishevelled.commandline.argument.URLArgument;
+//import org.dishevelled.commandline.ArgumentList;
+//import org.dishevelled.commandline.CommandLine;
+//import org.dishevelled.commandline.CommandLineParseException;
+//import org.dishevelled.commandline.CommandLineParser;
+//import org.dishevelled.commandline.Switch;
+//import org.dishevelled.commandline.Usage;
+//import org.dishevelled.commandline.argument.FileArgument;
+//import org.dishevelled.commandline.argument.StringArgument;
+//import org.dishevelled.commandline.argument.URLArgument;
 
 import io.swagger.client.api.CohortApi;
 import io.swagger.client.ApiClient;
@@ -126,6 +126,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		{
 			// process the header
 			HeaderProcessor hp = new HeaderProcessor();
+			System.out.println("new Header Processor created");
 			headers = hp.readHeader(reader(inputFile), errorCodeList);
 			headerFlag = Boolean.valueOf(headers.get("flag"));
 			System.out.println("Header flag: " + headerFlag);

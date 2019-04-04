@@ -5,6 +5,8 @@
  */
 package org.dash.freq.controller;
 
+import org.dash.freq.model.Population;
+
 import io.swagger.client.ApiException;
 
 import java.io.BufferedReader;
@@ -25,16 +27,27 @@ import java.util.regex.Pattern;
 public class HeaderProcessor {
 
 	// license types
-	String[] licenseTypes = {"CC0", "BY", "BY_SA", "BY_ND", "BY_NC", "BY_NC_SA", "BY_NC_ND"};
-	Set<String> licenses = new HashSet(Arrays.asList(licenseTypes));
+	private final String[] licenseTypes = {"CC0", "BY", "BY_SA", "BY_ND", "BY_NC", "BY_NC_SA", "BY_NC_ND"};
+	private final Set<String> licenses;
 	
 	// resolution types
-	String[] resolutionTypes = {"G", "P", "gNMDP", "gDKMS", "1-Field", "2-Field", "3-Field", "4-Field", "Serology"};
-	Set<String> resolutions = new HashSet(Arrays.asList(resolutionTypes));
+	private final String[] resolutionTypes = {"G", "P", "gNMDP", "gDKMS", "1-Field", "2-Field", "3-Field", "4-Field", "Serology"};
+	private final Set<String> resolutions;
+	
+	// populations
+	private final Set<String> populations;
 
 	public HeaderProcessor()
 	{
-	
+		this.licenses = new HashSet(Arrays.asList(licenseTypes));
+		this.resolutions = new HashSet(Arrays.asList(resolutionTypes));
+		
+		Population population = new Population();
+		System.out.println("population created");
+
+		this.populations = new HashSet(population.getPopulations());
+		System.out.println("populations created");
+
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -47,9 +60,8 @@ public class HeaderProcessor {
 		TreeMap<String, String> headerContent = new TreeMap<>();
 		
 		// flags
+		Set<String> flags = new HashSet<>();
 		boolean flag = true;
-		boolean popFlag = false;
-		boolean cohortFlag = false;
 		
 		// read first line
 		header = reader.readLine();
@@ -65,34 +77,29 @@ public class HeaderProcessor {
 		// check population
 		if (headerContent.containsKey("pop")) 
 		{
-			popFlag = checkPop(headerContent.get("pop"), errorCodeList);
-			System.out.println("popFlag status: " + popFlag);
+			flags.add(checkPop(headerContent.get("pop").toString(), errorCodeList));
 		}
 		else errorCodeList.add(4);
 			
 		// check cohort
 		if (headerContent.containsKey("cohort")) 
 		{
-			cohortFlag = checkCohort(headerContent.get("cohort"), errorCodeList);
-			System.out.println("cohortFlag status: " + cohortFlag);
+			flags.add(checkCohort(headerContent.get("cohort"), errorCodeList));
 		}
 		else errorCodeList.add(5);
-
-		// if either cohort or pop missing, do not upload data
-		if (!popFlag || !cohortFlag) flag = false;
-		System.out.println("after pop and cohort check: " + flag);
 		
 		// check header for license type if present
 		if (headerContent.containsKey("license")) 
 			System.out.println("license: " + headerContent.get("license"));
-			flag = checkHeaderLicenseType(headerContent.get("license").toString(), errorCodeList);
+			flags.add(checkLicenseType(headerContent.get("license").toString(), errorCodeList));
 		
 		// check header for resolution type if present
 		if (headerContent.containsKey("resolution")) 
 			System.out.println("resolution: " + headerContent.get("resolution"));
-			flag = checkHeaderResolutionType(headerContent.get("resolution").toString(), errorCodeList);
+			flags.add(checkResolutionType(headerContent.get("resolution").toString(), errorCodeList));
 		
 		// return pass/fail data in headerContent
+		if (flags.contains("false")) flag = false;
 		headerContent.put("flag", String.valueOf(flag));		
 		return headerContent;
 	}
@@ -114,14 +121,17 @@ public class HeaderProcessor {
 		return parsedAttribute;
 	}
 	
-	public boolean checkPop(String popValue, List<Integer> errorCodeList)
+	public String checkPop(String popValue, List<Integer> errorCodeList)
 	{
-		boolean flag = true;
+		boolean flag = false;
 		
-		return flag;
+		if (populations.contains(popValue)) flag = true;
+		else errorCodeList.add(3);
+		
+		return String.valueOf(flag);
 	}
 	
-	public boolean checkCohort(String cohortValue, List<Integer> errorCodeList)
+	public String checkCohort(String cohortValue, List<Integer> errorCodeList)
 	{
 		boolean flag = true;
 		
@@ -132,28 +142,26 @@ public class HeaderProcessor {
 			flag = false;
 		}
 		
-		return flag;
+		return String.valueOf(flag);
 	}
 	
-	public boolean checkHeaderLicenseType(String selectedLicense, List<Integer> errorCodeList)
+	public String checkLicenseType(String selectedLicense, List<Integer> errorCodeList)
 	{
 		boolean flag = false;
 		
 		if (licenses.contains(selectedLicense)) flag = true;
+		else errorCodeList.add(7);
 		
-		if (!flag) errorCodeList.add(7);
-		
-		return flag;
+		return String.valueOf(flag);
 	}
 	
-	public boolean checkHeaderResolutionType(String selectedResolution, List<Integer> errorCodeList)
+	public String checkResolutionType(String selectedResolution, List<Integer> errorCodeList)
 	{
 		boolean flag = false;
 		
 		if (resolutions.contains(selectedResolution)) flag = true;
+		else errorCodeList.add(8);
 		
-		if (!flag) errorCodeList.add(8);
-		
-		return flag;
+		return String.valueOf(flag);
 	}
 }

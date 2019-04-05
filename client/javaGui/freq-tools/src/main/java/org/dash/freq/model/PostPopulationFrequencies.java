@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
 //import org.dishevelled.commandline.ArgumentList;
@@ -69,6 +70,8 @@ import io.swagger.client.model.License;
 //import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
+import java.util.HashSet;
+
 
 
 /**
@@ -82,6 +85,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	private final String gtRegistry;
 	private final String estEntity;
 	private final URL url;
+	private Population population;
 
 	private static final String USAGE = "post-population-frequencies [args]";
 	
@@ -104,6 +108,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		} else {
 			this.url = url;
 		}
+		this.population = new Population();
 	}
 	public void setFile(File incomingFile)
 	{
@@ -236,24 +241,15 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		
 		for (String populationName : populationMap.keySet()) {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
-			PopulationRequest populationRequest = new PopulationRequest();
-			
-			populationRequest.setName(populationName);
-			
-			System.out.println("Creating population: " + populationRequest.getName());
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Creating population: " + populationRequest.getName(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
-			PopulationData populationData = popApi.createPopulation(populationRequest);
-			
-			hfCurationRequest.setPopulationID(populationData.getId());
+			PopulationData selectedPopulation = population.getPopulation(race);
+			hfCurationRequest.setPopulationID(selectedPopulation.getId());
 			hfCurationRequest.setCohortID(cohortData.getId());
 			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
 
 			hfCurationRequest.setLabelData(labelData);
 
-			System.out.println("Submitting frequencies for population: " + populationData.getName());
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Submitting frequencies for population: " + populationData.getName(), Color.BLACK);
+			System.out.println("Submitting frequencies for population: " + selectedPopulation.getName());
+			AppendText.appendToPane(PhycusGui.outputTextPane, "Submitting frequencies for population: " + selectedPopulation.getName(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);

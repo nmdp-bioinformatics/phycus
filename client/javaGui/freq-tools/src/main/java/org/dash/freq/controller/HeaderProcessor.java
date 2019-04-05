@@ -43,11 +43,7 @@ public class HeaderProcessor {
 		this.resolutions = new HashSet(Arrays.asList(resolutionTypes));
 		
 		Population population = new Population();
-		System.out.println("population created");
-
-		this.populations = new HashSet(population.getPopulations());
-		System.out.println("populations created");
-
+		this.populations = new HashSet(population.getPopulationNames());
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,

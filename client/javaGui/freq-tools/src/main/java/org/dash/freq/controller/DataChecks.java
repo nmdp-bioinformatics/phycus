@@ -71,9 +71,6 @@ public class DataChecks {
 
 		columns = row.split(",");
 
-		// list to collect error codes
-//		List<Integer> errorCodeList = new ArrayList<>();
-
 		// frequency totals up to 1.0000
 		freqTotal = new BigDecimal(columns[1]);
 		

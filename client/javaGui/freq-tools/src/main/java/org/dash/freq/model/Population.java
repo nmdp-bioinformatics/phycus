@@ -8,6 +8,7 @@ package org.dash.freq.model;
 import io.swagger.client.ApiClient;
 import io.swagger.client.api.DefaultApi;
 import io.swagger.client.api.PopulationApi;
+import io.swagger.client.model.HFCurationRequest;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import io.swagger.client.model.PopulationResponse;
@@ -25,6 +26,7 @@ public class Population {
 	
 	private final String url = new String("http://localhost:8080");
 	public List<PopulationData> popList = new ArrayList<>();
+	private PopulationApi popApi;
 	
 	public Population()
 	{
@@ -36,7 +38,7 @@ public class Population {
 			apiClient.setWriteTimeout(60000);
 			apiClient.setBasePath(url);
 			DefaultApi api = new DefaultApi(apiClient);
-			PopulationApi popApi = new PopulationApi(apiClient);
+			popApi = new PopulationApi(apiClient);
 			
 			PopulationResponse popResponse = popApi.getAllPopulations();
 			
@@ -77,9 +79,18 @@ public class Population {
 		return foundPopulation;
 	}
 	
-	public void createNewPopulation()
+	public void createNewPopulation(String popName, String popDesc)
 	{
-		
+		HFCurationRequest hfCurationRequest = new HFCurationRequest();
+		PopulationRequest populationRequest = new PopulationRequest();
+
+		populationRequest.setName(popName);
+		populationRequest.setDescription(popDesc);
+
+		System.out.println("Creating population: " + populationRequest.getName());
+
+		try { popApi.createPopulation(populationRequest); }
+		catch (Exception ex) { System.out.println(ex); }
 	}
 	
 }

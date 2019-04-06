@@ -241,6 +241,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		
 		for (String populationName : populationMap.keySet()) {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
+			
+			// find the population in the db and get its ID for uploading data
 			PopulationData selectedPopulation = population.getPopulation(race);
 			hfCurationRequest.setPopulationID(selectedPopulation.getId());
 			hfCurationRequest.setCohortID(cohortData.getId());

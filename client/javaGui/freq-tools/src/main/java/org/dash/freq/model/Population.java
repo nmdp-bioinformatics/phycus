@@ -25,38 +25,66 @@ import java.util.List;
 public class Population {
 	
 	private final String url = new String("http://localhost:8080");
-	public List<PopulationData> popList = new ArrayList<>();
-	private PopulationApi popApi;
+//	public List<PopulationData> popList = new ArrayList<>();
+//	ApiClient apiClient = new ApiClient();
+//	private DefaultApi api;
+//	private PopulationApi popApi;
 	
 	public Population()
 	{
 		try
 		{
-			ApiClient apiClient = new ApiClient();
-			apiClient.setConnectTimeout(60000);
-			apiClient.setReadTimeout(60000);
-			apiClient.setWriteTimeout(60000);
-			apiClient.setBasePath(url);
-			DefaultApi api = new DefaultApi(apiClient);
-			popApi = new PopulationApi(apiClient);
+//			ApiClient apiClient = new ApiClient();
+//			this.apiClient.setConnectTimeout(60000);
+//			this.apiClient.setReadTimeout(60000);
+//			this.apiClient.setWriteTimeout(60000);
+//			this.apiClient.setBasePath(url);
+//			DefaultApi api = new DefaultApi(apiClient);
+//			popApi = new PopulationApi(apiClient);
 			
-			PopulationResponse popResponse = popApi.getAllPopulations();
-			
-			this.popList = popResponse.getPopulationList();
-			System.out.println("popList: " + popList);
+//			PopulationResponse popResponse = popApi.getAllPopulations();
+//			
+//			this.popList = popResponse.getPopulationList();
+//			System.out.println("popList: " + popList);
 			
 		} 
-		catch (Exception ex) 
-		{
-			System.out.println(ex);
-		}
+		catch (Exception ex) { System.out.println(ex); }
 	}
 	
-	public List<String> getPopulationNames()
+	public List<PopulationData> getPopulationsFromDB()
+	{
+		ApiClient apiClient = new ApiClient();
+		apiClient.setConnectTimeout(60000);
+		apiClient.setReadTimeout(60000);
+		apiClient.setWriteTimeout(60000);
+		apiClient.setBasePath(url);
+		System.out.println("Api set");
+//		DefaultApi api = new DefaultApi(apiClient);
+		PopulationApi popApi = new PopulationApi(apiClient);
+		System.out.println("popApi set");
+
+		List<PopulationData> popList = new ArrayList<>();
+
+		try 
+		{ 
+			PopulationResponse popResponse = popApi.getAllPopulations(); 
+			System.out.println("opened popResponse");
+			popList = popResponse.getPopulationList();
+			System.out.println("retrieved populations");
+
+			System.out.println("popList: " + popList);
+		}
+		catch (Exception ex) { System.out.println(ex); }
+		
+		return popList;
+	}
+	
+	public List<String> getPopulationNames(List<PopulationData> populations)
 	{
 		List<String> popNames = new ArrayList<>();
 		
-		for (PopulationData populationName : popList) {
+		for (PopulationData populationName : populations) 
+		{
 			popNames.add(populationName.getName());
 		}
 		
@@ -65,11 +93,11 @@ public class Population {
 		return popNames;
 	}
 	
-	public PopulationData getPopulation(String searchedPop)
+	public PopulationData getPopulation(List<PopulationData> populations, String searchedPop)
 	{
 		PopulationData foundPopulation = new PopulationData();
 		
-		for (PopulationData populationName : popList) {
+		for (PopulationData populationName : populations) {
 			if (populationName.getName().equals(searchedPop))
 			{
 				foundPopulation = populationName;
@@ -81,6 +109,16 @@ public class Population {
 	
 	public void createNewPopulation(String popName, String popDesc)
 	{
+		ApiClient apiClient = new ApiClient();
+		apiClient.setConnectTimeout(60000);
+		apiClient.setReadTimeout(60000);
+		apiClient.setWriteTimeout(60000);
+		apiClient.setBasePath(url);
+		System.out.println("Api set");
+//		DefaultApi api = new DefaultApi(apiClient);
+		PopulationApi popApi = new PopulationApi(apiClient);
+		System.out.println("popApi set");
+		
 		HFCurationRequest hfCurationRequest = new HFCurationRequest();
 		PopulationRequest populationRequest = new PopulationRequest();
 

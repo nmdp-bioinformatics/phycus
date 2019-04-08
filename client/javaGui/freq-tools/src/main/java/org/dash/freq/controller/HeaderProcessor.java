@@ -8,6 +8,7 @@ package org.dash.freq.controller;
 import org.dash.freq.model.Population;
 
 import io.swagger.client.ApiException;
+import io.swagger.client.model.PopulationData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class HeaderProcessor {
 	private final Set<String> resolutions;
 	
 	// populations
-	private final Set<String> populations;
+	private final Set<String> populationNames;
 
 	public HeaderProcessor()
 	{
@@ -43,7 +44,8 @@ public class HeaderProcessor {
 		this.resolutions = new HashSet(Arrays.asList(resolutionTypes));
 		
 		Population population = new Population();
-		this.populations = new HashSet(population.getPopulationNames());
+		List<PopulationData> populations = population.getPopulationsFromDB();
+		this.populationNames = new HashSet(population.getPopulationNames(populations));
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -121,7 +123,7 @@ public class HeaderProcessor {
 	{
 		boolean flag = false;
 		
-		if (populations.contains(popValue)) flag = true;
+		if (populationNames.contains(popValue)) flag = true;
 		else errorCodeList.add(3);
 		
 		return String.valueOf(flag);

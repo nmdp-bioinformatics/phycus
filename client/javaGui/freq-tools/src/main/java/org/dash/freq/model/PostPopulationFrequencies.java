@@ -85,7 +85,8 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	private final String gtRegistry;
 	private final String estEntity;
 	private final URL url;
-	private Population population;
+	private final Population population = new Population();
+	private List<PopulationData> populations;
 
 	private static final String USAGE = "post-population-frequencies [args]";
 	
@@ -108,7 +109,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		} else {
 			this.url = url;
 		}
-		this.population = new Population();
+		this.populations = population.getPopulationsFromDB();
 	}
 	public void setFile(File incomingFile)
 	{
@@ -243,7 +244,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
 			
 			// find the population in the db and get its ID for uploading data
-			PopulationData selectedPopulation = population.getPopulation(race);
+			PopulationData selectedPopulation = population.getPopulation(populations, race);
 			hfCurationRequest.setPopulationID(selectedPopulation.getId());
 			hfCurationRequest.setCohortID(cohortData.getId());
 			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));

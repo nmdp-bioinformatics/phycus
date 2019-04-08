@@ -53,13 +53,13 @@ public class PhycusGui extends javax.swing.JFrame {
 
         fileChooserUpload = new javax.swing.JFileChooser(prefs.get("LAST_OUTPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
         fileOrFolder = new javax.swing.ButtonGroup();
-        EstEntityPopupFrame = new javax.swing.JFrame();
-        EstEntityTextField = new javax.swing.JTextField();
-        EstEntityEnterButton = new javax.swing.JButton();
-        EstEntityCloseButton = new javax.swing.JButton();
-        EstEntityInstructions1 = new javax.swing.JLabel();
-        EstEntityInstructions2 = new javax.swing.JLabel();
-        EstEntityInstructions3 = new javax.swing.JLabel();
+        estEntityPopupFrame = new javax.swing.JFrame();
+        estEntityTextField = new javax.swing.JTextField();
+        estEntityEnterButton = new javax.swing.JButton();
+        estEntityCloseButton = new javax.swing.JButton();
+        estEntityInstructions1 = new javax.swing.JLabel();
+        estEntityInstructions2 = new javax.swing.JLabel();
+        estEntityInstructions3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         uploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,8 +84,9 @@ public class PhycusGui extends javax.swing.JFrame {
         popSearchTextField = new javax.swing.JTextField();
         popResultsScrollPane = new javax.swing.JScrollPane();
         popResultsTextPane = new javax.swing.JTextPane();
-        uploadButton1 = new javax.swing.JButton();
-        cancelButton1 = new javax.swing.JButton();
+        popCreateButton = new javax.swing.JButton();
+        popCancelButton = new javax.swing.JButton();
+        popSearchLabel = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
         OptionsEstEntityLabel = new javax.swing.JLabel();
         OptionsEstEntityButton = new javax.swing.JButton();
@@ -96,76 +97,76 @@ public class PhycusGui extends javax.swing.JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
         fileChooserUpload.setFileFilter(filter);
 
-        EstEntityPopupFrame.setVisible(false);
-        EstEntityPopupFrame.setTitle("Genotyping Registry");
-        EstEntityPopupFrame.setAlwaysOnTop(true);
-        EstEntityPopupFrame.setLocationByPlatform(true);
-        EstEntityPopupFrame.setMinimumSize(new java.awt.Dimension(300, 250));
-        EstEntityPopupFrame.setName("EstEntityFrame"); // NOI18N
+        estEntityPopupFrame.setVisible(false);
+        estEntityPopupFrame.setTitle("Haplotyping Registry");
+        estEntityPopupFrame.setAlwaysOnTop(true);
+        estEntityPopupFrame.setLocationByPlatform(true);
+        estEntityPopupFrame.setMinimumSize(new java.awt.Dimension(300, 250));
+        estEntityPopupFrame.setName("EstEntityFrame"); // NOI18N
 
-        EstEntityEnterButton.setText("Enter");
-        EstEntityEnterButton.addActionListener(new java.awt.event.ActionListener() {
+        estEntityEnterButton.setText("Enter");
+        estEntityEnterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EstEntityEnterButtonActionPerformed(evt);
+                estEntityEnterButtonActionPerformed(evt);
             }
         });
 
-        EstEntityCloseButton.setText("Close");
-        EstEntityCloseButton.addActionListener(new java.awt.event.ActionListener() {
+        estEntityCloseButton.setText("Close");
+        estEntityCloseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EstEntityCloseButtonActionPerformed(evt);
+                estEntityCloseButtonActionPerformed(evt);
             }
         });
 
-        EstEntityInstructions1.setText("Please enter the ION or other facility identification ");
+        estEntityInstructions1.setText("Please enter the ION or other facility identification ");
 
-        EstEntityInstructions2.setText("of the group performing the genotyping:");
+        estEntityInstructions2.setText("of the group performing the genotyping:");
 
-        EstEntityInstructions3.setText("(This can be changed in the options tab)");
+        estEntityInstructions3.setText("(This can be changed in the options tab)");
 
-        javax.swing.GroupLayout EstEntityPopupFrameLayout = new javax.swing.GroupLayout(EstEntityPopupFrame.getContentPane());
-        EstEntityPopupFrame.getContentPane().setLayout(EstEntityPopupFrameLayout);
-        EstEntityPopupFrameLayout.setHorizontalGroup(
-            EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
-                .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
+        javax.swing.GroupLayout estEntityPopupFrameLayout = new javax.swing.GroupLayout(estEntityPopupFrame.getContentPane());
+        estEntityPopupFrame.getContentPane().setLayout(estEntityPopupFrameLayout);
+        estEntityPopupFrameLayout.setHorizontalGroup(
+            estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
+                .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(EstEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EstEntityInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EstEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(EstEntityPopupFrameLayout.createSequentialGroup()
+                        .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(estEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(estEntityInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(estEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
                         .addGap(73, 73, 73)
-                        .addComponent(EstEntityEnterButton)
+                        .addComponent(estEntityEnterButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(EstEntityCloseButton)))
+                        .addComponent(estEntityCloseButton)))
                 .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EstEntityPopupFrameLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(EstEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
-        EstEntityPopupFrameLayout.setVerticalGroup(
-            EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EstEntityPopupFrameLayout.createSequentialGroup()
+        estEntityPopupFrameLayout.setVerticalGroup(
+            estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(EstEntityInstructions1)
+                .addComponent(estEntityInstructions1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EstEntityInstructions2)
+                .addComponent(estEntityInstructions2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EstEntityInstructions3)
+                .addComponent(estEntityInstructions3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(EstEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(EstEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EstEntityEnterButton)
-                    .addComponent(EstEntityCloseButton))
+                .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(estEntityEnterButton)
+                    .addComponent(estEntityCloseButton))
                 .addContainerGap())
         );
 
-        EstEntityPopupFrame.getAccessibleContext().setAccessibleName("");
-        // EstEntityPopupFrame.setVisible(false);
+        estEntityPopupFrame.getAccessibleContext().setAccessibleName("");
+        // estEntityPopupFrame.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -293,9 +294,9 @@ public class PhycusGui extends javax.swing.JFrame {
         try {if(prefs.nodeExists("/org/dash/freq/view/PHY_EST_ENTITY")){
             System.out.println(prefs.get("PHY_EST_ENTITY", "PHY_EST_ENTITY not found"));
             EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "No code set"));
-            if(EstEntityLabelCode.getText().equals("No code set")){EstEntityPopupFrame.setVisible(true);}
+            if(EstEntityLabelCode.getText().equals("No code set")){estEntityPopupFrame.setVisible(true);}
         } else {
-            EstEntityPopupFrame.setVisible(true);
+            estEntityPopupFrame.setVisible(true);
         }} catch (Exception ex){ System.out.println(ex);}
 
         javax.swing.GroupLayout uploadFilesPanelLayout = new javax.swing.GroupLayout(uploadFilesPanel);
@@ -372,7 +373,6 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Upload Files", uploadFilesPanel);
 
-        popSearchTextField.setText("Population search");
         popSearchTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 popSearchTextFieldActionPerformed(evt);
@@ -386,53 +386,55 @@ public class PhycusGui extends javax.swing.JFrame {
 
         popResultsScrollPane.setViewportView(popResultsTextPane);
 
-        uploadButton1.setText("Upload");
-        uploadButton1.addActionListener(new java.awt.event.ActionListener() {
+        popCreateButton.setText("Create");
+        popCreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadButton1ActionPerformed(evt);
+                popCreateButtonActionPerformed(evt);
             }
         });
 
-        cancelButton1.setText("Cancel");
-        cancelButton1.addActionListener(new java.awt.event.ActionListener() {
+        popCancelButton.setText("Cancel");
+        popCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButton1ActionPerformed(evt);
+                popCancelButtonActionPerformed(evt);
             }
         });
+
+        popSearchLabel.setText("Population name:");
 
         javax.swing.GroupLayout populationPanelLayout = new javax.swing.GroupLayout(populationPanel);
         populationPanel.setLayout(populationPanelLayout);
         populationPanelLayout.setHorizontalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(populationPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(popResultsScrollPane)
                     .addGroup(populationPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(popResultsScrollPane))
-                    .addGroup(populationPanelLayout.createSequentialGroup()
-                        .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(populationPanelLayout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(popSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(populationPanelLayout.createSequentialGroup()
-                                .addGap(202, 202, 202)
-                                .addComponent(uploadButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 94, Short.MAX_VALUE)))
+                        .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(popSearchTextField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, populationPanelLayout.createSequentialGroup()
+                        .addGap(0, 210, Short.MAX_VALUE)
+                        .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(192, 192, 192)))
                 .addContainerGap())
         );
         populationPanelLayout.setVerticalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(populationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(popSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton1)
-                    .addComponent(uploadButton1))
+                    .addComponent(popSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(popSearchLabel))
+                .addGap(18, 18, 18)
+                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popCancelButton)
+                    .addComponent(popCreateButton))
                 .addContainerGap())
         );
 
@@ -585,16 +587,16 @@ public class PhycusGui extends javax.swing.JFrame {
 		prefs.putInt("PHY_LICENSE", licenseComboBox.getSelectedIndex());
     }//GEN-LAST:event_licenseComboBoxActionPerformed
 
-    private void EstEntityCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstEntityCloseButtonActionPerformed
-        EstEntityPopupFrame.setVisible(false);
-    }//GEN-LAST:event_EstEntityCloseButtonActionPerformed
+    private void estEntityCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estEntityCloseButtonActionPerformed
+        estEntityPopupFrame.setVisible(false);
+    }//GEN-LAST:event_estEntityCloseButtonActionPerformed
 
-    private void EstEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstEntityEnterButtonActionPerformed
-		prefs.put("PHY_EST_ENTITY", EstEntityTextField.getText());
+    private void estEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estEntityEnterButtonActionPerformed
+		prefs.put("PHY_EST_ENTITY", estEntityTextField.getText());
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
 		EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "blank"));
-		EstEntityPopupFrame.setVisible(false);
-    }//GEN-LAST:event_EstEntityEnterButtonActionPerformed
+		estEntityPopupFrame.setVisible(false);
+    }//GEN-LAST:event_estEntityEnterButtonActionPerformed
 
     private void OptionsEstEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsEstEntityButtonActionPerformed
         
@@ -603,7 +605,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		try { System.out.println(prefs.node("PHY_EST_ENTITY"));} catch (Exception ex){System.out.println(ex);}
 		
 		// show Est entity popup
-		EstEntityPopupFrame.setVisible(true);
+		estEntityPopupFrame.setVisible(true);
 		
 		// debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
@@ -645,21 +647,22 @@ public class PhycusGui extends javax.swing.JFrame {
 		
     }//GEN-LAST:event_popSearchTextFieldKeyTyped
 
-    private void uploadButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButton1ActionPerformed
+    private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
-		String popSearchDescription = popSearchTextField.getText();
-		// search DB for similar
-		// show suggestions
 		
 		// popup for description
+		String popSearchDescription = javax.swing.JOptionPane
+			.showInputDialog(this, "Please enter a brief description of your population:");
+
 		// upload pop name / description
 		population.createNewPopulation(popSearchName, popSearchDescription);
-		// refresh population list
-    }//GEN-LAST:event_uploadButton1ActionPerformed
 
-    private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
+		// refresh population list
+    }//GEN-LAST:event_popCreateButtonActionPerformed
+
+    private void popCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCancelButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_cancelButton1ActionPerformed
+    }//GEN-LAST:event_popCancelButtonActionPerformed
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {
@@ -742,20 +745,19 @@ public class PhycusGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CsvNotificationLabel;
-    private javax.swing.JButton EstEntityCloseButton;
-    private javax.swing.JButton EstEntityEnterButton;
-    private javax.swing.JLabel EstEntityInstructions1;
-    private javax.swing.JLabel EstEntityInstructions2;
-    private javax.swing.JLabel EstEntityInstructions3;
     private javax.swing.JLabel EstEntityLabel1;
     private javax.swing.JLabel EstEntityLabelCode;
-    private javax.swing.JFrame EstEntityPopupFrame;
-    private javax.swing.JTextField EstEntityTextField;
     private javax.swing.JButton OptionsEstEntityButton;
     private javax.swing.JLabel OptionsEstEntityLabel;
     private javax.swing.JPanel SelectFilePanel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton cancelButton1;
+    private javax.swing.JButton estEntityCloseButton;
+    private javax.swing.JButton estEntityEnterButton;
+    private javax.swing.JLabel estEntityInstructions1;
+    private javax.swing.JLabel estEntityInstructions2;
+    private javax.swing.JLabel estEntityInstructions3;
+    private javax.swing.JFrame estEntityPopupFrame;
+    private javax.swing.JTextField estEntityTextField;
     private javax.swing.JFileChooser fileChooserUpload;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
@@ -773,13 +775,15 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel licenseHelpIcon;
     private javax.swing.JLabel licenseLabel;
     public static javax.swing.JTextPane outputTextPane;
+    private javax.swing.JButton popCancelButton;
+    private javax.swing.JButton popCreateButton;
     private javax.swing.JScrollPane popResultsScrollPane;
     private javax.swing.JTextPane popResultsTextPane;
+    private javax.swing.JLabel popSearchLabel;
     private javax.swing.JTextField popSearchTextField;
     private javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JButton uploadButton;
-    private javax.swing.JButton uploadButton1;
     private javax.swing.JPanel uploadFilesPanel;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables

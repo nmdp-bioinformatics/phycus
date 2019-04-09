@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,17 +41,17 @@ public class PhycusGui extends javax.swing.JFrame {
 	/**
 	 * Creates new form PhycusGui
 	 */
-	public PhycusGui() {
+	public PhycusGui() 
+	{
 		initComponents();
 		
-		Runnable r = new Runnable() {
-			public void run() {
-				populations = population.getPopulationsFromDB();
-			}
-		};
-
-     new Thread(r).start();
-     //this line will execute immediately, not waiting for your task to complete
+//		Runnable r = new Runnable() {
+//			public void run() {
+//				populations = population.getPopulationsFromDB();
+//			}
+//		};
+//
+//		new Thread(r).start();
 	}
 
 	/**
@@ -668,16 +669,59 @@ public class PhycusGui extends javax.swing.JFrame {
 
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
+		String popSearchDescription = "";
+		List<String> popNames;
+		System.out.println("pop Name: " + popSearchName);
 		
 		// does this name already exist?
+//		if (!populations.equals(null))
+//		{
+//			popNames = population.getPopulationNames(populations);
+//		}
+//		
+//		if (popNames.contains(popSearchName)){
+//			javax.swing.JOptionPane.showMessageDialog(this,
+//				("The population " + popSearchName + " already exists"),
+//				"This population already exists",
+//				javax.swing.JOptionPane.ERROR_MESSAGE);
+//		}
+//		
+//		else if (popSearchName.equals(null))
+//		{
+//			javax.swing.JOptionPane.showMessageDialog(this,
+//				("The population cannot be blank"),
+//				"The population cannot be blank",
+//				javax.swing.JOptionPane.ERROR_MESSAGE);
+//		}
+//		
+//		// if name does not exist ask for a description
+//		else
+		{
+			// popup for description
+			popSearchDescription = javax.swing.JOptionPane
+				.showInputDialog(this, "Please enter a brief description of your population:");
+		}
 		
 		
-		// popup for description
-		String popSearchDescription = javax.swing.JOptionPane
-			.showInputDialog(this, "Please enter a brief description of your population:");
+		
+		System.out.println("pop Desc: " + popSearchDescription);
 
 		// upload pop name / description
-		population.createNewPopulation(popSearchName, popSearchDescription);
+		if (!popSearchName.equals("") || !popSearchDescription.equals(""))
+		{
+			try 
+			{ 
+				population.createNewPopulation(popSearchName, popSearchDescription); 
+			} 
+			catch (Exception ex)
+			{
+				System.out.println(ex);
+				javax.swing.JOptionPane.showMessageDialog(this,
+					("The population was not created\n" + ex),
+					"Houston, we have a problem",
+					javax.swing.JOptionPane.ERROR_MESSAGE);
+			}
+		}
 
 		// refresh population list
     }//GEN-LAST:event_popCreateButtonActionPerformed
@@ -689,12 +733,18 @@ public class PhycusGui extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // load populations when switching to populations tab
 		int selectedIndex = jTabbedPane1.getSelectedIndex();
-		System.out.println(selectedIndex);
+		int popTabIndex = 1;
 		
-//		if (selectedIndex.equals(1)){
-//			
-//		
-//		}
+		if (selectedIndex == popTabIndex){
+			Runnable r = new Runnable() 
+			{
+				public void run() 
+				{
+					populations = population.getPopulationsFromDB();
+				}
+			};
+			new Thread(r).start();
+		}
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
 	// open links to external browser
@@ -814,7 +864,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JTextPane popResultsTextPane;
     private javax.swing.JLabel popSearchLabel;
     private javax.swing.JTextField popSearchTextField;
-    private javax.swing.JPanel populationPanel;
+    public static javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JButton uploadButton;
     private javax.swing.JPanel uploadFilesPanel;

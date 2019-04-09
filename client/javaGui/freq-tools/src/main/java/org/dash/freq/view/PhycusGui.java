@@ -5,6 +5,7 @@
  */
 package org.dash.freq.view;
 
+import io.swagger.client.model.PopulationData;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,11 +36,21 @@ public class PhycusGui extends javax.swing.JFrame {
 	private URL url;
 	private boolean folder = false;
 	private final Population population = new Population();
+	private List<PopulationData> populations;
 	/**
 	 * Creates new form PhycusGui
 	 */
 	public PhycusGui() {
 		initComponents();
+		
+		Runnable r = new Runnable() {
+			public void run() {
+				populations = population.getPopulationsFromDB();
+			}
+		};
+
+     new Thread(r).start();
+     //this line will execute immediately, not waiting for your task to complete
 	}
 
 	/**
@@ -172,6 +184,12 @@ public class PhycusGui extends javax.swing.JFrame {
         setTitle("Phycus Upload Interface");
         setLocationByPlatform(true);
         setMaximumSize(new java.awt.Dimension(650, 600));
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jScrollPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         jScrollPane1.setBorder(null);
@@ -357,7 +375,7 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EstEntityLabel1)
                     .addComponent(EstEntityLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
@@ -384,6 +402,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        popResultsTextPane.setEditable(false);
         popResultsScrollPane.setViewportView(popResultsTextPane);
 
         popCreateButton.setText("Create");
@@ -413,14 +432,14 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addGroup(populationPanelLayout.createSequentialGroup()
                         .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(popSearchTextField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, populationPanelLayout.createSequentialGroup()
-                        .addGap(0, 210, Short.MAX_VALUE)
-                        .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(192, 192, 192)))
+                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(populationPanelLayout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         populationPanelLayout.setVerticalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,12 +449,12 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(popSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(popSearchLabel))
                 .addGap(18, 18, 18)
-                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(popCancelButton)
                     .addComponent(popCreateButton))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         jTabbedPane1.addTab("Populations", populationPanel);
@@ -650,6 +669,9 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
 		
+		// does this name already exist?
+		
+		
 		// popup for description
 		String popSearchDescription = javax.swing.JOptionPane
 			.showInputDialog(this, "Please enter a brief description of your population:");
@@ -663,6 +685,17 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCancelButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_popCancelButtonActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // load populations when switching to populations tab
+		int selectedIndex = jTabbedPane1.getSelectedIndex();
+		System.out.println(selectedIndex);
+		
+//		if (selectedIndex.equals(1)){
+//			
+//		
+//		}
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {

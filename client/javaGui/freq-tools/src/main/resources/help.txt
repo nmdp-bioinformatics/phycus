@@ -1,6 +1,6 @@
 <a name="top"></a>
 ## 1. Contents
-[2. Headers](#headers)<br>
+[2. Headers](#headers)<br />
   - [2.1 Population](#pop)<br>
   - [2.2 Cohort](#cohort)<br>
   - [2.3 License](#license)<br>

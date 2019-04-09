@@ -164,6 +164,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane1StateChanged"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -249,9 +252,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="EstEntityLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="EstEntityLabelCode" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="EstEntityLabelCode" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="73" max="32767" attributes="0"/>
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
@@ -492,17 +495,17 @@
                           <Group type="102" attributes="0">
                               <Component id="popSearchLabel" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="popSearchTextField" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="210" max="32767" attributes="0"/>
-                              <Component id="popCreateButton" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="popCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="popSearchTextField" pref="451" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
+                      <Component id="popCreateButton" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="popCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -515,13 +518,13 @@
                           <Component id="popSearchLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="popResultsScrollPane" pref="487" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="popResultsScrollPane" pref="507" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="popCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="popCreateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -541,6 +544,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTextPane" name="popResultsTextPane">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

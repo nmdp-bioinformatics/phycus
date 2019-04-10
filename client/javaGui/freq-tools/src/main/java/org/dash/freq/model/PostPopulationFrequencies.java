@@ -99,16 +99,18 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	 * @param cohortId
 	 * @throws MalformedURLException
 	 */
-	public PostPopulationFrequencies(String gtRegistry, String estEntity, URL url) //File inputFile, 
+	public PostPopulationFrequencies(String gtRegistry, String estEntity) //File inputFile, 
 			throws MalformedURLException {
+
+		this.url = new URL("http://localhost:8080");
 //		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
         this.estEntity = estEntity;
-		if (url == null) {
-			this.url = new URL("http://localhost:8080");
-		} else {
-			this.url = url;
-		}
+//		if (url == null) {
+//			this.url = new URL("http://localhost:8080");
+//		} else {
+//			this.url = url;
+//		}
 		this.populations = population.getPopulationsFromDB();
 	}
 	public void setFile(File incomingFile)

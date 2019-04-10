@@ -54,6 +54,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	public PhycusGui() 
 	{
 		initComponents();
+//		new Thread(r).start();
 	}
 
 	/**
@@ -572,15 +573,21 @@ public class PhycusGui extends javax.swing.JFrame {
 				{
 					PostPopulationFrequencies ppf = new PostPopulationFrequencies(
 							gtRegistry, 
-							prefs.get("PHY_EST_ENTITY", null), //estEntity, 
-							null);
+							prefs.get("PHY_EST_ENTITY", null));
 					ppf.setFile(selectedFile);
 					ppf.call();
 				}
 				else if (folder == true)
 				{
-					BatchUploader bu = new BatchUploader();
-					bu.uploadFiles(selectedFile.toString());
+					Runnable batchUpload = new Runnable() 
+					{
+						public void run() {
+							BatchUploader bu = new BatchUploader();
+							bu.uploadFiles(selectedFile.toString());
+						}
+					};
+					
+					new Thread(batchUpload).start();
 				}
 			}
 			else 
@@ -683,6 +690,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
 		String popSearchDescription = "";
+		boolean popFlag = true;
 		
 		List<String> popNames = population.getPopulationNames(populations);
 		System.out.println("pop Name: " + popSearchName);
@@ -695,6 +703,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		
 		if (popNames.contains(popSearchName))
 		{
+			popFlag = false;
+			
 			AppendText.appendToPane(popNotificationsTextPane, "The population name already exists", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 			
@@ -707,12 +717,14 @@ public class PhycusGui extends javax.swing.JFrame {
 		// is the name blank?
 		else if (popSearchName == null || popSearchName.equals(""))
 		{
+			popFlag = false;
+			
 			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be blank", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 				
 			javax.swing.JOptionPane.showMessageDialog(this,
 				("The population name cannot be blank"),
-				 "The population name cannot be blank",
+				 "Houston, we have a problem",
 				 javax.swing.JOptionPane.ERROR_MESSAGE);
 		}
 		
@@ -722,6 +734,20 @@ public class PhycusGui extends javax.swing.JFrame {
 			// popup for description
 			popSearchDescription = javax.swing.JOptionPane
 				.showInputDialog(this, "Please enter a brief description of your population:");
+			
+			// if description is empty
+			if(popSearchDescription == null || popSearchDescription.equals(""))
+			{
+				popFlag = false;
+				
+				AppendText.appendToPane(popNotificationsTextPane, "The population description cannot be blank", Color.RED);
+				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+				javax.swing.JOptionPane.showMessageDialog(this,
+					("The population description cannot be blank"),
+					 "Houston, we have a problem",
+					 javax.swing.JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		
@@ -729,7 +755,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		System.out.println("pop Desc: " + popSearchDescription);
 
 		// upload pop name / description
-		if (!popSearchName.equals("") || !popSearchDescription.equals(""))
+		if (popFlag)
 		{
 			try 
 			{ 
@@ -759,6 +785,12 @@ public class PhycusGui extends javax.swing.JFrame {
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else
+		{
+			// notify that new pop has not been created
+			AppendText.appendToPane(popNotificationsTextPane, ("No population created."), Color.BLACK);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+		}
 
 		// refresh population list
     }//GEN-LAST:event_popCreateButtonActionPerformed
@@ -773,6 +805,10 @@ public class PhycusGui extends javax.swing.JFrame {
 		int popTabIndex = 1;
 		
 		if (selectedIndex == popTabIndex){
+			// clear pop textpane
+			popResultsTextPane.setText("");
+			
+			// populate text pane
 			new Thread(r).start();
 		}
     }//GEN-LAST:event_jTabbedPane1StateChanged

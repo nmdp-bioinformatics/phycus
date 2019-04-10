@@ -26,13 +26,14 @@ public class BatchUploader {
 	private String gtRegistry;
 //	private static String estEntity;
 	private String estEntity = prefs.get("PHY_EST_ENTITY", null);
+	private PostPopulationFrequencies ppf;
 	
 	public BatchUploader ()
 	{
-		
+	
 	}
 	
-	public  void uploadFiles(String folder)
+	public void uploadFiles(String folder)
 	{
 		File dir = new File(folder);
 		TreeMap<String, Boolean> processedFiles = new TreeMap<String, Boolean>();
@@ -42,7 +43,7 @@ public class BatchUploader {
 		{
 			// instatiate Post Pop Freq
 			PostPopulationFrequencies ppf = new PostPopulationFrequencies(
-					gtRegistry, estEntity, null);
+					gtRegistry, estEntity);
 			
 			// for each file in the folder
 			for (File file : dir.listFiles()) {
@@ -52,6 +53,7 @@ public class BatchUploader {
 				if (fileName.toLowerCase().endsWith(".csv"))
 				{
 					// print file name
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 					AppendText.appendToPane(PhycusGui.outputTextPane, file.getName() + ":", Color.BLUE);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
@@ -62,6 +64,7 @@ public class BatchUploader {
 				}
 			}
 			
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Files uploaded: ", Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 

@@ -68,7 +68,7 @@ public class LicenseType {
 				newLicense.setTypeOfLicense(TypeOfLicenseEnum.BY_NC_ND);
 				break;
 			default:
-				
+				System.out.println("Default case for LicenseType switch: This should not happen.");
 		}
 		
 		System.out.println("License type: " + selectedLicense);

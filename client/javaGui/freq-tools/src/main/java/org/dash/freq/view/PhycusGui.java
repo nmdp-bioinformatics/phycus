@@ -30,13 +30,23 @@ import org.dash.freq.model.PostPopulationFrequencies;
  */
 public class PhycusGui extends javax.swing.JFrame {
 	
-	File selectedFile;
+	private File selectedFile;
 	private String gtRegistry;
 	private String estEntity;
 	public Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	private URL url;
 	private boolean folder = false;
+	private final PopulationList popList = new PopulationList();
 	private final Population population = new Population();
+	private Runnable r = new Runnable() 
+			{
+				public void run() {
+					populations = population.getPopulationsFromDB();
+					popList.updatePopulation ("", populations);
+				}
+			};
+	
+	// initially populated when program open population tab
 	private List<PopulationData> populations;
 	/**
 	 * Creates new form PhycusGui
@@ -44,14 +54,6 @@ public class PhycusGui extends javax.swing.JFrame {
 	public PhycusGui() 
 	{
 		initComponents();
-		
-//		Runnable r = new Runnable() {
-//			public void run() {
-//				populations = population.getPopulationsFromDB();
-//			}
-//		};
-//
-//		new Thread(r).start();
 	}
 
 	/**
@@ -100,6 +102,8 @@ public class PhycusGui extends javax.swing.JFrame {
         popCreateButton = new javax.swing.JButton();
         popCancelButton = new javax.swing.JButton();
         popSearchLabel = new javax.swing.JLabel();
+        popNotificationsScrollPane = new javax.swing.JScrollPane();
+        popNotificationsTextPane = new javax.swing.JTextPane();
         settingsPanel = new javax.swing.JPanel();
         OptionsEstEntityLabel = new javax.swing.JLabel();
         OptionsEstEntityButton = new javax.swing.JButton();
@@ -403,7 +407,6 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        popResultsTextPane.setEditable(false);
         popResultsScrollPane.setViewportView(popResultsTextPane);
 
         popCreateButton.setText("Create");
@@ -422,25 +425,32 @@ public class PhycusGui extends javax.swing.JFrame {
 
         popSearchLabel.setText("Population name:");
 
+        popNotificationsScrollPane.setViewportView(popNotificationsTextPane);
+
         javax.swing.GroupLayout populationPanelLayout = new javax.swing.GroupLayout(populationPanel);
         populationPanel.setLayout(populationPanelLayout);
         populationPanelLayout.setHorizontalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(populationPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(popResultsScrollPane)
                     .addGroup(populationPanelLayout.createSequentialGroup()
-                        .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(popResultsScrollPane)
+                            .addGroup(populationPanelLayout.createSequentialGroup()
+                                .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))))
+                    .addGroup(populationPanelLayout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)))
+                        .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(populationPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(popNotificationsScrollPane)))
                 .addContainerGap())
-            .addGroup(populationPanelLayout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         populationPanelLayout.setVerticalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,8 +460,10 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(popSearchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(popSearchLabel))
                 .addGap(18, 18, 18)
-                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(popResultsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(popNotificationsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(popCancelButton)
                     .addComponent(popCreateButton))
@@ -670,32 +682,41 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
 		String popSearchDescription = "";
-		List<String> popNames;
+		
+		List<String> popNames = population.getPopulationNames(populations);
 		System.out.println("pop Name: " + popSearchName);
 		
 		// does this name already exist?
-//		if (!populations.equals(null))
+//		if (!populations.exists())
 //		{
 //			popNames = population.getPopulationNames(populations);
 //		}
-//		
-//		if (popNames.contains(popSearchName)){
-//			javax.swing.JOptionPane.showMessageDialog(this,
-//				("The population " + popSearchName + " already exists"),
-//				"This population already exists",
-//				javax.swing.JOptionPane.ERROR_MESSAGE);
-//		}
-//		
-//		else if (popSearchName.equals(null))
-//		{
-//			javax.swing.JOptionPane.showMessageDialog(this,
-//				("The population cannot be blank"),
-//				"The population cannot be blank",
-//				javax.swing.JOptionPane.ERROR_MESSAGE);
-//		}
-//		
-//		// if name does not exist ask for a description
-//		else
+		
+		if (popNames.contains(popSearchName))
+		{
+			AppendText.appendToPane(popNotificationsTextPane, "The population name already exists", Color.RED);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+			
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population " + popSearchName + " already exists"),
+				"This population already exists",
+				javax.swing.JOptionPane.ERROR_MESSAGE);
+		}
+		
+		// is the name blank?
+		else if (popSearchName == null || popSearchName.equals(""))
+		{
+			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be blank", Color.RED);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+				
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population name cannot be blank"),
+				 "The population name cannot be blank",
+				 javax.swing.JOptionPane.ERROR_MESSAGE);
+		}
+		
+		// if name does not exist ask for a description
+		else
 		{
 			// popup for description
 			popSearchDescription = javax.swing.JOptionPane
@@ -711,7 +732,22 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			try 
 			{ 
-				population.createNewPopulation(popSearchName, popSearchDescription); 
+				// create new population in db
+				population.createNewPopulation(popSearchName, popSearchDescription);
+				
+				// notify that new pop has been created
+				AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
+				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+				
+				// clear pop textpane
+				popResultsTextPane.setText("");
+				
+				// redownload db in background
+				new Thread(r).start();
+				
+				// clear search bar
+				popSearchTextField.setText("");
+				
 			} 
 			catch (Exception ex)
 			{
@@ -736,13 +772,6 @@ public class PhycusGui extends javax.swing.JFrame {
 		int popTabIndex = 1;
 		
 		if (selectedIndex == popTabIndex){
-			Runnable r = new Runnable() 
-			{
-				public void run() 
-				{
-					populations = population.getPopulationsFromDB();
-				}
-			};
 			new Thread(r).start();
 		}
     }//GEN-LAST:event_jTabbedPane1StateChanged
@@ -790,7 +819,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		// so uploader function knows whether it's a file or folder
 		folder = true;
 	}
-
+	
 	/**
 	 * @param args the command line arguments
 	 */
@@ -860,8 +889,10 @@ public class PhycusGui extends javax.swing.JFrame {
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton popCancelButton;
     private javax.swing.JButton popCreateButton;
+    private javax.swing.JScrollPane popNotificationsScrollPane;
+    public static javax.swing.JTextPane popNotificationsTextPane;
     private javax.swing.JScrollPane popResultsScrollPane;
-    private javax.swing.JTextPane popResultsTextPane;
+    public static javax.swing.JTextPane popResultsTextPane;
     private javax.swing.JLabel popSearchLabel;
     private javax.swing.JTextField popSearchTextField;
     public static javax.swing.JPanel populationPanel;

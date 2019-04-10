@@ -48,16 +48,8 @@ public class Help {
 					.extensions(extensions)
 					.build();
 			
-//			Parser parser = Parser.builder().build();
 			Node document = parser.parse(helpText);
-//			HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
-			parsedText = renderer.render(document);  // "<p>This is <em>Sparta</em></p>\n"
-
-
-			
-			
-			
-		
+			parsedText = renderer.render(document);
 		} 
 		catch (Exception ex) 
 		{

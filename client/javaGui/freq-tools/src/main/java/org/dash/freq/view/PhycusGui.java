@@ -42,7 +42,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			{
 				public void run() {
 					populations = population.getPopulationsFromDB();
-					popList.updatePopulation ("", populations);
+					popList.updatePopulation("", populations);
 				}
 			};
 	
@@ -676,6 +676,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
     private void popSearchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popSearchTextFieldKeyTyped
         // TODO add your handling code here:
+//		List<PopulationData> searchedList = popList.searchList();
 		
     }//GEN-LAST:event_popSearchTextFieldKeyTyped
 

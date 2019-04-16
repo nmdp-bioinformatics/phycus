@@ -71,6 +71,10 @@ public class DataChecks {
 
 		columns = row.split(",");
 
+		// first line for haplotype template
+		HaplotypeProcessor haplotypeProcessor = new HaplotypeProcessor(columns[0]);
+		System.out.println(columns[0]);
+		
 		// frequency totals up to 1.0000
 		freqTotal = new BigDecimal(columns[1]);
 		

@@ -82,20 +82,37 @@ public class DataChecks {
 //		int scale = 4;
 //		BigDecimal targetFrequency = new BigDecimal(1)
 //				.setScale(scale, BigDecimal.ROUND_HALF_UP);
-		BigDecimal targetFrequency = new BigDecimal(1.0);
+		BigDecimal targetFrequency = new BigDecimal(1.01);
 
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
+			// counter starting on line 3
+			int i = 3;
+			
 			// break the row down into useable pieces
 			columns = row.split(",");
-			String haplotype = columns[0];
+			String haplotype = columns[0];			
 			BigDecimal frequency = new BigDecimal(columns[1]);
+			
+			// compare current line's loci to first haplotype
+			if (!haplotypeProcessor.checkLoci(haplotype))
+			{
+				flag = false;
+				AppendText.appendToPane(PhycusGui.outputTextPane, ("Line " + i + " contains different loci than line 2"), Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
 //			System.out.println("While-loop frequency total: " + freqTotal);
+
+			i++;
 		}
+		
+		// did the flag get triggered during while loop?
+		// if so, there's a discrepency between haplotype loci
+		if (flag == false) errorCodeList.add(9);
 		
 		// does the frequency fall withing the target range?
 		// if frequencies total to 0 report total

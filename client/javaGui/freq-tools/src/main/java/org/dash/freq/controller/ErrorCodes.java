@@ -44,7 +44,7 @@ public class ErrorCodes {
 		errorCodes.put(6, "The cohort value must be fewer than 255 characters.");
 		errorCodes.put(7, "An invalid license type is included in the header. See the help tab for more information.");
 		errorCodes.put(8, "An invalid resolution type is included in the header. See the help tab for more information.");
-		errorCodes.put(9, "");
+		errorCodes.put(9, "Haplotype contains an extra or is missing a locus");
 		errorCodes.put(10, "");
 
 		// errorCodes.put(, )

@@ -16,6 +16,7 @@ import java.util.List;
 public class HaplotypeProcessor {
 	
 	private List<String> haplotypeTemplate = new ArrayList();
+	private List<String> currentHaplotype = new ArrayList();
 	
 	public HaplotypeProcessor (String firstHaplotypeLine)
 	{
@@ -35,5 +36,31 @@ public class HaplotypeProcessor {
 		System.out.println(haplotypeTemplate);
 	}
 	
+	public boolean checkLoci (String currentLoci)
+	{
+		boolean sameLociFlag = false;
+		currentHaplotype.clear();
+		
+		// break haplotypes down to individual loci
+		String[] brokenDownHaplotype = currentLoci.split("~");
+
+		// add individual loci to haplotype template
+		for (String locus:brokenDownHaplotype){
+			String[] locusName = locus.split("\\*");
+			System.out.println(locus);
+			currentHaplotype.add(locusName[0]);
+		}
+		
+		// sort loci alphabetically
+		Collections.sort(currentHaplotype);
+		System.out.println(currentHaplotype);
+		
+		if (currentHaplotype.equals(haplotypeTemplate))
+		{
+			sameLociFlag = true;
+		}
+
+		return sameLociFlag;
+	}
 	
 }

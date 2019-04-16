@@ -4,7 +4,7 @@
   - [2.1 Population](#pop)<br>
   - [2.2 Cohort](#cohort)<br>
   - [2.3 License](#license)<br>
-
+  - [2.4 Resolution](#resolution)<br>
 
 <a name="headers"></a>
 ## 2. Headers:
@@ -56,5 +56,23 @@ For more information, see [here](https://creativecommons.org/share-your-work/lic
 
 [back](#top)
 
+<a name="resolution"></a>
+### 2.4 Resolution
+
+> resolution=gDKMS
+
+The resolution is an optional header describing the resolution of the genotyping. There are 9 resolution options. If provided, the resolution must exactly match one of the following options:
+
+- G: G-groups.
+- P: P-Groups.
+- gNMDP: Little g, NMDP standard.
+- gDKMS: Little g, DKMS standard.
+- 1-Field: 1 field genotyping.
+- 2-Field: 2 field genotyping.
+- 3-Field: 3 field genotyping.
+- 4-Field: 4 field genotyping.
+- Serology: Serology level genotyping.
+
+[back](#top)
 
 

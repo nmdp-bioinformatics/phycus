@@ -408,6 +408,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        popResultsTextPane.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         popResultsScrollPane.setViewportView(popResultsTextPane);
 
         popCreateButton.setText("Create");
@@ -571,6 +572,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			{
 				if (folder == false)
 				{
+					outputTextPane.setText("");
 					PostPopulationFrequencies ppf = new PostPopulationFrequencies(
 							gtRegistry, 
 							prefs.get("PHY_EST_ENTITY", null));
@@ -579,6 +581,7 @@ public class PhycusGui extends javax.swing.JFrame {
 				}
 				else if (folder == true)
 				{
+					outputTextPane.setText("");
 					Runnable batchUpload = new Runnable() 
 					{
 						public void run() {
@@ -592,6 +595,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			}
 			else 
 			{
+				outputTextPane.setText("");
 				AppendText.appendToPane(PhycusGui.outputTextPane, "Please select a file or folder", Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			}

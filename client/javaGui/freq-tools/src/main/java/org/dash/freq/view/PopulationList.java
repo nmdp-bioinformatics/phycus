@@ -28,7 +28,7 @@ public class PopulationList {
 	{
 		for (PopulationData pop : pops) {
 //			AppendText.appendToPane(PhycusGui.popResultsTextPane, StringUtils.rightPad(pop.getName(), 30), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.popResultsTextPane, (String.format("%0$-30s", pop.getName())), Color.BLACK);
+			AppendText.appendToPane(PhycusGui.popResultsTextPane, (String.format("%-25s", pop.getName())), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.popResultsTextPane, pop.getDescription(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.popResultsTextPane, System.lineSeparator(), Color.BLACK);
 		}

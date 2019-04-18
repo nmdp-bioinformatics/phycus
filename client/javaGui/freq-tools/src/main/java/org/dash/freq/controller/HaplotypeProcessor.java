@@ -40,6 +40,7 @@ public class HaplotypeProcessor {
 		System.out.println(haplotypeTemplate);
 	}
 	
+	// make sure all same loci are present in each haplotype
 	public boolean checkLoci (String currentLoci)
 	{
 		boolean sameLociFlag = false;
@@ -67,35 +68,43 @@ public class HaplotypeProcessor {
 		return sameLociFlag;
 	}
 	
+	// checking for things like this: A*01:01gA*01:01g
+	public boolean asteriksAndTildas (String currentLoci)
+	{
+		boolean astTilFlag = false;
+		
+		return astTilFlag;
+	}
+	
 	public void printOutErrors (List<Integer> errorLineNumbers)
 	{
-		// if there are ten or fewer errors list them
-		if(errorLineNumbers.size() <= 5)
+		// if there are one or two errors list them
+		if(errorLineNumbers.size() <= 2)
 		{
 			for (int lineError:errorLineNumbers)
 			{
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + lineError + " contains different loci than line 2"), Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + lineError + ": the loci in line 2 are different than the loci in line " + lineError), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
 			}
 		}
 		
-		// list some and message that there are more
+		// otherwise list some and message that there are more
 		else
 		{
-			int errorCounter = 5;
+			int errorCounter = 2;
 			int listCursor = 0;
 		
 			while (errorCounter > 0)
 			{
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + errorLineNumbers.get(listCursor) + " contains different loci than line 2"), Color.RED);
+				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + errorLineNumbers.get(listCursor) + ": the loci in line 2 are different than the loci in line " + errorLineNumbers.get(listCursor)), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				errorCounter--;
 				listCursor++;
 			}
 			
 			// plus anything over 5
-			int remainingErrors = errorLineNumbers.size() - 5;
+			int remainingErrors = errorLineNumbers.size() - 2;
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Plus " + remainingErrors + " more"), Color.RED);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		}

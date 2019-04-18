@@ -34,6 +34,8 @@ public class ErrorCodes {
 	
 	}
 
+	// error and warning printing in DataChecks.java
+	
 	static public TreeMap<Integer, String> ErrorList() {
 		TreeMap<Integer, String> errorCodes = new TreeMap<Integer, String>();
 
@@ -69,14 +71,4 @@ public class ErrorCodes {
 		
 		return warningCodes;
 	}
-	
-//	public static void printErrors(List<Integer> errorCodeList)
-//	{
-//		for (int x:errorCodeList)
-//		{
-//			System.out.println("* " + ErrorCodes.ErrorList().get(x));
-//			AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
-//			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-//		}
-//	}
 }

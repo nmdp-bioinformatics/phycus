@@ -573,6 +573,11 @@ public class PhycusGui extends javax.swing.JFrame {
 				if (folder == false)
 				{
 					outputTextPane.setText("");
+					
+					// list file name
+					AppendText.appendToPane(PhycusGui.outputTextPane, (selectedFile + ":"), Color.BLUE);
+					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+					
 					PostPopulationFrequencies ppf = new PostPopulationFrequencies(
 							gtRegistry, 
 							prefs.get("PHY_EST_ENTITY", null));

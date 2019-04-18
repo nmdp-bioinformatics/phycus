@@ -41,25 +41,27 @@ public class DataChecks {
 
 	}
 	
-	// are all the population names the same?
-	public boolean raceCheck(String raceFirst, String race, List<Integer> errorCodes) {
-		boolean flag = true;
-
-		if (!race.equals(raceFirst)) {
-			flag = false;
-			errorCodes.add(3);
-		}
-		return flag;
-	}
-
+	// checking the data for consistancy
+	// does every entry have the same haploty loci?
+	// does the total frequency fall within acceptable range?
 	public boolean populationDataCheck(BufferedReader reader, 
 										List<Integer> errorCodeList,
 										List<Integer> warningCodeList
-										) throws IOException, ApiException {
+										) throws IOException, ApiException 
+	{
 		// while loop variables
 		String row;
 		String[] columns;
 		boolean flag = true;
+		
+		// counter starts on line 3 (header is 1, line to compare to is 2)
+		// allows line numbers for errors to be tracked
+		int i = 3;
+		
+		// collect haplotype line errors, we will list the first 10
+		// this is to prevent showing 3000 errors if the first haplotype has an
+		// error
+		List<Integer> haplotypeLineErrors = new ArrayList();
 
 		// skip header line
 		row = reader.readLine();
@@ -75,21 +77,19 @@ public class DataChecks {
 		HaplotypeProcessor haplotypeProcessor = new HaplotypeProcessor(columns[0]);
 		System.out.println(columns[0]);
 		
-		// frequency totals up to 1.0000
+		// first line for frequency total
 		freqTotal = new BigDecimal(columns[1]);
 		
 		// resolution of the total frequencies & target frequency
 //		int scale = 4;
 //		BigDecimal targetFrequency = new BigDecimal(1)
 //				.setScale(scale, BigDecimal.ROUND_HALF_UP);
-		BigDecimal targetFrequency = new BigDecimal(1.01);
-
+		BigDecimal targetFrequency = new BigDecimal(1.0);
+		BigDecimal maxFrequency = new BigDecimal(1.01);
+		
 		// read through the file, consolodate the data for checking
 		while ((row = reader.readLine()) != null) 
 		{
-			// counter starting on line 3
-			int i = 3;
-			
 			// break the row down into useable pieces
 			columns = row.split(",");
 			String haplotype = columns[0];			
@@ -99,13 +99,11 @@ public class DataChecks {
 			if (!haplotypeProcessor.checkLoci(haplotype))
 			{
 				flag = false;
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("Line " + i + " contains different loci than line 2"), Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				haplotypeLineErrors.add(i);
 			}
 
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
-//			System.out.println("While-loop frequency total: " + freqTotal);
 
 			i++;
 		}
@@ -121,13 +119,14 @@ public class DataChecks {
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
+		// if frequency over 1.0, but under 1.01, give warning
 		// if frequencies less than 0, give warning
-		else if (freqTotal.compareTo(targetFrequency) < 0)
+		else if (freqTotal.compareTo(targetFrequency) < 0 || freqTotal.compareTo(maxFrequency) < 0)
 		{
 //			flag = false;
 			warningCodeList.add(2);
 		}
-		// if frequencies greater than 0, give error
+		// if frequencies greater than 1.01, give error
 		else
 		{
 			flag = false;
@@ -164,20 +163,23 @@ public class DataChecks {
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				
+				// frequency total error
 				if (x == 2)
 				{
 					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
 				}
+				
+				// haplotype consistency error
+				if (x == 9)
+				{
+					haplotypeProcessor.printOutErrors(haplotypeLineErrors);
+				}
 			}
 		}
 
 		return flag;
-	}
-	
-	public BigDecimal getTotal()
-	{
-		return freqTotal;
 	}
 }

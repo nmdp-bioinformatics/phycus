@@ -9,6 +9,7 @@ import org.dash.freq.model.Population;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
+import java.awt.Color;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.dash.freq.view.AppendText;
+import org.dash.freq.view.PhycusGui;
 
 
 

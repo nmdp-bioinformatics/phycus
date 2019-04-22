@@ -148,6 +148,11 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			// if the header and data both check out, post the data
 			if (headerFlag && dataFlag)
 			{
+				// visual feedback
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Uploading data. (For large data sets this may take a little while.)", Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				
+				// upload data
 				postPopulationFrequencies(reader(inputFile), headers);
 				return 1;
 			} 

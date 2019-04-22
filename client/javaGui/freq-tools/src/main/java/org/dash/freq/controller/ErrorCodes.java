@@ -36,7 +36,7 @@ public class ErrorCodes {
 
 	// error and warning printing in DataChecks.java
 	
-	static public TreeMap<Integer, String> ErrorList() {
+	static public TreeMap<Integer, String> errorList() {
 		TreeMap<Integer, String> errorCodes = new TreeMap<Integer, String>();
 
 		errorCodes.put(2, "Haplotype frequency is greater than 1.01");
@@ -54,7 +54,7 @@ public class ErrorCodes {
 		return errorCodes;
 	}
 	
-	static public TreeMap<Integer, String> WarningList() {
+	static public TreeMap<Integer, String> warningList() {
 		TreeMap<Integer, String> warningCodes = new TreeMap<Integer, String>();
 
 		warningCodes.put(2, "Haplotype frequencies do not total 1.00");
@@ -70,5 +70,14 @@ public class ErrorCodes {
 		// errorCodes.put(, )
 		
 		return warningCodes;
+	}
+	
+	static public TreeMap<Integer, String> haplotypeErrorList() {
+		TreeMap<Integer, String> haplotypeErrorCodes = new TreeMap<Integer, String>();
+
+		haplotypeErrorCodes.put(1, ": the loci in line 2 are different than the loci in line ");
+		haplotypeErrorCodes.put(2, ": there is an error in the haplotype in line ");
+
+		return haplotypeErrorCodes;
 	}
 }

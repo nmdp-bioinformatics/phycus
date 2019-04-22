@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
 
@@ -25,19 +26,18 @@ public class HaplotypeProcessor {
 	{
 		// break haplotypes down to individual loci
 		String[] firstHaplotypes = firstHaplotypeLine.split("~");
-		System.out.println(firstHaplotypes);
+//		System.out.println(firstHaplotypes);
 
 		// add individual loci to haplotype template
 		for (String locus:firstHaplotypes)
 		{
 			String[] locusName = locus.split("\\*");
-			System.out.println(locus);
+//			System.out.println(locus);
 			haplotypeTemplate.add(locusName[0]);
 		}
 		
 		// sort loci alphabetically
 		Collections.sort(haplotypeTemplate);
-		System.out.println(haplotypeTemplate);
 	}
 	
 	// make sure all same loci are present in each haplotype
@@ -73,41 +73,62 @@ public class HaplotypeProcessor {
 	{
 		boolean astTilFlag = false;
 		
+		int asteriks = StringUtils.countMatches(currentLoci, '*');
+		System.out.println(asteriks);
+		int tildas = StringUtils.countMatches(currentLoci, '~');
+		System.out.println(tildas);
+
+		
+		// there should be one more asterisk than tilda
+		if (asteriks == (tildas + 1)) 
+		{
+			astTilFlag = true;
+		}
+		
 		return astTilFlag;
 	}
 	
-	public void printOutErrors (List<Integer> errorLineNumbers)
+	public void printOutErrors (ArrayList<String> errorLineNumbers)
 	{
-		// if there are one or two errors list them
-		if(errorLineNumbers.size() <= 2)
+		// how many errors listed for non-verbose reporting
+		int errorCounter = 5;
+		
+		// if there are "errorCounter" or fewer errors list them
+		if(errorLineNumbers.size() <= errorCounter)
 		{
-			for (int lineError:errorLineNumbers)
+			for (String lineError:errorLineNumbers)
 			{
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + lineError + ": the loci in line 2 are different than the loci in line " + lineError), Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
+				haplotypeErrorParser(lineError);
 			}
 		}
 		
 		// otherwise list some and message that there are more
 		else
 		{
-			int errorCounter = 2;
 			int listCursor = 0;
 		
 			while (errorCounter > 0)
 			{
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + errorLineNumbers.get(listCursor) + ": the loci in line 2 are different than the loci in line " + errorLineNumbers.get(listCursor)), Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				haplotypeErrorParser(errorLineNumbers.get(listCursor));
+				
 				errorCounter--;
 				listCursor++;
 			}
 			
 			// plus anything over 5
-			int remainingErrors = errorLineNumbers.size() - 2;
+			int remainingErrors = errorLineNumbers.size() - errorCounter;
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Plus " + remainingErrors + " more"), Color.RED);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
+	}
+	
+	public void haplotypeErrorParser(String errorLine)
+	{
+		// split the error line and print it out
+		String[] parsedError = errorLine.split(":");
+		
+		AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + parsedError[0] + ErrorCodes.haplotypeErrorList().get(Integer.parseInt(parsedError[1])) + parsedError[0]), Color.RED);
+		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 	}
 }
 

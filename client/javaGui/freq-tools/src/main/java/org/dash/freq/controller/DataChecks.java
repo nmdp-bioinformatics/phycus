@@ -58,10 +58,11 @@ public class DataChecks {
 		// allows line numbers for errors to be tracked
 		int i = 3;
 		
-		// collect haplotype line errors, we will list the first 10
+		// collect haplotype line errors, 
+		// we will list the first 2 errors outside of verbose reporting
 		// this is to prevent showing 3000 errors if the first haplotype has an
 		// error
-		List<Integer> haplotypeLineErrors = new ArrayList();
+		ArrayList<String> haplotypeLineErrorsMismatch = new ArrayList();
 
 		// skip header line
 		row = reader.readLine();
@@ -74,16 +75,20 @@ public class DataChecks {
 		columns = row.split(",");
 
 		// first line for haplotype template
-		HaplotypeProcessor haplotypeProcessor = new HaplotypeProcessor(columns[0]);
+		HaplotypeProcessor haplotypeProcessor = new HaplotypeProcessor(columns[0]);		
 		System.out.println(columns[0]);
+		
+		// check for missing tildas in first haplotype
+		if (!haplotypeProcessor.asteriksAndTildas(columns[0]))
+		{
+			flag = false;
+			haplotypeLineErrorsMismatch.add("2:2");
+		}
 		
 		// first line for frequency total
 		freqTotal = new BigDecimal(columns[1]);
 		
 		// resolution of the total frequencies & target frequency
-//		int scale = 4;
-//		BigDecimal targetFrequency = new BigDecimal(1)
-//				.setScale(scale, BigDecimal.ROUND_HALF_UP);
 		BigDecimal targetFrequency = new BigDecimal(1.0);
 		BigDecimal maxFrequency = new BigDecimal(1.01);
 		
@@ -99,9 +104,16 @@ public class DataChecks {
 			if (!haplotypeProcessor.checkLoci(haplotype))
 			{
 				flag = false;
-				haplotypeLineErrors.add(i);
+				haplotypeLineErrorsMismatch.add(i + ":" + 1);
 			}
 
+			// checking for missing tildas: A*01:01gA*01:01g
+			if (!haplotypeProcessor.asteriksAndTildas(haplotype))
+			{
+				flag = false;
+				haplotypeLineErrorsMismatch.add(i + ":" + 2);
+			}
+			
 			// add the current line's frequency to the total frequency
 			freqTotal = frequency.add(freqTotal);
 
@@ -138,10 +150,10 @@ public class DataChecks {
 		{
 			for (int x:warningCodeList)
 			{
-				System.out.println("* " + ErrorCodes.WarningList().get(x));
+				System.out.println("* " + ErrorCodes.warningList().get(x));
 				AppendText.appendToPane(PhycusGui.outputTextPane, "Warnings: ", Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.WarningList().get(x), Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.warningList().get(x), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				if (x == 2)
 				{
@@ -156,12 +168,14 @@ public class DataChecks {
 		// if there are errors, print out the errors to the gui
 		if (!errorCodeList.isEmpty()) 
 		{
+			AppendText.appendToPane(PhycusGui.outputTextPane, "Errors: ", Color.RED);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				
 			for (int x:errorCodeList)
 			{
-				System.out.println("* " + ErrorCodes.ErrorList().get(x));
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Errors: ", Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.ErrorList().get(x), Color.RED);
+				System.out.println("* " + ErrorCodes.errorList().get(x));
+
+				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.errorList().get(x), Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				
 				// frequency total error
@@ -175,7 +189,7 @@ public class DataChecks {
 				// haplotype consistency error
 				if (x == 9)
 				{
-					haplotypeProcessor.printOutErrors(haplotypeLineErrors);
+					haplotypeProcessor.printOutErrors(haplotypeLineErrorsMismatch);
 				}
 			}
 		}

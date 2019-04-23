@@ -75,8 +75,8 @@ public class ErrorCodes {
 	static public TreeMap<Integer, String> haplotypeErrorList() {
 		TreeMap<Integer, String> haplotypeErrorCodes = new TreeMap<Integer, String>();
 
-		haplotypeErrorCodes.put(1, ": the loci in line 2 are different than the loci in line ");
-		haplotypeErrorCodes.put(2, ": there is an error in the haplotype in line ");
+		haplotypeErrorCodes.put(1, ": the loci in line 2 are different than the loci on line ");
+		haplotypeErrorCodes.put(2, ": there is an error in the haplotype on line ");
 
 		return haplotypeErrorCodes;
 	}

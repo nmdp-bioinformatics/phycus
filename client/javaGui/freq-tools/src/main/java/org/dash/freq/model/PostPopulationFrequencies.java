@@ -148,11 +148,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			// if the header and data both check out, post the data
 			if (headerFlag && dataFlag)
 			{
-				// visual feedback
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Uploading data. (For large data sets this may take a little while.)", Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				
-				// upload data
 				postPopulationFrequencies(reader(inputFile), headers);
 				return 1;
 			} 
@@ -261,7 +256,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			System.out.println("Submitting frequencies for population: " + selectedPopulation.getName());
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Submitting frequencies for population: " + selectedPopulation.getName(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-		
+			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
 		}		
 	}

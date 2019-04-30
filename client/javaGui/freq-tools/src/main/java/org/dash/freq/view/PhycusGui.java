@@ -38,7 +38,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	private boolean folder = false;
 	private final PopulationList popList = new PopulationList();
 	private final Population population = new Population();
-	private Runnable r = new Runnable() 
+	private Runnable getPops = new Runnable() 
 			{
 				public void run() {
 					populations = population.getPopulationsFromDB();
@@ -54,7 +54,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	public PhycusGui() 
 	{
 		initComponents();
-//		new Thread(r).start();
+//		new Thread(getPops).start();
 	}
 
 	/**
@@ -806,7 +806,7 @@ public class PhycusGui extends javax.swing.JFrame {
 				popResultsTextPane.setText("");
 				
 				// redownload db in background
-				new Thread(r).start();
+				new Thread(getPops).start();
 				
 				// clear search bar
 				popSearchTextField.setText("");
@@ -845,7 +845,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			popResultsTextPane.setText("");
 			
 			// populate text pane
-			new Thread(r).start();
+			new Thread(getPops).start();
 		}
     }//GEN-LAST:event_jTabbedPane1StateChanged
 

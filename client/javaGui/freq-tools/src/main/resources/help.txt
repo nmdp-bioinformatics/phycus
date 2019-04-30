@@ -64,14 +64,14 @@ For more information, see [here](https://creativecommons.org/share-your-work/lic
 The resolution is an optional header element describing the resolution of the allele names in the haplotypes. There are 9 resolution options (described below). If specified, the resolution must exactly match one of the following options:
 
 - G: G-groups. HLA alleles that have identical nucleotide sequences across the exons encoding the peptide binding domains form a G group. See: [http://hla.alleles.org/alleles/g_groups.html](http://hla.alleles.org/alleles/g_groups.html)
-- P: P-Groups. HLA alleles encoding the same antigen recognition domain form a P group. Null alleles are excluded from P groups. See: (http://hla.alleles.org/alleles/p_groups.html)
-- gNMDP: "Little g group", NMDP standard. HLA alleles described at the protein level that have identical nucleotide sequences across the exons encoding the peptide binding domains form a g-group. See: (https://doi.org/10.1016/j.humimm.2013.06.025)
-- gDKMS: "Little g group", DKMS standard. HLA alleles encoding the same antigen recognition domain, including Null alleles, form a g-group. See: (https://doi.org/10.1016/j.humimm.2009.08.006)
-- 1-Field: 1 field allele names. Alleles are described using only the first field of an allele name. See: (http://hla.alleles.org/nomenclature/naming.html)
+- P: P-Groups. HLA alleles encoding the same antigen recognition domain form a P group. Null alleles are excluded from P groups. See: [http://hla.alleles.org/alleles/p_groups.html](http://hla.alleles.org/alleles/p_groups.html)
+- gNMDP: "Little g group", NMDP standard. HLA alleles described at the protein level that have identical nucleotide sequences across the exons encoding the peptide binding domains form a g-group. See: [https://doi.org/10.1016/j.humimm.2013.06.025](https://doi.org/10.1016/j.humimm.2013.06.025)
+- gDKMS: "Little g group", DKMS standard. HLA alleles encoding the same antigen recognition domain, including Null alleles, form a g-group. See: [https://doi.org/10.1016/j.humimm.2009.08.006](https://doi.org/10.1016/j.humimm.2009.08.006)
+- 1-Field: 1 field allele names. Alleles are described using only the first field of an allele name. See: [http://hla.alleles.org/nomenclature/naming.html](http://hla.alleles.org/nomenclature/naming.html)
 - 2-Field: 2 field allele names. Alleles are described using only the first two fields of an allele name. 
 - 3-Field: 3 field allele names. Alleles are described using only the first three fields (where possible) of an allele name. 
 - 4-Field: 4 field allele names. Alleles are described using all four fields (where possible) of an allele name. 
-- Serology: Serological allele names. Alleles are described using serological equivalents only. See: (https://doi.org/10.1111/j.1399-0039.2008.01183.x)
+- Serology: Serological allele names. Alleles are described using serological equivalents only. See: [https://doi.org/10.1111/j.1399-0039.2008.01183.x](https://doi.org/10.1111/j.1399-0039.2008.01183.x)
 
 [back](#top)
 

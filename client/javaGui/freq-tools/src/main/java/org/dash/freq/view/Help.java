@@ -40,7 +40,10 @@ public class Help {
 			// convert that file into a string
 			helpText = new String(Files.readAllBytes(filePath));
 			
+			// add heading anchor extension to the parser
 			List<Extension> extensions = Arrays.asList(HeadingAnchorExtension.create());
+			
+			// build the parser and renderer
 			Parser parser = Parser.builder()
 					.extensions(extensions)
 					.build();
@@ -48,6 +51,7 @@ public class Help {
 					.extensions(extensions)
 					.build();
 			
+			// parse and render the document
 			Node document = parser.parse(helpText);
 			parsedText = renderer.render(document);
 		} 

@@ -10,7 +10,6 @@ import org.dash.freq.model.Population;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
 import java.awt.Color;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;

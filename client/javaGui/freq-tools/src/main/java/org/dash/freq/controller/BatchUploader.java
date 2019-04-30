@@ -21,10 +21,8 @@ import org.dash.freq.view.PhycusGui;
  */
 public class BatchUploader {
 	
-//	public Preferences prefs = Preferences.node("/org/dash/freq/view/");
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	private String gtRegistry;
-//	private static String estEntity;
 	private String estEntity = prefs.get("PHY_EST_ENTITY", null);
 	private PostPopulationFrequencies ppf;
 	
@@ -36,6 +34,8 @@ public class BatchUploader {
 	public void uploadFiles(String folder)
 	{
 		File dir = new File(folder);
+		
+		// track unprocessed files
 		TreeMap<String, Boolean> processedFiles = new TreeMap<String, Boolean>();
 		Boolean flag = false;
 		
@@ -64,20 +64,18 @@ public class BatchUploader {
 				}
 			}
 			
+			// print out list of files that did not upload header
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Files uploaded: ", Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, "Files not uploaded: ", Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
+			// cycle through list of file, print files that didn't upload
 			for(Map.Entry<String,Boolean> entry : processedFiles.entrySet()) {
-				if (entry.getValue()) 
+				if (!entry.getValue()) 
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.BLUE);
+					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.RED);
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				}
-				String key = entry.getKey();
-				Boolean value = entry.getValue();
-
-				System.out.println(key + " => " + value);
 			}
 		} catch (Exception e) 
 		{

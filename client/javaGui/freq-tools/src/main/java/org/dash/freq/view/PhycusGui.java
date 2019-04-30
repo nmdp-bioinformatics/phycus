@@ -570,8 +570,10 @@ public class PhycusGui extends javax.swing.JFrame {
         {	
 			if (!fileLocationTextArea.getText().isEmpty())
 			{
+				// for a single file
 				if (folder == false)
 				{
+					// reset TextPane
 					outputTextPane.setText("");
 					
 					// list file name
@@ -584,9 +586,13 @@ public class PhycusGui extends javax.swing.JFrame {
 					ppf.setFile(selectedFile);
 					ppf.call();
 				}
+				// for multiple files
 				else if (folder == true)
 				{
+					// reset TextPane
 					outputTextPane.setText("");
+					
+					// run batch job in background so TextPane updates
 					Runnable batchUpload = new Runnable() 
 					{
 						public void run() {

@@ -38,6 +38,8 @@ public class PhycusGui extends javax.swing.JFrame {
 	private boolean folder = false;
 	private final PopulationList popList = new PopulationList();
 	private final Population population = new Population();
+	
+	// used in multiple listeners
 	private Runnable getPops = new Runnable() 
 			{
 				public void run() {
@@ -54,7 +56,6 @@ public class PhycusGui extends javax.swing.JFrame {
 	public PhycusGui() 
 	{
 		initComponents();
-//		new Thread(getPops).start();
 	}
 
 	/**
@@ -80,14 +81,14 @@ public class PhycusGui extends javax.swing.JFrame {
         uploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         fileLocationTextArea = new javax.swing.JTextArea();
-        uploadButton = new javax.swing.JButton();
+        mainUploadButton = new javax.swing.JButton();
         CsvNotificationLabel = new javax.swing.JLabel();
         SelectFilePanel = new javax.swing.JPanel();
         fileOpenButton = new javax.swing.JButton();
         jRBFile = new javax.swing.JRadioButton();
         jRBFolder = new javax.swing.JRadioButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        cancelButton = new javax.swing.JButton();
+        mainCancelButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         outputTextPane = new javax.swing.JTextPane();
         licenseComboBox = new javax.swing.JComboBox<>();
@@ -212,10 +213,10 @@ public class PhycusGui extends javax.swing.JFrame {
         fileLocationTextArea.setOpaque(false);
         jScrollPane1.setViewportView(fileLocationTextArea);
 
-        uploadButton.setText("Upload");
-        uploadButton.addActionListener(new java.awt.event.ActionListener() {
+        mainUploadButton.setText("Upload");
+        mainUploadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadButtonActionPerformed(evt);
+                mainUploadButtonActionPerformed(evt);
             }
         });
 
@@ -281,10 +282,10 @@ public class PhycusGui extends javax.swing.JFrame {
         SelectFilePanel.add(jRBFolder, gridBagConstraints);
         SelectFilePanel.add(filler1, new java.awt.GridBagConstraints());
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        mainCancelButton.setText("Cancel");
+        mainCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                mainCancelButtonActionPerformed(evt);
             }
         });
 
@@ -329,9 +330,9 @@ public class PhycusGui extends javax.swing.JFrame {
             uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, uploadFilesPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainUploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(206, 206, 206))
             .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -390,8 +391,8 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
-                    .addComponent(uploadButton))
+                    .addComponent(mainCancelButton)
+                    .addComponent(mainUploadButton))
                 .addContainerGap())
         );
 
@@ -565,7 +566,7 @@ public class PhycusGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fileOpenButtonActionPerformed
 
-    private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
+    private void mainUploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUploadButtonActionPerformed
         try
         {	
 			if (!fileLocationTextArea.getText().isEmpty())
@@ -616,11 +617,11 @@ public class PhycusGui extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-    }//GEN-LAST:event_uploadButtonActionPerformed
+    }//GEN-LAST:event_mainUploadButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void mainCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCancelButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_mainCancelButtonActionPerformed
 
     private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
 		setFile();   // see below
@@ -935,7 +936,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton OptionsEstEntityButton;
     private javax.swing.JLabel OptionsEstEntityLabel;
     private javax.swing.JPanel SelectFilePanel;
-    private javax.swing.JButton cancelButton;
     private javax.swing.JButton estEntityCloseButton;
     private javax.swing.JButton estEntityEnterButton;
     private javax.swing.JLabel estEntityInstructions1;
@@ -959,6 +959,8 @@ public class PhycusGui extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> licenseComboBox;
     private javax.swing.JLabel licenseHelpIcon;
     private javax.swing.JLabel licenseLabel;
+    private javax.swing.JButton mainCancelButton;
+    private javax.swing.JButton mainUploadButton;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton popCancelButton;
     private javax.swing.JButton popCreateButton;
@@ -970,7 +972,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JTextField popSearchTextField;
     public static javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
-    private javax.swing.JButton uploadButton;
     private javax.swing.JPanel uploadFilesPanel;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables

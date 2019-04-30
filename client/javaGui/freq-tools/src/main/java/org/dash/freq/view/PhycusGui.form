@@ -184,9 +184,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="uploadButton" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="mainUploadButton" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="cancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="mainCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -262,8 +262,8 @@
                       <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="uploadButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mainCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="mainUploadButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -304,12 +304,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="uploadButton">
+            <Component class="javax.swing.JButton" name="mainUploadButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Upload"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uploadButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainUploadButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="CsvNotificationLabel">
@@ -393,12 +393,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="cancelButton">
+            <Component class="javax.swing.JButton" name="mainCancelButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainCancelButtonActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">

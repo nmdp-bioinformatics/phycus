@@ -604,6 +604,8 @@ public class PhycusGui extends javax.swing.JFrame {
 					new Thread(batchUpload).start();
 				}
 			}
+			
+			// make sure there is a file selected to prevent crashes
 			else 
 			{
 				outputTextPane.setText("");
@@ -631,6 +633,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private void licenseHelpIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_licenseHelpIconMouseClicked
 		try {
 			URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
+			
+			// method listed below
 			openWebpage(licenseTypes);
 		} catch (Exception ex) {
             System.out.println(ex);
@@ -646,10 +650,28 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_estEntityCloseButtonActionPerformed
 
     private void estEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estEntityEnterButtonActionPerformed
-		prefs.put("PHY_EST_ENTITY", estEntityTextField.getText());
-		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
-		EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "blank"));
-		estEntityPopupFrame.setVisible(false);
+		
+		// if no Est Entity is listed
+		if(estEntityTextField.getText().isEmpty())
+		{
+			// show error
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("Someone had to process this data, please list an indentifier"),
+				"This cannot be blank",
+				javax.swing.JOptionPane.ERROR_MESSAGE);
+		} 
+		else 
+		{
+			// save the Estimation entity in the preferences
+			prefs.put("PHY_EST_ENTITY", estEntityTextField.getText());
+			System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
+			
+			// set the label on the GUI
+			EstEntityLabelCode.setText(prefs.get("PHY_EST_ENTITY", "blank"));
+			
+			// hide the window
+			estEntityPopupFrame.setVisible(false);
+		}
     }//GEN-LAST:event_estEntityEnterButtonActionPerformed
 
     private void OptionsEstEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsEstEntityButtonActionPerformed
@@ -677,17 +699,16 @@ public class PhycusGui extends javax.swing.JFrame {
 			if (desc == null || !desc.startsWith("#"))
 			{
 				try {
-					// opens only this URL. Need to read the actual link to open others
-					// Set this way because of time crunch
-					URI licenseTypes = new URI("https://creativecommons.org/share-your-work/licensing-types-examples/");
-					openWebpage(licenseTypes);
+					// get the uri from the description and open the page
+					URI helpUri = new URI(desc);
+					openWebpage(helpUri);
 				} catch (Exception ex){System.out.println(ex);}
 			}
 			
 			// select the first substring (ideally only substring), name
 			desc = desc.substring(1);
 			
-			// got to the anchor
+			// go to the anchor
 			helpEditorPane.scrollToReference(desc);
         }
     }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate

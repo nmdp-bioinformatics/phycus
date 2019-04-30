@@ -64,7 +64,7 @@ public class BatchUploader {
 				}
 			}
 			
-			// print out list of files that did not upload header
+			// print out header for list of files that did not upload
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, "Files not uploaded: ", Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);

@@ -617,12 +617,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="OptionsEstEntityLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="OptionsEstEntityButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="310" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="OptionsEstEntityLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="OptionsEstEntityButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="verboseCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="320" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -634,7 +639,9 @@
                           <Component id="OptionsEstEntityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="OptionsEstEntityButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="531" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="verboseCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="540" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -651,6 +658,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OptionsEstEntityButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="verboseCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Verbose error reporting"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="verboseCheckBoxItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verboseCheckBoxActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

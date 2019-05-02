@@ -9,6 +9,7 @@ import io.swagger.client.model.PopulationData;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -109,6 +110,7 @@ public class PhycusGui extends javax.swing.JFrame {
         settingsPanel = new javax.swing.JPanel();
         OptionsEstEntityLabel = new javax.swing.JLabel();
         OptionsEstEntityButton = new javax.swing.JButton();
+        verboseCheckBox = new javax.swing.JCheckBox();
         helpPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
@@ -484,16 +486,31 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        verboseCheckBox.setText("Verbose error reporting");
+        verboseCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                verboseCheckBoxItemStateChanged(evt);
+            }
+        });
+        verboseCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verboseCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(OptionsEstEntityLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OptionsEstEntityButton)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(OptionsEstEntityLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OptionsEstEntityButton))
+                    .addComponent(verboseCheckBox))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,7 +519,9 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OptionsEstEntityLabel)
                     .addComponent(OptionsEstEntityButton))
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(verboseCheckBox)
+                .addContainerGap(540, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Options", settingsPanel);
@@ -657,7 +676,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			// show error
 			javax.swing.JOptionPane.showMessageDialog(this,
-				("Someone had to process this data, please list an indentifier"),
+				("Please list an indentifier"),
 				"This cannot be blank",
 				javax.swing.JOptionPane.ERROR_MESSAGE);
 		} 
@@ -850,6 +869,17 @@ public class PhycusGui extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
+    private void verboseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verboseCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verboseCheckBoxActionPerformed
+
+    private void verboseCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_verboseCheckBoxItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+		{
+			
+		}
+    }//GEN-LAST:event_verboseCheckBoxItemStateChanged
+
 	// open links to external browser
 	public static void openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
@@ -973,6 +1003,7 @@ public class PhycusGui extends javax.swing.JFrame {
     public static javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
+    private javax.swing.JCheckBox verboseCheckBox;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

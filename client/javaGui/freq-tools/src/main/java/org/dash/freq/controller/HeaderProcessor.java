@@ -9,11 +9,9 @@ import org.dash.freq.model.Population;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,9 +42,11 @@ public class HeaderProcessor {
 
 	public HeaderProcessor()
 	{
+		// set for accepted license and resolution types
 		this.licenses = new HashSet(Arrays.asList(licenseTypes));
 		this.resolutions = new HashSet(Arrays.asList(resolutionTypes));
 		
+		// set of populations pulled from db
 		Population population = new Population();
 		List<PopulationData> populations = population.getPopulationsFromDB();
 		this.populationNames = new HashSet(population.getPopulationNames(populations));
@@ -61,7 +61,9 @@ public class HeaderProcessor {
 		String[] attributes;
 		TreeMap<String, String> headerContent = new TreeMap<>();
 		
-		// flags
+		// flags - Set of flags for all attributes
+		// done this way because some of the header attributes are optional
+		// and may or may not have errors if present
 		Set<String> flags = new HashSet<>();
 		boolean flag = true;
 		
@@ -73,17 +75,19 @@ public class HeaderProcessor {
 		for(int i = 0; i < attributes.length; i++)
 		{
 			String[] parsedAtt = parseAttribute(attributes[i]);
+			
+			// store all the attributes in the treemap
 			headerContent.put(parsedAtt[0], parsedAtt[1]);
 		}
 		
-		// check population
+		// check for population - mandatory
 		if (headerContent.containsKey("pop")) 
 		{
 			flags.add(checkPop(headerContent.get("pop").toString(), errorCodeList));
 		}
 		else errorCodeList.add(4);
 			
-		// check cohort
+		// check for cohort - mandatory
 		if (headerContent.containsKey("cohort")) 
 		{
 			flags.add(checkCohort(headerContent.get("cohort"), errorCodeList));
@@ -100,9 +104,13 @@ public class HeaderProcessor {
 			System.out.println("resolution: " + headerContent.get("resolution"));
 			flags.add(checkResolutionType(headerContent.get("resolution").toString(), errorCodeList));
 		
-		// return pass/fail data in headerContent
+		// if any of the headers have errors, set flag to false
 		if (flags.contains("false")) flag = false;
-		headerContent.put("flag", String.valueOf(flag));		
+		
+		// add flag to header content TreeMap so that DataChecks.java knows
+		// if it needs to print out errors
+		headerContent.put("flag", String.valueOf(flag));
+		
 		return headerContent;
 	}
 	
@@ -127,6 +135,7 @@ public class HeaderProcessor {
 	{
 		boolean flag = false;
 		
+		// does the population already exist in the db?
 		if (populationNames.contains(popValue)) flag = true;
 		else errorCodeList.add(3);
 		
@@ -151,6 +160,7 @@ public class HeaderProcessor {
 	{
 		boolean flag = false;
 		
+		// does the license match one of the accepted license types?
 		if (licenses.contains(selectedLicense)) flag = true;
 		else errorCodeList.add(7);
 		
@@ -161,6 +171,7 @@ public class HeaderProcessor {
 	{
 		boolean flag = false;
 		
+		// does the resolution match one of the accepted resolution types?
 		if (resolutions.contains(selectedResolution)) flag = true;
 		else errorCodeList.add(8);
 		

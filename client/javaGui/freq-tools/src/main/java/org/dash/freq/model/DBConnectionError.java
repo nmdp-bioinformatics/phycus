@@ -20,9 +20,8 @@ public class DBConnectionError extends Exception {
 		super("Can't connect to the database");
 		
 		// population pane error
-//		PhycusGui.popResultsTextPane.setText("");
-		AppendText.appendToPane(PhycusGui.popResultsTextPane, "Cannot connect to the database", Color.RED);
-		AppendText.appendToPane(PhycusGui.popResultsTextPane, System.lineSeparator(), Color.BLACK);
+		AppendText.appendToPane(PhycusGui.popNotificationsTextPane, "Cannot connect to the database", Color.RED);
+		AppendText.appendToPane(PhycusGui.popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 	
 		// main upload pane error
 		AppendText.appendToPane(PhycusGui.outputTextPane, "Cannot connect to the database", Color.RED);

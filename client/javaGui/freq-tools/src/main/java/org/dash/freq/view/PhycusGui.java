@@ -48,8 +48,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		public void run() {
 			
 			try {populations = population.getPopulationsFromDB();}
-			catch (Exception ex){ ex.printStackTrace();}
-			
+			catch (Exception ex){ ex.printStackTrace(); }
 			popList.updatePopulation("", populations);
 		}
 	};
@@ -822,24 +821,28 @@ public class PhycusGui extends javax.swing.JFrame {
 			catch (Exception ex) 
 			{
 				System.out.println(ex);
+				popFlag = false;
+				
 				javax.swing.JOptionPane.showMessageDialog(this,
 					("The population was not created\n" + ex),
 					"Houston, we have a problem",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
+			if (popFlag)
+			{
+				// notify that new pop has been created
+				AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
+				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 
-			// notify that new pop has been created
-			AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
-			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+				// clear pop textpane
+				popResultsTextPane.setText("");
 
-			// clear pop textpane
-			popResultsTextPane.setText("");
+				// redownload db in background
+				new Thread(getPops).start();
 
-			// redownload db in background
-			new Thread(getPops).start();
-
-			// clear search bar
-			popSearchTextField.setText("");
+				// clear search bar
+				popSearchTextField.setText("");
+			}
 		}
 		else
 		{

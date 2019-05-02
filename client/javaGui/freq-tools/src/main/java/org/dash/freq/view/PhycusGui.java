@@ -5,7 +5,9 @@
  */
 package org.dash.freq.view;
 
+import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
+
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -42,12 +44,15 @@ public class PhycusGui extends javax.swing.JFrame {
 	
 	// used in multiple listeners
 	private Runnable getPops = new Runnable() 
-			{
-				public void run() {
-					populations = population.getPopulationsFromDB();
-					popList.updatePopulation("", populations);
-				}
-			};
+	{
+		public void run() {
+			
+			try {populations = population.getPopulationsFromDB();}
+			catch (Exception ex){ ex.printStackTrace();}
+			
+			popList.updatePopulation("", populations);
+		}
+	};
 	
 	// initially populated when program open population tab
 	private List<PopulationData> populations;
@@ -813,22 +818,8 @@ public class PhycusGui extends javax.swing.JFrame {
 			{ 
 				// create new population in db
 				population.createNewPopulation(popSearchName, popSearchDescription);
-				
-				// notify that new pop has been created
-				AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
-				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-				
-				// clear pop textpane
-				popResultsTextPane.setText("");
-				
-				// redownload db in background
-				new Thread(getPops).start();
-				
-				// clear search bar
-				popSearchTextField.setText("");
-				
 			} 
-			catch (Exception ex)
+			catch (Exception ex) 
 			{
 				System.out.println(ex);
 				javax.swing.JOptionPane.showMessageDialog(this,
@@ -836,6 +827,19 @@ public class PhycusGui extends javax.swing.JFrame {
 					"Houston, we have a problem",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
+
+			// notify that new pop has been created
+			AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+			// clear pop textpane
+			popResultsTextPane.setText("");
+
+			// redownload db in background
+			new Thread(getPops).start();
+
+			// clear search bar
+			popSearchTextField.setText("");
 		}
 		else
 		{
@@ -859,6 +863,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		if (selectedIndex == popTabIndex){
 			// clear pop textpane
 			popResultsTextPane.setText("");
+			AppendText.appendToPane(PhycusGui.popResultsTextPane, "Please wait", Color.BLACK);
+			AppendText.appendToPane(PhycusGui.popResultsTextPane, System.lineSeparator(), Color.BLACK);
 			
 			// populate text pane
 			new Thread(getPops).start();

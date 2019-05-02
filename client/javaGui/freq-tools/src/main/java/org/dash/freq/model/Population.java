@@ -6,6 +6,7 @@
 package org.dash.freq.model;
 
 import io.swagger.client.ApiClient;
+import io.swagger.client.ApiException;
 import io.swagger.client.api.DefaultApi;
 import io.swagger.client.api.PopulationApi;
 import io.swagger.client.model.HFCurationRequest;
@@ -13,7 +14,9 @@ import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import io.swagger.client.model.PopulationResponse;
 import java.awt.Color;
+import java.io.IOException;
 
+import java.net.ConnectException;
 import java.net.URL;
 
 import java.util.ArrayList;
@@ -55,7 +58,8 @@ public class Population
 		catch (Exception ex) { System.out.println(ex); }
 	}
 	
-	public List<PopulationData> getPopulationsFromDB()
+	public List<PopulationData> getPopulationsFromDB() throws DBConnectionError
+			
 	{
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
@@ -75,7 +79,7 @@ public class Population
 			System.out.println("retrieved populations");
 
 			System.out.println("popList: " + popList);
-			if (popList == null)
+			if (popList == null || popList.isEmpty())
 			{
 				AppendText.appendToPane(PhycusGui.outputTextPane, "No populations retrieved from the database", Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
@@ -84,7 +88,13 @@ public class Population
 				throw new NullPointerException("No populations retrieved from the database"); 
 			}
 		}
-		catch (Exception ex) { System.out.println(ex); }
+		catch (ApiException ex) 
+		{ 
+			System.out.println(ex); 
+			System.out.println("getPopulationsFromDB"); 
+
+			throw new DBConnectionError();
+		}
 		
 		return popList;
 	}

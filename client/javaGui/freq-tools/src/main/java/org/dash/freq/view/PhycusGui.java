@@ -487,14 +487,14 @@ public class PhycusGui extends javax.swing.JFrame {
         });
 
         verboseCheckBox.setText("Verbose error reporting");
+        verboseCheckBox.setSelected(prefs.getBoolean("PHY_VERBOSE_REPORTING", false));
+        if (verboseCheckBox.isSelected()){
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose error reporting is on", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+        }
         verboseCheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 verboseCheckBoxItemStateChanged(evt);
-            }
-        });
-        verboseCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verboseCheckBoxActionPerformed(evt);
             }
         });
 
@@ -510,7 +510,7 @@ public class PhycusGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(OptionsEstEntityButton))
                     .addComponent(verboseCheckBox))
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,7 +543,7 @@ public class PhycusGui extends javax.swing.JFrame {
         helpPanel.setLayout(helpPanelLayout);
         helpPanelLayout.setHorizontalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
         );
         helpPanelLayout.setVerticalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +564,7 @@ public class PhycusGui extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 624, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
@@ -676,8 +676,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			// show error
 			javax.swing.JOptionPane.showMessageDialog(this,
-				("Please list an indentifier"),
-				"This cannot be blank",
+				("Please list an institution indentifier"),
+				"Houston, we have a problem",
 				javax.swing.JOptionPane.ERROR_MESSAGE);
 		} 
 		else 
@@ -698,7 +698,8 @@ public class PhycusGui extends javax.swing.JFrame {
         
 		// what's there and where is it? Debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
-		try { System.out.println(prefs.node("PHY_EST_ENTITY"));} catch (Exception ex){System.out.println(ex);}
+		try { System.out.println(prefs.node("PHY_EST_ENTITY"));} 
+		catch (Exception ex){System.out.println(ex);}
 		
 		// show Est entity popup
 		estEntityPopupFrame.setVisible(true);
@@ -751,12 +752,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		List<String> popNames = population.getPopulationNames(populations);
 		System.out.println("pop Name: " + popSearchName);
 		
-		// does this name already exist?
-//		if (!populations.exists())
-//		{
-//			popNames = population.getPopulationNames(populations);
-//		}
-		
+		// does this name already exist?		
 		if (popNames.contains(popSearchName))
 		{
 			popFlag = false;
@@ -869,14 +865,22 @@ public class PhycusGui extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void verboseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verboseCheckBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verboseCheckBoxActionPerformed
-
     private void verboseCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_verboseCheckBoxItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED)
+        // add state to preferences
+		prefs.putBoolean("PHY_VERBOSE_REPORTING", verboseCheckBox.isSelected());
+		
+		// notify user when turned on
+		if (verboseCheckBox.isSelected())
 		{
-			
+			AppendText.appendToPane(outputTextPane, "Verbose error reporting is on", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+		
+		// notify user when turned off
+		else
+		{
+			AppendText.appendToPane(outputTextPane, "Verbose error reporting is off", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
     }//GEN-LAST:event_verboseCheckBoxItemStateChanged
 
@@ -1003,7 +1007,7 @@ public class PhycusGui extends javax.swing.JFrame {
     public static javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
-    private javax.swing.JCheckBox verboseCheckBox;
+    public static javax.swing.JCheckBox verboseCheckBox;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

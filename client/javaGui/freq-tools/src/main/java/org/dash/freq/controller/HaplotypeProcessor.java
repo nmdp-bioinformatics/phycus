@@ -90,8 +90,11 @@ public class HaplotypeProcessor {
 	
 	public void printOutErrors (ArrayList<String> errorLineNumbers)
 	{
-		// how many errors listed for non-verbose reporting
-		int errorCounter = 5;
+		// verbose error reporting?
+		boolean verboseState = PhycusGui.verboseCheckBox.isSelected();
+		
+		// how many errors to list for non-verbose reporting
+		int errorCounter = 3;
 		
 		// if there are "errorCounter" or fewer errors list them
 		if(errorLineNumbers.size() <= errorCounter)
@@ -103,7 +106,7 @@ public class HaplotypeProcessor {
 		}
 		
 		// otherwise list some and message that there are more
-		else
+		else if (verboseState == false)
 		{
 			int listCursor = 0;
 		
@@ -119,6 +122,15 @@ public class HaplotypeProcessor {
 			int remainingErrors = errorLineNumbers.size() - errorCounter;
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Plus " + remainingErrors + " more"), Color.RED);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+		
+		// if verbose is true, list all of the errors
+		else if (verboseState == true)
+		{
+			for (String lineError:errorLineNumbers)
+			{
+				haplotypeErrorParser(lineError);
+			}
 		}
 	}
 	

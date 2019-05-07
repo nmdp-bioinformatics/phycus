@@ -59,7 +59,7 @@ public class DataChecks {
 		int i = 3;
 		
 		// collect haplotype line errors, 
-		// we will list the first 2 errors outside of verbose reporting
+		// we will list the first 3 errors outside of verbose reporting
 		// this is to prevent showing 3000 errors if the first haplotype has an
 		// error
 		ArrayList<String> haplotypeLineErrorsMismatch = new ArrayList();
@@ -82,6 +82,12 @@ public class DataChecks {
 		if (!haplotypeProcessor.asteriksAndTildas(columns[0]))
 		{
 			flag = false;
+			
+			// because there can be multiple errors for each line, neither the 
+			// line number nor the error code can be used as the key for a 
+			// hashmap. The first number is the line in question, the second 
+			// number the haplotype error code, and the colon is used as a 
+			// separator when parsed.
 			haplotypeLineErrorsMismatch.add("2:2");
 		}
 		

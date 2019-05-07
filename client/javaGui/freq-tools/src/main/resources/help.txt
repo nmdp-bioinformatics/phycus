@@ -24,7 +24,7 @@ A header example:
 
 > pop=POPULATION_TAG
 
-The population is a mandatory header, and to prevent duplicates, must use a population tag already found in the database. To add a population, please see the Options tab.
+The population is a mandatory header, and to prevent duplicates, must use a population tag already found in the database. To add a population, please see the Populations tab.
 
 [back](#top)
 

@@ -119,10 +119,12 @@ public class HeaderProcessor {
 		// if it needs to print out errors
 		headerContent.put("flag", String.valueOf(flag));
 		
+		
+		
 		return headerContent;
 	}
 	
-	public String[] parseAttribute(String att)
+	private String[] parseAttribute(String att)
 	{
 		// pattern to match and string to check
 		String[] parsedAttribute = new String[2];
@@ -139,7 +141,7 @@ public class HeaderProcessor {
 		return parsedAttribute;
 	}
 	
-	public String checkPop(String popValue, List<Integer> errorCodeList)
+	private String checkPop(String popValue, List<Integer> errorCodeList)
 	{
 		boolean flag = false;
 		
@@ -150,7 +152,7 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	public String checkCohort(String cohortValue, List<Integer> errorCodeList)
+	private String checkCohort(String cohortValue, List<Integer> errorCodeList)
 	{
 		boolean flag = true;
 		
@@ -164,7 +166,7 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	public String checkLicenseType(String selectedLicense, List<Integer> errorCodeList)
+	private String checkLicenseType(String selectedLicense, List<Integer> errorCodeList)
 	{
 		boolean flag = false;
 		
@@ -175,7 +177,7 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	public String checkResolutionType(String selectedResolution, List<Integer> errorCodeList)
+	private String checkResolutionType(String selectedResolution, List<Integer> errorCodeList)
 	{
 		boolean flag = false;
 		
@@ -184,5 +186,11 @@ public class HeaderProcessor {
 		else errorCodeList.add(8);
 		
 		return String.valueOf(flag);
+	}
+	
+	// verbose option, one line per element
+	private void printHeader(TreeMap<String, String> headers, boolean status)
+	{
+		
 	}
 }

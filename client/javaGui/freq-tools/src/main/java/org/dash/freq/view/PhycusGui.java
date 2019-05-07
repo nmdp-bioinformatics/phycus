@@ -490,7 +490,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        verboseCheckBox.setText("Verbose error reporting");
+        verboseCheckBox.setText("Verbose reporting");
         verboseCheckBox.setSelected(prefs.getBoolean("PHY_VERBOSE_REPORTING", false));
         if (verboseCheckBox.isSelected()){
             AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose error reporting is on", Color.BLACK);

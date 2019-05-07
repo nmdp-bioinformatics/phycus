@@ -262,6 +262,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
+			System.out.println(response);
 		}		
 	}
 

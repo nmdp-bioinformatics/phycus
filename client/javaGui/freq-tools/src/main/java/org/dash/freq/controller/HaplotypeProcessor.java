@@ -106,7 +106,7 @@ public class HaplotypeProcessor {
 		}
 		
 		// otherwise list some and message that there are more
-		else if (verboseState == false)
+		else if (!verboseState)
 		{
 			int listCursor = 0;
 		
@@ -125,7 +125,7 @@ public class HaplotypeProcessor {
 		}
 		
 		// if verbose is true, list all of the errors
-		else if (verboseState == true)
+		else
 		{
 			for (String lineError:errorLineNumbers)
 			{

@@ -111,7 +111,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 //		} else {
 //			this.url = url;
 //		}
-		this.populations = population.getPopulationsFromDB();
+
+		try { this.populations = population.getPopulationsFromDB();}
+		catch (Exception ex) { System.out.println(ex); }
 	}
 	public void setFile(File incomingFile)
 	{

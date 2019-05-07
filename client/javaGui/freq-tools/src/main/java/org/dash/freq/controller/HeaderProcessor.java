@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.dash.freq.controller;
 
 import org.dash.freq.model.Population;
@@ -12,16 +8,13 @@ import io.swagger.client.model.PopulationData;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.dash.freq.view.AppendText;
-import org.dash.freq.view.PhycusGui;
-
-
 
 /**
  *
@@ -29,16 +22,16 @@ import org.dash.freq.view.PhycusGui;
  */
 public class HeaderProcessor {
 
-	// license types
+	// license types as designated by the API
 	private final String[] licenseTypes = {"CC0", "BY", "BY_SA", "BY_ND", "BY_NC", "BY_NC_SA", "BY_NC_ND"};
 	private final Set<String> licenses;
 	
-	// resolution types
+	// resolution types as designated by the API
 	private final String[] resolutionTypes = {"G", "P", "gNMDP", "gDKMS", "1-Field", "2-Field", "3-Field", "4-Field", "Serology"};
 	private final Set<String> resolutions;
 	
 	// populations
-	private final Set<String> populationNames;
+	private List<String> populationNames = new ArrayList();
 
 	public HeaderProcessor()
 	{
@@ -48,8 +41,13 @@ public class HeaderProcessor {
 		
 		// set of populations pulled from db
 		Population population = new Population();
-		List<PopulationData> populations = population.getPopulationsFromDB();
-		this.populationNames = new HashSet(population.getPopulationNames(populations));
+		
+		try 
+		{
+			List<PopulationData> populations = population.getPopulationsFromDB(); 
+			this.populationNames = population.getPopulationNames(populations);
+		}
+		catch (Exception ex) { ex.printStackTrace(); }
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -68,12 +66,14 @@ public class HeaderProcessor {
 		boolean flag = true;
 		
 		// read first line
+		// first line sample: pop=US_CAU,license=CC0,resolution=G,cohort="Proto test"
 		header = reader.readLine();
 		attributes = header.split(",");
 		
-		// break down header
+		// break down the header
 		for(int i = 0; i < attributes.length; i++)
 		{
+			// regex break
 			String[] parsedAtt = parseAttribute(attributes[i]);
 			
 			// store all the attributes in the treemap
@@ -83,6 +83,8 @@ public class HeaderProcessor {
 		// check for population - mandatory
 		if (headerContent.containsKey("pop")) 
 		{
+			// added .toString() because it's pulling unquoted text from the header
+			// and checkPop doesn't read the values as strings
 			flags.add(checkPop(headerContent.get("pop").toString(), errorCodeList));
 		}
 		else errorCodeList.add(4);
@@ -95,14 +97,20 @@ public class HeaderProcessor {
 		else errorCodeList.add(5);
 		
 		// check header for license type if present
-		if (headerContent.containsKey("license")) 
+		if (headerContent.containsKey("license"))
+		{
 			System.out.println("license: " + headerContent.get("license"));
-			flags.add(checkLicenseType(headerContent.get("license").toString(), errorCodeList));
+			flags.add(checkLicenseType(headerContent.get("license")
+				.toString(), errorCodeList));
+		}
 		
 		// check header for resolution type if present
 		if (headerContent.containsKey("resolution")) 
+		{
 			System.out.println("resolution: " + headerContent.get("resolution"));
-			flags.add(checkResolutionType(headerContent.get("resolution").toString(), errorCodeList));
+			flags.add(checkResolutionType(headerContent.get("resolution")
+				.toString(), errorCodeList));
+		}
 		
 		// if any of the headers have errors, set flag to false
 		if (flags.contains("false")) flag = false;

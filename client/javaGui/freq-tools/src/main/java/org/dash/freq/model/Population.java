@@ -39,46 +39,37 @@ public class Population
 	
 	public Population()
 	{
-		try
-		{
-//			ApiClient apiClient = new ApiClient();
-//			this.apiClient.setConnectTimeout(60000);
-//			this.apiClient.setReadTimeout(60000);
-//			this.apiClient.setWriteTimeout(60000);
-//			this.apiClient.setBasePath(url);
-//			DefaultApi api = new DefaultApi(apiClient);
-//			popApi = new PopulationApi(apiClient);
-			
-//			PopulationResponse popResponse = popApi.getAllPopulations();
-//			
-//			this.popList = popResponse.getPopulationList();
-//			System.out.println("popList: " + popList);
-			
-		} 
-		catch (Exception ex) { System.out.println(ex); }
+
 	}
 	
-	public List<PopulationData> getPopulationsFromDB() throws DBConnectionError
+	public List<PopulationData> getPopulationsFromDB() throws DBConnectionException
 			
 	{
+		// open connection to the db
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
 		apiClient.setWriteTimeout(60000);
 		apiClient.setBasePath(url);
+		
+		// access to the Population API
 		PopulationApi popApi = new PopulationApi(apiClient);
 		System.out.println("popApi set");
-
+		
+		// retrieved population storage
 		List<PopulationData> popList = new ArrayList<>();
 
 		try 
-		{ 
+		{
+			// get all the populations and populate the list
 			PopulationResponse popResponse = popApi.getAllPopulations(); 
 			System.out.println("opened popResponse");
 			popList = popResponse.getPopulationList();
 			System.out.println("retrieved populations");
 
 			System.out.println("popList: " + popList);
+			
+			
 			if (popList == null || popList.isEmpty())
 			{
 				AppendText.appendToPane(PhycusGui.outputTextPane, "No populations retrieved from the database", Color.RED);
@@ -90,10 +81,10 @@ public class Population
 		}
 		catch (ApiException ex) 
 		{ 
-			System.out.println(ex); 
-			System.out.println("getPopulationsFromDB"); 
-
-			throw new DBConnectionError();
+			ex.printStackTrace();
+			
+			// notify user that there was a problem connecting to the db
+			throw new DBConnectionException();
 		}
 		
 		return popList;
@@ -130,17 +121,19 @@ public class Population
 	
 	public void createNewPopulation(String popName, String popDesc)
 	{
+		// open connection to the db
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
 		apiClient.setWriteTimeout(60000);
 		apiClient.setBasePath(url);
 		System.out.println("Api set");
-//		DefaultApi api = new DefaultApi(apiClient);
+
+		// access to the Population API
 		PopulationApi popApi = new PopulationApi(apiClient);
 		System.out.println("popApi set");
 		
-		HFCurationRequest hfCurationRequest = new HFCurationRequest();
+		// create the request
 		PopulationRequest populationRequest = new PopulationRequest();
 
 		populationRequest.setName(popName);
@@ -148,13 +141,8 @@ public class Population
 
 		System.out.println("Creating population: " + populationRequest.getName());
 
+		// try to upload the new population
 		try { popApi.createPopulation(populationRequest); }
-		catch (Exception ex) { System.out.println(ex); 
-//				throw ex;
-//				javax.swing.JOptionPane.showMessageDialog(PhycusGui.populationPanel,
-//					("The population was not created\n" + ex),
-//					"Houston, we have a problem",
-//					javax.swing.JOptionPane.ERROR_MESSAGE);}
-		}
+		catch (Exception ex) { ex.printStackTrace(); }
 	}
 }

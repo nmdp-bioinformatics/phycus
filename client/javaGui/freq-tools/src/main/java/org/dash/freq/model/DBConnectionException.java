@@ -13,9 +13,9 @@ import org.dash.freq.view.PhycusGui;
  *
  * @author kaeaton
  */
-public class DBConnectionError extends Exception {
+public class DBConnectionException extends Exception {
 	
-	public DBConnectionError()
+	public DBConnectionException()
 	{
 		super("Can't connect to the database");
 		

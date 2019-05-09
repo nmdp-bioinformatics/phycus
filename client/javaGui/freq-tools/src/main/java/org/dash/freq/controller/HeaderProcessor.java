@@ -42,7 +42,7 @@ public class HeaderProcessor {
 	HashMap<String, String> fullHeaderTitles = new  HashMap();
 	
 	// access to prefs
-//	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.getClass());
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 
 	public HeaderProcessor()
 	{
@@ -131,9 +131,9 @@ public class HeaderProcessor {
 		
 		// check header for haplotype, 
 		// use if present, otherwise prefs default
-//		String haplotypeEnt = headerContent.containsKey("haplotype") 
-//				? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
-//		printHeader("haplotype", haplotypeEnt, true);
+		String haplotypeEnt = headerContent.containsKey("haplotype") 
+				? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
+		printHeader("haplotype", haplotypeEnt, true);
 		
 		// check header for genotype type, print if present
 		if (headerContent.containsKey("genotype")) 

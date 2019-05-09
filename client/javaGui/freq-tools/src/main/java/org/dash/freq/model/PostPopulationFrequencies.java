@@ -288,57 +288,18 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 			
+			// db response - did we get one?
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
 			System.out.println(response);
 			
-			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			// if yes, let user know the data was successfully uploaded
+			if (response != null)
+			{
+				AppendText.appendToPane(PhycusGui.outputTextPane, "Data submitted!", Color.BLUE);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, ("Submission ID: " + response.getSubmissionID().toString()), Color.BLACK);
+				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			}
 		}		
 	}
-
-	/**
-	 * Main.
-	 *
-	 * @param args
-	 *            command line args
-	 * @throws MalformedURLException
-	 */
-//	public static void main(final String[] args) throws MalformedURLException {
-//		Switch about = new Switch("a", "about", "display about message");
-//		Switch help = new Switch("h", "help", "display help message");
-//		FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
-//		StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
-//		StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
-//		URLArgument url = new URLArgument("u", "url", "frequency service url", false);
-//
-//		ArgumentList arguments = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
-//		CommandLine commandLine = new CommandLine(args);
-//
-//		PostPopulationFrequencies postPopulationFrequencies = null;
-//		try {
-//			CommandLineParser.parse(commandLine, arguments);
-//			if (about.wasFound()) {
-//				About.about(System.out);
-//				System.exit(0);
-//			}
-//			if (help.wasFound()) {
-//				Usage.usage(USAGE, null, commandLine, arguments, System.out);
-//				System.exit(0);
-//			}
-//			postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
-//					estEntity.getValue(), url.getValue());
-//		} catch (CommandLineParseException | IllegalArgumentException e) {
-//			Usage.usage(USAGE, e, commandLine, arguments, System.err);
-//			System.exit(-1);
-//		}
-//		try {
-//			System.exit(postPopulationFrequencies.call());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.exit(1);
-//		}
-//	}
-
 }

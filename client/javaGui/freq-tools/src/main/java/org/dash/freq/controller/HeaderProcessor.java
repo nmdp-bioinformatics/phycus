@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.prefs.Preferences;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -39,6 +40,9 @@ public class HeaderProcessor {
 	
 	// printing titles
 	HashMap<String, String> fullHeaderTitles = new  HashMap();
+	
+	// access to prefs
+//	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.getClass());
 
 	public HeaderProcessor()
 	{
@@ -124,6 +128,16 @@ public class HeaderProcessor {
 			flags.add(checkResolutionType(headerContent.get("resolution")
 				.toString(), errorCodeList));
 		}
+		
+		// check header for haplotype, 
+		// use if present, otherwise prefs default
+//		String haplotypeEnt = headerContent.containsKey("haplotype") 
+//				? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
+//		printHeader("haplotype", haplotypeEnt, true);
+		
+		// check header for genotype type, print if present
+		if (headerContent.containsKey("genotype")) 
+			printHeader("genotype", headerContent.get("genotype"), true);
 		
 		// if any of the headers have errors, set flag to false
 		if (flags.contains("false")) flag = false;

@@ -586,6 +586,7 @@ public class PhycusGui extends javax.swing.JFrame {
             fileLocationTextArea.setText( absolutePath );
 			prefs.put("LAST_OUTPUT_DIR", absolutePath);
         }
+		System.out.println(prefs.absolutePath());
     }//GEN-LAST:event_fileOpenButtonActionPerformed
 
     private void mainUploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUploadButtonActionPerformed

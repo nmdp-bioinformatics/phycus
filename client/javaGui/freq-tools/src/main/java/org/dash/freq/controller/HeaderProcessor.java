@@ -5,16 +5,20 @@ import org.dash.freq.model.Population;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.dash.freq.view.AppendText;
+import org.dash.freq.view.PhycusGui;
 
 /**
  *
@@ -32,6 +36,9 @@ public class HeaderProcessor {
 	
 	// populations
 	private List<String> populationNames = new ArrayList();
+	
+	// printing titles
+	HashMap<String, String> fullHeaderTitles = new  HashMap();
 
 	public HeaderProcessor()
 	{
@@ -48,6 +55,14 @@ public class HeaderProcessor {
 			this.populationNames = population.getPopulationNames(populations);
 		}
 		catch (Exception ex) { ex.printStackTrace(); }
+		
+		// full header titles for printing
+		this.fullHeaderTitles.put("pop", "Population: ");
+		this.fullHeaderTitles.put("cohort", "Cohort: ");
+		this.fullHeaderTitles.put("license", "License: ");
+		this.fullHeaderTitles.put("resolution", "Resolution: ");
+		this.fullHeaderTitles.put("genotyping", "Genotyping group: ");
+		this.fullHeaderTitles.put("haplotyping", "Haplotyping group: ");
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -60,8 +75,6 @@ public class HeaderProcessor {
 		TreeMap<String, String> headerContent = new TreeMap<>();
 		
 		// flags - Set of flags for all attributes
-		// done this way because some of the header attributes are optional
-		// and may or may not have errors if present
 		Set<String> flags = new HashSet<>();
 		boolean flag = true;
 		
@@ -71,7 +84,7 @@ public class HeaderProcessor {
 		attributes = header.split(",");
 		
 		// break down the header
-		for(int i = 0; i < attributes.length; i++)
+		for (int i = 0; i < attributes.length; i++)
 		{
 			// regex break
 			String[] parsedAtt = parseAttribute(attributes[i]);
@@ -149,6 +162,8 @@ public class HeaderProcessor {
 		if (populationNames.contains(popValue)) flag = true;
 		else errorCodeList.add(3);
 		
+		printHeader("pop", popValue, flag);
+		
 		return String.valueOf(flag);
 	}
 	
@@ -189,8 +204,18 @@ public class HeaderProcessor {
 	}
 	
 	// verbose option, one line per element
-	private void printHeader(TreeMap<String, String> headers, boolean status)
+	private void printHeader(String header, String headerValue, boolean valid)
 	{
-		
+		AppendText.appendToPane(PhycusGui.outputTextPane, fullHeaderTitles.get(header), Color.BLACK);
+		if (valid)
+		{
+			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.BLACK);
+		}
+		else
+		{
+			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.RED);
+		}
+		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+
 	}
 }

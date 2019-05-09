@@ -35,7 +35,6 @@ public class PhycusGui extends javax.swing.JFrame {
 	
 	private File selectedFile;
 	private String gtRegistry;
-	private String estEntity;
 	public Preferences prefs = Preferences.userNodeForPackage(this.getClass());
 	private URL url;
 	private boolean folder = false;
@@ -601,14 +600,23 @@ public class PhycusGui extends javax.swing.JFrame {
 					outputTextPane.setText("");
 					
 					// list file name
-					AppendText.appendToPane(PhycusGui.outputTextPane, (selectedFile + ":"), Color.BLUE);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-					
-					PostPopulationFrequencies ppf = new PostPopulationFrequencies(
-							gtRegistry, 
-							prefs.get("PHY_EST_ENTITY", null));
-					ppf.setFile(selectedFile);
-					ppf.call();
+					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
+					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+
+					// run as background thread so TextPane updates
+					Runnable fileUpload = new Runnable() 
+					{
+						public void run() {
+							try {
+								PostPopulationFrequencies ppf = new PostPopulationFrequencies(
+									gtRegistry, 
+									prefs.get("PHY_EST_ENTITY", null));
+								ppf.setFile(selectedFile);
+								ppf.call();
+							} catch (Exception ex) { ex.printStackTrace(); }
+						}
+					};
+					new Thread(fileUpload).start();
 				}
 				// for multiple files
 				else if (folder == true)

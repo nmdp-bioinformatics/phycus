@@ -187,6 +187,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			license = lType.typeOfLicense();
 		}
 		System.out.println("Uploading license of type " + license);
+		
+
+		
 
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");
@@ -194,9 +197,12 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			String haplotype = columns[0];
 			Double frequency = new Double(columns[1]);
 
-			if (populationMap.containsKey(race)) {
+			if (populationMap.containsKey(race)) 
+			{
 				haplotypeFrequencyData = populationMap.get(race);
-			} else {
+			} 
+			else 
+			{
 				haplotypeFrequencyData = new HaplotypeFrequencyData();
 				haplotypeFrequencyData.setLicense(license);
 			}
@@ -233,15 +239,36 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
+		// Labels
 		LabelData labelData = new LabelData();
+		
+		// genotyping entity
 		Label registryLabel = new Label();
 		registryLabel.setTypeOfLabel("GT_REGISTRY");
-		registryLabel.setValue(gtRegistry);
+		if (headers.containsKey("haplotype"))
+		{
+			String headerGenotype = headers.get("genotype").toString();
+			registryLabel.setValue(headerGenotype);
+		}
+		else
+		{
+			registryLabel.setValue(gtRegistry);
+		}
+		
 		labelData.addLabelListItem(registryLabel);
-
+		
+		// haplotyping entity
 		Label estimatorLabel = new Label();
 		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
-		estimatorLabel.setValue(estEntity);
+		if (headers.containsKey("haplotype"))
+		{
+			String headerHaplotype = headers.get("haplotype").toString();
+			estimatorLabel.setValue(headerHaplotype);
+		}
+		else
+		{
+			estimatorLabel.setValue(estEntity);
+		}
 		labelData.addLabelListItem(estimatorLabel);
 		
 		for (String populationName : populationMap.keySet()) {
@@ -263,6 +290,11 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			
 			HFCurationResponse response = api.hfcPost(hfCurationRequest);
 			System.out.println(response);
+			
+			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 		}		
 	}
 

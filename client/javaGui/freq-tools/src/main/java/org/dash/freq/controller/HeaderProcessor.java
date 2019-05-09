@@ -61,8 +61,8 @@ public class HeaderProcessor {
 		this.fullHeaderTitles.put("cohort", "Cohort: ");
 		this.fullHeaderTitles.put("license", "License: ");
 		this.fullHeaderTitles.put("resolution", "Resolution: ");
-		this.fullHeaderTitles.put("genotyping", "Genotyping group: ");
-		this.fullHeaderTitles.put("haplotyping", "Haplotyping group: ");
+		this.fullHeaderTitles.put("genotype", "Genotyping group: ");
+		this.fullHeaderTitles.put("haplotype", "Haplotyping group: ");
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,

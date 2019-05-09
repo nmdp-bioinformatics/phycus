@@ -178,6 +178,8 @@ public class HeaderProcessor {
 			flag = false;
 		}
 		
+		printHeader("cohort", cohortValue, flag);
+			
 		return String.valueOf(flag);
 	}
 	
@@ -188,6 +190,8 @@ public class HeaderProcessor {
 		// does the license match one of the accepted license types?
 		if (licenses.contains(selectedLicense)) flag = true;
 		else errorCodeList.add(7);
+
+		printHeader("license", selectedLicense, flag);
 		
 		return String.valueOf(flag);
 	}
@@ -199,6 +203,8 @@ public class HeaderProcessor {
 		// does the resolution match one of the accepted resolution types?
 		if (resolutions.contains(selectedResolution)) flag = true;
 		else errorCodeList.add(8);
+		
+		printHeader("resolution", selectedResolution, flag);
 		
 		return String.valueOf(flag);
 	}

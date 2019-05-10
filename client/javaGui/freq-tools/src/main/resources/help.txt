@@ -82,7 +82,7 @@ The resolution is an optional header element describing the resolution of the al
 
 > haplotype=A9576 or haplotype="Children's Hospital Oakland Research Institute"
 
-The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group ID defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the options tab.)
+The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group identifies defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the options tab.)
 
 The haplotyping ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
 
@@ -93,8 +93,7 @@ The haplotyping ID may include spaces, but to do so requires that the text be pu
 
 > genotype=A9576 or genotype="Children's Hospital Oakland Research Institute"
 
-The genotyping group ID is an optional header tag. It ID's the facility that performed the genotyping of the samples. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
+The genotyping group ID is an optional header tag. It identifies the facility that performed the genotyping of the samples. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
 
 [back](#top)
 
-[back](#top)

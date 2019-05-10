@@ -124,9 +124,6 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Phycus Upload Interface"/>
     <Property name="locationByPlatform" type="boolean" value="true"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[650, 600]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -224,7 +221,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
                       <Component id="mainUploadButton" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="mainCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
@@ -260,11 +257,12 @@
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="mainCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="mainUploadButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -491,22 +489,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="popResultsScrollPane" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="popResultsScrollPane" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="popSearchLabel" min="-2" pref="114" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="popSearchTextField" pref="513" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="popSearchLabel" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="popSearchTextField" pref="513" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="popNotificationsScrollPane" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="popNotificationsScrollPane" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -616,16 +607,28 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="OptionsEstEntityLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="OptionsEstEntityButton" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="OptionsEstEntityLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="OptionsEstEntityButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="verboseCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="verboseCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
+                              <Component id="optionsCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="uploadReceiptCheckBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="382" max="32767" attributes="0"/>
+                      <EmptySpace pref="294" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -639,7 +642,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="verboseCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="540" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="uploadReceiptCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="476" max="32767" attributes="0"/>
+                      <Component id="optionsCancelButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -666,7 +673,27 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="verboseCheckBoxItemStateChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="verboseCheckBox.setSelected(prefs.getBoolean(&quot;PHY_VERBOSE_REPORTING&quot;, false));&#xa;if (verboseCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Verbose error reporting is on&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="verboseCheckBox.setSelected(prefs.getBoolean(&quot;PHY_VERBOSE_REPORTING&quot;, false));&#xa;if (verboseCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Verbose reporting is on. (This can be changed in the options tab.)&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="optionsCancelButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Close"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optionsCancelButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="uploadReceiptCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Upload Receipt"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="uploadReceiptCheckBoxItemStateChanged"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="uploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, false));&#xa;if (uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipt will be generated. (This can be changed in the options tab.)&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>

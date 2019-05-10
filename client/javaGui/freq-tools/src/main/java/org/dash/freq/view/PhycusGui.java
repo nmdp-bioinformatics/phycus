@@ -114,6 +114,8 @@ public class PhycusGui extends javax.swing.JFrame {
         OptionsEstEntityLabel = new javax.swing.JLabel();
         OptionsEstEntityButton = new javax.swing.JButton();
         verboseCheckBox = new javax.swing.JCheckBox();
+        optionsCancelButton = new javax.swing.JButton();
+        uploadReceiptCheckBox = new javax.swing.JCheckBox();
         helpPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
@@ -195,7 +197,6 @@ public class PhycusGui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
         setLocationByPlatform(true);
-        setMaximumSize(new java.awt.Dimension(650, 600));
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -364,7 +365,7 @@ public class PhycusGui extends javax.swing.JFrame {
                                         .addGap(445, 445, 445)))))
                         .addContainerGap())))
             .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                .addGap(237, 237, 237)
+                .addGap(236, 236, 236)
                 .addComponent(mainUploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mainCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,10 +395,11 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(warningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGap(15, 15, 15)
                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mainCancelButton)
-                    .addComponent(mainUploadButton)))
+                    .addComponent(mainUploadButton))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Upload Files", uploadFilesPanel);
@@ -439,18 +441,14 @@ public class PhycusGui extends javax.swing.JFrame {
         populationPanelLayout.setHorizontalGroup(
             populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(populationPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(popResultsScrollPane)
                     .addGroup(populationPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(populationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(popResultsScrollPane)
-                            .addGroup(populationPanelLayout.createSequentialGroup()
-                                .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))))
-                    .addGroup(populationPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(popNotificationsScrollPane)))
+                        .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+                    .addComponent(popNotificationsScrollPane))
                 .addContainerGap())
             .addGroup(populationPanelLayout.createSequentialGroup()
                 .addGap(234, 234, 234)
@@ -490,7 +488,7 @@ public class PhycusGui extends javax.swing.JFrame {
         verboseCheckBox.setText("Verbose reporting");
         verboseCheckBox.setSelected(prefs.getBoolean("PHY_VERBOSE_REPORTING", false));
         if (verboseCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose error reporting is on", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose reporting is on. (This can be changed in the options tab.)", Color.BLACK);
             AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         verboseCheckBox.addItemListener(new java.awt.event.ItemListener() {
@@ -499,19 +497,46 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        optionsCancelButton.setText("Close");
+        optionsCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionsCancelButtonActionPerformed(evt);
+            }
+        });
+
+        uploadReceiptCheckBox.setText("Upload Receipt");
+        uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", false));
+        if (uploadReceiptCheckBox.isSelected()){
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be generated. (This can be changed in the options tab.)", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+        }
+        uploadReceiptCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                uploadReceiptCheckBoxItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addComponent(OptionsEstEntityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OptionsEstEntityButton))
-                    .addComponent(verboseCheckBox))
-                .addContainerGap(382, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addComponent(OptionsEstEntityLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OptionsEstEntityButton))
+                            .addComponent(verboseCheckBox)))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(uploadReceiptCheckBox)))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,7 +547,11 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(OptionsEstEntityButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(verboseCheckBox)
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(uploadReceiptCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 476, Short.MAX_VALUE)
+                .addComponent(optionsCancelButton)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Options", settingsPanel);
@@ -888,17 +917,40 @@ public class PhycusGui extends javax.swing.JFrame {
 		// notify user when turned on
 		if (verboseCheckBox.isSelected())
 		{
-			AppendText.appendToPane(outputTextPane, "Verbose error reporting is on", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, "Verbose reporting is on", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
 		
 		// notify user when turned off
 		else
 		{
-			AppendText.appendToPane(outputTextPane, "Verbose error reporting is off", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, "Verbose reporting is off", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 		}
     }//GEN-LAST:event_verboseCheckBoxItemStateChanged
+
+    private void optionsCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsCancelButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_optionsCancelButtonActionPerformed
+
+    private void uploadReceiptCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uploadReceiptCheckBoxItemStateChanged
+        // add state to preferences
+		prefs.putBoolean("PHY_RECEIPT", uploadReceiptCheckBox.isSelected());
+		
+		// notify user when turned on
+		if (uploadReceiptCheckBox.isSelected())
+		{
+			AppendText.appendToPane(outputTextPane, "Upload receipt will be generated", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+		
+		// notify user when turned off
+		else
+		{
+			AppendText.appendToPane(outputTextPane, "Upload receipt will not be generated", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+    }//GEN-LAST:event_uploadReceiptCheckBoxItemStateChanged
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {
@@ -1011,6 +1063,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel licenseLabel;
     private javax.swing.JButton mainCancelButton;
     private javax.swing.JButton mainUploadButton;
+    private javax.swing.JButton optionsCancelButton;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton popCancelButton;
     private javax.swing.JButton popCreateButton;
@@ -1023,6 +1076,7 @@ public class PhycusGui extends javax.swing.JFrame {
     public static javax.swing.JPanel populationPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
+    public static javax.swing.JCheckBox uploadReceiptCheckBox;
     public static javax.swing.JCheckBox verboseCheckBox;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables

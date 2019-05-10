@@ -111,11 +111,17 @@ public class PhycusGui extends javax.swing.JFrame {
         popNotificationsScrollPane = new javax.swing.JScrollPane();
         popNotificationsTextPane = new javax.swing.JTextPane();
         settingsPanel = new javax.swing.JPanel();
-        OptionsEstEntityLabel = new javax.swing.JLabel();
-        OptionsEstEntityButton = new javax.swing.JButton();
+        haplotypeEntityLabel = new javax.swing.JLabel();
+        haplotypeEntityButton = new javax.swing.JButton();
         verboseCheckBox = new javax.swing.JCheckBox();
         optionsCancelButton = new javax.swing.JButton();
         uploadReceiptCheckBox = new javax.swing.JCheckBox();
+        uploadReceiptLabel = new javax.swing.JLabel();
+        uploadReceiptScrollPane = new javax.swing.JScrollPane();
+        uploadReceiptTextArea = new javax.swing.JTextArea();
+        defaultUploadReceiptCheckBox = new javax.swing.JCheckBox();
+        optionsSeparator1 = new javax.swing.JSeparator();
+        optionsSeparator2 = new javax.swing.JSeparator();
         helpPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
@@ -476,12 +482,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Populations", populationPanel);
 
-        OptionsEstEntityLabel.setText("Reset Haplotyping Group ID:");
+        haplotypeEntityLabel.setText("Reset Haplotyping Group ID:");
 
-        OptionsEstEntityButton.setText("Reset");
-        OptionsEstEntityButton.addActionListener(new java.awt.event.ActionListener() {
+        haplotypeEntityButton.setText("Reset");
+        haplotypeEntityButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OptionsEstEntityButtonActionPerformed(evt);
+                haplotypeEntityButtonActionPerformed(evt);
             }
         });
 
@@ -504,6 +510,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        uploadReceiptCheckBox.setSelected(true);
         uploadReceiptCheckBox.setText("Upload Receipt");
         uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", false));
         if (uploadReceiptCheckBox.isSelected()){
@@ -516,6 +523,26 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        uploadReceiptLabel.setText("Receipt save location:");
+
+        uploadReceiptScrollPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        uploadReceiptScrollPane.setBorder(null);
+        uploadReceiptScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        uploadReceiptScrollPane.setFocusable(false);
+        uploadReceiptScrollPane.setOpaque(false);
+
+        uploadReceiptTextArea.setEditable(false);
+        uploadReceiptTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        uploadReceiptTextArea.setColumns(20);
+        uploadReceiptTextArea.setLineWrap(true);
+        uploadReceiptTextArea.setRows(5);
+        uploadReceiptTextArea.setFocusable(false);
+        uploadReceiptTextArea.setOpaque(false);
+        uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
+
+        defaultUploadReceiptCheckBox.setSelected(true);
+        defaultUploadReceiptCheckBox.setText("Save with uploaded file");
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
@@ -523,33 +550,57 @@ public class PhycusGui extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addComponent(OptionsEstEntityLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(OptionsEstEntityButton))
-                            .addComponent(verboseCheckBox)))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(284, 284, 284)
                         .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(uploadReceiptCheckBox)))
-                .addContainerGap(294, Short.MAX_VALUE))
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(uploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(defaultUploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(uploadReceiptLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)))
+                .addGap(14, 14, 14))
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(optionsSeparator1)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(verboseCheckBox)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addComponent(haplotypeEntityLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(haplotypeEntityButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(optionsSeparator2))
+                .addContainerGap())
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OptionsEstEntityLabel)
-                    .addComponent(OptionsEstEntityButton))
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(uploadReceiptCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(defaultUploadReceiptCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(uploadReceiptLabel))
+                    .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(optionsSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(verboseCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(uploadReceiptCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 476, Short.MAX_VALUE)
+                .addComponent(optionsSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(haplotypeEntityLabel)
+                    .addComponent(haplotypeEntityButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 375, Short.MAX_VALUE)
                 .addComponent(optionsCancelButton)
                 .addContainerGap())
         );
@@ -734,7 +785,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_estEntityEnterButtonActionPerformed
 
-    private void OptionsEstEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsEstEntityButtonActionPerformed
+    private void haplotypeEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haplotypeEntityButtonActionPerformed
         
 		// what's there and where is it? Debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
@@ -746,7 +797,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		
 		// debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
-    }//GEN-LAST:event_OptionsEstEntityButtonActionPerformed
+    }//GEN-LAST:event_haplotypeEntityButtonActionPerformed
 
     private void helpEditorPaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_helpEditorPaneHyperlinkUpdate
         
@@ -1035,9 +1086,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel CsvNotificationLabel;
     private javax.swing.JLabel EstEntityLabel1;
     private javax.swing.JLabel EstEntityLabelCode;
-    private javax.swing.JButton OptionsEstEntityButton;
-    private javax.swing.JLabel OptionsEstEntityLabel;
     private javax.swing.JPanel SelectFilePanel;
+    private javax.swing.JCheckBox defaultUploadReceiptCheckBox;
     private javax.swing.JButton estEntityCloseButton;
     private javax.swing.JButton estEntityEnterButton;
     private javax.swing.JLabel estEntityInstructions1;
@@ -1050,6 +1100,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton fileOpenButton;
     private javax.swing.ButtonGroup fileOrFolder;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton haplotypeEntityButton;
+    private javax.swing.JLabel haplotypeEntityLabel;
     private javax.swing.JEditorPane helpEditorPane;
     private javax.swing.JPanel helpPanel;
     private javax.swing.JRadioButton jRBFile;
@@ -1064,6 +1116,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton mainCancelButton;
     private javax.swing.JButton mainUploadButton;
     private javax.swing.JButton optionsCancelButton;
+    private javax.swing.JSeparator optionsSeparator1;
+    private javax.swing.JSeparator optionsSeparator2;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton popCancelButton;
     private javax.swing.JButton popCreateButton;
@@ -1077,6 +1131,9 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
     public static javax.swing.JCheckBox uploadReceiptCheckBox;
+    private javax.swing.JLabel uploadReceiptLabel;
+    private javax.swing.JScrollPane uploadReceiptScrollPane;
+    private javax.swing.JTextArea uploadReceiptTextArea;
     public static javax.swing.JCheckBox verboseCheckBox;
     private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables

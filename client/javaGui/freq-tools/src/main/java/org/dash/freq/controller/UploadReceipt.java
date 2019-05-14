@@ -28,6 +28,8 @@ public class UploadReceipt
 
         LocalDate dateStamp = LocalDate.now();
         String timeStamp = LocalTime.now().format(dtf).toString();
+		
+		// create receipt file name from source file name
         String receiptFileName = fileName.substring(0, (fileName.length()-3)) + "txt";
 
         System.out.println(receiptFileName);

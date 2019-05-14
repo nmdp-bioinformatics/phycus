@@ -715,7 +715,11 @@ public class PhycusGui extends javax.swing.JFrame {
 					// list file name
 					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
 					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
-
+					
+					// append to receipt
+					if (prefs.getBoolean("PHY_RECEIPT", true)) {}
+					
+					
 					// run as background thread so TextPane updates
 					Runnable fileUpload = new Runnable() 
 					{

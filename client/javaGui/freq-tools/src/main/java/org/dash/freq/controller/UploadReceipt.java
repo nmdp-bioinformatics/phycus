@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import org.apache.commons.io.FileUtils;
 /**
  *
  * @author katrinaeaton

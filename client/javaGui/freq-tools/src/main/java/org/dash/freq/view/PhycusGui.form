@@ -703,7 +703,7 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="verboseCheckBoxItemStateChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="verboseCheckBox.setSelected(prefs.getBoolean(&quot;PHY_VERBOSE_REPORTING&quot;, false));&#xa;if (verboseCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Verbose reporting is on. (This can be changed in the options tab.)&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="verboseCheckBox.setSelected(prefs.getBoolean(&quot;PHY_VERBOSE_REPORTING&quot;, false));&#xa;if (verboseCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Verbose reporting is on.&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -717,14 +717,13 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="uploadReceiptCheckBox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Upload Receipt"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="uploadReceiptCheckBoxItemStateChanged"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="uploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, false));&#xa;if (uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipt will be generated. (This can be changed in the options tab.)&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="uploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;if (uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipt will be generated.&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
@@ -768,9 +767,14 @@
             </Container>
             <Component class="javax.swing.JCheckBox" name="defaultUploadReceiptCheckBox">
               <Properties>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Save with uploaded file"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultUploadReceiptCheckBoxActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true));&#xa;if (defaultUploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipt will be saved in the folder files are uploaded from. (This can be changed in the options tab.)&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JSeparator" name="optionsSeparator1">
             </Component>

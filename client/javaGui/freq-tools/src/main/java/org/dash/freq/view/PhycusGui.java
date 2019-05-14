@@ -494,7 +494,7 @@ public class PhycusGui extends javax.swing.JFrame {
         verboseCheckBox.setText("Verbose reporting");
         verboseCheckBox.setSelected(prefs.getBoolean("PHY_VERBOSE_REPORTING", false));
         if (verboseCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose reporting is on. (This can be changed in the options tab.)", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose reporting is on.", Color.BLACK);
             AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         verboseCheckBox.addItemListener(new java.awt.event.ItemListener() {
@@ -510,11 +510,10 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        uploadReceiptCheckBox.setSelected(true);
         uploadReceiptCheckBox.setText("Upload Receipt");
-        uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", false));
+        uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", true));
         if (uploadReceiptCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be generated. (This can be changed in the options tab.)", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be generated.", Color.BLACK);
             AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         uploadReceiptCheckBox.addItemListener(new java.awt.event.ItemListener() {
@@ -540,8 +539,18 @@ public class PhycusGui extends javax.swing.JFrame {
         uploadReceiptTextArea.setOpaque(false);
         uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
 
-        defaultUploadReceiptCheckBox.setSelected(true);
         defaultUploadReceiptCheckBox.setText("Save with uploaded file");
+        defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean("PHY_RECEIPT", true));
+        defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true));
+        if (defaultUploadReceiptCheckBox.isSelected()){
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be saved in the folder files are uploaded from. (This can be changed in the options tab.)", Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+        }
+        defaultUploadReceiptCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defaultUploadReceiptCheckBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
@@ -993,6 +1002,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be generated", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+			defaultUploadReceiptCheckBox.setEnabled(true);
+
 		}
 		
 		// notify user when turned off
@@ -1000,8 +1011,31 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			AppendText.appendToPane(outputTextPane, "Upload receipt will not be generated", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+			defaultUploadReceiptCheckBox.setEnabled(false);
 		}
     }//GEN-LAST:event_uploadReceiptCheckBoxItemStateChanged
+
+    private void defaultUploadReceiptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultUploadReceiptCheckBoxActionPerformed
+        // add state to preferences
+		prefs.putBoolean("PHY_RECEIPT_DEFAULT", defaultUploadReceiptCheckBox.isSelected());
+		
+		// notify user when turned on
+		if (defaultUploadReceiptCheckBox.isSelected())
+		{
+			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in the same folder as the uploaded file.", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+//			AppendText.appendToPane(outputTextPane, "(This can be changed in the options tab.)", Color.BLACK);
+//			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+		
+		// notify user when turned off
+		else
+		{
+			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
+    }//GEN-LAST:event_defaultUploadReceiptCheckBoxActionPerformed
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {

@@ -621,18 +621,22 @@
                               <Component id="optionsCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="uploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="defaultUploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Component id="uploadReceiptLabel" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="uploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="defaultUploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="CustomReceiptFolderButton" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="CustomReceiptFolderButton" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="uploadReceiptLabel" min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptScrollPane" pref="456" max="32767" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" pref="458" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -774,7 +778,7 @@
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (uploadReceiptCheckBox.isSelected() &amp;&amp; defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_DEFAULT_RECEIPT_FOLDER&quot;, userDocumentsPath)); }&#xa;else if (uploadReceiptCheckBox.isSelected() &amp;&amp; !defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath)); }"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (uploadReceiptCheckBox.isSelected() &amp;&amp; defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_DEFAULT_RECEIPT_FOLDER&quot;, userDocumentsPath)); }&#xa;else if (uploadReceiptCheckBox.isSelected() &amp;&amp; !(defaultUploadReceiptCheckBox.isSelected()))&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath)); }"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -787,7 +791,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultUploadReceiptCheckBoxActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true));&#xa;if (defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in the folder data files are uploaded from.&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;} else if (!defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in &quot; + prefs.get(&quot;RECEIPT_FOLDER&quot;, userDocumentsPath), Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true));&#xa;if (defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in the folder data files are uploaded from.&quot;, Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;} else if (!defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in &quot; + prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath), Color.BLACK);&#xa;    AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JSeparator" name="optionsSeparator1">

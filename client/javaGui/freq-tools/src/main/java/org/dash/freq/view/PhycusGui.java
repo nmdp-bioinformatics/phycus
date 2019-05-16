@@ -547,7 +547,7 @@ public class PhycusGui extends javax.swing.JFrame {
         uploadReceiptTextArea.setOpaque(false);
         if (uploadReceiptCheckBox.isSelected() && defaultUploadReceiptCheckBox.isSelected())
         { uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath)); }
-        else if (uploadReceiptCheckBox.isSelected() && !defaultUploadReceiptCheckBox.isSelected())
+        else if (uploadReceiptCheckBox.isSelected() && !(defaultUploadReceiptCheckBox.isSelected()))
         { uploadReceiptTextArea.setText(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath)); }
         uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
 
@@ -558,7 +558,7 @@ public class PhycusGui extends javax.swing.JFrame {
             AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in the folder data files are uploaded from.", Color.BLACK);
             AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         } else if (!defaultUploadReceiptCheckBox.isSelected() && uploadReceiptCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in " + prefs.get("RECEIPT_FOLDER", userDocumentsPath), Color.BLACK);
+            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in " + prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath), Color.BLACK);
             AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         defaultUploadReceiptCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -587,16 +587,18 @@ public class PhycusGui extends javax.swing.JFrame {
                         .addGap(284, 284, 284)
                         .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(uploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(defaultUploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(uploadReceiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CustomReceiptFolderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(uploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(defaultUploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CustomReceiptFolderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(uploadReceiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)))
+                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)))
                 .addGap(14, 14, 14))
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -705,9 +707,21 @@ public class PhycusGui extends javax.swing.JFrame {
             fileLocationTextArea.setText( absolutePath );
 			prefs.put("PHY_INPUT_DIR", absolutePath);
 			
-			if (defaultUploadReceiptCheckBox.isSelected())
+			// save parent folder location for receipt if individual file selected
+			if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true) == true)
 			{
 				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", parentFolder);
+			}
+			// save absolute path for receipt of folder selected
+			else
+			{
+				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", absolutePath);
+			}
+			
+			// if saving receipts to default location, update the textarea
+			// listing where the receipts are being saved
+			if (defaultUploadReceiptCheckBox.isSelected())
+			{
 				uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath));
 			}
         }
@@ -1065,6 +1079,8 @@ public class PhycusGui extends javax.swing.JFrame {
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in the same folder as the uploaded file.", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 			
+			uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath));
+			
 			CustomReceiptFolderButton.setEnabled(false);
 		}
 		
@@ -1075,13 +1091,19 @@ public class PhycusGui extends javax.swing.JFrame {
 			AppendText.appendToPane(outputTextPane, prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath), Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 			
+			uploadReceiptTextArea.setText(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath));
+			
 			CustomReceiptFolderButton.setEnabled(true);
 
 		}
     }//GEN-LAST:event_defaultUploadReceiptCheckBoxActionPerformed
 
     private void CustomReceiptFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomReceiptFolderButtonActionPerformed
-        receiptDirectoryChooser.showOpenDialog(this);
+        
+		// open the directory chooser
+		receiptDirectoryChooser.showOpenDialog(this);
+		
+		// get selected directory and store in prefs
         File directory = receiptDirectoryChooser.getSelectedFile();
         String directoryLocation = directory.getAbsolutePath();
         uploadReceiptTextArea.setText( directoryLocation );

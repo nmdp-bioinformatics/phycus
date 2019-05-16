@@ -76,7 +76,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        fileChooserUpload = new javax.swing.JFileChooser(prefs.get("LAST_OUTPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
+        fileChooserUpload = new javax.swing.JFileChooser(prefs.get("PHY_INPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
         fileOrFolder = new javax.swing.ButtonGroup();
         estEntityPopupFrame = new javax.swing.JFrame();
         estEntityTextField = new javax.swing.JTextField();
@@ -85,6 +85,7 @@ public class PhycusGui extends javax.swing.JFrame {
         estEntityInstructions1 = new javax.swing.JLabel();
         estEntityInstructions2 = new javax.swing.JLabel();
         estEntityInstructions3 = new javax.swing.JLabel();
+        receiptDirectoryChooser = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         uploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -260,7 +261,7 @@ public class PhycusGui extends javax.swing.JFrame {
         fileOrFolder.add(jRBFile);
         jRBFile.setText("File");
         jRBFile.setName("file"); // NOI18N
-        if (prefs.getBoolean("FILE_OR_FOLDER", true)){
+        if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true)){
             setFile();
             jRBFile.setSelected(true);
         } else {
@@ -542,7 +543,10 @@ public class PhycusGui extends javax.swing.JFrame {
         uploadReceiptTextArea.setRows(5);
         uploadReceiptTextArea.setFocusable(false);
         uploadReceiptTextArea.setOpaque(false);
-        uploadReceiptTextArea.setText(prefs.get("RECEIPT_FOLDER", userDocumentsPath));
+        if (uploadReceiptCheckBox.isSelected() && defaultUploadReceiptCheckBox.isSelected())
+        { uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath)); }
+        else if (uploadReceiptCheckBox.isSelected() && !defaultUploadReceiptCheckBox.isSelected())
+        { uploadReceiptTextArea.setText(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath)); }
         uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
 
         defaultUploadReceiptCheckBox.setText("Save with uploaded file");
@@ -563,6 +567,11 @@ public class PhycusGui extends javax.swing.JFrame {
 
         CustomReceiptFolderButton.setText("Choose directory");
         CustomReceiptFolderButton.setEnabled(prefs.getBoolean("PHY_RECEIPT_CUSTOM", false));
+        CustomReceiptFolderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomReceiptFolderButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
@@ -690,12 +699,12 @@ public class PhycusGui extends javax.swing.JFrame {
 			System.out.println(fileName);
 			
             fileLocationTextArea.setText( absolutePath );
-			prefs.put("LAST_OUTPUT_DIR", absolutePath);
+			prefs.put("PHY_INPUT_DIR", absolutePath);
 			
 			if (defaultUploadReceiptCheckBox.isSelected())
 			{
-				prefs.put("RECEIPT_FOLDER", parentFolder);
-				uploadReceiptTextArea.setText(prefs.get("RECEIPT_FOLDER", userDocumentsPath));
+				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", parentFolder);
+				uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath));
 			}
         }
 		System.out.println(prefs.absolutePath());
@@ -930,9 +939,7 @@ public class PhycusGui extends javax.swing.JFrame {
 					 javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
-		
-		
+
 		System.out.println("pop Desc: " + popSearchDescription);
 
 		// upload pop name / description
@@ -1053,8 +1060,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		{
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in the same folder as the uploaded file.", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
-//			AppendText.appendToPane(outputTextPane, "(This can be changed in the options tab.)", Color.BLACK);
-//			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+			
+			CustomReceiptFolderButton.setEnabled(false);
 		}
 		
 		// notify user when turned off
@@ -1063,8 +1070,20 @@ public class PhycusGui extends javax.swing.JFrame {
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+			
+			CustomReceiptFolderButton.setEnabled(true);
+
 		}
     }//GEN-LAST:event_defaultUploadReceiptCheckBoxActionPerformed
+
+    private void CustomReceiptFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomReceiptFolderButtonActionPerformed
+        int option = receiptDirectoryChooser.showOpenDialog(this);
+        File directory = receiptDirectoryChooser.getSelectedFile();
+        String directoryLocation = directory.getAbsolutePath();
+        uploadReceiptTextArea.setText( directoryLocation );
+		prefs.put("PHY_RECEIPT_CUSTOM_FOLDER", directoryLocation);
+        System.out.println(directoryLocation);
+    }//GEN-LAST:event_CustomReceiptFolderButtonActionPerformed
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {
@@ -1088,7 +1107,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		CsvNotificationLabel.setText("CSV files only.");
 		
 		// save choice to preferences
-		prefs.putBoolean("FILE_OR_FOLDER", true);
+		prefs.putBoolean("PHY_FILE_OR_FOLDER", true);
 		
 		// so uploader function knows whether it's a file or folder
 		folder = false;
@@ -1104,7 +1123,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
 		
 		// save choice to preferences
-		prefs.putBoolean("FILE_OR_FOLDER", false);
+		prefs.putBoolean("PHY_FILE_OR_FOLDER", false);
 		
 		// so uploader function knows whether it's a file or folder
 		folder = true;
@@ -1192,6 +1211,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel popSearchLabel;
     private javax.swing.JTextField popSearchTextField;
     public static javax.swing.JPanel populationPanel;
+    private javax.swing.JFileChooser receiptDirectoryChooser;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
     public static javax.swing.JCheckBox uploadReceiptCheckBox;

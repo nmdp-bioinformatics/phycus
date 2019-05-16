@@ -9,7 +9,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;LAST_OUTPUT_DIR&quot;, (System.getProperty(&quot;user.home&quot;)+ System.getProperty(&quot;file.separator&quot;) + &quot;Documents&quot;)))"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;PHY_INPUT_DIR&quot;, (System.getProperty(&quot;user.home&quot;)+ System.getProperty(&quot;file.separator&quot;) + &quot;Documents&quot;)))"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;Comma Separated Values file&quot;, &quot;csv&quot;);"/>
       </AuxValues>
     </Component>
@@ -119,6 +119,8 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JFileChooser" name="receiptDirectoryChooser">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -345,7 +347,7 @@
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="&quot;File&quot;" type="code"/>
                     </Property>
-                    <Property name="name" type="java.lang.String" value="file" noResource="true" postCode="if (prefs.getBoolean(&quot;FILE_OR_FOLDER&quot;, true)){&#xa;setFile();&#xa;jRBFile.setSelected(true);&#xa;} else {&#xa;setFolder();&#xa;jRBFolder.setSelected(true);&#xa;}"/>
+                    <Property name="name" type="java.lang.String" value="file" noResource="true" postCode="if (prefs.getBoolean(&quot;PHY_FILE_OR_FOLDER&quot;, true)){&#xa;setFile();&#xa;jRBFile.setSelected(true);&#xa;} else {&#xa;setFolder();&#xa;jRBFolder.setSelected(true);&#xa;}"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBFileActionPerformed"/>
@@ -766,7 +768,7 @@
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="uploadReceiptTextArea.setText(prefs.get(&quot;RECEIPT_FOLDER&quot;, userDocumentsPath));"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (uploadReceiptCheckBox.isSelected() &amp;&amp; defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_DEFAULT_RECEIPT_FOLDER&quot;, userDocumentsPath)); }&#xa;else if (uploadReceiptCheckBox.isSelected() &amp;&amp; !defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath)); }"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -790,6 +792,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Choose directory"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustomReceiptFolderButtonActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CustomReceiptFolderButton.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT_CUSTOM&quot;, false));"/>
               </AuxValues>

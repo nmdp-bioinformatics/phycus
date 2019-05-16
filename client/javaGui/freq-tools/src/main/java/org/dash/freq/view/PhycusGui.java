@@ -76,7 +76,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        fileChooserUpload = new javax.swing.JFileChooser(prefs.get("PHY_INPUT_DIR", (System.getProperty("user.home")+ System.getProperty("file.separator") + "Documents")));
+        fileChooserUpload = new javax.swing.JFileChooser(prefs.get("PHY_INPUT_DIR", userDocumentsPath));
         fileOrFolder = new javax.swing.ButtonGroup();
         estEntityPopupFrame = new javax.swing.JFrame();
         estEntityTextField = new javax.swing.JTextField();
@@ -85,7 +85,7 @@ public class PhycusGui extends javax.swing.JFrame {
         estEntityInstructions1 = new javax.swing.JLabel();
         estEntityInstructions2 = new javax.swing.JLabel();
         estEntityInstructions3 = new javax.swing.JLabel();
-        receiptDirectoryChooser = new javax.swing.JFileChooser();
+        receiptDirectoryChooser = new javax.swing.JFileChooser(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath));
         jTabbedPane1 = new javax.swing.JTabbedPane();
         uploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -205,6 +205,8 @@ public class PhycusGui extends javax.swing.JFrame {
 
         estEntityPopupFrame.getAccessibleContext().setAccessibleName("");
         // estEntityPopupFrame.setVisible(false);
+
+        receiptDirectoryChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -516,7 +518,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        uploadReceiptCheckBox.setText("Upload Receipt");
+        uploadReceiptCheckBox.setText("Generate Receipt");
         uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", true));
         if (uploadReceiptCheckBox.isSelected()){
             AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be generated.", Color.BLACK);
@@ -549,7 +551,7 @@ public class PhycusGui extends javax.swing.JFrame {
         { uploadReceiptTextArea.setText(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath)); }
         uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
 
-        defaultUploadReceiptCheckBox.setText("Save with uploaded file");
+        defaultUploadReceiptCheckBox.setText("Save receipt with uploaded file");
         defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean("PHY_RECEIPT", true));
         defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true));
         if (defaultUploadReceiptCheckBox.isSelected() && uploadReceiptCheckBox.isSelected()){
@@ -566,7 +568,9 @@ public class PhycusGui extends javax.swing.JFrame {
         });
 
         CustomReceiptFolderButton.setText("Choose directory");
-        CustomReceiptFolderButton.setEnabled(prefs.getBoolean("PHY_RECEIPT_CUSTOM", false));
+        if ((prefs.getBoolean("PHY_RECEIPT", true)) && !(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true)) )
+        { CustomReceiptFolderButton.setEnabled(true); }
+        else { CustomReceiptFolderButton.setEnabled(false); }
         CustomReceiptFolderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CustomReceiptFolderButtonActionPerformed(evt);
@@ -592,7 +596,7 @@ public class PhycusGui extends javax.swing.JFrame {
                                 .addComponent(uploadReceiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(CustomReceiptFolderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)))
+                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)))
                 .addGap(14, 14, 14))
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1068,7 +1072,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		else
 		{
 			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
-			AppendText.appendToPane(outputTextPane, "Upload receipt will be saved in ", Color.BLACK);
+			AppendText.appendToPane(outputTextPane, prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath), Color.BLACK);
 			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 			
 			CustomReceiptFolderButton.setEnabled(true);
@@ -1077,12 +1081,13 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_defaultUploadReceiptCheckBoxActionPerformed
 
     private void CustomReceiptFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomReceiptFolderButtonActionPerformed
-        int option = receiptDirectoryChooser.showOpenDialog(this);
+        receiptDirectoryChooser.showOpenDialog(this);
         File directory = receiptDirectoryChooser.getSelectedFile();
         String directoryLocation = directory.getAbsolutePath();
         uploadReceiptTextArea.setText( directoryLocation );
 		prefs.put("PHY_RECEIPT_CUSTOM_FOLDER", directoryLocation);
-        System.out.println(directoryLocation);
+		System.out.println(directory);
+
     }//GEN-LAST:event_CustomReceiptFolderButtonActionPerformed
 
 	// open links to external browser

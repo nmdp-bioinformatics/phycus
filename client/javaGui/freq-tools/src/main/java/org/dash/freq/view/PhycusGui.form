@@ -9,7 +9,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;PHY_INPUT_DIR&quot;, (System.getProperty(&quot;user.home&quot;)+ System.getProperty(&quot;file.separator&quot;) + &quot;Documents&quot;)))"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;PHY_INPUT_DIR&quot;, userDocumentsPath))"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;Comma Separated Values file&quot;, &quot;csv&quot;);"/>
       </AuxValues>
     </Component>
@@ -120,6 +120,12 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JFileChooser" name="receiptDirectoryChooser">
+      <Properties>
+        <Property name="fileSelectionMode" type="int" value="1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath))"/>
+      </AuxValues>
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -626,7 +632,7 @@
                                   <Component id="CustomReceiptFolderButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptScrollPane" pref="492" max="32767" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" pref="456" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -722,7 +728,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="uploadReceiptCheckBox">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Upload Receipt"/>
+                <Property name="text" type="java.lang.String" value="Generate Receipt"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="uploadReceiptCheckBoxItemStateChanged"/>
@@ -775,7 +781,7 @@
             </Container>
             <Component class="javax.swing.JCheckBox" name="defaultUploadReceiptCheckBox">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Save with uploaded file"/>
+                <Property name="text" type="java.lang.String" value="Save receipt with uploaded file"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultUploadReceiptCheckBoxActionPerformed"/>
@@ -796,7 +802,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustomReceiptFolderButtonActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CustomReceiptFolderButton.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT_CUSTOM&quot;, false));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if ((prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true)) &amp;&amp; !(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true)) )&#xa;{ CustomReceiptFolderButton.setEnabled(true); }&#xa;else { CustomReceiptFolderButton.setEnabled(false); }"/>
               </AuxValues>
             </Component>
           </SubComponents>

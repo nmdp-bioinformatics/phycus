@@ -11,14 +11,20 @@ import java.io.FileWriter;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.prefs.Preferences;
 
 import org.apache.commons.io.FileUtils;
+import org.dash.freq.view.PhycusGui;
 /**
  *
  * @author katrinaeaton
  */
 public class UploadReceipt 
 {
+	
+	// access to prefs
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
+	
 	public UploadReceipt()
 	{
 		
@@ -39,8 +45,17 @@ public class UploadReceipt
         return fileName;
     }
     
-    public void writeToFile(String locus, String version, String dataType)
+    public void writeToFile(String fileName)
     {
+		if (prefs.getBoolean("PHY_RECEIPT", true))
+		{
+			
+		}
+		
+		
+		
+		
+		
         try {
 //            String text = whichTextArea.get(dataType).getText();
 //            String filePath = fileName(locus, dataType);

@@ -163,6 +163,8 @@ paths:
     post:
       description: |
         Storing of a new Haplotype Frequency set.
+        The service will silently ignore any quality metrics sent for submission and calculate the supported
+        ones itself.
       parameters:
         - name: HFCurationRequest
           in: body

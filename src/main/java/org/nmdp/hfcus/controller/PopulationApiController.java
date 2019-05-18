@@ -37,7 +37,7 @@ public class PopulationApiController implements PopulationApi {
 
     @Override
     public ResponseEntity<PopulationData> getPopulationForId(@ApiParam(value = "Population ID",required=true ) @PathVariable("populationId") Long populationId) {
-        Population population = populationRepository.findOne(populationId);
+        Population population = populationRepository.findById(populationId).orElse(null);
         ResponseEntity<PopulationData> responseEntity;
         if (population != null) {
             responseEntity = ResponseEntity.ok(population.toSwaggerObject());

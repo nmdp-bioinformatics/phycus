@@ -1,5 +1,7 @@
 package org.nmdp.hfcus.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.CascadeType;
@@ -12,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class HaplotypeFrequency implements ICurationDataModel<io.swagger.model.HaplotypeFrequency> {
-    public HaplotypeFrequency(){
-        //intentionally left empty
-    }
+
     public HaplotypeFrequency(io.swagger.model.HaplotypeFrequency swaggerObject) {
         haplotypeString = swaggerObject.getHaplotypeString();
         if (haplotypeString == null){
@@ -34,44 +36,12 @@ public class HaplotypeFrequency implements ICurationDataModel<io.swagger.model.H
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String haplotypeString;
     private Double frequency;
     @OneToMany(cascade = CascadeType.ALL)
     private List<FrequencyError> errorList;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getHaplotypeString() {
-        return haplotypeString;
-    }
-
-    public void setHaplotypeString(String haplotypeString) {
-        this.haplotypeString = haplotypeString;
-    }
-
-    public Double getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Double frequency) {
-        this.frequency = frequency;
-    }
-
-    public List<FrequencyError> getErrorList() {
-        return errorList;
-    }
-
-    public void setErrorList(List<FrequencyError> errorList) {
-        this.errorList = errorList;
-    }
 
     @Override
     public io.swagger.model.HaplotypeFrequency toSwaggerObject(){

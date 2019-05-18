@@ -1,14 +1,15 @@
 package org.nmdp.hfcus.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
-    public Quality(){
-        //intentionally left empty
-    }
 
     public Quality(io.swagger.model.Quality swaggerObject){
         value = swaggerObject.getValue();
@@ -22,35 +23,11 @@ public class Quality implements ICurationDataModel<io.swagger.model.Quality> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double value;
     @Enumerated(EnumType.STRING)
     private io.swagger.model.Quality.TypeOfQualityEnum typeOfQuality;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public io.swagger.model.Quality.TypeOfQualityEnum getTypeOfQuality() {
-        return typeOfQuality;
-    }
-
-    public void setTypeOfQuality(io.swagger.model.Quality.TypeOfQualityEnum typeOfQuality) {
-        this.typeOfQuality = typeOfQuality;
-    }
 
     @Override
     public io.swagger.model.Quality toSwaggerObject(){

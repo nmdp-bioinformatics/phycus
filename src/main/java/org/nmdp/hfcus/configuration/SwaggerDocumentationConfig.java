@@ -3,6 +3,7 @@ package org.nmdp.hfcus.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -12,6 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 
 @Configuration
+@EnableTransactionManagement
 public class SwaggerDocumentationConfig {
 
     private ApiInfo apiInfo() {

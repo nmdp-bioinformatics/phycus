@@ -1,12 +1,17 @@
 package org.nmdp.hfcus.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Method implements ICurationDataModel<io.swagger.model.Method> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private io.swagger.model.Method.TypeOfMethodEnum typeOfMethod;
@@ -14,55 +19,11 @@ public class Method implements ICurationDataModel<io.swagger.model.Method> {
     private String methodComment;
     private String methodReference;
 
-    public Method(){
-        //intentionally left empty
-    }
-
     public Method(io.swagger.model.Method swaggerObject){
         typeOfMethod = swaggerObject.getTypeOfMethod();
         methodValue = swaggerObject.getMethodValue();
         methodComment = swaggerObject.getMethodComment();
         methodReference = swaggerObject.getMethodReference();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public io.swagger.model.Method.TypeOfMethodEnum getTypeOfMethod() {
-        return typeOfMethod;
-    }
-
-    public void setTypeOfMethod(io.swagger.model.Method.TypeOfMethodEnum typeOfMethod) {
-        this.typeOfMethod = typeOfMethod;
-    }
-
-    public String getMethodValue() {
-        return methodValue;
-    }
-
-    public void setMethodValue(String methodValue) {
-        this.methodValue = methodValue;
-    }
-
-    public String getMethodComment() {
-        return methodComment;
-    }
-
-    public void setMethodComment(String methodComment) {
-        this.methodComment = methodComment;
-    }
-
-    public String getMethodReference() {
-        return methodReference;
-    }
-
-    public void setMethodReference(String methodReference) {
-        this.methodReference = methodReference;
     }
 
     @Override

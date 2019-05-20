@@ -42,16 +42,6 @@ import java.util.TreeMap;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-//import org.dishevelled.commandline.ArgumentList;
-//import org.dishevelled.commandline.CommandLine;
-//import org.dishevelled.commandline.CommandLineParseException;
-//import org.dishevelled.commandline.CommandLineParser;
-//import org.dishevelled.commandline.Switch;
-//import org.dishevelled.commandline.Usage;
-//import org.dishevelled.commandline.argument.FileArgument;
-//import org.dishevelled.commandline.argument.StringArgument;
-//import org.dishevelled.commandline.argument.URLArgument;
-
 import io.swagger.client.api.CohortApi;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
@@ -100,17 +90,12 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	 * @throws MalformedURLException
 	 */
 	public PostPopulationFrequencies(String gtRegistry, String estEntity) //File inputFile, 
-			throws MalformedURLException {
+			throws MalformedURLException 
+	{
 
 		this.url = new URL("http://localhost:8080");
-//		this.inputFile = inputFile;
 		this.gtRegistry = gtRegistry;
         this.estEntity = estEntity;
-//		if (url == null) {
-//			this.url = new URL("http://localhost:8080");
-//		} else {
-//			this.url = url;
-//		}
 
 		try { this.populations = population.getPopulationsFromDB();}
 		catch (Exception ex) { System.out.println(ex); }
@@ -188,9 +173,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		}
 		System.out.println("Uploading license of type " + license);
 		
-
-		
-
+		// read the file and break down each row
 		while ((row = reader.readLine()) != null) {
 			columns = row.split(",");
 			
@@ -217,6 +200,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 
 		reader.close();
 		
+		// connect to the db
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
 		apiClient.setReadTimeout(60000);
@@ -226,6 +210,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		PopulationApi popApi = new PopulationApi(apiClient);
 		CohortApi cohortApi = new CohortApi(apiClient);
 		
+		// create cohort
 		CohortRequest cohortRequest = new CohortRequest();
 		
 		CohortData cohortData = new CohortData();

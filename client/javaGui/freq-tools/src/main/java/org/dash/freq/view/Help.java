@@ -5,9 +5,7 @@ import java.net.URL;
 import java.nio.file.*;
 import java.util.Arrays;
 import java.util.List;
-//import javax.swing.text.Document;
-//import javax.swing.text.html.HTMLDocument;
-//import javax.swing.text.html.HTMLEditorKit;
+
 import org.commonmark.Extension;
 import org.commonmark.node.*;
 import org.commonmark.parser.Parser;

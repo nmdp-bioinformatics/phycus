@@ -41,8 +41,6 @@ public class LicenseType {
 	
 	public License typeOfLicense(String license)
 	{
-//		String selectedLicense = parseLicense(license);
-		
 		License newLicense = new License();
 		
 		switch (license) {

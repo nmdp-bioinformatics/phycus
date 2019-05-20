@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.prefs.Preferences;
 import org.apache.commons.lang3.StringUtils;
 import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
@@ -21,6 +22,9 @@ public class HaplotypeProcessor {
 	
 	private List<String> haplotypeTemplate = new ArrayList();
 	private List<String> currentHaplotype = new ArrayList();
+	
+	// access to prefs
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
 	public HaplotypeProcessor (String firstHaplotypeLine)
 	{
@@ -60,6 +64,7 @@ public class HaplotypeProcessor {
 		Collections.sort(currentHaplotype);
 		System.out.println(currentHaplotype);
 		
+		// compare to haplotypes from first line of data
 		if (currentHaplotype.equals(haplotypeTemplate))
 		{
 			sameLociFlag = true;
@@ -89,15 +94,14 @@ public class HaplotypeProcessor {
 	}
 	
 	public void printOutErrors (ArrayList<String> errorLineNumbers)
-	{
-		// verbose error reporting?
-		boolean verboseState = PhycusGui.verboseCheckBox.isSelected();
-		
+	{	
 		// how many errors to list for non-verbose reporting
 		int errorCounter = 3;
 		
-		// if there are "errorCounter" or fewer errors list them
-		if(errorLineNumbers.size() <= errorCounter)
+		// if there are "errorCounter" or fewer errors OR if verbose is on
+		// list them all
+		if(errorLineNumbers.size() <= errorCounter || 
+			prefs.getBoolean("PHY_VERBOSE_REPORTING", false))
 		{
 			for (String lineError:errorLineNumbers)
 			{
@@ -106,7 +110,7 @@ public class HaplotypeProcessor {
 		}
 		
 		// otherwise list some and message that there are more
-		else if (!verboseState)
+		else if (prefs.getBoolean("PHY_VERBOSE_REPORTING", false))
 		{
 			int listCursor = 0;
 		
@@ -118,19 +122,10 @@ public class HaplotypeProcessor {
 				listCursor++;
 			}
 			
-			// plus anything over 5
+			// plus anything over "errorCounter"
 			int remainingErrors = errorLineNumbers.size() - errorCounter;
 			AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Plus " + remainingErrors + " more"), Color.RED);
 			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-		}
-		
-		// if verbose is true, list all of the errors
-		else
-		{
-			for (String lineError:errorLineNumbers)
-			{
-				haplotypeErrorParser(lineError);
-			}
 		}
 	}
 	

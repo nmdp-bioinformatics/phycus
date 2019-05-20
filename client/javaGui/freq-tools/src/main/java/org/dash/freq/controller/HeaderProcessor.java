@@ -129,13 +129,13 @@ public class HeaderProcessor {
 				.toString(), errorCodeList));
 		}
 		
-		// check header for haplotype, 
+		// check header for haplotyping institution, 
 		// use if present, otherwise prefs default
 		String haplotypeEnt = headerContent.containsKey("haplotype") 
 				? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
 		printHeader("haplotype", haplotypeEnt, true);
 		
-		// check header for genotype type, print if present
+		// check header for genotyping institution, print if present
 		if (headerContent.containsKey("genotype")) 
 			printHeader("genotype", headerContent.get("genotype"), true);
 		

@@ -21,13 +21,7 @@
 */
 package org.dash.freq.controller;
 
-import java.awt.Color;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
-import org.dash.freq.view.AppendText;
-import org.dash.freq.view.PhycusGui;
 
 public class ErrorCodes {
 	public ErrorCodes() {
@@ -48,8 +42,6 @@ public class ErrorCodes {
 		errorCodes.put(8, "An invalid resolution type is included in the header. See the help tab for more information.");
 		errorCodes.put(9, "One or more haplotypes contains an error");
 		errorCodes.put(10, "");
-
-		// errorCodes.put(, )
 		
 		return errorCodes;
 	}
@@ -58,16 +50,8 @@ public class ErrorCodes {
 		TreeMap<Integer, String> warningCodes = new TreeMap<Integer, String>();
 
 		warningCodes.put(2, "Haplotype frequencies do not total 1.00");
-		warningCodes.put(3, "The population must already exist in the database. See the help tab for more information.");
-		warningCodes.put(4, "A population value must be included in the header. See the help tab for more information.");
-		warningCodes.put(5, "A cohort value must be included in the header. See the help tab for more information.");
-		warningCodes.put(6, "The cohort value must be fewer than 255 characters.");
-		warningCodes.put(7, "A cohort value must be included in the header. See the help tab for more information.");
-		warningCodes.put(8, "");
-		warningCodes.put(9, "");
-		warningCodes.put(10, "");
-
-		// errorCodes.put(, )
+		warningCodes.put(3, "");
+		warningCodes.put(4, "");
 		
 		return warningCodes;
 	}

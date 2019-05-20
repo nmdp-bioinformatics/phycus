@@ -74,11 +74,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>unknown.binary</groupId>
-      <artifactId>AbsoluteLayout</artifactId>
-      <version>SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>com.atlassian.commonmark</groupId>
       <artifactId>commonmark</artifactId>
       <version>0.12.1</version>

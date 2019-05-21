@@ -43,6 +43,3 @@ buildNumber.properties
 /.settings/
 /.classpath
 /.project
-
-# Avoid changing ip address when switching between windows and mac
-/src/main/resources/application.properties

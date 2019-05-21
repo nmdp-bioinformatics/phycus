@@ -128,7 +128,7 @@ public class DataChecks {
 		
 		// did the flag get triggered during while loop?
 		// if so, there's a discrepency between haplotype loci
-		if (flag == false) errorCodeList.add(9);
+		if (!flag) errorCodeList.add(9);
 		
 		// does the frequency fall withing the target range?
 		// if frequencies total to 0 report total

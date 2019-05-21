@@ -82,7 +82,7 @@ public class DataChecks {
 
 			// run the population check only while flag equals true
 			// This is so it only adds one mismatch to the errorCode list
-			if (flag == true)
+			if (flag)
 			{
 				flag = raceCheck(raceFirst, race, errorCodeList);
 			}
@@ -103,7 +103,7 @@ public class DataChecks {
 		}
 
 		// if flag is false, print out the errors to the command line
-		if (flag == false) 
+		if (!flag) 
 		{
 			for (int x:errorCodeList)
 			{

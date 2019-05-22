@@ -61,6 +61,7 @@ import io.swagger.client.model.License;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.util.HashSet;
+import java.util.prefs.Preferences;
 
 
 
@@ -77,6 +78,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	private final URL url;
 	private final Population population = new Population();
 	private List<PopulationData> populations;
+	
+	// access to prefs
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 
 	private static final String USAGE = "post-population-frequencies [args]";
 	
@@ -93,7 +97,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			throws MalformedURLException 
 	{
 
-		this.url = new URL("http://localhost:8080");
+		this.url = new URL(prefs.get("PHY_DB_URL", PhycusGui.defaultDatabaseURL));
 		this.gtRegistry = gtRegistry;
         this.estEntity = estEntity;
 

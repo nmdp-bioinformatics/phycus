@@ -36,7 +36,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	private File selectedFile;
 	private String gtRegistry;
 	public Preferences prefs = Preferences.userNodeForPackage(this.getClass());
-	private URL url;
+	public static final String defaultDatabaseURL = "http://localhost:8080";
 	private boolean folder = false;
 	private final PopulationList popList = new PopulationList();
 	private final Population population = new Population();
@@ -86,6 +86,12 @@ public class PhycusGui extends javax.swing.JFrame {
         estEntityInstructions2 = new javax.swing.JLabel();
         estEntityInstructions3 = new javax.swing.JLabel();
         receiptDirectoryChooser = new javax.swing.JFileChooser(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath));
+        advancedOptionsPopupFrame = new javax.swing.JFrame();
+        databaseUrlTextField = new javax.swing.JTextField();
+        advancedOptionsCloseButton = new javax.swing.JButton();
+        databaseUrlLabel = new javax.swing.JLabel();
+        databaseDefaultButton = new javax.swing.JButton();
+        databaseSetUrlButton = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         uploadFilesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -127,7 +133,9 @@ public class PhycusGui extends javax.swing.JFrame {
         defaultUploadReceiptCheckBox = new javax.swing.JCheckBox();
         optionsSeparator1 = new javax.swing.JSeparator();
         optionsSeparator2 = new javax.swing.JSeparator();
+        optionsSeparator3 = new javax.swing.JSeparator();
         CustomReceiptFolderButton = new javax.swing.JButton();
+        advancedOptionsButton = new javax.swing.JButton();
         helpPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
@@ -176,14 +184,14 @@ public class PhycusGui extends javax.swing.JFrame {
                             .addComponent(estEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
                         .addGap(73, 73, 73)
-                        .addComponent(estEntityEnterButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(estEntityCloseButton)))
+                        .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
+                                .addComponent(estEntityEnterButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(estEntityCloseButton)
+                                .addGap(17, 17, 17)))))
                 .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
         );
         estEntityPopupFrameLayout.setVerticalGroup(
             estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,19 +202,92 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(estEntityInstructions2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estEntityInstructions3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(estEntityEnterButton)
                     .addComponent(estEntityCloseButton))
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         estEntityPopupFrame.getAccessibleContext().setAccessibleName("");
         // estEntityPopupFrame.setVisible(false);
 
         receiptDirectoryChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+
+        estEntityPopupFrame.setVisible(false);
+        advancedOptionsPopupFrame.setTitle("Advanced Options");
+        advancedOptionsPopupFrame.setAlwaysOnTop(true);
+        advancedOptionsPopupFrame.setLocationByPlatform(true);
+        advancedOptionsPopupFrame.setMaximumSize(new java.awt.Dimension(375, 175));
+        advancedOptionsPopupFrame.setMinimumSize(new java.awt.Dimension(375, 175));
+        advancedOptionsPopupFrame.setName("EstEntityFrame"); // NOI18N
+
+        databaseUrlTextField.setText(prefs.get("PHY_DB_URL", defaultDatabaseURL));
+
+        advancedOptionsCloseButton.setText("Close");
+        advancedOptionsCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedOptionsCloseButtonActionPerformed(evt);
+            }
+        });
+
+        databaseUrlLabel.setText("Database URL:");
+
+        databaseDefaultButton.setText("Reset to default");
+        databaseDefaultButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                databaseDefaultButtonActionPerformed(evt);
+            }
+        });
+
+        databaseSetUrlButton.setText("Set database URL");
+        databaseSetUrlButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                databaseSetUrlButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout advancedOptionsPopupFrameLayout = new javax.swing.GroupLayout(advancedOptionsPopupFrame.getContentPane());
+        advancedOptionsPopupFrame.getContentPane().setLayout(advancedOptionsPopupFrameLayout);
+        advancedOptionsPopupFrameLayout.setHorizontalGroup(
+            advancedOptionsPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(advancedOptionsPopupFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(advancedOptionsPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(databaseUrlTextField)
+                    .addGroup(advancedOptionsPopupFrameLayout.createSequentialGroup()
+                        .addComponent(databaseUrlLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(advancedOptionsPopupFrameLayout.createSequentialGroup()
+                        .addComponent(databaseSetUrlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(databaseDefaultButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addContainerGap())
+            .addGroup(advancedOptionsPopupFrameLayout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(advancedOptionsCloseButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        advancedOptionsPopupFrameLayout.setVerticalGroup(
+            advancedOptionsPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, advancedOptionsPopupFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(databaseUrlLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(databaseUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(advancedOptionsPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(databaseDefaultButton)
+                    .addComponent(databaseSetUrlButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(advancedOptionsCloseButton)
+                .addContainerGap())
+        );
+
+        // estEntityPopupFrame.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -578,6 +659,13 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
+        advancedOptionsButton.setText("Advanced");
+        advancedOptionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedOptionsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
@@ -608,11 +696,17 @@ public class PhycusGui extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(haplotypeEntityButton)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(optionsSeparator2))
+                    .addComponent(optionsSeparator2)
+                    .addComponent(optionsSeparator3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(advancedOptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
@@ -639,7 +733,11 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(haplotypeEntityLabel)
                     .addComponent(haplotypeEntityButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(optionsSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(advancedOptionsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
                 .addComponent(optionsCancelButton)
                 .addContainerGap())
         );
@@ -1112,6 +1210,30 @@ public class PhycusGui extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CustomReceiptFolderButtonActionPerformed
 
+    private void advancedOptionsCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedOptionsCloseButtonActionPerformed
+        // hide the window
+		advancedOptionsPopupFrame.setVisible(false);
+    }//GEN-LAST:event_advancedOptionsCloseButtonActionPerformed
+
+    private void databaseDefaultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_databaseDefaultButtonActionPerformed
+		// set the db url to the default
+		prefs.put("PHY_DB_URL", defaultDatabaseURL);
+		
+		// set the textfield
+		databaseUrlTextField.setText(prefs.get("PHY_DB_URL", defaultDatabaseURL));
+    }//GEN-LAST:event_databaseDefaultButtonActionPerformed
+
+    private void databaseSetUrlButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_databaseSetUrlButtonActionPerformed
+        System.out.println(databaseUrlTextField.getText());
+
+		// set the db url to the specified URL
+		prefs.put("PHY_DB_URL", databaseUrlTextField.getText());
+    }//GEN-LAST:event_databaseSetUrlButtonActionPerformed
+
+    private void advancedOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedOptionsButtonActionPerformed
+        advancedOptionsPopupFrame.setVisible(true);
+    }//GEN-LAST:event_advancedOptionsButtonActionPerformed
+
 	// open links to external browser
 	public static void openWebpage(URI uri) {
 		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
@@ -1197,6 +1319,13 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel EstEntityLabel1;
     private javax.swing.JLabel EstEntityLabelCode;
     private javax.swing.JPanel SelectFilePanel;
+    private javax.swing.JButton advancedOptionsButton;
+    private javax.swing.JButton advancedOptionsCloseButton;
+    private javax.swing.JFrame advancedOptionsPopupFrame;
+    private javax.swing.JButton databaseDefaultButton;
+    private javax.swing.JButton databaseSetUrlButton;
+    private javax.swing.JLabel databaseUrlLabel;
+    private javax.swing.JTextField databaseUrlTextField;
     private javax.swing.JCheckBox defaultUploadReceiptCheckBox;
     private javax.swing.JButton estEntityCloseButton;
     private javax.swing.JButton estEntityEnterButton;
@@ -1228,6 +1357,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton optionsCancelButton;
     private javax.swing.JSeparator optionsSeparator1;
     private javax.swing.JSeparator optionsSeparator2;
+    private javax.swing.JSeparator optionsSeparator3;
     public static javax.swing.JTextPane outputTextPane;
     private javax.swing.JButton popCancelButton;
     private javax.swing.JButton popCreateButton;

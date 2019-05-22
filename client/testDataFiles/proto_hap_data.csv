@@ -1,4 +1,4 @@
-Beer License
-AFA, ABCDE, 0.25
-AFA, FGHIJ, 0.25
-AFA, KLMNO, 0.50
+pop=AFA,cohort="Nonsense test",license=BY,resolution=G,blah=blahblah
+ABCDE,0.25
+FGHIJ,0.25
+KLMNO,0.50

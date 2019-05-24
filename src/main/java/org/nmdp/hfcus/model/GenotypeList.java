@@ -1,25 +1,25 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.License;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class GenotypeList implements ICurationDataModel<io.swagger.model.GenotypeList> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private License.TypeOfLicenseEnum license;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Genotype> genotypeList;
-
-    public GenotypeList(){
-        //intentionallyLeftEmpty
-    }
 
     public GenotypeList(io.swagger.model.GenotypeList swaggerObject){
         if (swaggerObject.getLicense() != null) {
@@ -31,30 +31,6 @@ public class GenotypeList implements ICurationDataModel<io.swagger.model.Genotyp
                 genotypeList.add(new Genotype(genotype));
             }
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public License.TypeOfLicenseEnum getLicense() {
-        return license;
-    }
-
-    public void setLicense(License.TypeOfLicenseEnum license) {
-        this.license = license;
-    }
-
-    public List<Genotype> getGenotypeList() {
-        return genotypeList;
-    }
-
-    public void setGenotypeList(List<Genotype> genotypeList) {
-        this.genotypeList = genotypeList;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package org.nmdp.hfcus.model;
 
 import io.swagger.model.AccessData;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.Entity;
@@ -9,12 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Access implements ICurationDataModel<AccessData> {
-    public Access(){
-        //intentionally left empty
-    }
 
-    public Access(AccessData swaggerObject) {
+    Access(AccessData swaggerObject) {
         typeOfAccess = swaggerObject.getTypeOfAccess();
         if (typeOfAccess == null){
             throw new RequiredFieldInvalidException("Requires type of access");
@@ -22,25 +23,9 @@ public class Access implements ICurationDataModel<AccessData> {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String typeOfAccess;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTypeOfAccess() {
-        return typeOfAccess;
-    }
-
-    public void setTypeOfAccess(String typeOfAccess) {
-        this.typeOfAccess = typeOfAccess;
-    }
 
     @Override
     public  AccessData toSwaggerObject(){

@@ -1,5 +1,7 @@
 package org.nmdp.hfcus.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nmdp.hfcus.model.exceptions.RequiredFieldInvalidException;
 
 import javax.persistence.*;
@@ -7,18 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Genotype implements ICurationDataModel<io.swagger.model.Genotype> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long genotypeId;
     private String genotypeString;
     @OneToMany(cascade = CascadeType.ALL)
     private List<GenotypeMethod> genotypingMethods;
-
-    public Genotype(){
-        //intentionally left empty
-    }
 
     public Genotype(io.swagger.model.Genotype swaggerObject){
         genotypeString = swaggerObject.getGenotypeString();
@@ -31,30 +31,6 @@ public class Genotype implements ICurationDataModel<io.swagger.model.Genotype> {
                 genotypingMethods.add(new GenotypeMethod(method));
             }
         }
-    }
-
-    public Long getGenotypeId() {
-        return genotypeId;
-    }
-
-    public void setGenotypeId(Long genotypeId) {
-        this.genotypeId = genotypeId;
-    }
-
-    public String getGenotypeString() {
-        return genotypeString;
-    }
-
-    public void setGenotypeString(String genotypeString) {
-        this.genotypeString = genotypeString;
-    }
-
-    public List<GenotypeMethod> getGenotypingMethods() {
-        return genotypingMethods;
-    }
-
-    public void setGenotypingMethods(List<GenotypeMethod> genotypingMethods) {
-        this.genotypingMethods = genotypingMethods;
     }
 
     @Override

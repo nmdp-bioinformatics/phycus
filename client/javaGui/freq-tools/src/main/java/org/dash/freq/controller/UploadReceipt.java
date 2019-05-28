@@ -19,7 +19,7 @@ import org.dash.freq.view.PhycusGui;
  *
  * @author katrinaeaton
  */
-public class UploadReceipt 
+public class UploadReceipt implements Receipt
 {
 	
 	// access to prefs

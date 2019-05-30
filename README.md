@@ -30,7 +30,7 @@ Use `docker-compose stop` and `docker-compose rm` to stop and remove the db cont
 ### Run the application
 
 #### Special step on windows
-On Windows, you need to change `src/main/resources/application.properties` and replace `localhost` with the IP of your docker machine, then recompile. Use `docker-machine ip` to retrieve it.
+On Windows, you need to start the server using the IP address Docker has assigned. Use `docker-machine ip` to retrieve it. You'll use it to replace `localhost` in `jdbc:mysql://localhost:3306/hfcusdb` when you start your server. (See the command below.)
 
 #### Starting the application
 
@@ -40,6 +40,11 @@ Check your JDK version with `java -version`
 With Java 8:
 ```bash
  java -jar target/service-haplotype-frequency-curation-0.0.1.jar
+```
+
+With Java 8 on Windows:
+```bash
+ java -jar target/service-haplotype-frequency-curation-0.0.1.jar -Dspring.datasource.url=jdbc:mysql://your-ip-address:3306/hfcusdb
 ```
 
 With Java 9:

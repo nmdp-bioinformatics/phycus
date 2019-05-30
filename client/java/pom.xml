@@ -39,7 +39,6 @@
   <modules>
     <module>freq-client</module>
     <module>freq-tools</module>
-    <module>freq-tools-gui</module>
   </modules>
   <properties>
     <maven.compile.source>1.7</maven.compile.source>

@@ -18,7 +18,8 @@
 
     > http://www.gnu.org/licenses/lgpl.html
 
- */
+*/
+
 package org.dash.freq;
 
 import io.swagger.client.ApiException;

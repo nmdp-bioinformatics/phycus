@@ -60,186 +60,174 @@ import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 
-import org.dash.freq.controller.DataChecks;
-
 /**
  * PostPopulationFrequencies
  *
  */
 public class PostPopulationFrequencies implements Callable<Integer> {
 
+  private final File inputFile;
+  private final String gtRegistry;
+  private final String estEntity;
+  private final URL url;
 
-	private final File inputFile;
-	private final String gtRegistry;
-	private final String estEntity;
-	private final URL url;
+  private static final String USAGE = "post-population-frequencies [args]";
 
-	private static final String USAGE = "post-population-frequencies [args]";
-	
-	/**
-	 * Post population frequencies to the frequency curation service
-	 *
-	 * @param inputFile
-	 *            input file
-	 * @param accessId
-	 * @param cohortId
-	 * @throws MalformedURLException
-	 */
-	public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
-			throws MalformedURLException {
-		this.inputFile = inputFile;
-		this.gtRegistry = gtRegistry;
-		this.estEntity = estEntity;
-		if (url == null) {
-			this.url = new URL("http://localhost:8080");
-		} else {
-			this.url = url;
-		}
-	}
+  /**
+   * Post population frequencies to the frequency curation service
+   *
+   * @param inputFile
+   *            input file
+   * @param accessId
+   * @param cohortId
+   * @throws MalformedURLException
+   */
+  public PostPopulationFrequencies(File inputFile, String gtRegistry, String estEntity, URL url)
+      throws MalformedURLException {
+    this.inputFile = inputFile;
+    this.gtRegistry = gtRegistry;
+                this.estEntity = estEntity;
+    if (url == null) {
+      this.url = new URL("http://localhost:8080");
+    } else {
+      this.url = url;
+    }
+  }
 
-	@Override
-	public Integer call() throws Exception {
-		try 
-		{
-			DataChecks dataChecks = new DataChecks();
-			if (dataChecks.populationDataCheck(reader(inputFile)))
-			{
-				postPopulationFrequencies(reader(inputFile));
-			}
-		} catch (Exception ex) {
-            System.out.println(ex); 
-        }
+  @Override
+  public Integer call() throws Exception {
+    postPopulationFrequencies(reader(inputFile));
 
-		return 0;
-	}
+    return 0;
+  }
 
-	public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
-		String row;
-		String[] columns;
+  public void postPopulationFrequencies(BufferedReader reader) throws IOException, ApiException {
+    String row;
+    String[] columns;
 
-		HashMap<String, HaplotypeFrequencyData> populationMap = new HashMap<String, HaplotypeFrequencyData>();
-		HaplotypeFrequencyData haplotypeFrequencyData;
+    HashMap<String, HaplotypeFrequencyData> populationMap = new HashMap<String, HaplotypeFrequencyData>();
+    HaplotypeFrequencyData haplotypeFrequencyData;
 
-		License license = new License();
-		license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
+    License license = new License();
+    license.setTypeOfLicense(TypeOfLicenseEnum.CC0);
 
-		while ((row = reader.readLine()) != null) {
-			columns = row.split(",");
+    while ((row = reader.readLine()) != null) {
+      columns = row.split(",");
 
-			String race = columns[0];
-			String haplotype = columns[1];
-			Double frequency = new Double(columns[2]);
+      String race = columns[0];
+      String haplotype = columns[1];
+      Double frequency = new Double(columns[2]);
 
-			if (populationMap.containsKey(race)) {
-				haplotypeFrequencyData = populationMap.get(race);
-			} else {
-				haplotypeFrequencyData = new HaplotypeFrequencyData();
-				haplotypeFrequencyData.setLicense(license);
-			}
-			
-			HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
-			hapFrequency.setFrequency(new Double(frequency));
-			hapFrequency.setHaplotypeString(haplotype);
-			haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
+      if (populationMap.containsKey(race)) {
+        haplotypeFrequencyData = populationMap.get(race);
+      } else {
+        haplotypeFrequencyData = new HaplotypeFrequencyData();
+        haplotypeFrequencyData.setLicense(license);
+      }
 
-			populationMap.put(race, haplotypeFrequencyData);
-		}
+      HaplotypeFrequency hapFrequency = new HaplotypeFrequency();
+      hapFrequency.setFrequency(new Double(frequency));
+      hapFrequency.setHaplotypeString(haplotype);
+      haplotypeFrequencyData.addHaplotypeFrequencyListItem(hapFrequency);
 
-		reader.close();
-		
-		ApiClient apiClient = new ApiClient();
-		apiClient.setConnectTimeout(60000);
-		apiClient.setReadTimeout(60000);
-		apiClient.setWriteTimeout(60000);
-		apiClient.setBasePath(url.toString());
-		DefaultApi api = new DefaultApi(apiClient);
-		PopulationApi popApi = new PopulationApi(apiClient);
-		CohortApi cohortApi = new CohortApi(apiClient);
-		
-		CohortRequest cohortRequest = new CohortRequest();
-		
-		CohortData cohortData = new CohortData();
-		cohortData.setName(inputFile.getName());
-		cohortData.setGenotypeList(new GenotypeList());
-		
-		cohortRequest.setCohortData(cohortData);
-		
-		System.out.println("Creating cohort: " + cohortData.getName());
+      populationMap.put(race, haplotypeFrequencyData);
+    }
 
-		cohortData = cohortApi.createCohort(cohortRequest);
-		
-		LabelData labelData = new LabelData();
-		Label registryLabel = new Label();
-		registryLabel.setTypeOfLabel("GT_REGISTRY");
-		registryLabel.setValue(gtRegistry);
-		labelData.addLabelListItem(registryLabel);
+    reader.close();
 
-		Label estimatorLabel = new Label();
-		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
-		estimatorLabel.setValue(estEntity);
-		labelData.addLabelListItem(estimatorLabel);
-		
-		for (String populationName : populationMap.keySet()) {
-			HFCurationRequest hfCurationRequest = new HFCurationRequest();
-			PopulationRequest populationRequest = new PopulationRequest();
-			
-			populationRequest.setName(populationName);
-			
-			System.out.println("Creating population: " + populationRequest.getName());
+    ApiClient apiClient = new ApiClient();
+    apiClient.setConnectTimeout(60000);
+    apiClient.setReadTimeout(60000);
+    apiClient.setWriteTimeout(60000);
+    apiClient.setBasePath(url.toString());
+    DefaultApi api = new DefaultApi(apiClient);
+    PopulationApi popApi = new PopulationApi(apiClient);
+    CohortApi cohortApi = new CohortApi(apiClient);
 
-			PopulationData populationData = popApi.createPopulation(populationRequest);
-			
-			hfCurationRequest.setPopulationID(populationData.getId());
-			hfCurationRequest.setCohortID(cohortData.getId());
-			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
+    CohortRequest cohortRequest = new CohortRequest();
 
-			hfCurationRequest.setLabelData(labelData);
+    CohortData cohortData = new CohortData();
+    cohortData.setName(inputFile.getName());
+    cohortData.setGenotypeList(new GenotypeList());
 
-			System.out.println("Submitting frequencies for population: " + populationData.getName());
-			HFCurationResponse response = api.hfcPost(hfCurationRequest);
-		}		
-	}
+    cohortRequest.setCohortData(cohortData);
 
-	/**
-	 * Main.
-	 *
-	 * @param args
-	 *            command line args
-	 * @throws MalformedURLException
-	 */
-	public static void main(final String[] args) throws MalformedURLException {
-		Switch about = new Switch("a", "about", "display about message");
-		Switch help = new Switch("h", "help", "display help message");
-		FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
-		StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
-		StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
-		URLArgument url = new URLArgument("u", "url", "frequency service url", false);
+    System.out.println("Creating cohort: " + cohortData.getName());
 
-		ArgumentList arguments = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
-		CommandLine commandLine = new CommandLine(args);
+    cohortData = cohortApi.createCohort(cohortRequest);
 
-		PostPopulationFrequencies postPopulationFrequencies = null;
-		try {
-			CommandLineParser.parse(commandLine, arguments);
-			if (about.wasFound()) {
-				About.about(System.out);
-				System.exit(0);
-			}
-			if (help.wasFound()) {
-				Usage.usage(USAGE, null, commandLine, arguments, System.out);
-				System.exit(0);
-			}
-			postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
-					estEntity.getValue(), url.getValue());
-		} catch (CommandLineParseException | IllegalArgumentException e) {
-			Usage.usage(USAGE, e, commandLine, arguments, System.err);
-			System.exit(-1);
-		}
-		try {
-			System.exit(postPopulationFrequencies.call());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
+    LabelData labelData = new LabelData();
+    Label registryLabel = new Label();
+    registryLabel.setTypeOfLabel("GT_REGISTRY");
+    registryLabel.setValue(gtRegistry);
+    labelData.addLabelListItem(registryLabel);
+
+    Label estimatorLabel = new Label();
+    estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
+    estimatorLabel.setValue(estEntity);
+    labelData.addLabelListItem(estimatorLabel);
+
+    for (String populationName : populationMap.keySet()) {
+      HFCurationRequest hfCurationRequest = new HFCurationRequest();
+      PopulationRequest populationRequest = new PopulationRequest();
+
+      populationRequest.setName(populationName);
+
+      System.out.println("Creating population: " + populationRequest.getName());
+
+      PopulationData populationData = popApi.createPopulation(populationRequest);
+
+      hfCurationRequest.setPopulationID(populationData.getId());
+      hfCurationRequest.setCohortID(cohortData.getId());
+      hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
+
+      hfCurationRequest.setLabelData(labelData);
+
+      System.out.println("Submitting frequencies for population: " + populationData.getName());
+      HFCurationResponse response = api.hfcPost(hfCurationRequest);
+    }
+  }
+
+  /**
+   * Main.
+   *
+   * @param args
+   *            command line args
+   * @throws MalformedURLException
+   */
+  public static void main(final String[] args) throws MalformedURLException {
+    Switch about = new Switch("a", "about", "display about message");
+    Switch help = new Switch("h", "help", "display help message");
+    FileArgument inputFile = new FileArgument("i", "input-file", "input file, default stdin", true);
+    StringArgument gtRegistry = new StringArgument("r", "registry", "genotype registry", false);
+    StringArgument estEntity = new StringArgument("e", "estimator", "haplotype frequency estimating entity", false);
+    URLArgument url = new URLArgument("u", "url", "frequency service url", false);
+
+    ArgumentList arguments = new ArgumentList(about, help, inputFile, gtRegistry, estEntity, url);
+    CommandLine commandLine = new CommandLine(args);
+
+    PostPopulationFrequencies postPopulationFrequencies = null;
+    try {
+      CommandLineParser.parse(commandLine, arguments);
+      if (about.wasFound()) {
+        About.about(System.out);
+        System.exit(0);
+      }
+      if (help.wasFound()) {
+        Usage.usage(USAGE, null, commandLine, arguments, System.out);
+        System.exit(0);
+      }
+      postPopulationFrequencies = new PostPopulationFrequencies(inputFile.getValue(), gtRegistry.getValue(),
+          estEntity.getValue(), url.getValue());
+    } catch (CommandLineParseException | IllegalArgumentException e) {
+      Usage.usage(USAGE, e, commandLine, arguments, System.err);
+      System.exit(-1);
+    }
+    try {
+      System.exit(postPopulationFrequencies.call());
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
 }

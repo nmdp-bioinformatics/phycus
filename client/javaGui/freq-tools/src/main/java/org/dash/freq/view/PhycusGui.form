@@ -110,7 +110,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="estEntityInstructions2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="of the group performing the genotyping:"/>
+            <Property name="text" type="java.lang.String" value="of the group performing the haplotyping:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="estEntityInstructions3">

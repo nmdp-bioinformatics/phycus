@@ -10,4 +10,4 @@ PHY_RECEIPT_DEFAULT			Boolean: receipt in upload dir?
 PHY_RECEIPT_CUSTOM_FOLDER	Custom set receipt folder
 PHY_FILE_OR_FOLDER			Boolean: true: file, false folder
 PHY_DB_URL					The database URL
-defaultDatabaseURL			default variable: DB URL
+defaultDatabaseURL			default variable: DB URL: PhycusGui.java

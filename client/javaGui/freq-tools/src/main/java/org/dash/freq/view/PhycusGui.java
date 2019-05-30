@@ -166,7 +166,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         estEntityInstructions1.setText("Please enter the ION or other facility identification ");
 
-        estEntityInstructions2.setText("of the group performing the genotyping:");
+        estEntityInstructions2.setText("of the group performing the haplotyping:");
 
         estEntityInstructions3.setText("(This can be changed in the options tab)");
 
@@ -1002,50 +1002,41 @@ public class PhycusGui extends javax.swing.JFrame {
 		String popSearchName = popSearchTextField.getText();
 		String popSearchDescription = "";
 		boolean popFlag = true;
-		
 		List<String> popNames = population.getPopulationNames(populations);
-		System.out.println("pop Name: " + popSearchName);
 		
 		// does this name already exist?		
-		if (popNames.contains(popSearchName))
-		{
-			popFlag = false;
-			
+		if (popNames.contains(popSearchName)) {
+
 			AppendText.appendToPane(popNotificationsTextPane, "The population name already exists", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-			
+
 			javax.swing.JOptionPane.showMessageDialog(this,
 				("The population " + popSearchName + " already exists"),
 				"This population already exists",
 				javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
-		// is the name blank?
-		else if (popSearchName == null || popSearchName.equals(""))
-		{
-			popFlag = false;
-			
+		// the name cannot be blank
+		else if (popSearchName == null || popSearchName.equals("")) {
 			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be blank", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-				
+
 			javax.swing.JOptionPane.showMessageDialog(this,
 				("The population name cannot be blank"),
 				 "Houston, we have a problem",
 				 javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		
+
 		// if name does not exist ask for a description
-		else
-		{
+		else {
 			// popup for description
 			popSearchDescription = javax.swing.JOptionPane
 				.showInputDialog(this, "Please enter a brief description of your population:");
-			
+
 			// if description is empty
-			if(popSearchDescription == null || popSearchDescription.equals(""))
-			{
-				popFlag = false;
-				
+			if(popSearchDescription == null || popSearchDescription.equals("")) {
 				AppendText.appendToPane(popNotificationsTextPane, "The population description cannot be blank", Color.RED);
 				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 
@@ -1053,53 +1044,38 @@ public class PhycusGui extends javax.swing.JFrame {
 					("The population description cannot be blank"),
 					 "Houston, we have a problem",
 					 javax.swing.JOptionPane.ERROR_MESSAGE);
+				return;
 			}
 		}
 
-		System.out.println("pop Desc: " + popSearchDescription);
+		System.out.println("pop Desc: " + popSearchDescription);		
 
-		// upload pop name / description
-		if (popFlag)
-		{
-			try 
-			{ 
-				// create new population in db
-				population.createNewPopulation(popSearchName, popSearchDescription);
-			} 
-			catch (Exception ex) 
-			{
-				System.out.println(ex);
-				popFlag = false;
-				
-				javax.swing.JOptionPane.showMessageDialog(this,
-					("The population was not created\n" + ex),
-					"Houston, we have a problem",
-					javax.swing.JOptionPane.ERROR_MESSAGE);
-			}
-			if (popFlag)
-			{
-				// notify that new pop has been created
-				AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
-				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+		try { 
+			// create new population in db
+			population.createNewPopulation(popSearchName, popSearchDescription);
+		} catch (Exception ex) {
+			System.out.println(ex);
 
-				// clear pop textpane
-				popResultsTextPane.setText("");
-
-				// redownload db in background
-				new Thread(getPops).start();
-
-				// clear search bar
-				popSearchTextField.setText("");
-			}
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population was not created\n" + ex),
+				"Houston, we have a problem",
+				javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		else
-		{
-			// notify that new pop has not been created
-			AppendText.appendToPane(popNotificationsTextPane, ("No population created."), Color.BLACK);
-			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-		}
+			
+		// notify that new pop has been created
+		AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
+		AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 
-		// refresh population list
+		// clear pop textpane
+		popResultsTextPane.setText("");
+
+		// redownload db in background
+		new Thread(getPops).start();
+
+		// clear search bar
+		popSearchTextField.setText("");
+			
     }//GEN-LAST:event_popCreateButtonActionPerformed
 
     private void popCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCancelButtonActionPerformed

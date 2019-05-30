@@ -20,18 +20,24 @@ import java.net.ConnectException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.prefs.Preferences;
 import org.dash.freq.view.AppendText;
 
 import org.dash.freq.view.PhycusGui;
+
 /**
  *
  * @author katrinaeaton
  */
 public class Population 
 {
+	// access to prefs
+	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
-	private final String url = new String("http://localhost:8080");
+	private final String url = new String(prefs.get("PHY_DB_URL", PhycusGui.defaultDatabaseURL));
+	
 //	public List<PopulationData> popList = new ArrayList<>();
 //	ApiClient apiClient = new ApiClient();
 //	private DefaultApi api;
@@ -57,7 +63,7 @@ public class Population
 		System.out.println("popApi set");
 		
 		// retrieved population storage
-		List<PopulationData> popList = new ArrayList<>();
+		List<PopulationData> popList; //= new ArrayList<>();
 
 		try 
 		{
@@ -69,14 +75,13 @@ public class Population
 
 			System.out.println("popList: " + popList);
 			
-			
 			if (popList == null || popList.isEmpty())
 			{
 				AppendText.appendToPane(PhycusGui.outputTextPane, "No populations retrieved from the database", Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 				AppendText.appendToPane(PhycusGui.outputTextPane, "Check Populations tab to confirm populations exist", Color.RED);
 				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				throw new NullPointerException("No populations retrieved from the database"); 
+				popList = Collections.emptyList();
 			}
 		}
 		catch (ApiException ex) 
@@ -94,9 +99,9 @@ public class Population
 	{
 		List<String> popNames = new ArrayList<>();
 		
-		for (PopulationData populationName : populations) 
+		for (PopulationData population : populations) 
 		{
-			popNames.add(populationName.getName());
+			popNames.add(population.getName());
 		}
 		
 		System.out.println("popNames: " + popNames);
@@ -121,6 +126,8 @@ public class Population
 	
 	public void createNewPopulation(String popName, String popDesc)
 	{
+		
+
 		// open connection to the db
 		ApiClient apiClient = new ApiClient();
 		apiClient.setConnectTimeout(60000);
@@ -145,4 +152,20 @@ public class Population
 		try { popApi.createPopulation(populationRequest); }
 		catch (Exception ex) { ex.printStackTrace(); }
 	}
+	
+//	public void popWithDescription()
+//	{
+//		if (popName == null || popName.equals(""))
+//		{
+//			popFlag = false;
+//			
+//			AppendText.appendToPane(PhycusGui.popNotificationsTextPane, "The population name cannot be blank", Color.RED);
+//			AppendText.appendToPane(PhycusGui.popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+//				
+//			javax.swing.JOptionPane.showMessageDialog(this,
+//				("The population name cannot be blank"),
+//				 "Houston, we have a problem",
+//				 javax.swing.JOptionPane.ERROR_MESSAGE);
+//		}
+//	}
 }

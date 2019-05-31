@@ -227,12 +227,9 @@ public class HeaderProcessor {
 	private void printHeader(String header, String headerValue, boolean valid)
 	{
 		AppendText.appendToPane(PhycusGui.outputTextPane, fullHeaderTitles.get(header), Color.BLACK);
-		if (valid)
-		{
+		if (valid) {
 			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.BLACK);
-		}
-		else
-		{
+		} else {
 			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.RED);
 		}
 		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);

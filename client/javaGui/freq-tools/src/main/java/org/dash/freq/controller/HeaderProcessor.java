@@ -44,8 +44,8 @@ public class HeaderProcessor {
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 
-	public HeaderProcessor()
-	{
+	public HeaderProcessor() {
+		
 		// set for accepted license and resolution types
 		this.licenses = new HashSet(Arrays.asList(licenseTypes));
 		this.resolutions = new HashSet(Arrays.asList(resolutionTypes));
@@ -53,12 +53,10 @@ public class HeaderProcessor {
 		// set of populations pulled from db
 		Population population = new Population();
 		
-		try 
-		{
+		try {
 			List<PopulationData> populations = population.getPopulationsFromDB(); 
 			this.populationNames = population.getPopulationNames(populations);
-		}
-		catch (Exception ex) { ex.printStackTrace(); }
+		} catch (Exception ex) { ex.printStackTrace(); }
 		
 		// full header titles for printing
 		this.fullHeaderTitles.put("pop", "Population: ");
@@ -71,8 +69,7 @@ public class HeaderProcessor {
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
 												List<Integer> errorCodeList)
-			throws IOException, ApiException 
-	{
+			throws IOException, ApiException {
 		// header variables
 		String header;
 		String[] attributes;
@@ -88,8 +85,7 @@ public class HeaderProcessor {
 		attributes = header.split(",");
 		
 		// break down the header
-		for (int i = 0; i < attributes.length; i++)
-		{
+		for (int i = 0; i < attributes.length; i++) {
 			// regex break
 			String[] parsedAtt = parseAttribute(attributes[i]);
 			
@@ -98,8 +94,7 @@ public class HeaderProcessor {
 		}
 		
 		// check for population - mandatory
-		if (headerContent.containsKey("pop")) 
-		{
+		if (headerContent.containsKey("pop")) {
 			// added .toString() because it's pulling unquoted text from the header
 			// and checkPop doesn't read the values as strings
 			flags.add(checkPop(headerContent.get("pop").toString(), errorCodeList));
@@ -107,23 +102,20 @@ public class HeaderProcessor {
 		else errorCodeList.add(4);
 			
 		// check for cohort - mandatory
-		if (headerContent.containsKey("cohort")) 
-		{
+		if (headerContent.containsKey("cohort")) {
 			flags.add(checkCohort(headerContent.get("cohort"), errorCodeList));
 		}
 		else errorCodeList.add(5);
 		
 		// check header for license type if present
-		if (headerContent.containsKey("license"))
-		{
+		if (headerContent.containsKey("license")) {
 			System.out.println("license: " + headerContent.get("license"));
 			flags.add(checkLicenseType(headerContent.get("license")
 				.toString(), errorCodeList));
 		}
 		
 		// check header for resolution type if present
-		if (headerContent.containsKey("resolution")) 
-		{
+		if (headerContent.containsKey("resolution")) {
 			System.out.println("resolution: " + headerContent.get("resolution"));
 			flags.add(checkResolutionType(headerContent.get("resolution")
 				.toString(), errorCodeList));
@@ -151,16 +143,14 @@ public class HeaderProcessor {
 		return headerContent;
 	}
 	
-	private String[] parseAttribute(String att)
-	{
+	private String[] parseAttribute(String att) {
 		// pattern to match and string to check
 		String[] parsedAttribute = new String[2];
 		Pattern p = Pattern.compile("^([a-zA-Z]+)=(.+)$");
 		Matcher m = p.matcher(att);
 		
 		// if match is found
-		if (m.find())
-		{
+		if (m.find()) {
 			parsedAttribute[0] = m.group(1);
 			parsedAttribute[1] = m.group(2);
 		}
@@ -168,8 +158,7 @@ public class HeaderProcessor {
 		return parsedAttribute;
 	}
 	
-	private String checkPop(String popValue, List<Integer> errorCodeList)
-	{
+	private String checkPop(String popValue, List<Integer> errorCodeList) {
 		boolean flag = false;
 		
 		// does the population already exist in the db?
@@ -181,13 +170,11 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	private String checkCohort(String cohortValue, List<Integer> errorCodeList)
-	{
+	private String checkCohort(String cohortValue, List<Integer> errorCodeList) {
 		boolean flag = true;
 		
 		// make sure the cohort data will fit in the database
-		if (cohortValue.length() >= 255) 
-		{
+		if (cohortValue.length() >= 255) {
 			errorCodeList.add(6); 
 			flag = false;
 		}
@@ -197,8 +184,7 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	private String checkLicenseType(String selectedLicense, List<Integer> errorCodeList)
-	{
+	private String checkLicenseType(String selectedLicense, List<Integer> errorCodeList) {
 		boolean flag = false;
 		
 		// does the license match one of the accepted license types?
@@ -210,8 +196,7 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	private String checkResolutionType(String selectedResolution, List<Integer> errorCodeList)
-	{
+	private String checkResolutionType(String selectedResolution, List<Integer> errorCodeList) {
 		boolean flag = false;
 		
 		// does the resolution match one of the accepted resolution types?

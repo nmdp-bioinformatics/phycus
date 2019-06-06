@@ -46,11 +46,11 @@ public class ReceiptObserver extends Observer{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH-mm-ss");
 
         LocalDate dateStamp = LocalDate.now();
-        String timeStamp = LocalTime.now().format(dtf).toString();
+        String timeStamp = LocalTime.now().format(dtf);
 		
 		// create receipt file name from source file name
         String receiptFileName = incFileName.toString()
-			.substring(0, (incFileName.length()-3)) + "txt";
+			.substring(0, (incFileName.toString().length()-3)) + "txt";
 
         System.out.println(receiptFileName);
         

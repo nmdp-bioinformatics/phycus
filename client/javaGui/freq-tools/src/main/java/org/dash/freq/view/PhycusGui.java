@@ -24,6 +24,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import org.dash.freq.controller.BatchUploader;
+import org.dash.freq.controller.ReceiptObserver;
+import org.dash.freq.controller.Subject;
 import org.dash.freq.model.Population;
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -1287,6 +1289,12 @@ public class PhycusGui extends javax.swing.JFrame {
 				new PhycusGui().setVisible(true);
 			}
 		});
+		
+		/* Instantiate Observer and kin */
+		Subject subject = new Subject();
+
+		new MainTextObserver(subject);
+		new ReceiptObserver(subject);
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

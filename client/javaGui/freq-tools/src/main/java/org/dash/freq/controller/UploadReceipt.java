@@ -19,8 +19,7 @@ import org.dash.freq.view.PhycusGui;
  *
  * @author katrinaeaton
  */
-public class UploadReceipt 
-{
+public class UploadReceipt {
 	
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);

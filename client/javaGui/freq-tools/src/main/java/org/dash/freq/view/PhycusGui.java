@@ -60,6 +60,10 @@ public class PhycusGui extends javax.swing.JFrame {
 	
 	// initially populated when program open population tab
 	private List<PopulationData> populations;
+	
+	// Observer
+	Subject subject;
+		
 	/**
 	 * Creates new form PhycusGui
 	 */
@@ -806,6 +810,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			
             fileLocationTextArea.setText( absolutePath );
 			prefs.put("PHY_INPUT_DIR", absolutePath);
+			System.out.println(parentFolder);
 			
 			// save parent folder location for receipt if individual file selected
 			if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true) == true)
@@ -836,6 +841,9 @@ public class PhycusGui extends javax.swing.JFrame {
 				// for a single file
 				if (folder == false)
 				{
+					// set up a new Receipt Observer
+					ReceiptObserver ro = new ReceiptObserver(subject, selectedFile);
+					
 					// reset TextPane
 					outputTextPane.setText("");
 					
@@ -1290,11 +1298,10 @@ public class PhycusGui extends javax.swing.JFrame {
 			}
 		});
 		
-		/* Instantiate Observer and kin */
+		// Start Output Text Pane observer
 		Subject subject = new Subject();
-
 		new MainTextObserver(subject);
-		new ReceiptObserver(subject);
+		
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -58,8 +58,7 @@ public class BatchUploader {
 					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
 					// receipt name
-					UploadReceipt receipt = new UploadReceipt();
-					System.out.println(receipt.fileName(fileName));
+					
 					
 					// set file and process
 					ppf.setFile(file);

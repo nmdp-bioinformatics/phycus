@@ -34,16 +34,6 @@ public class Subject {
 	
 	public void setColor(String color) {
 		this.color = color.toUpperCase();
-		notifyAllObservers();
-	}
-	
-	public File getFile() {
-		return file;
-	}
-	
-	public void setFile(File file) {
-		this.file = file;
-		notifyAllObservers();
 	}
 	
 	public void attach(Observer observer) {

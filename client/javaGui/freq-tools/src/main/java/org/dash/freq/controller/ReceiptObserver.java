@@ -35,25 +35,26 @@ public class ReceiptObserver extends Observer{
 	
 		// name the text file
 		this.textFileName = fileName(file);
+		System.out.println("textFileName: " + textFileName);
 		
 		// where are we putting the receipt? Default folder or custom?
 		Boolean defaultFilePath = prefs.getBoolean("PHY_RECEIPT_DEFAULT", true);
 		
 		// create the full file path
-		if(defaultFilePath){
-			this.filePath = file.getParent() 
-				+ System.getProperty("file.separator")
-				+ textFileName;
+//		if(defaultFilePath){
+//			this.filePath = file.getParent() 
+//				+ System.getProperty("file.separator")
+//				+ textFileName;
 //		} else {
 //			this.filePath = prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", PhycusGui.userDocumentsPath) 
 //				+ System.getProperty("file.separator")
 //				+ textFileName;
-		}
+//		}
 		
-		System.out.println(filePath);
+//		System.out.println("File path: " + filePath);
 		
 		// create destination file
-		destinationFile = new File(filePath);
+		destinationFile = new File(textFileName);
 		
 		// if file doesnt exists, then create it
 		if (!destinationFile.exists()) {
@@ -73,9 +74,13 @@ public class ReceiptObserver extends Observer{
 			System.out.println("Filewriter exception: " + ex);
 		}
 		
+		System.out.println("Trying to create object and attach listener");
 		// attach listener
+		try {
 		this.subject = sub;
 		subject.attach(this);
+		} catch (Exception ex) { ex.printStackTrace(); }
+		
 	}
 	
 	public String fileName(File incFileName) 

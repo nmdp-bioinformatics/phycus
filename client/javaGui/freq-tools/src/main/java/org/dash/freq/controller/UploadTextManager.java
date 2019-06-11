@@ -17,11 +17,13 @@ import java.util.Observable;
 public class UploadTextManager extends Observable{
 
 	// trying to keep this vaguely thread safe
-	private List text = Collections.synchronizedList(new ArrayList(2));
+	private List text = Collections.synchronizedList(new ArrayList(3));
 	
-	public void setLine(String line, String color) {
+	public void setLine(String line, String color, Boolean lineBreak) {
 		text.add(0, line);
 		text.add(1, color);
+		text.add(2, lineBreak);
+		
 		setChanged();
 		notifyObservers(text);
 	}

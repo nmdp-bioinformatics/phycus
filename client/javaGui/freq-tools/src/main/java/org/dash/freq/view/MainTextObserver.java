@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JTextPane;
 import org.dash.freq.controller.UploadTextManager;
 
 /**
  *
  * @author katrinaeaton
  */
-public class MainTextObserver implements java.util.Observer{
+public class MainTextObserver implements Observer{
 	public MainTextObserver(UploadTextManager sub)
 	{
 
@@ -38,6 +37,10 @@ public class MainTextObserver implements java.util.Observer{
 		}
 		
 		AppendText.appendToPane(PhycusGui.outputTextPane, text.get(0).toString(), color);
-		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		
+		// if end of line, append a new line
+		if (Boolean.valueOf(text.get(2).toString())) {
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		}
 	}
 }

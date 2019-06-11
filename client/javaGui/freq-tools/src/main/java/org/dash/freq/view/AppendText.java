@@ -21,6 +21,8 @@ public class AppendText{
 	{
 
 	}
+	// code shamelessly ganked from:
+	// https://stackoverflow.com/questions/9567028/coloring-texts-in-java
 	
 	public static void appendToPane(JTextPane tp, String msg, Color c)
     {

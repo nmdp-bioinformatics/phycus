@@ -24,7 +24,7 @@ import org.dash.freq.view.PhycusGui;
  *
  * @author katrinaeaton
  */
-//public class ReceiptObserver extends Observer{
+
 public class ReceiptObserver implements Observer{
 	
 	private String textFileName;

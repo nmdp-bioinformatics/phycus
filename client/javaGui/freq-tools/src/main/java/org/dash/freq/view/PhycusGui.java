@@ -842,7 +842,8 @@ public class PhycusGui extends javax.swing.JFrame {
 				if (folder == false)
 				{
 					// set up a new Receipt Observer
-					new ReceiptObserver(subject, selectedFile);
+					ReceiptObserver ro = new ReceiptObserver(subject, selectedFile);
+					subject.attach(ro);
 					
 					// reset TextPane
 					outputTextPane.setText("");

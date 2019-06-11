@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
+//import java.util.Observer;
 import org.dash.freq.view.PhycusGui;
 
 /**
@@ -21,6 +22,7 @@ import org.dash.freq.view.PhycusGui;
  * @author katrinaeaton
  */
 public class ReceiptObserver extends Observer{
+//public class ReceiptObserver implements Observer{
 	
 	private String textFileName;
 	private String filePath;
@@ -57,16 +59,16 @@ public class ReceiptObserver extends Observer{
 		destinationFile = new File(textFileName);
 		
 		// if file doesnt exists, then create it
-		if (!destinationFile.exists()) {
+//		if (!destinationFile.exists()) {
 			try { destinationFile.createNewFile(); }
 			catch(Exception ex){ ex.printStackTrace(); }
-		}
+//		}
 		System.out.println("created file");
 
 		// get date stamp & write it to the file
         LocalDate dateStamp = LocalDate.now();
 		
-		try(FileWriter fw = new FileWriter(destinationFile, true);
+		try(FileWriter fw = new FileWriter(destinationFile, false);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){
 			pw.println(dateStamp);
@@ -78,7 +80,7 @@ public class ReceiptObserver extends Observer{
 		// attach listener
 		try {
 		this.subject = sub;
-		subject.attach(this);
+//		subject.attach(this);
 		} catch (Exception ex) { ex.printStackTrace(); }
 		
 	}

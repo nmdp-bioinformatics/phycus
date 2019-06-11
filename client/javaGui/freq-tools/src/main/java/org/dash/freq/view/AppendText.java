@@ -12,22 +12,14 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
-import org.dash.freq.controller.Observer;
-import org.dash.freq.controller.Subject;
 /**
  *
  * @author katrinaeaton
  */
-public class AppendText extends Observer{
-	public AppendText(Subject subject)
+public class AppendText{
+	public AppendText()
 	{
-		this.subject = subject;
-		this.subject.attach(this);
-	}
-	
-	@Override
-	public void update() {
-		
+
 	}
 	
 	public static void appendToPane(JTextPane tp, String msg, Color c)

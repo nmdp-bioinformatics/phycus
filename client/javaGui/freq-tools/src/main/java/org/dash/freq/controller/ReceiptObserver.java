@@ -13,16 +13,19 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
-//import java.util.Observer;
+import java.util.Observable;
+import java.util.Observer;
 import org.dash.freq.view.PhycusGui;
 
 /**
  *
  * @author katrinaeaton
  */
-public class ReceiptObserver extends Observer{
-//public class ReceiptObserver implements Observer{
+//public class ReceiptObserver extends Observer{
+public class ReceiptObserver implements Observer{
 	
 	private String textFileName;
 	private String filePath;
@@ -31,7 +34,7 @@ public class ReceiptObserver extends Observer{
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
-	public ReceiptObserver(Subject sub, File file)
+	public ReceiptObserver(UploadTextManager sub, File file)
 	{
 		
 	
@@ -76,12 +79,12 @@ public class ReceiptObserver extends Observer{
 			System.out.println("Filewriter exception: " + ex);
 		}
 		
-		System.out.println("Trying to create object and attach listener");
+//		System.out.println("Trying to create object and attach listener");
 		// attach listener
-		try {
-		this.subject = sub;
-//		subject.attach(this);
-		} catch (Exception ex) { ex.printStackTrace(); }
+//		try {
+//		this.upTextMgr = sub;
+//		upTextMgr.attach(this);
+//		} catch (Exception ex) { ex.printStackTrace(); }
 		
 	}
 	
@@ -97,13 +100,17 @@ public class ReceiptObserver extends Observer{
     }
 
 	@Override
-	public void update() {
+	public void update(Observable sub, Object arg) {
 		
+		List text = new ArrayList();
+		text = (List) arg;
+		
+		System.out.println("Receipt observer added");
 		
 		try(FileWriter fw = new FileWriter(destinationFile, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){
-			pw.println(subject.getLine());
+			pw.println(text.get(0).toString());
 		} catch( IOException ex ) {
 			System.out.println(ex);
 		}

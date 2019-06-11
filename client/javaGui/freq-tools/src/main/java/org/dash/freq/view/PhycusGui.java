@@ -25,7 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.dash.freq.controller.BatchUploader;
 import org.dash.freq.controller.ReceiptObserver;
-import org.dash.freq.controller.Subject;
+import org.dash.freq.controller.UploadTextManager;
 import org.dash.freq.model.Population;
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -62,7 +62,8 @@ public class PhycusGui extends javax.swing.JFrame {
 	private List<PopulationData> populations;
 	
 	// Observer
-	Subject subject;
+	UploadTextManager upTextMgr = new UploadTextManager();
+	
 		
 	/**
 	 * Creates new form PhycusGui
@@ -70,6 +71,8 @@ public class PhycusGui extends javax.swing.JFrame {
 	public PhycusGui() 
 	{
 		initComponents();
+		MainTextObserver mto = new MainTextObserver(upTextMgr);
+		upTextMgr.addObserver(mto);
 	}
 
 	/**
@@ -842,18 +845,20 @@ public class PhycusGui extends javax.swing.JFrame {
 				if (folder == false)
 				{
 					// set up a new Receipt Observer
-					ReceiptObserver ro = new ReceiptObserver(subject, selectedFile);
-					subject.attach(ro);
+					ReceiptObserver ro = new ReceiptObserver(upTextMgr, selectedFile);
+					try { upTextMgr.addObserver(ro); }
+					catch (Exception ex) { System.out.println("Error adding observer"); ex.printStackTrace(); }
 					
 					// reset TextPane
 					outputTextPane.setText("");
 					
 					// list file name
-					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
-					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+//					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
+//					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
+					upTextMgr.setLine((selectedFile + ":"), "blue");
 					
 					// append to receipt
-					if (prefs.getBoolean("PHY_RECEIPT", true)) {}
+//					if (prefs.getBoolean("PHY_RECEIPT", true)) {}
 					
 					
 					// run as background thread so TextPane updates
@@ -866,6 +871,8 @@ public class PhycusGui extends javax.swing.JFrame {
 									prefs.get("PHY_EST_ENTITY", null));
 								ppf.setFile(selectedFile);
 								ppf.call();
+								upTextMgr.deleteObserver(ro);
+
 							} catch (Exception ex) { ex.printStackTrace(); }
 						}
 					};
@@ -1300,8 +1307,8 @@ public class PhycusGui extends javax.swing.JFrame {
 		});
 		
 		// Start Output Text Pane observer
-		Subject subject = new Subject();
-		new MainTextObserver(subject);
+//		UploadTextManager upTextMgr = new UploadTextManager();
+//		new MainTextObserver(upTextMgr);
 		
 	}
 

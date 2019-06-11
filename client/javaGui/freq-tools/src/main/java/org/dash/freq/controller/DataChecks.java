@@ -36,6 +36,9 @@ import org.dash.freq.view.PhycusGui;
 public class DataChecks {
 
 	public BigDecimal freqTotal;
+	
+	// Observable
+	UploadTextManager upTextMgr = UploadTextManager.getInstance();
 
 	public DataChecks() {
 

@@ -15,9 +15,20 @@ import java.util.Observable;
  * @author katrinaeaton
  */
 public class UploadTextManager extends Observable{
+	
+	// make it a Singleton
+	private static UploadTextManager instance = new UploadTextManager();
 
 	// trying to keep this vaguely thread safe
 	private List text = Collections.synchronizedList(new ArrayList(3));
+	
+	// prevent the class from being instantiated
+	private UploadTextManager(){}
+	
+	//Get the only object available
+	public static UploadTextManager getInstance(){
+		return instance;
+	}
 	
 	public void setLine(String line, String color, Boolean lineBreak) {
 		text.add(0, line);

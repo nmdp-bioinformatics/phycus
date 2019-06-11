@@ -26,6 +26,9 @@ public class BatchUploader {
 	private String estEntity = prefs.get("PHY_EST_ENTITY", null);
 	private PostPopulationFrequencies ppf;
 	
+	// Observable
+	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	
 	public BatchUploader ()
 	{
 	

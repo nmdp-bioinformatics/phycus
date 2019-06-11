@@ -61,8 +61,8 @@ public class PhycusGui extends javax.swing.JFrame {
 	// initially populated when program open population tab
 	private List<PopulationData> populations;
 	
-	// Observer
-	UploadTextManager upTextMgr = new UploadTextManager();
+	// Observable
+	UploadTextManager upTextMgr = UploadTextManager.getInstance();
 	
 		
 	/**
@@ -853,8 +853,6 @@ public class PhycusGui extends javax.swing.JFrame {
 					outputTextPane.setText("");
 					
 					// list file name
-//					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
-//					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
 					upTextMgr.setLine((selectedFile + ":"), "blue", true);
 					
 					// append to receipt

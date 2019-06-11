@@ -44,6 +44,9 @@ public class HeaderProcessor {
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 
+	// Observable
+	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	
 	public HeaderProcessor() {
 		
 		// set for accepted license and resolution types

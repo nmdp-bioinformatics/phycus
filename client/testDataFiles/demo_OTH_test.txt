@@ -1,2 +1,5 @@
 2019-06-11
 /Users/katrinaeaton/Dropbox/Nerding/Java/CHORI/phycus/client/testDataFiles/demo_OTH_test.csv:
+Population: OTH
+Cohort: "Demo test data"
+Haplotyping group: CHORI

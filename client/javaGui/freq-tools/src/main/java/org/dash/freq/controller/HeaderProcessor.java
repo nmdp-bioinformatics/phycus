@@ -214,13 +214,16 @@ public class HeaderProcessor {
 	// verbose option, one line per element
 	private void printHeader(String header, String headerValue, boolean valid)
 	{
-		AppendText.appendToPane(PhycusGui.outputTextPane, fullHeaderTitles.get(header), Color.BLACK);
+//		AppendText.appendToPane(PhycusGui.outputTextPane, fullHeaderTitles.get(header), Color.BLACK);
+//		upTextMgr.setLine((fullHeaderTitles.get(header)), "black", false);
 		if (valid) {
-			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.BLACK);
+//			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.BLACK);
+			upTextMgr.setLine((fullHeaderTitles.get(header) + headerValue), "black", true);
 		} else {
-			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.RED);
+//			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.RED);
+			upTextMgr.setLine((fullHeaderTitles.get(header) + headerValue), "red", true);
 		}
-		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+//		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
 
 	}
 }

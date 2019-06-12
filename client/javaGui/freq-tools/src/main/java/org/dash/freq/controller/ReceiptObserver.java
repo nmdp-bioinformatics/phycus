@@ -31,6 +31,11 @@ public class ReceiptObserver implements Observer{
 	private String filePath;
 	private File destinationFile;
 	
+	// date/time stamps
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH-mm-ss");
+	LocalDate dateStamp = LocalDate.now();
+	String timeStamp = LocalTime.now().format(dtf);
+	
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
@@ -56,8 +61,6 @@ public class ReceiptObserver implements Observer{
 //				+ textFileName;
 //		}
 		
-//		System.out.println("File path: " + filePath);
-		
 		// create destination file
 		destinationFile = new File(textFileName);
 		
@@ -69,30 +72,21 @@ public class ReceiptObserver implements Observer{
 		System.out.println("created file");
 
 		// get date stamp & write it to the file
-        LocalDate dateStamp = LocalDate.now();
-		
 		try(FileWriter fw = new FileWriter(destinationFile, false);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){
-			pw.println(dateStamp);
+			pw.println(dateStamp + " " + timeStamp);
 		} catch( IOException ex ) {
 			System.out.println("Filewriter exception: " + ex);
-		}
-		
-//		System.out.println("Trying to create object and attach listener");
-		// attach listener
-//		try {
-//		this.upTextMgr = sub;
-//		upTextMgr.attach(this);
-//		} catch (Exception ex) { ex.printStackTrace(); }
-		
+		}		
 	}
 	
 	public String fileName(File incFileName) 
     {
 		// create receipt file name from source file name
         String receiptFileName = incFileName.toString()
-			.substring(0, (incFileName.toString().length()-3)) + "txt";
+			.substring(0, (incFileName.toString().length()-4)) 
+			+ "_" + dateStamp + "_" + timeStamp + ".txt";
 
         System.out.println(receiptFileName);
         

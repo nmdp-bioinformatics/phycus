@@ -20,7 +20,7 @@ public class UploadTextManager extends Observable{
 	private static UploadTextManager instance = new UploadTextManager();
 
 	// trying to keep this vaguely thread safe
-	private List text = Collections.synchronizedList(new ArrayList(3));
+	private List text = Collections.synchronizedList(new ArrayList(2));
 	
 	// prevent the class from being instantiated
 	private UploadTextManager(){}
@@ -30,10 +30,9 @@ public class UploadTextManager extends Observable{
 		return instance;
 	}
 	
-	public void setLine(String line, String color, Boolean lineBreak) {
+	public void setLine(String line, String color) {
 		text.add(0, line);
 		text.add(1, color);
-		text.add(2, lineBreak);
 		
 		setChanged();
 		notifyObservers(text);

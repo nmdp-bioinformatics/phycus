@@ -137,9 +137,9 @@ public class DataChecks {
 		// if frequencies total to 0 report total
 		if (freqTotal.compareTo(targetFrequency) == 0)
 		{
-			AppendText.appendToPane(PhycusGui.outputTextPane, ("Frequency total: " + freqTotal), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine(("Frequency total: " + freqTotal), "black");
 		}
+		
 		// if frequency over 1.0, but under 1.01, give warning
 		// if frequencies less than 0, give warning
 		else if (freqTotal.compareTo(targetFrequency) < 0 || freqTotal.compareTo(maxFrequency) < 0)
@@ -157,19 +157,17 @@ public class DataChecks {
 		// if there are warnings, print out the warnings to the gui
 		if (!warningCodeList.isEmpty()) 
 		{
+			upTextMgr.setLine("Warnings:", "black");
+
 			for (int x:warningCodeList)
 			{
 				System.out.println("* " + ErrorCodes.warningList().get(x));
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Warnings: ", Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.warningList().get(x), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				upTextMgr.setLine(("* " + ErrorCodes.warningList().get(x)), "black");
+
 				if (x == 2)
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency total: " + freqTotal), Color.BLACK);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency sum will be normalized by the server to 1.0."), Color.BLACK);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+					upTextMgr.setLine(("  - Frequency total: " + freqTotal), "black");
+					upTextMgr.setLine("  - Frequency sum will be normalized by the server to 1.0.", "black");
 				}
 			}
 		}
@@ -177,22 +175,17 @@ public class DataChecks {
 		// if there are errors, print out the errors to the gui
 		if (!errorCodeList.isEmpty()) 
 		{
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Errors: ", Color.RED);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine("Errors:", "red");
 				
 			for (int x:errorCodeList)
 			{
 				System.out.println("* " + ErrorCodes.errorList().get(x));
-
-				AppendText.appendToPane(PhycusGui.outputTextPane, "* " + ErrorCodes.errorList().get(x), Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				upTextMgr.setLine(("* " + ErrorCodes.errorList().get(x)), "red");
 				
 				// frequency total error
 				if (x == 2)
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Frequency totals: " + freqTotal), Color.RED);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
+					upTextMgr.setLine(("  - Frequency totals: " + freqTotal), "red");
 				}
 				
 				// haplotype consistency error

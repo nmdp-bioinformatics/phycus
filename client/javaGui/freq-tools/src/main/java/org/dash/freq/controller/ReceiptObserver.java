@@ -105,8 +105,6 @@ public class ReceiptObserver implements Observer{
 		List text = new ArrayList();
 		text = (List) arg;
 		
-		System.out.println("Receipt observer added");
-		
 		try(FileWriter fw = new FileWriter(destinationFile, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){

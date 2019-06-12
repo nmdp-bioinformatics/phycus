@@ -33,14 +33,10 @@ public class MainTextObserver implements Observer{
 			Field field = Class.forName("java.awt.Color").getField(text.get(1).toString());
 			color = (Color)field.get(null);
 		} catch (Exception e) {
-			color = null; // Not defined
+			color = Color.BLACK; // Not defined
 		}
 		
 		AppendText.appendToPane(PhycusGui.outputTextPane, text.get(0).toString(), color);
-		
-		// if end of line, append a new line
-		if (Boolean.valueOf(text.get(2).toString())) {
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-		}
+		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);	
 	}
 }

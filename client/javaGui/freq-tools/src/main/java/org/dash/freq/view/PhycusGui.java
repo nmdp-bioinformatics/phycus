@@ -853,11 +853,7 @@ public class PhycusGui extends javax.swing.JFrame {
 					outputTextPane.setText("");
 					
 					// list file name
-					upTextMgr.setLine((selectedFile + ":"), "blue", true);
-					
-					// append to receipt
-//					if (prefs.getBoolean("PHY_RECEIPT", true)) {}
-					
+					upTextMgr.setLine((selectedFile + ":"), "blue");
 					
 					// run as background thread so TextPane updates
 					Runnable fileUpload = new Runnable() 
@@ -869,6 +865,7 @@ public class PhycusGui extends javax.swing.JFrame {
 									prefs.get("PHY_EST_ENTITY", null));
 								ppf.setFile(selectedFile);
 								ppf.call();
+								System.out.println("Number of observers: " + upTextMgr.countObservers());
 								upTextMgr.deleteObserver(ro);
 
 							} catch (Exception ex) { ex.printStackTrace(); }
@@ -1303,11 +1300,6 @@ public class PhycusGui extends javax.swing.JFrame {
 				new PhycusGui().setVisible(true);
 			}
 		});
-		
-		// Start Output Text Pane observer
-//		UploadTextManager upTextMgr = new UploadTextManager();
-//		new MainTextObserver(upTextMgr);
-		
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

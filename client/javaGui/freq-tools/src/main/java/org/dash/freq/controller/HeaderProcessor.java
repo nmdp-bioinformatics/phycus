@@ -5,7 +5,6 @@ import org.dash.freq.model.Population;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.PopulationData;
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,7 +17,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.dash.freq.view.AppendText;
 import org.dash.freq.view.PhycusGui;
 
 /**
@@ -81,6 +79,9 @@ public class HeaderProcessor {
 		// flags - Set of flags for all attributes
 		Set<String> flags = new HashSet<>();
 		boolean flag = true;
+		
+		// identifier for receipt
+		upTextMgr.setLine("Headers:", "black");
 		
 		// read first line
 		// first line sample: pop=US_CAU,license=CC0,resolution=G,cohort="Proto test"
@@ -211,19 +212,13 @@ public class HeaderProcessor {
 		return String.valueOf(flag);
 	}
 	
-	// verbose option, one line per element
+	// one line per element
 	private void printHeader(String header, String headerValue, boolean valid)
 	{
-//		AppendText.appendToPane(PhycusGui.outputTextPane, fullHeaderTitles.get(header), Color.BLACK);
-//		upTextMgr.setLine((fullHeaderTitles.get(header)), "black", false);
 		if (valid) {
-//			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.BLACK);
-			upTextMgr.setLine((fullHeaderTitles.get(header) + headerValue), "black", true);
+			upTextMgr.setLine((" +  " + fullHeaderTitles.get(header) + headerValue), "black");
 		} else {
-//			AppendText.appendToPane(PhycusGui.outputTextPane, headerValue, Color.RED);
-			upTextMgr.setLine((fullHeaderTitles.get(header) + headerValue), "red", true);
+			upTextMgr.setLine((" - Error: " + fullHeaderTitles.get(header) + headerValue), "red");
 		}
-//		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
 	}
 }

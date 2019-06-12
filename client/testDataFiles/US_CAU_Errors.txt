@@ -1,2 +1,22 @@
 2019-06-11
-[M:\Lab Folder\Katie\phycus\client\testDataFiles\US_CAU_Errors.csv:, blue]
+/Users/katrinaeaton/Dropbox/Nerding/Java/CHORI/phycus/client/testDataFiles/US_CAU_Errors.csv:
+Headers:
+ - Error: Population: US_CAU
+ +  Cohort: "Proto test"
+ - Error: License: CC
+ - Error: Resolution: Gb
+ +  Haplotyping group: CHORI
+Warnings:
+* Haplotype frequencies do not total 1.00
+  - Frequency total: 0.99669
+  - Frequency sum will be normalized by the server to 1.0.
+Errors:
+* The population must already exist in the database. See the help tab for more information.
+* An invalid license type is included in the header. See the help tab for more information.
+* An invalid resolution type is included in the header. See the help tab for more information.
+* One or more haplotypes contains an error
+  - Line 2: there is an error in the haplotype on line 2
+  - Line 4: the loci in line 2 are different than the loci on line 4
+  - Line 25: the loci in line 2 are different than the loci on line 25
+  - Line 34: there is an error in the haplotype on line 34
+  - Line 77: the loci in line 2 are different than the loci on line 77

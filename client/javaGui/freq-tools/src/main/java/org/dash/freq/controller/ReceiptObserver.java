@@ -39,7 +39,7 @@ public class ReceiptObserver implements Observer{
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
-	public ReceiptObserver(UploadTextManager sub, File file)
+	public ReceiptObserver(UploadTextObservable sub, File file)
 	{
 		
 	

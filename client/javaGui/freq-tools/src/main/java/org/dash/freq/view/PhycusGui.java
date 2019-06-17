@@ -25,7 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.dash.freq.controller.BatchUploader;
 import org.dash.freq.controller.ReceiptObserver;
-import org.dash.freq.controller.UploadTextManager;
+import org.dash.freq.controller.UploadTextObservable;
 import org.dash.freq.model.Population;
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -62,7 +62,7 @@ public class PhycusGui extends javax.swing.JFrame {
 	private List<PopulationData> populations;
 	
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 	
 		
 	/**

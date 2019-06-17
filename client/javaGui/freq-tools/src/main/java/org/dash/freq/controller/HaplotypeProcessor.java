@@ -27,7 +27,7 @@ public class HaplotypeProcessor {
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 	
 	public HaplotypeProcessor (String firstHaplotypeLine)
 	{

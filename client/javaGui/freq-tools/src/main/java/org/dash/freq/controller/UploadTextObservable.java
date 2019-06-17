@@ -14,19 +14,19 @@ import java.util.Observable;
  *
  * @author katrinaeaton
  */
-public class UploadTextManager extends Observable{
+public class UploadTextObservable extends Observable{
 	
 	// make it a Singleton
-	private static UploadTextManager instance = new UploadTextManager();
+	private static UploadTextObservable instance = new UploadTextObservable();
 
-	// trying to keep this vaguely thread safe
-	private List text = Collections.synchronizedList(new ArrayList(2));
+	// hold the text and color info
+	private List text = new ArrayList(2);
 	
 	// prevent the class from being instantiated
-	private UploadTextManager(){}
+	private UploadTextObservable(){}
 	
 	//Get the only object available
-	public static UploadTextManager getInstance(){
+	public static UploadTextObservable getInstance(){
 		return instance;
 	}
 	

@@ -27,7 +27,7 @@ public class BatchUploader {
 	private PostPopulationFrequencies ppf;
 	
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 	
 	public BatchUploader ()
 	{
@@ -56,9 +56,7 @@ public class BatchUploader {
 				if (fileName.toLowerCase().endsWith(".csv"))
 				{
 					// print file name
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-					AppendText.appendToPane(PhycusGui.outputTextPane, file.getName() + ":", Color.BLUE);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+					upTextMgr.setLine((file.getName() + ":"), "blue");
 
 					// receipt name
 					
@@ -71,16 +69,13 @@ public class BatchUploader {
 			}
 			
 			// print out header for list of files that did not upload
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Files not uploaded: ", Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine("Files not uploaded: ", "black");
 
 			// cycle through list of file, print files that didn't upload
 			for(Map.Entry<String,Boolean> entry : processedFiles.entrySet()) {
 				if (!entry.getValue()) 
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.RED);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+					upTextMgr.setLine(entry.getKey(), "red");
 				}
 			}
 		} catch (Exception e) 

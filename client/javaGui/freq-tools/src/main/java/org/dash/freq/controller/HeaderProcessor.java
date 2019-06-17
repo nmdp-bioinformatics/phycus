@@ -43,7 +43,7 @@ public class HeaderProcessor {
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 	
 	public HeaderProcessor() {
 		

@@ -38,7 +38,7 @@ public class DataChecks {
 	public BigDecimal freqTotal;
 	
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 
 	public DataChecks() {
 

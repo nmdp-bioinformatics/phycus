@@ -62,7 +62,7 @@ import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.util.HashSet;
 import java.util.prefs.Preferences;
-import org.dash.freq.controller.UploadTextManager;
+import org.dash.freq.controller.UploadTextObservable;
 
 
 
@@ -84,7 +84,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
 	// Observable
-	UploadTextManager upTextMgr = UploadTextManager.getInstance();
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 
 	private static final String USAGE = "post-population-frequencies [args]";
 	

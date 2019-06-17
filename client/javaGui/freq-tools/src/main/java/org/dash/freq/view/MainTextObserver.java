@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import org.dash.freq.controller.UploadTextManager;
+import org.dash.freq.controller.UploadTextObservable;
 
 /**
  *
  * @author katrinaeaton
  */
 public class MainTextObserver implements Observer{
-	public MainTextObserver(UploadTextManager sub)
+	public MainTextObserver(UploadTextObservable sub)
 	{
 
 	}

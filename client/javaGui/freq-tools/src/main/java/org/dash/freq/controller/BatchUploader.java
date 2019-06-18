@@ -28,6 +28,7 @@ public class BatchUploader {
 	
 	// Observable
 	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
+	ReceiptObserver ro;
 	
 	public BatchUploader ()
 	{
@@ -39,8 +40,7 @@ public class BatchUploader {
 		File dir = new File(folder);
 		
 		// track unprocessed files
-		TreeMap<String, Boolean> processedFiles = new TreeMap<String, Boolean>();
-		Boolean flag = false;
+		TreeMap<String, Boolean> processedFiles = new TreeMap<>();
 		
 		try 
 		{
@@ -55,16 +55,22 @@ public class BatchUploader {
 				String fileName = file.getName();
 				if (fileName.toLowerCase().endsWith(".csv"))
 				{
+					// receipt name
+					ro = new ReceiptObserver(upTextMgr, file);
+					try { upTextMgr.addObserver(ro); }
+					catch (Exception ex) { 
+						System.out.println("Error adding observer"); 
+						ex.printStackTrace(); 
+					}
+					
 					// print file name
 					upTextMgr.setLine((file.getName() + ":"), "blue");
-
-					// receipt name
-					
 					
 					// set file and process
 					ppf.setFile(file);
 					Boolean processed = ppf.call() != 0;
 					processedFiles.put(file.getName(), processed);
+					upTextMgr.deleteObserver(ro);
 				}
 			}
 			

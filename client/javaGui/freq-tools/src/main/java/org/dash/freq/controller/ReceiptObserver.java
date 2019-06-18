@@ -31,10 +31,15 @@ public class ReceiptObserver implements Observer{
 	private String filePath;
 	private File destinationFile;
 	
-	// date/time stamps
+	// date/time stamps for file name
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH-mm-ss");
 	LocalDate dateStamp = LocalDate.now();
 	String timeStamp = LocalTime.now().format(dtf);
+	
+	// time stamp for receipt header. 
+	// The above one looks like a second date stamp in the header
+	DateTimeFormatter headerDtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+	String headerTimeStamp = LocalTime.now().format(headerDtf);
 	
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
@@ -75,7 +80,7 @@ public class ReceiptObserver implements Observer{
 		try(FileWriter fw = new FileWriter(destinationFile, false);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){
-			pw.println(dateStamp + " " + timeStamp);
+			pw.println(dateStamp + " " + headerTimeStamp);
 		} catch( IOException ex ) {
 			System.out.println("Filewriter exception: " + ex);
 		}		

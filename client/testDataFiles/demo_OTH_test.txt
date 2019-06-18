@@ -1,9 +1,0 @@
-2019-06-11
-/Users/katrinaeaton/Dropbox/Nerding/Java/CHORI/phycus/client/testDataFiles/demo_OTH_test.csv:
-Error: Population: OTH
-Cohort: "Demo test data"
-Haplotyping group: CHORI
-Warnings:
-* Haplotype frequencies do not total 1.00
-  - Frequency total: 1.010000000
-  - Frequency sum will be normalized by the server to 1.0.

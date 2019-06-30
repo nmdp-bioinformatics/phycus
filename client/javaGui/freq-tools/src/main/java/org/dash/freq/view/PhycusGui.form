@@ -715,79 +715,70 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="uploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="defaultUploadReceiptCheckBox" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="CustomReceiptFolderButton" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="uploadReceiptLabel" min="-2" pref="163" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="uploadReceiptScrollPane" pref="392" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="advancedOptionsButton" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace pref="527" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="optionsSeparator1" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="verboseCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CustomReceiptFolderButton" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <Component id="defaultUploadReceiptCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                                      <Component id="uploadReceiptLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" pref="392" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="verboseCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="optionsSeparator1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="optionsSeparator2" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="haplotypeEntityLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="haplotypeEntityButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="optionsSeparator2" alignment="0" max="32767" attributes="0"/>
                           <Component id="optionsSeparator3" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
-                              <Component id="optionsCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="advancedOptionsButton" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                      <Component id="optionsCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptCheckBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="defaultUploadReceiptCheckBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="uploadReceiptLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="CustomReceiptFolderButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="uploadReceiptScrollPane" min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="optionsSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="optionsSeparator1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="verboseCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="verboseCheckBox" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="optionsSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -799,7 +790,7 @@
                       <Component id="optionsSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="advancedOptionsButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="322" max="32767" attributes="0"/>
+                      <EmptySpace pref="353" max="32767" attributes="0"/>
                       <Component id="optionsCancelButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -840,21 +831,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optionsCancelButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="uploadReceiptCheckBox">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Generate Receipt"/>
-              </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="uploadReceiptCheckBoxItemStateChanged"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="uploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;if (uploadReceiptCheckBox.isSelected()){&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipt will be generated.&quot;, Color.BLACK);&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="uploadReceiptLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Receipt save location:"/>
+                <Property name="text" type="java.lang.String" value="Custom receipt save location:"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="uploadReceiptScrollPane">
@@ -888,7 +867,7 @@
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (uploadReceiptCheckBox.isSelected() &amp;&amp; defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_DEFAULT_RECEIPT_FOLDER&quot;, userDocumentsPath)); }&#xa;else if (uploadReceiptCheckBox.isSelected() &amp;&amp; !(defaultUploadReceiptCheckBox.isSelected()))&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath)); }"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (defaultUploadReceiptCheckBox.isSelected())&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_DEFAULT_RECEIPT_FOLDER&quot;, userDocumentsPath)); }&#xa;else if (!(defaultUploadReceiptCheckBox.isSelected()))&#xa;{ uploadReceiptTextArea.setText(prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath)); }"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -901,7 +880,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultUploadReceiptCheckBoxActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true));&#xa;defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true));&#xa;if (defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in the folder data files are uploaded from.&quot;, Color.BLACK);&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;} else if (!defaultUploadReceiptCheckBox.isSelected() &amp;&amp; uploadReceiptCheckBox.isSelected()){&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in &quot; + prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath), Color.BLACK);&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true));&#xa;if (defaultUploadReceiptCheckBox.isSelected()){&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in the folder data files are uploaded from.&quot;, Color.BLACK);&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;} else if (!defaultUploadReceiptCheckBox.isSelected()){&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, &quot;Upload receipts will be saved in &quot; + prefs.get(&quot;PHY_RECEIPT_CUSTOM_FOLDER&quot;, userDocumentsPath), Color.BLACK);&#xa;    org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);&#xa;}"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JSeparator" name="optionsSeparator1">
@@ -918,7 +897,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CustomReceiptFolderButtonActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if ((prefs.getBoolean(&quot;PHY_RECEIPT&quot;, true)) &amp;&amp; !(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true)) )&#xa;{ CustomReceiptFolderButton.setEnabled(true); }&#xa;else { CustomReceiptFolderButton.setEnabled(false); }"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if (!(prefs.getBoolean(&quot;PHY_RECEIPT_DEFAULT&quot;, true)) )&#xa;{ CustomReceiptFolderButton.setEnabled(true); }&#xa;else { CustomReceiptFolderButton.setEnabled(false); }"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="advancedOptionsButton">

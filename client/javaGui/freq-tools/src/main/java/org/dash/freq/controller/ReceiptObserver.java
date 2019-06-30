@@ -27,6 +27,9 @@ import org.dash.freq.view.PhycusGui;
 
 public class ReceiptObserver implements Observer{
 	
+	// make it a Singleton
+//	private static ReceiptObserver instance = new ReceiptObserver();
+	
 	private String textFileName;
 	private String filePath;
 	private File destinationFile;
@@ -84,6 +87,10 @@ public class ReceiptObserver implements Observer{
 		} catch( IOException ex ) {
 			System.out.println("Filewriter exception: " + ex);
 		}		
+	}
+	public File setFile(){
+		
+		return null;
 	}
 	
 	public String fileName(File incFileName) 

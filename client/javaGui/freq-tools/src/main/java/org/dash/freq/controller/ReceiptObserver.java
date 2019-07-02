@@ -37,7 +37,7 @@ public class ReceiptObserver implements Observer{
 	String timeStamp = LocalTime.now().format(dtf);
 	
 	// time stamp for receipt header. 
-	// The above one looks like a second date stamp in the header
+	// The one above looks like a second date stamp in the header
 	DateTimeFormatter headerDtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 	String headerTimeStamp = LocalTime.now().format(headerDtf);
 	
@@ -54,16 +54,16 @@ public class ReceiptObserver implements Observer{
 		// where are we putting the receipt? Default folder or custom?
 		Boolean defaultFilePath = prefs.getBoolean("PHY_RECEIPT_DEFAULT", true);
 		
-		
-		
-		// create the full file path if custom
+		// create the full file path
 		if(defaultFilePath){
-			// get the name of the file without the default path
+			// use the path to the original file
 			this.filePath = file.getParent() 
 				+ System.getProperty("file.separator")
 				+ textFileName;
 			System.out.println(filePath);
 		} else {
+			// use destination specified in preferences
+			// if no destination is specified, default to the user's documents folder
 			this.filePath = prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", PhycusGui.userDocumentsPath) 
 				+ System.getProperty("file.separator")
 				+ textFileName;
@@ -72,15 +72,9 @@ public class ReceiptObserver implements Observer{
 		
 		// create destination file
 		destinationFile = new File(filePath);
-		
-		// if file doesnt exists, then create it
-//		if (!destinationFile.exists()) {
-//			try { destinationFile.createNewFile(); }
-//			catch(Exception ex){ ex.printStackTrace(); }
-//		}
-		System.out.println("created file");
 
 		// get date stamp & write it to the file
+		// this should automatically close the buffer at the end
 		try(FileWriter fw = new FileWriter(destinationFile, false);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){
@@ -88,10 +82,6 @@ public class ReceiptObserver implements Observer{
 		} catch( IOException ex ) {
 			System.out.println("Filewriter exception: " + ex);
 		}		
-	}
-	public File setFile(){
-		
-		return null;
 	}
 	
 	public String fileName(String incFileName) 
@@ -112,6 +102,7 @@ public class ReceiptObserver implements Observer{
 		List text = new ArrayList();
 		text = (List) arg;
 		
+		// this should automatically close the buffer at the end
 		try(FileWriter fw = new FileWriter(destinationFile, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw)){

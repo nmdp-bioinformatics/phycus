@@ -27,9 +27,6 @@ import org.dash.freq.view.PhycusGui;
 
 public class ReceiptObserver implements Observer{
 	
-	// make it a Singleton
-//	private static ReceiptObserver instance = new ReceiptObserver();
-	
 	private String textFileName;
 	private String filePath;
 	private File destinationFile;
@@ -49,33 +46,37 @@ public class ReceiptObserver implements Observer{
 	
 	public ReceiptObserver(UploadTextObservable sub, File file)
 	{
-		
-	
-		// name the text file
-		this.textFileName = fileName(file);
+		// name the text file without path
+		this.textFileName = file.getName();
+		textFileName = fileName(textFileName);
 		System.out.println("textFileName: " + textFileName);
 		
 		// where are we putting the receipt? Default folder or custom?
 		Boolean defaultFilePath = prefs.getBoolean("PHY_RECEIPT_DEFAULT", true);
 		
-		// create the full file path
-//		if(defaultFilePath){
-//			this.filePath = file.getParent() 
-//				+ System.getProperty("file.separator")
-//				+ textFileName;
-//		} else {
-//			this.filePath = prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", PhycusGui.userDocumentsPath) 
-//				+ System.getProperty("file.separator")
-//				+ textFileName;
-//		}
+		
+		
+		// create the full file path if custom
+		if(defaultFilePath){
+			// get the name of the file without the default path
+			this.filePath = file.getParent() 
+				+ System.getProperty("file.separator")
+				+ textFileName;
+			System.out.println(filePath);
+		} else {
+			this.filePath = prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", PhycusGui.userDocumentsPath) 
+				+ System.getProperty("file.separator")
+				+ textFileName;
+			System.out.println(filePath);
+		}
 		
 		// create destination file
-		destinationFile = new File(textFileName);
+		destinationFile = new File(filePath);
 		
 		// if file doesnt exists, then create it
 //		if (!destinationFile.exists()) {
-			try { destinationFile.createNewFile(); }
-			catch(Exception ex){ ex.printStackTrace(); }
+//			try { destinationFile.createNewFile(); }
+//			catch(Exception ex){ ex.printStackTrace(); }
 //		}
 		System.out.println("created file");
 
@@ -93,10 +94,10 @@ public class ReceiptObserver implements Observer{
 		return null;
 	}
 	
-	public String fileName(File incFileName) 
+	public String fileName(String incFileName) 
     {
 		// create receipt file name from source file name
-        String receiptFileName = incFileName.toString()
+        String receiptFileName = incFileName
 			.substring(0, (incFileName.toString().length()-4)) 
 			+ "_" + dateStamp + "_" + timeStamp + ".txt";
 

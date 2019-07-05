@@ -101,14 +101,17 @@ public class ReceiptObserver implements Observer{
 		
 		List text = new ArrayList();
 		text = (List) arg;
+		String who = text.get(2).toString();
 		
-		// this should automatically close the buffer at the end
-		try(FileWriter fw = new FileWriter(destinationFile, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				PrintWriter pw = new PrintWriter(bw)){
-			pw.println(text.get(0).toString());
-		} catch( IOException ex ) {
-			System.out.println(ex);
+		if(who.equals("receipt") || who.equals("both")) {
+			// this should automatically close the buffer at the end
+			try(FileWriter fw = new FileWriter(destinationFile, true);
+					BufferedWriter bw = new BufferedWriter(fw);
+					PrintWriter pw = new PrintWriter(bw)){
+				pw.println(text.get(0).toString());
+			} catch( IOException ex ) {
+				System.out.println(ex);
+			}
 		}
 	}
 }

@@ -834,7 +834,8 @@ public class PhycusGui extends javax.swing.JFrame {
 					outputTextPane.setText("");
 					
 					// list file name
-					upTextMgr.setLine((selectedFile + ":"), "blue");
+					upTextMgr.setLine((selectedFile.getName() + ":"), "blue", "gui");
+					upTextMgr.setLine(("File name: " + selectedFile.getName() + ":"), "blue", "receipt");
 					
 					// run as background thread so TextPane updates
 					Runnable fileUpload = new Runnable() 
@@ -847,6 +848,8 @@ public class PhycusGui extends javax.swing.JFrame {
 								ppf.setFile(selectedFile);
 								ppf.call();
 								System.out.println("Number of observers: " + upTextMgr.countObservers());
+								upTextMgr.setLine("", "black", "receipt");
+								upTextMgr.setLine("End of receipt", "black", "receipt");
 								upTextMgr.deleteObserver(ro);
 
 							} catch (Exception ex) { ex.printStackTrace(); }
@@ -877,8 +880,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			else 
 			{
 				outputTextPane.setText("");
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Please select a file or folder", Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				upTextMgr.setLine("Please select a file or folder", "red", "gui");
 			}
         } catch (Exception e) {
             e.printStackTrace();
@@ -995,7 +997,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
 		String popSearchDescription = "";
-		boolean popFlag = true;
 		List<String> popNames = population.getPopulationNames(populations);
 		
 		// does this name already exist?		

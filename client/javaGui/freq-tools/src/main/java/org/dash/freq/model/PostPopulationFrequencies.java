@@ -149,7 +149,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			
 		} catch (Exception ex) {
             System.out.println(ex);
-			upTextMgr.setLine(ex.toString(), "red");
+			upTextMgr.setLine(ex.toString(), "red", "gui");
         }
 
 		return 0;
@@ -227,7 +227,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		cohortRequest.setCohortData(cohortData);
 		
 		System.out.println("Creating cohort: " + cohortData.getName());
-		upTextMgr.setLine(("Creating cohort: " + cohortData.getName()), "black");
+		upTextMgr.setLine(("Creating cohort: " + cohortData.getName()), "black", "both");
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
 		// Labels
@@ -273,19 +273,29 @@ public class PostPopulationFrequencies implements Callable<Integer>
 
 			hfCurationRequest.setLabelData(labelData);
 
+			// data only to the gui
 			System.out.println("Submitting frequencies for population: " + selectedPopulation.getName());
-			upTextMgr.setLine(("Submitting frequencies for population: " + selectedPopulation.getName()), "black");
-			upTextMgr.setLine("(For large data sets this may take a little while.)", "black");
+			upTextMgr.setLine("", "black", "both");
+			upTextMgr.setLine(("Submitting frequencies for population: " + selectedPopulation.getName()), "black", "gui");
+			upTextMgr.setLine("(For large data sets this may take a little while.)", "black", "gui");
 			
-			// db response - did we get one?
-			HFCurationResponse response = api.hfcPost(hfCurationRequest);
-			System.out.println(response);
-			
-			// if yes, let user know the data was successfully uploaded
-			if (response != null)
-			{
-				upTextMgr.setLine("Data submitted!", "blue");
-				upTextMgr.setLine(("Submission ID: " + response.getSubmissionID().toString()), "black");
+			try {
+				// db response - did we get one?
+				HFCurationResponse response = api.hfcPost(hfCurationRequest);
+				System.out.println(response);
+
+				// if yes, let user know the data was successfully uploaded
+				if (response != null)
+				{
+					upTextMgr.setLine("", "blue", "both");
+					upTextMgr.setLine("Data submitted!", "blue", "both");
+					upTextMgr.setLine(("Submission ID: " + response.getSubmissionID().toString()), "black", "both");
+				}
+			} catch (Exception ex) {
+				// if not, let the user know that it failed
+				upTextMgr.setLine("", "red", "both");
+				upTextMgr.setLine("Data submission unsuccessful", "red", "both");
+				upTextMgr.setLine("No submission ID generated", "red", "both");
 			}
 		}		
 	}

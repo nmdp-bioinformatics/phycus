@@ -127,7 +127,7 @@ public class HaplotypeProcessor {
 			
 			// plus anything over "errorCounter"
 			int remainingErrors = errorLineNumbers.size() - errorCounter;
-			upTextMgr.setLine(("  - Plus " + remainingErrors + " more"), "red");
+			upTextMgr.setLine(("  - Plus " + remainingErrors + " more"), "red", "both");
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class HaplotypeProcessor {
 	{
 		// split the error line and print it out
 		String[] parsedError = errorLine.split(":");
-		upTextMgr.setLine(("  - Line " + parsedError[0] + ErrorCodes.haplotypeErrorList().get(Integer.parseInt(parsedError[1])) + parsedError[0]), "red");
+		upTextMgr.setLine(("  - Line " + parsedError[0] + ErrorCodes.haplotypeErrorList().get(Integer.parseInt(parsedError[1])) + parsedError[0]), "red", "both");
 	}
 }
 

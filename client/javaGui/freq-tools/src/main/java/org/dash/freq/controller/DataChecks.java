@@ -137,7 +137,7 @@ public class DataChecks {
 		// if frequencies total to 0 report total
 		if (freqTotal.compareTo(targetFrequency) == 0)
 		{
-			upTextMgr.setLine(("Frequency total: " + freqTotal), "black");
+			upTextMgr.setLine(("Frequency total: " + freqTotal), "black", "both");
 		}
 		
 		// if frequency over 1.0, but under 1.01, give warning
@@ -157,17 +157,18 @@ public class DataChecks {
 		// if there are warnings, print out the warnings to the gui
 		if (!warningCodeList.isEmpty()) 
 		{
-			upTextMgr.setLine("Warnings:", "black");
+			upTextMgr.setLine("", "black", "both");
+			upTextMgr.setLine("Warnings:", "black", "both");
 
 			for (int x:warningCodeList)
 			{
 				System.out.println("* " + ErrorCodes.warningList().get(x));
-				upTextMgr.setLine(("* " + ErrorCodes.warningList().get(x)), "black");
+				upTextMgr.setLine(("* " + ErrorCodes.warningList().get(x)), "black", "both");
 
 				if (x == 2)
 				{
-					upTextMgr.setLine(("  - Frequency total: " + freqTotal), "black");
-					upTextMgr.setLine("  - Frequency sum will be normalized by the server to 1.0.", "black");
+					upTextMgr.setLine(("  - Frequency total: " + freqTotal), "black", "both");
+					upTextMgr.setLine("  - Frequency sum will be normalized by the server to 1.0.", "black", "both");
 				}
 			}
 		}
@@ -175,17 +176,18 @@ public class DataChecks {
 		// if there are errors, print out the errors to the gui
 		if (!errorCodeList.isEmpty()) 
 		{
-			upTextMgr.setLine("Errors:", "red");
+			upTextMgr.setLine("", "black", "both");
+			upTextMgr.setLine("Errors:", "red", "both");
 				
 			for (int x:errorCodeList)
 			{
 				System.out.println("* " + ErrorCodes.errorList().get(x));
-				upTextMgr.setLine(("* " + ErrorCodes.errorList().get(x)), "red");
+				upTextMgr.setLine(("* " + ErrorCodes.errorList().get(x)), "red", "both");
 				
 				// frequency total error
 				if (x == 2)
 				{
-					upTextMgr.setLine(("  - Frequency totals: " + freqTotal), "red");
+					upTextMgr.setLine(("  - Frequency totals: " + freqTotal), "red", "both");
 				}
 				
 				// haplotype consistency error
@@ -194,6 +196,9 @@ public class DataChecks {
 					haplotypeProcessor.printOutErrors(haplotypeLineErrorsMismatch);
 				}
 			}
+			upTextMgr.setLine("", "red", "both");
+			upTextMgr.setLine("Data submission unsuccessful", "red", "both");
+			upTextMgr.setLine("Please fix the errors and try again", "red", "both");
 		}
 
 		return flag;

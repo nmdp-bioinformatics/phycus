@@ -64,24 +64,27 @@ public class BatchUploader {
 					}
 					
 					// print file name
-					upTextMgr.setLine((file.getName() + ":"), "blue");
+					upTextMgr.setLine((file.getName() + ":"), "blue", "gui");
+					upTextMgr.setLine(("File name: " + file.getName() + ":"), "blue", "receipt");
 					
 					// set file and process
 					ppf.setFile(file);
 					Boolean processed = ppf.call() != 0;
 					processedFiles.put(file.getName(), processed);
+					upTextMgr.setLine("", "black", "receipt");
+					upTextMgr.setLine("End of receipt", "black", "receipt");
 					upTextMgr.deleteObserver(ro);
 				}
 			}
 			
 			// print out header for list of files that did not upload
-			upTextMgr.setLine("Files not uploaded: ", "black");
+			upTextMgr.setLine("Files not uploaded: ", "black", "gui");
 
 			// cycle through list of file, print files that didn't upload
 			for(Map.Entry<String,Boolean> entry : processedFiles.entrySet()) {
 				if (!entry.getValue()) 
 				{
-					upTextMgr.setLine(entry.getKey(), "red");
+					upTextMgr.setLine(entry.getKey(), "red", "gui");
 				}
 			}
 		} catch (Exception e) 

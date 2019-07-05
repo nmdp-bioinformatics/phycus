@@ -81,7 +81,8 @@ public class HeaderProcessor {
 		boolean flag = true;
 		
 		// identifier for receipt
-		upTextMgr.setLine("Headers:", "black");
+		upTextMgr.setLine("", "black", "both");
+		upTextMgr.setLine("Headers:", "black", "both");
 		
 		// read first line
 		// first line sample: pop=US_CAU,license=CC0,resolution=G,cohort="Proto test"
@@ -89,12 +90,28 @@ public class HeaderProcessor {
 		attributes = header.split(",");
 		
 		// break down the header
+		// done with a try/catch so that if the header line is missing
+		// the program will continue and give feedback about the problem
+		// instead of just returning a NullPointerException
 		for (int i = 0; i < attributes.length; i++) {
-			// regex break
-			String[] parsedAtt = parseAttribute(attributes[i]);
+			try {
+				// regex break
+				String[] parsedAtt = parseAttribute(attributes[i]);
 			
-			// store all the attributes in the treemap
-			headerContent.put(parsedAtt[0], parsedAtt[1]);
+				// store all the attributes in the treemap
+				headerContent.put(parsedAtt[0], parsedAtt[1]);
+			} catch (Exception ex) { 
+				
+				// must manually tell the program to fail
+				// otherwise it tries to submit the data anyway
+				flags.add("false");
+				
+				// notify user about the problem
+				upTextMgr.setLine("There's a problem with the header line. Please check your file.", "red", "both");
+				
+				// prevent duplicate error reporting
+				break;
+			}
 		}
 		
 		// check for population - mandatory
@@ -111,14 +128,14 @@ public class HeaderProcessor {
 		}
 		else errorCodeList.add(5);
 		
-		// check header for license type if present
+		// check header for valid license type if present
 		if (headerContent.containsKey("license")) {
 			System.out.println("license: " + headerContent.get("license"));
 			flags.add(checkLicenseType(headerContent.get("license")
 				.toString(), errorCodeList));
 		}
 		
-		// check header for resolution type if present
+		// check header for valid resolution type if present
 		if (headerContent.containsKey("resolution")) {
 			System.out.println("resolution: " + headerContent.get("resolution"));
 			flags.add(checkResolutionType(headerContent.get("resolution")
@@ -141,8 +158,6 @@ public class HeaderProcessor {
 		// add flag to header content TreeMap so that DataChecks.java knows
 		// if it needs to print out errors
 		headerContent.put("flag", String.valueOf(flag));
-		
-		
 		
 		return headerContent;
 	}
@@ -216,9 +231,9 @@ public class HeaderProcessor {
 	private void printHeader(String header, String headerValue, boolean valid)
 	{
 		if (valid) {
-			upTextMgr.setLine((" +  " + fullHeaderTitles.get(header) + headerValue), "black");
+			upTextMgr.setLine((" +  " + fullHeaderTitles.get(header) + headerValue), "black", "both");
 		} else {
-			upTextMgr.setLine((" - Error: " + fullHeaderTitles.get(header) + headerValue), "red");
+			upTextMgr.setLine((" - Error: " + fullHeaderTitles.get(header) + headerValue), "red", "both");
 		}
 	}
 }

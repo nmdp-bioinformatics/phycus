@@ -27,16 +27,19 @@ public class MainTextObserver implements Observer{
 	public void update(Observable sub, Object arg) {
 		List text = new ArrayList();
 		text = (List) arg;
+		String who = text.get(2).toString();
 		
-		Color color;
-		try {
-			Field field = Class.forName("java.awt.Color").getField(text.get(1).toString());
-			color = (Color)field.get(null);
-		} catch (Exception e) {
-			color = Color.BLACK; // Not defined
+		if (who.equals("gui") || who.equals("both")){
+			Color color;
+			try {
+				Field field = Class.forName("java.awt.Color").getField(text.get(1).toString());
+				color = (Color)field.get(null);
+			} catch (Exception e) {
+				color = Color.BLACK; // Not defined
+			}
+
+			AppendText.appendToPane(PhycusGui.outputTextPane, text.get(0).toString(), color);
+			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);	
 		}
-		
-		AppendText.appendToPane(PhycusGui.outputTextPane, text.get(0).toString(), color);
-		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);	
 	}
 }

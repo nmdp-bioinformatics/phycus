@@ -30,9 +30,10 @@ public class UploadTextObservable extends Observable{
 		return instance;
 	}
 	
-	public void setLine(String line, String color) {
+	public void setLine(String line, String color, String whichObserver) {
 		text.add(0, line);
 		text.add(1, color);
+		text.add(2, whichObserver);
 		
 		setChanged();
 		notifyObservers(text);

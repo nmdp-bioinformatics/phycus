@@ -79,6 +79,7 @@ public class HeaderProcessor {
 		// flags - Set of flags for all attributes
 		Set<String> flags = new HashSet<>();
 		boolean flag = true;
+		boolean headerPresent = true;
 		
 		// identifier for receipt
 		upTextMgr.setLine("", "black", "both");
@@ -104,7 +105,7 @@ public class HeaderProcessor {
 				
 				// must manually tell the program to fail
 				// otherwise it tries to submit the data anyway
-				flags.add("false");
+				headerPresent = false;
 				
 				// notify user about the problem
 				upTextMgr.setLine("There's a problem with the header line. Please check your file.", "red", "both");
@@ -144,9 +145,11 @@ public class HeaderProcessor {
 		
 		// check header for haplotyping institution, 
 		// use if present, otherwise prefs default
-		String haplotypeEnt = headerContent.containsKey("haplotype") 
-				? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
-		printHeader("haplotype", haplotypeEnt, true);
+		if(headerPresent) {
+			String haplotypeEnt = headerContent.containsKey("haplotype") 
+					? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
+			printHeader("haplotype", haplotypeEnt, true);
+		} else { flags.add("false"); }
 		
 		// check header for genotyping institution, print if present
 		if (headerContent.containsKey("genotype")) 

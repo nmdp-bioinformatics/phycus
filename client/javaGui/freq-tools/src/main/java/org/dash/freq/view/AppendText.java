@@ -16,11 +16,13 @@ import javax.swing.text.StyleContext;
  *
  * @author katrinaeaton
  */
-public class AppendText {
+public class AppendText{
 	public AppendText()
 	{
-		
+
 	}
+	// code shamelessly ganked from:
+	// https://stackoverflow.com/questions/9567028/coloring-texts-in-java
 	
 	public static void appendToPane(JTextPane tp, String msg, Color c)
     {

@@ -62,6 +62,7 @@ import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.util.HashSet;
 import java.util.prefs.Preferences;
+import org.dash.freq.controller.UploadTextObservable;
 
 
 
@@ -81,6 +82,9 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
+	
+	// Observable
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
 
 	private static final String USAGE = "post-population-frequencies [args]";
 	
@@ -145,8 +149,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			
 		} catch (Exception ex) {
             System.out.println(ex);
-			AppendText.appendToPane(PhycusGui.outputTextPane, ex.toString(), Color.RED);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine(ex.toString(), "red", "gui");
         }
 
 		return 0;
@@ -224,8 +227,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		cohortRequest.setCohortData(cohortData);
 		
 		System.out.println("Creating cohort: " + cohortData.getName());
-		AppendText.appendToPane(PhycusGui.outputTextPane, "Creating cohort: " + cohortData.getName(), Color.BLACK);
-		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		upTextMgr.setLine(("Creating cohort: " + cohortData.getName()), "black", "both");
 		cohortData = cohortApi.createCohort(cohortRequest);
 		
 		// Labels
@@ -271,23 +273,29 @@ public class PostPopulationFrequencies implements Callable<Integer>
 
 			hfCurationRequest.setLabelData(labelData);
 
+			// data only to the gui
 			System.out.println("Submitting frequencies for population: " + selectedPopulation.getName());
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Submitting frequencies for population: " + selectedPopulation.getName(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, "(For large data sets this may take a little while.)", Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine("", "black", "both");
+			upTextMgr.setLine(("Submitting frequencies for population: " + selectedPopulation.getName()), "black", "gui");
+			upTextMgr.setLine("(For large data sets this may take a little while.)", "black", "gui");
 			
-			// db response - did we get one?
-			HFCurationResponse response = api.hfcPost(hfCurationRequest);
-			System.out.println(response);
-			
-			// if yes, let user know the data was successfully uploaded
-			if (response != null)
-			{
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Data submitted!", Color.BLUE);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, ("Submission ID: " + response.getSubmissionID().toString()), Color.BLACK);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			try {
+				// db response - did we get one?
+				HFCurationResponse response = api.hfcPost(hfCurationRequest);
+				System.out.println(response);
+
+				// if yes, let user know the data was successfully uploaded
+				if (response != null)
+				{
+					upTextMgr.setLine("", "blue", "both");
+					upTextMgr.setLine("Data submitted!", "blue", "both");
+					upTextMgr.setLine(("Submission ID: " + response.getSubmissionID().toString()), "black", "both");
+				}
+			} catch (Exception ex) {
+				// if not, let the user know that it failed
+				upTextMgr.setLine("", "red", "both");
+				upTextMgr.setLine("Data submission unsuccessful", "red", "both");
+				upTextMgr.setLine("No submission ID generated", "red", "both");
 			}
 		}		
 	}

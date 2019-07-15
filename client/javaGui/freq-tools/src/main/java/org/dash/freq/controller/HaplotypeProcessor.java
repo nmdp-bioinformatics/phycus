@@ -26,6 +26,9 @@ public class HaplotypeProcessor {
 	// access to prefs
 	public Preferences prefs = Preferences.userNodeForPackage(PhycusGui.class);
 	
+	// Observable
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
+	
 	public HaplotypeProcessor (String firstHaplotypeLine)
 	{
 		// break haplotypes down to individual loci
@@ -124,8 +127,7 @@ public class HaplotypeProcessor {
 			
 			// plus anything over "errorCounter"
 			int remainingErrors = errorLineNumbers.size() - errorCounter;
-			AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Plus " + remainingErrors + " more"), Color.RED);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine(("  - Plus " + remainingErrors + " more"), "red", "both");
 		}
 	}
 	
@@ -133,9 +135,7 @@ public class HaplotypeProcessor {
 	{
 		// split the error line and print it out
 		String[] parsedError = errorLine.split(":");
-		
-		AppendText.appendToPane(PhycusGui.outputTextPane, ("  - Line " + parsedError[0] + ErrorCodes.haplotypeErrorList().get(Integer.parseInt(parsedError[1])) + parsedError[0]), Color.RED);
-		AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+		upTextMgr.setLine(("  - Line " + parsedError[0] + ErrorCodes.haplotypeErrorList().get(Integer.parseInt(parsedError[1])) + parsedError[0]), "red", "both");
 	}
 }
 

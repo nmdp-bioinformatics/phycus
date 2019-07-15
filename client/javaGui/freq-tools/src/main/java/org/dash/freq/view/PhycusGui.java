@@ -24,6 +24,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import org.dash.freq.controller.BatchUploader;
+import org.dash.freq.controller.ReceiptObserver;
+import org.dash.freq.controller.UploadTextObservable;
 import org.dash.freq.model.Population;
 import org.dash.freq.model.PostPopulationFrequencies;
 
@@ -58,12 +60,21 @@ public class PhycusGui extends javax.swing.JFrame {
 	
 	// initially populated when program open population tab
 	private List<PopulationData> populations;
+	
+	// Observable
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
+	
+	
+	
+		
 	/**
 	 * Creates new form PhycusGui
 	 */
 	public PhycusGui() 
 	{
 		initComponents();
+		MainTextObserver mto = new MainTextObserver(upTextMgr);
+		upTextMgr.addObserver(mto);
 	}
 
 	/**
@@ -126,7 +137,6 @@ public class PhycusGui extends javax.swing.JFrame {
         haplotypeEntityButton = new javax.swing.JButton();
         verboseCheckBox = new javax.swing.JCheckBox();
         optionsCancelButton = new javax.swing.JButton();
-        uploadReceiptCheckBox = new javax.swing.JCheckBox();
         uploadReceiptLabel = new javax.swing.JLabel();
         uploadReceiptScrollPane = new javax.swing.JScrollPane();
         uploadReceiptTextArea = new javax.swing.JTextArea();
@@ -166,7 +176,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         estEntityInstructions1.setText("Please enter the ION or other facility identification ");
 
-        estEntityInstructions2.setText("of the group performing the genotyping:");
+        estEntityInstructions2.setText("of the group performing the haplotyping:");
 
         estEntityInstructions3.setText("(This can be changed in the options tab)");
 
@@ -220,7 +230,6 @@ public class PhycusGui extends javax.swing.JFrame {
         advancedOptionsPopupFrame.setTitle("Advanced Options");
         advancedOptionsPopupFrame.setAlwaysOnTop(true);
         advancedOptionsPopupFrame.setLocationByPlatform(true);
-        advancedOptionsPopupFrame.setMaximumSize(new java.awt.Dimension(375, 175));
         advancedOptionsPopupFrame.setMinimumSize(new java.awt.Dimension(375, 175));
         advancedOptionsPopupFrame.setName("EstEntityFrame"); // NOI18N
 
@@ -448,7 +457,7 @@ public class PhycusGui extends javax.swing.JFrame {
                                 .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1))
-                            .addComponent(warningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                            .addComponent(warningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                             .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -542,7 +551,7 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addGroup(populationPanelLayout.createSequentialGroup()
                         .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                     .addComponent(popNotificationsScrollPane))
                 .addContainerGap())
             .addGroup(populationPanelLayout.createSequentialGroup()
@@ -584,8 +593,8 @@ public class PhycusGui extends javax.swing.JFrame {
         verboseCheckBox.setText("Verbose reporting");
         verboseCheckBox.setSelected(prefs.getBoolean("PHY_VERBOSE_REPORTING", false));
         if (verboseCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose reporting is on.", Color.BLACK);
-            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, "Verbose reporting is on.", Color.BLACK);
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         verboseCheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -600,19 +609,7 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        uploadReceiptCheckBox.setText("Generate Receipt");
-        uploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT", true));
-        if (uploadReceiptCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipt will be generated.", Color.BLACK);
-            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-        }
-        uploadReceiptCheckBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                uploadReceiptCheckBoxItemStateChanged(evt);
-            }
-        });
-
-        uploadReceiptLabel.setText("Receipt save location:");
+        uploadReceiptLabel.setText("Custom receipt save location:");
 
         uploadReceiptScrollPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         uploadReceiptScrollPane.setBorder(null);
@@ -627,21 +624,20 @@ public class PhycusGui extends javax.swing.JFrame {
         uploadReceiptTextArea.setRows(5);
         uploadReceiptTextArea.setFocusable(false);
         uploadReceiptTextArea.setOpaque(false);
-        if (uploadReceiptCheckBox.isSelected() && defaultUploadReceiptCheckBox.isSelected())
+        if (defaultUploadReceiptCheckBox.isSelected())
         { uploadReceiptTextArea.setText(prefs.get("PHY_DEFAULT_RECEIPT_FOLDER", userDocumentsPath)); }
-        else if (uploadReceiptCheckBox.isSelected() && !(defaultUploadReceiptCheckBox.isSelected()))
+        else if (!(defaultUploadReceiptCheckBox.isSelected()))
         { uploadReceiptTextArea.setText(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath)); }
         uploadReceiptScrollPane.setViewportView(uploadReceiptTextArea);
 
         defaultUploadReceiptCheckBox.setText("Save receipt with uploaded file");
-        defaultUploadReceiptCheckBox.setEnabled(prefs.getBoolean("PHY_RECEIPT", true));
         defaultUploadReceiptCheckBox.setSelected(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true));
-        if (defaultUploadReceiptCheckBox.isSelected() && uploadReceiptCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in the folder data files are uploaded from.", Color.BLACK);
-            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-        } else if (!defaultUploadReceiptCheckBox.isSelected() && uploadReceiptCheckBox.isSelected()){
-            AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in " + prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath), Color.BLACK);
-            AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+        if (defaultUploadReceiptCheckBox.isSelected()){
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in the folder data files are uploaded from.", Color.BLACK);
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+        } else if (!defaultUploadReceiptCheckBox.isSelected()){
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, "Upload receipts will be saved in " + prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath), Color.BLACK);
+            org.dash.freq.view.AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
         }
         defaultUploadReceiptCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -650,7 +646,7 @@ public class PhycusGui extends javax.swing.JFrame {
         });
 
         CustomReceiptFolderButton.setText("Choose directory");
-        if ((prefs.getBoolean("PHY_RECEIPT", true)) && !(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true)) )
+        if (!(prefs.getBoolean("PHY_RECEIPT_DEFAULT", true)) )
         { CustomReceiptFolderButton.setEnabled(true); }
         else { CustomReceiptFolderButton.setEnabled(false); }
         CustomReceiptFolderButton.addActionListener(new java.awt.event.ActionListener() {
@@ -671,62 +667,56 @@ public class PhycusGui extends javax.swing.JFrame {
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(uploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(defaultUploadReceiptCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CustomReceiptFolderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(uploadReceiptLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
+                .addComponent(advancedOptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(470, Short.MAX_VALUE))
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(optionsSeparator1)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(verboseCheckBox)
+                            .addComponent(CustomReceiptFolderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(defaultUploadReceiptCheckBox)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(uploadReceiptLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                        .addGap(14, 14, 14))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(verboseCheckBox)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(optionsSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(optionsSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, settingsPanelLayout.createSequentialGroup()
                                 .addComponent(haplotypeEntityLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(haplotypeEntityButton)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(optionsSeparator2)
-                    .addComponent(optionsSeparator3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                                .addComponent(haplotypeEntityButton)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addComponent(optionsSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)))
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(advancedOptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(251, 251, 251)
+                .addComponent(optionsCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(uploadReceiptCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(defaultUploadReceiptCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(uploadReceiptLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CustomReceiptFolderButton))
                     .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(optionsSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(optionsSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(verboseCheckBox)
+                .addComponent(verboseCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optionsSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -737,7 +727,7 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addComponent(optionsSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(advancedOptionsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
                 .addComponent(optionsCancelButton)
                 .addContainerGap())
         );
@@ -761,7 +751,7 @@ public class PhycusGui extends javax.swing.JFrame {
         helpPanel.setLayout(helpPanelLayout);
         helpPanelLayout.setHorizontalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
         );
         helpPanelLayout.setVerticalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -776,7 +766,7 @@ public class PhycusGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
@@ -804,6 +794,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			
             fileLocationTextArea.setText( absolutePath );
 			prefs.put("PHY_INPUT_DIR", absolutePath);
+			System.out.println(parentFolder);
 			
 			// save parent folder location for receipt if individual file selected
 			if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true) == true)
@@ -834,16 +825,17 @@ public class PhycusGui extends javax.swing.JFrame {
 				// for a single file
 				if (folder == false)
 				{
+					// set up a new Receipt Observer
+					ReceiptObserver ro = new ReceiptObserver(upTextMgr, selectedFile);
+					try { upTextMgr.addObserver(ro); }
+					catch (Exception ex) { System.out.println("Error adding observer"); ex.printStackTrace(); }
+					
 					// reset TextPane
 					outputTextPane.setText("");
 					
 					// list file name
-					AppendText.appendToPane(outputTextPane, (selectedFile + ":"), Color.BLUE);
-					AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
-					
-					// append to receipt
-					if (prefs.getBoolean("PHY_RECEIPT", true)) {}
-					
+					upTextMgr.setLine((selectedFile.getName() + ":"), "blue", "gui");
+					upTextMgr.setLine(("File name: " + selectedFile.getName() + ":"), "blue", "receipt");
 					
 					// run as background thread so TextPane updates
 					Runnable fileUpload = new Runnable() 
@@ -855,6 +847,11 @@ public class PhycusGui extends javax.swing.JFrame {
 									prefs.get("PHY_EST_ENTITY", null));
 								ppf.setFile(selectedFile);
 								ppf.call();
+								System.out.println("Number of observers: " + upTextMgr.countObservers());
+								upTextMgr.setLine("", "black", "receipt");
+								upTextMgr.setLine("End of receipt", "black", "receipt");
+								upTextMgr.deleteObserver(ro);
+
 							} catch (Exception ex) { ex.printStackTrace(); }
 						}
 					};
@@ -883,8 +880,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			else 
 			{
 				outputTextPane.setText("");
-				AppendText.appendToPane(PhycusGui.outputTextPane, "Please select a file or folder", Color.RED);
-				AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+				upTextMgr.setLine("Please select a file or folder", "red", "gui");
 			}
         } catch (Exception e) {
             e.printStackTrace();
@@ -1001,51 +997,41 @@ public class PhycusGui extends javax.swing.JFrame {
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
 		String popSearchDescription = "";
-		boolean popFlag = true;
-		
 		List<String> popNames = population.getPopulationNames(populations);
-		System.out.println("pop Name: " + popSearchName);
 		
 		// does this name already exist?		
-		if (popNames.contains(popSearchName))
-		{
-			popFlag = false;
-			
+		if (popNames.contains(popSearchName)) {
+
 			AppendText.appendToPane(popNotificationsTextPane, "The population name already exists", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-			
+
 			javax.swing.JOptionPane.showMessageDialog(this,
 				("The population " + popSearchName + " already exists"),
 				"This population already exists",
 				javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
-		// is the name blank?
-		else if (popSearchName == null || popSearchName.equals(""))
-		{
-			popFlag = false;
-			
+		// the name cannot be blank
+		else if (popSearchName == null || popSearchName.equals("")) {
 			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be blank", Color.RED);
 			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-				
+
 			javax.swing.JOptionPane.showMessageDialog(this,
 				("The population name cannot be blank"),
 				 "Houston, we have a problem",
 				 javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		
+
 		// if name does not exist ask for a description
-		else
-		{
+		else {
 			// popup for description
 			popSearchDescription = javax.swing.JOptionPane
 				.showInputDialog(this, "Please enter a brief description of your population:");
-			
+
 			// if description is empty
-			if(popSearchDescription == null || popSearchDescription.equals(""))
-			{
-				popFlag = false;
-				
+			if(popSearchDescription == null || popSearchDescription.equals("")) {
 				AppendText.appendToPane(popNotificationsTextPane, "The population description cannot be blank", Color.RED);
 				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 
@@ -1053,53 +1039,38 @@ public class PhycusGui extends javax.swing.JFrame {
 					("The population description cannot be blank"),
 					 "Houston, we have a problem",
 					 javax.swing.JOptionPane.ERROR_MESSAGE);
+				return;
 			}
 		}
 
-		System.out.println("pop Desc: " + popSearchDescription);
+		System.out.println("pop Desc: " + popSearchDescription);		
 
-		// upload pop name / description
-		if (popFlag)
-		{
-			try 
-			{ 
-				// create new population in db
-				population.createNewPopulation(popSearchName, popSearchDescription);
-			} 
-			catch (Exception ex) 
-			{
-				System.out.println(ex);
-				popFlag = false;
-				
-				javax.swing.JOptionPane.showMessageDialog(this,
-					("The population was not created\n" + ex),
-					"Houston, we have a problem",
-					javax.swing.JOptionPane.ERROR_MESSAGE);
-			}
-			if (popFlag)
-			{
-				// notify that new pop has been created
-				AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
-				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+		try { 
+			// create new population in db
+			population.createNewPopulation(popSearchName, popSearchDescription);
+		} catch (Exception ex) {
+			System.out.println(ex);
 
-				// clear pop textpane
-				popResultsTextPane.setText("");
-
-				// redownload db in background
-				new Thread(getPops).start();
-
-				// clear search bar
-				popSearchTextField.setText("");
-			}
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population was not created\n" + ex),
+				"Houston, we have a problem",
+				javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		else
-		{
-			// notify that new pop has not been created
-			AppendText.appendToPane(popNotificationsTextPane, ("No population created."), Color.BLACK);
-			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
-		}
+			
+		// notify that new pop has been created
+		AppendText.appendToPane(popNotificationsTextPane, ("Population " + popSearchName + " created."), Color.BLACK);
+		AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
 
-		// refresh population list
+		// clear pop textpane
+		popResultsTextPane.setText("");
+
+		// redownload db in background
+		new Thread(getPops).start();
+
+		// clear search bar
+		popSearchTextField.setText("");
+			
     }//GEN-LAST:event_popCreateButtonActionPerformed
 
     private void popCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCancelButtonActionPerformed
@@ -1144,28 +1115,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private void optionsCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsCancelButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_optionsCancelButtonActionPerformed
-
-    private void uploadReceiptCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_uploadReceiptCheckBoxItemStateChanged
-        // add state to preferences
-		prefs.putBoolean("PHY_RECEIPT", uploadReceiptCheckBox.isSelected());
-		
-		// notify user when turned on
-		if (uploadReceiptCheckBox.isSelected())
-		{
-			AppendText.appendToPane(outputTextPane, "Upload receipt will be generated", Color.BLACK);
-			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
-			defaultUploadReceiptCheckBox.setEnabled(true);
-
-		}
-		
-		// notify user when turned off
-		else
-		{
-			AppendText.appendToPane(outputTextPane, "Upload receipt will not be generated", Color.BLACK);
-			AppendText.appendToPane(outputTextPane, System.lineSeparator(), Color.BLACK);
-			defaultUploadReceiptCheckBox.setEnabled(false);
-		}
-    }//GEN-LAST:event_uploadReceiptCheckBoxItemStateChanged
 
     private void defaultUploadReceiptCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultUploadReceiptCheckBoxActionPerformed
         // add state to preferences
@@ -1371,7 +1320,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JFileChooser receiptDirectoryChooser;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel uploadFilesPanel;
-    public static javax.swing.JCheckBox uploadReceiptCheckBox;
     private javax.swing.JLabel uploadReceiptLabel;
     private javax.swing.JScrollPane uploadReceiptScrollPane;
     private javax.swing.JTextArea uploadReceiptTextArea;

@@ -26,6 +26,10 @@ public class BatchUploader {
 	private String estEntity = prefs.get("PHY_EST_ENTITY", null);
 	private PostPopulationFrequencies ppf;
 	
+	// Observable
+	UploadTextObservable upTextMgr = UploadTextObservable.getInstance();
+	ReceiptObserver ro;
+	
 	public BatchUploader ()
 	{
 	
@@ -36,8 +40,7 @@ public class BatchUploader {
 		File dir = new File(folder);
 		
 		// track unprocessed files
-		TreeMap<String, Boolean> processedFiles = new TreeMap<String, Boolean>();
-		Boolean flag = false;
+		TreeMap<String, Boolean> processedFiles = new TreeMap<>();
 		
 		try 
 		{
@@ -52,33 +55,36 @@ public class BatchUploader {
 				String fileName = file.getName();
 				if (fileName.toLowerCase().endsWith(".csv"))
 				{
-					// print file name
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-					AppendText.appendToPane(PhycusGui.outputTextPane, file.getName() + ":", Color.BLUE);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-
 					// receipt name
-					UploadReceipt receipt = new UploadReceipt();
-					System.out.println(receipt.fileName(fileName));
+					ro = new ReceiptObserver(upTextMgr, file);
+					try { upTextMgr.addObserver(ro); }
+					catch (Exception ex) { 
+						System.out.println("Error adding observer"); 
+						ex.printStackTrace(); 
+					}
+					
+					// print file name
+					upTextMgr.setLine((file.getName() + ":"), "blue", "gui");
+					upTextMgr.setLine(("File name: " + file.getName() + ":"), "blue", "receipt");
 					
 					// set file and process
 					ppf.setFile(file);
 					Boolean processed = ppf.call() != 0;
 					processedFiles.put(file.getName(), processed);
+					upTextMgr.setLine("", "black", "receipt");
+					upTextMgr.setLine("End of receipt", "black", "receipt");
+					upTextMgr.deleteObserver(ro);
 				}
 			}
 			
 			// print out header for list of files that did not upload
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, "Files not uploaded: ", Color.BLACK);
-			AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+			upTextMgr.setLine("Files not uploaded: ", "black", "gui");
 
 			// cycle through list of file, print files that didn't upload
 			for(Map.Entry<String,Boolean> entry : processedFiles.entrySet()) {
 				if (!entry.getValue()) 
 				{
-					AppendText.appendToPane(PhycusGui.outputTextPane, entry.getKey(), Color.RED);
-					AppendText.appendToPane(PhycusGui.outputTextPane, System.lineSeparator(), Color.BLACK);
+					upTextMgr.setLine(entry.getKey(), "red", "gui");
 				}
 			}
 		} catch (Exception e) 

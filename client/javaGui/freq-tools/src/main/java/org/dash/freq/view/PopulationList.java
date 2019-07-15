@@ -5,7 +5,6 @@
  */
 package org.dash.freq.view;
 
-
 import io.swagger.client.model.PopulationData;
 import java.awt.Color;
 import java.util.List;
@@ -15,16 +14,15 @@ import java.util.List;
  * @author katrinaeaton
  */
 public class PopulationList {
-	public PopulationList ()
-	{
-		
+
+	public PopulationList() {
+
 	}
-	
-	public void updatePopulation (String searchTerms, List<PopulationData> pops)
-	{
+
+	public void updatePopulation(String searchTerms, List<PopulationData> pops) {
 		// clear text pane
 		PhycusGui.popResultsTextPane.setText("");
-		
+
 		// list the populations
 		for (PopulationData pop : pops) {
 			AppendText.appendToPane(PhycusGui.popResultsTextPane, (String.format("%-25s", pop.getName())), Color.BLACK);

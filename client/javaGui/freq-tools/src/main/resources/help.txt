@@ -1,19 +1,70 @@
 <a name="top"></a>
 ## 1. Contents
-[2. Headers](#headers)<br />
-  - [2.1 Population](#pop)<br>
-  - [2.2 Cohort](#cohort)<br>
-  - [2.3 License](#license)<br>
-  - [2.4 Resolution](#resolution)<br>
-  - [2.5 Haplotype](#haplotype)<br>
-  - [2.6 Genotype](#genotype)<br>
+## [2. Options](#options)<br />
+  - [2.1 Receipts](#receipts)<br>
+  - [2.2 Verbose Reporting](#verbose)<br>
+  - [2.3 Haplotyping Group ID](#haplotypeID)<br>
+  - [2.4 Advanced](#advanced)<br>
+    - [2.4.1 Database URL](#database)<br>
+## [3. The Population Tab](#popTab)<br />
+## [4. Headers](#headers)<br />
+  - [4.1 Population](#pop)<br>
+  - [4.2 Cohort](#cohort)<br>
+  - [4.3 License](#license)<br>
+  - [4.4 Resolution](#resolution)<br>
+  - [4.5 Haplotype](#haplotype)<br>
+  - [4.6 Genotype](#genotype)<br>
+
+<a name="options"></a>
+## 2. Options:
+
+The Phycus client includes a few basic reporting options
+
+### 2.1 Receipts <a name="receipts"></a>
+
+A receipt of the upload log is saved in a datestamped/timestamped text file. The file location will default to the folder the data file was uploaded from. This can be changed to a custom location. If a custom location is checked, but not specified, the files will default to the current users Documents folder.
+
+[back](#top)
+
+<a name="verbose"></a>
+### 2.2 Verbose Reporting
+
+This gives the option to turn on and off verbose reporting. This determines how many errors are shown when attempting to upload data.
+
+Errors are partially determined by comparing all data in the file to the first line of data in the file. If there is an error in that first line, and it's a 3000 line file, you can get 3000 errors. This is to minimize that.
+
+Verbose reporting also determines what is reported in the receipt file.
+
+[back](#top)
+
+<a name="haplotypeID"></a>
+### 2.3 Haplotyping Group ID
+
+This variable is initially set when the program is started for the first time. It can be changed in options, and can also be overwritten by adding an optional [header tag](#haplotype) to the file.
+
+[back](#top)
+
+<a name="advanced"></a>
+### 2.4 Advanced Options <a name="database"></a>
+### 2.4.1 Database URL
+
+The program possesses the ability to change the URL to reach the server. Do not change this unless otherwise notified. If it does get changed inappropriately, the "Reset to default" will restore the original url.
+
+[back](#top)
+
+<a name="popTab"></a>
+## 3. The Population Tab:
+
+Before uploading a data file it's population must be listed in the database. This is to limit the number of duplicate population names in the database. The name of a new population can be typed in the "Population name" text box, and created using the "Create" button at the bottom of the screen. The population name should be short, in uppercase letters, and use underscores in lieu of spaces. A brief description of the population (255 characters maximum) must be included. Please check the database for an existing population name before adding a new one.
+
+[back](#top)
 
 <a name="headers"></a>
-## 2. Headers:
+## 4. Headers:
 
 At the minimum there must be a population and cohort header in each file. All others are optional and will over-write options selected in the interface.
 
-Headers must be separated by commas and spaces (outside of quotes) are not allowed.
+Headers must be separated by commas, and spaces (outside of quotes) are not allowed.
 
 A header example:
 
@@ -22,7 +73,7 @@ A header example:
 [back](#top)
 
 <a name="pop"></a>
-### 2.1 Population
+### 4.1 Population
 
 > pop=POPULATION_TAG
 
@@ -31,7 +82,7 @@ The population is a mandatory header, and to prevent duplicates, must use a popu
 [back](#top)
 
 <a name="cohort"></a>
-### 2.2 Cohort
+### 4.2 Cohort
 
 > cohort="Description of the cohort"
 
@@ -40,7 +91,7 @@ The cohort is a mandatory header. You have 255 characters available to you to de
 [back](#top)
 
 <a name="license"></a>
-### 2.3 License
+### 4.3 License
 
 > license=CC0
 
@@ -59,7 +110,7 @@ For more information, see [here](https://creativecommons.org/share-your-work/lic
 [back](#top)
 
 <a name="resolution"></a>
-### 2.4 Resolution
+### 4.4 Resolution
 
 > resolution=gDKMS
 
@@ -78,18 +129,18 @@ The resolution is an optional header element describing the resolution of the al
 [back](#top)
 
 <a name="haplotype"></a>
-### 2.5 Haplotyping Group ID
+### 4.5 Haplotyping Group ID
 
 > haplotype=A9576 or haplotype="Children's Hospital Oakland Research Institute"
 
-The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group identifies defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the options tab.)
+The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group identifies defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the [options tab](#haplotypeID).
 
 The haplotyping ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
 
 [back](#top)
 
 <a name="genotype"></a>
-### 2.5 Genotyping Group ID
+### 4.6 Genotyping Group ID
 
 > genotype=A9576 or genotype="Children's Hospital Oakland Research Institute"
 

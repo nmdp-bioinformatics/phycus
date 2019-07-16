@@ -790,6 +790,8 @@ public class PhycusGui extends javax.swing.JFrame {
     private void mainUploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUploadButtonActionPerformed
         try
         {	
+			// check to make sure there's a file or folder listed in
+			// file location text area
 			if (!fileLocationTextArea.getText().isEmpty())
 			{
 				// for a single file

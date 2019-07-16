@@ -57,7 +57,7 @@ public class DataChecks {
 		String[] columns;
 		boolean flag = true;
 		
-		// counter starts on line 3 (header is 1, line to compare to is 2)
+		// counter starts on line 3 (header is 1, line everything is compared to is 2)
 		// allows line numbers for errors to be tracked
 		int i = 3;
 		

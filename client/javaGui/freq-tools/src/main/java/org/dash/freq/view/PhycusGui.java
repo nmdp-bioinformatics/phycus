@@ -766,13 +766,12 @@ public class PhycusGui extends javax.swing.JFrame {
 			System.out.println(parentFolder);
 			
 			// save parent folder location for receipt if individual file selected
-//			if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true) == true)
 			if (selectedFile.isFile())
 
 			{
 				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", parentFolder);
 			}
-			// save absolute path for receipt of folder selected
+			// save absolute path for receipt if folder selected
 			else
 			{
 				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", absolutePath);

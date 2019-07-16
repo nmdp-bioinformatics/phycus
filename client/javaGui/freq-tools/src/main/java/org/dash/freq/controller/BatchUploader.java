@@ -55,7 +55,7 @@ public class BatchUploader {
 				String fileName = file.getName();
 				if (fileName.toLowerCase().endsWith(".phycus"))
 				{
-					// receipt name
+					// create new receipt
 					ro = new ReceiptObserver(upTextMgr, file);
 					try { upTextMgr.addObserver(ro); }
 					catch (Exception ex) { 
@@ -63,7 +63,7 @@ public class BatchUploader {
 						ex.printStackTrace(); 
 					}
 					
-					// print file name
+					// print data file name
 					upTextMgr.setLine("", "black", "gui");
 					upTextMgr.setLine((file.getName() + ":"), "blue", "gui");
 					upTextMgr.setLine(("File name: " + file.getName() + ":"), "blue", "receipt");
@@ -74,6 +74,8 @@ public class BatchUploader {
 					processedFiles.put(file.getName(), processed);
 					upTextMgr.setLine("", "black", "receipt");
 					upTextMgr.setLine("End of receipt", "black", "receipt");
+					
+					// delete observer for current receipt
 					upTextMgr.deleteObserver(ro);
 				}
 			}

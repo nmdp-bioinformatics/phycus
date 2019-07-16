@@ -412,7 +412,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         licenseLabel.setText("Licensing type:");
 
-        licenseHelpIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/37171Small.png"))); // NOI18N
+        licenseHelpIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smallQuestionMark.png"))); // NOI18N
         licenseHelpIcon.setLabelFor(licenseLabel);
         licenseHelpIcon.setToolTipText("A link to a description of the different licensing types");
         licenseHelpIcon.setAlignmentY(0.1F);

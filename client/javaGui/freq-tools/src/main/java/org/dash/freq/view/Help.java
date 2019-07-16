@@ -32,8 +32,8 @@ public class Help {
 		try
 		{
 			// find help.txt from resources in the jar
-			URL fileLocation = ClassLoader.getSystemClassLoader().getResource("help.txt");
-			Path filePath= Paths.get(fileLocation.toURI());
+			URL fileLocation = ClassLoader.getSystemClassLoader().getResource("helpMarkdown.txt");
+			Path filePath = Paths.get(fileLocation.toURI());
 			
 			// convert that file into a string
 			helpText = new String(Files.readAllBytes(filePath));

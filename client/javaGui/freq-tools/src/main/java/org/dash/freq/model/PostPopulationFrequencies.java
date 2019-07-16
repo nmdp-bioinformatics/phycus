@@ -290,6 +290,7 @@ public class PostPopulationFrequencies implements Callable<Integer>
 					upTextMgr.setLine("", "blue", "both");
 					upTextMgr.setLine("Data submitted!", "blue", "both");
 					upTextMgr.setLine(("Submission ID: " + response.getSubmissionID().toString()), "black", "both");
+
 				}
 			} catch (Exception ex) {
 				// if not, let the user know that it failed

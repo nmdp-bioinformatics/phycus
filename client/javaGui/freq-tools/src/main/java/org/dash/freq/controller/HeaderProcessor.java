@@ -82,7 +82,7 @@ public class HeaderProcessor {
 		boolean headerPresent = true;
 		
 		// identifier for receipt
-		upTextMgr.setLine("", "black", "both");
+		upTextMgr.setLine("", "black", "receipt");
 		upTextMgr.setLine("Headers:", "black", "both");
 		
 		// read first line

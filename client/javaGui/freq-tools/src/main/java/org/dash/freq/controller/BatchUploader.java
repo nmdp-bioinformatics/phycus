@@ -64,6 +64,7 @@ public class BatchUploader {
 					}
 					
 					// print file name
+					upTextMgr.setLine("", "black", "gui");
 					upTextMgr.setLine((file.getName() + ":"), "blue", "gui");
 					upTextMgr.setLine(("File name: " + file.getName() + ":"), "blue", "receipt");
 					
@@ -78,6 +79,7 @@ public class BatchUploader {
 			}
 			
 			// print out header for list of files that did not upload
+			upTextMgr.setLine("", "black", "gui");
 			upTextMgr.setLine("Files not uploaded: ", "black", "gui");
 
 			// cycle through list of file, print files that didn't upload

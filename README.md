@@ -44,7 +44,7 @@ With Java 8:
 
 With Java 8 on Windows:
 ```bash
- java -jar target/service-haplotype-frequency-curation-0.0.1.jar -Dspring.datasource.url=jdbc:mysql://your-ip-address:3306/hfcusdb
+ java  -Dspring.datasource.url="jdbc:mysql://your-ip-address-here:3306/hfcusdb" -jar target/service-haplotype-frequency-curation-0.0.1.jar
 ```
 
 With Java 9:

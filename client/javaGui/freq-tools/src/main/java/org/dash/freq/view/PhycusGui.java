@@ -150,7 +150,7 @@ public class PhycusGui extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Phycus file", "phycus");
         fileChooserUpload.setFileFilter(filter);
 
         estEntityPopupFrame.setVisible(false);

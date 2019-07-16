@@ -10,7 +10,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFileChooser(prefs.get(&quot;PHY_INPUT_DIR&quot;, userDocumentsPath))"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;Comma Separated Values file&quot;, &quot;csv&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;Phycus file&quot;, &quot;phycus&quot;);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.ButtonGroup" name="fileOrFolder">

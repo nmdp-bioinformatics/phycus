@@ -53,7 +53,7 @@ public class BatchUploader {
 				
 				// if file is a csv file
 				String fileName = file.getName();
-				if (fileName.toLowerCase().endsWith(".csv"))
+				if (fileName.toLowerCase().endsWith(".phycus"))
 				{
 					// receipt name
 					ro = new ReceiptObserver(upTextMgr, file);

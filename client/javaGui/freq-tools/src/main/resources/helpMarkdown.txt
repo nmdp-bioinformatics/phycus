@@ -20,7 +20,7 @@
 <a name="phycus"></a>
 ## 2. Phycus File Format
 
-A Phycus file is a comma separated value file with a custom header, and the suffix '.phycus'. (Example: 'file_name.phycus') The first line is a header, followed by lines for haplotype and its frequency. There should be no spaces outside of quoted text, and commas should not be used except to separate data and header options. (Do not use commas in quoted descriptions.)
+A Phycus file is a comma separated value file with a custom header, and the suffix '.phycus'. (Example: 'file_name.phycus') The first line is a header, followed by lines for haplotypes and their frequencies. There should be no spaces outside of quoted text, and commas should not be used except to separate data and header options. (Do not use commas in quoted descriptions.)
 
 A minature example file:
 
@@ -115,7 +115,7 @@ The resolution is an optional header element describing the resolution of the al
 
 > haplotype=A9576 or haplotype="Children's Hospital Oakland Research Institute"
 
-The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group identifies defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the [options tab](#haplotypeID).
+The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the [options tab](#haplotypeID)\).
 
 The haplotyping ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
 

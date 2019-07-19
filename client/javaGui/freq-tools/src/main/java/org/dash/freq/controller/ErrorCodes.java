@@ -40,7 +40,7 @@ public class ErrorCodes {
 		errorCodes.put(6, "The cohort value must be fewer than 255 characters.");
 		errorCodes.put(7, "An invalid license type is included in the header. See the help tab for more information.");
 		errorCodes.put(8, "An invalid resolution type is included in the header. See the help tab for more information.");
-		errorCodes.put(9, "One or more haplotypes contains an error");
+		errorCodes.put(9, "One or more haplotypes contains an error. Please turn on verbose reporting for more information. (It's in options)");
 		errorCodes.put(10, "");
 		
 		return errorCodes;

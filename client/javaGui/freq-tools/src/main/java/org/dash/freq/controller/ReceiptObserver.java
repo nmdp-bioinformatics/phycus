@@ -88,7 +88,7 @@ public class ReceiptObserver implements Observer{
     {
 		// create receipt file name from source file name
         String receiptFileName = incFileName
-			.substring(0, (incFileName.toString().length()-4)) 
+			.substring(0, (incFileName.toString().length()-7)) 
 			+ "_" + dateStamp + "_" + timeStamp + ".txt";
 
         System.out.println(receiptFileName);

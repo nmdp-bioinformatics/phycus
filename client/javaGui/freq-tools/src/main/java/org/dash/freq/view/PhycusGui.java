@@ -85,7 +85,6 @@ public class PhycusGui extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         fileChooserUpload = new javax.swing.JFileChooser(prefs.get("PHY_INPUT_DIR", userDocumentsPath));
         fileOrFolder = new javax.swing.ButtonGroup();
@@ -110,9 +109,6 @@ public class PhycusGui extends javax.swing.JFrame {
         mainUploadButton = new javax.swing.JButton();
         CsvNotificationLabel = new javax.swing.JLabel();
         SelectFilePanel = new javax.swing.JPanel();
-        fileOpenButton = new javax.swing.JButton();
-        jRBFile = new javax.swing.JRadioButton();
-        jRBFolder = new javax.swing.JRadioButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         mainCancelButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -123,6 +119,8 @@ public class PhycusGui extends javax.swing.JFrame {
         warningLabel = new javax.swing.JLabel();
         EstEntityLabel1 = new javax.swing.JLabel();
         EstEntityLabelCode = new javax.swing.JLabel();
+        fileOpenButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         populationPanel = new javax.swing.JPanel();
         popSearchTextField = new javax.swing.JTextField();
         popResultsScrollPane = new javax.swing.JScrollPane();
@@ -150,8 +148,9 @@ public class PhycusGui extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         helpEditorPane = new javax.swing.JEditorPane();
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Values file", "csv");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Phycus file", "phycus");
         fileChooserUpload.setFileFilter(filter);
+        fileChooserUpload.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
 
         estEntityPopupFrame.setVisible(false);
         estEntityPopupFrame.setTitle("Haplotyping Registry");
@@ -330,66 +329,9 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        CsvNotificationLabel.setText("CSV files only.");
+        CsvNotificationLabel.setText("You may select individual .phycus files (See help for more information about the suffix.)");
 
         SelectFilePanel.setLayout(new java.awt.GridBagLayout());
-
-        fileOpenButton.setText("Select File");
-        fileOpenButton.setMaximumSize(new java.awt.Dimension(100, 23));
-        fileOpenButton.setMinimumSize(new java.awt.Dimension(100, 23));
-        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileOpenButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
-        SelectFilePanel.add(fileOpenButton, gridBagConstraints);
-
-        fileOrFolder.add(jRBFile);
-        jRBFile.setText("File");
-        jRBFile.setName("file"); // NOI18N
-        if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true)){
-            setFile();
-            jRBFile.setSelected(true);
-        } else {
-            setFolder();
-            jRBFolder.setSelected(true);
-        }
-        jRBFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBFileActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
-        SelectFilePanel.add(jRBFile, gridBagConstraints);
-
-        fileOrFolder.add(jRBFolder);
-        if (!prefs.getBoolean("FILE_OR_FOLDER", true)){
-            jRBFolder.isSelected();
-        }
-        jRBFolder.setText("Folder");
-        jRBFolder.setName("folder"); // NOI18N
-        jRBFolder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBFolderActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 23, 0, 0);
-        SelectFilePanel.add(jRBFolder, gridBagConstraints);
         SelectFilePanel.add(filler1, new java.awt.GridBagConstraints());
 
         mainCancelButton.setText("Cancel");
@@ -434,6 +376,17 @@ public class PhycusGui extends javax.swing.JFrame {
             estEntityPopupFrame.setVisible(true);
         }} catch (Exception ex){ System.out.println(ex);}
 
+        fileOpenButton.setText("Select File(s)");
+        fileOpenButton.setMaximumSize(new java.awt.Dimension(100, 23));
+        fileOpenButton.setMinimumSize(new java.awt.Dimension(100, 23));
+        fileOpenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileOpenButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("You may also select folders of .phycus files. Non-phycus files will be ignored as will subdirectories.");
+
         javax.swing.GroupLayout uploadFilesPanelLayout = new javax.swing.GroupLayout(uploadFilesPanel);
         uploadFilesPanel.setLayout(uploadFilesPanelLayout);
         uploadFilesPanelLayout.setHorizontalGroup(
@@ -442,37 +395,44 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                        .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(EstEntityLabel1)
-                                .addGap(4, 4, 4)
-                                .addComponent(EstEntityLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40))
                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                         .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
                             .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                                .addComponent(fileOpenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1))
-                            .addComponent(warningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                            .addComponent(warningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                                        .addComponent(EstEntityLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(EstEntityLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                                         .addComponent(licenseLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(445, 445, 445)))))
-                        .addContainerGap())))
-            .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(mainUploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(mainUploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mainCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         uploadFilesPanelLayout.setVerticalGroup(
@@ -482,20 +442,27 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, uploadFilesPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SelectFilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, uploadFilesPanelLayout.createSequentialGroup()
+                                .addComponent(fileOpenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(CsvNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(licenseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(licenseHelpIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EstEntityLabel1)
+                .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(uploadFilesPanelLayout.createSequentialGroup()
+                        .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EstEntityLabel1))
                     .addComponent(EstEntityLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addComponent(warningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -551,11 +518,11 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addGroup(populationPanelLayout.createSequentialGroup()
                         .addComponent(popSearchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                        .addComponent(popSearchTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
                     .addComponent(popNotificationsScrollPane))
                 .addContainerGap())
             .addGroup(populationPanelLayout.createSequentialGroup()
-                .addGap(213, 213, 213)
+                .addGap(194, 194, 194)
                 .addComponent(popCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(popCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -668,7 +635,7 @@ public class PhycusGui extends javax.swing.JFrame {
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addComponent(advancedOptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addContainerGap(445, Short.MAX_VALUE))
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -680,7 +647,7 @@ public class PhycusGui extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(uploadReceiptLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                         .addGap(14, 14, 14))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addComponent(verboseCheckBox)
@@ -751,7 +718,7 @@ public class PhycusGui extends javax.swing.JFrame {
         helpPanel.setLayout(helpPanelLayout);
         helpPanelLayout.setHorizontalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
         );
         helpPanelLayout.setVerticalGroup(
             helpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,9 +733,11 @@ public class PhycusGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 565, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -797,11 +766,12 @@ public class PhycusGui extends javax.swing.JFrame {
 			System.out.println(parentFolder);
 			
 			// save parent folder location for receipt if individual file selected
-			if (prefs.getBoolean("PHY_FILE_OR_FOLDER", true) == true)
+			if (selectedFile.isFile())
+
 			{
 				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", parentFolder);
 			}
-			// save absolute path for receipt of folder selected
+			// save absolute path for receipt if folder selected
 			else
 			{
 				prefs.put("PHY_DEFAULT_RECEIPT_FOLDER", absolutePath);
@@ -820,10 +790,12 @@ public class PhycusGui extends javax.swing.JFrame {
     private void mainUploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUploadButtonActionPerformed
         try
         {	
+			// check to make sure there's a file or folder listed in
+			// file location text area
 			if (!fileLocationTextArea.getText().isEmpty())
 			{
 				// for a single file
-				if (folder == false)
+				if (selectedFile.isFile())
 				{
 					// set up a new Receipt Observer
 					ReceiptObserver ro = new ReceiptObserver(upTextMgr, selectedFile);
@@ -858,7 +830,7 @@ public class PhycusGui extends javax.swing.JFrame {
 					new Thread(fileUpload).start();
 				}
 				// for multiple files
-				else if (folder == true)
+				else if (!selectedFile.isFile())
 				{
 					// reset TextPane
 					outputTextPane.setText("");
@@ -891,14 +863,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private void mainCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCancelButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mainCancelButtonActionPerformed
-
-    private void jRBFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFileActionPerformed
-		setFile();   // see below
-    }//GEN-LAST:event_jRBFileActionPerformed
-
-    private void jRBFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBFolderActionPerformed
-		setFolder(); // see below
-    }//GEN-LAST:event_jRBFolderActionPerformed
 
     private void licenseHelpIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_licenseHelpIconMouseClicked
 		try {
@@ -1194,38 +1158,6 @@ public class PhycusGui extends javax.swing.JFrame {
 			}
 		}
 	}
-
-	// settings for uploading a file, used in custom code for jRBFile
-	public void setFile() {
-		// set file selection
-		fileChooserUpload.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		
-		// visual cues
-		fileOpenButton.setText("Select File");
-		CsvNotificationLabel.setText("CSV files only.");
-		
-		// save choice to preferences
-		prefs.putBoolean("PHY_FILE_OR_FOLDER", true);
-		
-		// so uploader function knows whether it's a file or folder
-		folder = false;
-	}
-	
-	// settings for uploading a folder, used in custom code for jRBFile
-	public void setFolder() {
-		// set folder selection
-		fileChooserUpload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		
-		// visual cues
-		fileOpenButton.setText("Select Folder");
-		CsvNotificationLabel.setText("Only CSV files will be processed, other files and subfolders will be ignored.");
-		
-		// save choice to preferences
-		prefs.putBoolean("PHY_FILE_OR_FOLDER", false);
-		
-		// so uploader function knows whether it's a file or folder
-		folder = true;
-	}
 	
 	/**
 	 * @param args the command line arguments
@@ -1292,8 +1224,7 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel haplotypeEntityLabel;
     private javax.swing.JEditorPane helpEditorPane;
     private javax.swing.JPanel helpPanel;
-    private javax.swing.JRadioButton jRBFile;
-    private javax.swing.JRadioButton jRBFolder;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;

@@ -61,8 +61,8 @@ public class DataChecks {
 		// allows line numbers for errors to be tracked
 		int i = 3;
 		
-		// collect haplotype line errors, 
-		// we will list the first 3 errors outside of verbose reporting
+		// collect haplotype line errors
+		// this list only prints out if verbose reporting is turned on.
 		// this is to prevent showing 3000 errors if the first haplotype has an
 		// error
 		ArrayList<String> haplotypeLineErrorsMismatch = new ArrayList();

@@ -1,7 +1,7 @@
 <a name="top"></a>
 ## 1. Contents
 ## [2. Phycus file format](#phycus)<br>
-  - [2.1 Headers](#headers)<br>
+  - [2.1 Header Block](#header)<br>
     - [2.1.1 Population](#pop)<br>
     - [2.1.2 Cohort](#cohort)<br>
     - [2.1.3 License](#license)<br>
@@ -20,7 +20,7 @@
 <a name="phycus"></a>
 ## 2. Phycus File Format
 
-A Phycus file is a comma separated value file with a custom header, and the suffix '.phycus'. (Example: 'file_name.phycus') The first line is a header, followed by one line per haplotype, with its frequency. There are no spaces after commas, and commas should not be used except to separate data and header options. (Do not use commas in quoted descriptions.)
+A Phycus file is a comma separated value file with a custom header, and the suffix '.phycus'. (Example: 'file_name.phycus') The first line is a header, followed by lines for haplotype and its frequency. There should be no spaces outside of quoted text, and commas should not be used except to separate data and header options. (Do not use commas in quoted descriptions.)
 
 A minature example file:
 
@@ -41,10 +41,10 @@ DRB1*15:01:01:01~DQB1*06:05:01,0.117427322
 
 [back](#top)
 
-<a name="headers"></a>
-## 2.1 Headers:
+<a name="header"></a>
+## 2.1 Header Block:
 
-At the minimum there must be a population and cohort in the header for each file. All others are optional and will over-write options selected in the interface.
+A minimum header block must contain a population value and cohort value. All other header elements are optional. Any header options that can be selected in the interface will be over-written by the option listed in the header.
 
 Headers must be separated by commas, and spaces are not allowed (outside of quotes).
 
@@ -135,7 +135,7 @@ The genotyping group ID is an optional header tag. It identifies the facility th
 
 Data should start on the second line, and should list the haplotype first, a comma, then its frequency. No spaces should be included. Individual loci should be separated by a tilde ( ~ ). Ideally the frequencies should total up to 1.00, but may range as high as 1.01 and as low as 0.95 and still be accepted.
 
-> DRB1*07:01:01:01~DQB1*02:02:01,0.082586969
+> DRB1\*07:01:01:01~DQB1\*02:02:01,0.082586969
 
 [back](#top)
 
@@ -146,7 +146,7 @@ The Phycus client includes a few basic reporting options
 
 ### 3.1 Receipts <a name="receipts"></a>
 
-A receipt of the upload log is saved in a datestamped/timestamped text file. The file location will default to the folder the data file was uploaded from. This can be changed to a custom location. If a custom location is checked, but not specified, the files will default to the current users Documents folder.
+A receipt of the upload log is saved in a datestamped/timestamped text file. The file location will default to the folder the data file was uploaded from. This can be changed to a custom location. If a custom location is checked, but not specified, the files will default to the current user's Documents folder.
 
 [back](#top)
 
@@ -172,14 +172,14 @@ This variable is initially set when the program is started for the first time. I
 ### 3.4 Advanced Options <a name="database"></a>
 ### 3.4.1 Database URL
 
-The program possesses the ability to change the URL to reach the server. Do not change this unless otherwise notified. If it does get changed inappropriately, the "Reset to default" will restore the original url.
+The program possesses the ability to change the URL to reach the server. Do not change this unless otherwise notified. If it does get changed inappropriately, the "Reset to default" button will restore the original url.
 
 [back](#top)
 
 <a name="popTab"></a>
 ## 4. The Population Tab:
 
-Before uploading a data file it's population must be listed in the database. This is to limit the number of duplicate population names in the database. The name of a new population can be typed in the "Population name" text box, and created using the "Create" button at the bottom of the screen. The population name should be short, in uppercase letters, and use underscores in lieu of spaces. A brief description of the population (255 characters maximum) must be included. Please check the database for an existing population name before adding a new one.
+Before uploading a data file its population must be listed in the database. This is to limit the number of duplicate population names in the database. The name of a new population can be typed in the "Population name" text box, and created using the "Create" button at the bottom of the screen. The population name should be short, in uppercase letters, and use underscores in lieu of spaces. A brief description of the population (255 characters maximum) must be included. Please check the database for an existing population name before adding a new one.
 
 [back](#top)
 

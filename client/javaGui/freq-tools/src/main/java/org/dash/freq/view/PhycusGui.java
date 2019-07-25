@@ -481,8 +481,8 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
         popSearchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                popSearchTextFieldKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                popSearchTextFieldKeyReleased(evt);
             }
         });
 
@@ -949,17 +949,12 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate
 
     private void popSearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popSearchTextFieldActionPerformed
-        // TODO add your handling code here:
+//        String popSearchName = popSearchTextField.getText();
+//		popList.updatePopulation(popSearchName, populations);
     }//GEN-LAST:event_popSearchTextFieldActionPerformed
 
-    private void popSearchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popSearchTextFieldKeyTyped
-        // TODO add your handling code here:
-//		List<PopulationData> searchedList = popList.searchList();
-		
-    }//GEN-LAST:event_popSearchTextFieldKeyTyped
-
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
-		String popSearchName = popSearchTextField.getText();
+		String popSearchName = popSearchTextField.getText().toUpperCase();
 		String popSearchDescription = "";
 		List<String> popNames = population.getPopulationNames(populations);
 		
@@ -987,6 +982,18 @@ public class PhycusGui extends javax.swing.JFrame {
 				 javax.swing.JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		
+		// the name cannot be over 20 characters long
+		if (popSearchName.length() > 20) {
+			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be more than 20 characters long", Color.RED);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population name cannot be more than 20 characters long"),
+				 "Houston, we have a problem",
+				 javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		// if name does not exist ask for a description
 		else {
@@ -1001,6 +1008,18 @@ public class PhycusGui extends javax.swing.JFrame {
 
 				javax.swing.JOptionPane.showMessageDialog(this,
 					("The population description cannot be blank"),
+					 "Houston, we have a problem",
+					 javax.swing.JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			// if description is over 254 characters long
+			else if (popSearchDescription.length() >= 255) {
+				AppendText.appendToPane(popNotificationsTextPane, "The population description cannot be more than 254 characters long", Color.RED);
+				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+				javax.swing.JOptionPane.showMessageDialog(this,
+					("The population description cannot be more than 254 characters long"),
 					 "Houston, we have a problem",
 					 javax.swing.JOptionPane.ERROR_MESSAGE);
 				return;
@@ -1146,6 +1165,11 @@ public class PhycusGui extends javax.swing.JFrame {
     private void advancedOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedOptionsButtonActionPerformed
         advancedOptionsPopupFrame.setVisible(true);
     }//GEN-LAST:event_advancedOptionsButtonActionPerformed
+
+    private void popSearchTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popSearchTextFieldKeyReleased
+        String popSearchName = popSearchTextField.getText();
+		popList.updatePopulation(popSearchName, populations);
+    }//GEN-LAST:event_popSearchTextFieldKeyReleased
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {

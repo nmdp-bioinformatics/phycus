@@ -481,8 +481,8 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
         popSearchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                popSearchTextFieldKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                popSearchTextFieldKeyReleased(evt);
             }
         });
 
@@ -949,14 +949,9 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_helpEditorPaneHyperlinkUpdate
 
     private void popSearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popSearchTextFieldActionPerformed
-        // TODO add your handling code here:
+//        String popSearchName = popSearchTextField.getText();
+//		popList.updatePopulation(popSearchName, populations);
     }//GEN-LAST:event_popSearchTextFieldActionPerformed
-
-    private void popSearchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popSearchTextFieldKeyTyped
-        // TODO add your handling code here:
-//		List<PopulationData> searchedList = popList.searchList();
-		
-    }//GEN-LAST:event_popSearchTextFieldKeyTyped
 
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
 		String popSearchName = popSearchTextField.getText();
@@ -1146,6 +1141,11 @@ public class PhycusGui extends javax.swing.JFrame {
     private void advancedOptionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advancedOptionsButtonActionPerformed
         advancedOptionsPopupFrame.setVisible(true);
     }//GEN-LAST:event_advancedOptionsButtonActionPerformed
+
+    private void popSearchTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popSearchTextFieldKeyReleased
+        String popSearchName = popSearchTextField.getText();
+		popList.updatePopulation(popSearchName, populations);
+    }//GEN-LAST:event_popSearchTextFieldKeyReleased
 
 	// open links to external browser
 	public static void openWebpage(URI uri) {

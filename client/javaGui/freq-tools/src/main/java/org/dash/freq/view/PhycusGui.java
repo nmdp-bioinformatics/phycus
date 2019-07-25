@@ -954,7 +954,7 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_popSearchTextFieldActionPerformed
 
     private void popCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popCreateButtonActionPerformed
-		String popSearchName = popSearchTextField.getText();
+		String popSearchName = popSearchTextField.getText().toUpperCase();
 		String popSearchDescription = "";
 		List<String> popNames = population.getPopulationNames(populations);
 		
@@ -982,6 +982,18 @@ public class PhycusGui extends javax.swing.JFrame {
 				 javax.swing.JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		
+		// the name cannot be over 20 characters long
+		if (popSearchName.length() > 20) {
+			AppendText.appendToPane(popNotificationsTextPane, "The population name cannot be more than 20 characters long", Color.RED);
+			AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("The population name cannot be more than 20 characters long"),
+				 "Houston, we have a problem",
+				 javax.swing.JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		// if name does not exist ask for a description
 		else {
@@ -996,6 +1008,18 @@ public class PhycusGui extends javax.swing.JFrame {
 
 				javax.swing.JOptionPane.showMessageDialog(this,
 					("The population description cannot be blank"),
+					 "Houston, we have a problem",
+					 javax.swing.JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			// if description is over 254 characters long
+			else if (popSearchDescription.length() >= 255) {
+				AppendText.appendToPane(popNotificationsTextPane, "The population description cannot be more than 254 characters long", Color.RED);
+				AppendText.appendToPane(popNotificationsTextPane, System.lineSeparator(), Color.BLACK);
+
+				javax.swing.JOptionPane.showMessageDialog(this,
+					("The population description cannot be more than 254 characters long"),
 					 "Houston, we have a problem",
 					 javax.swing.JOptionPane.ERROR_MESSAGE);
 				return;

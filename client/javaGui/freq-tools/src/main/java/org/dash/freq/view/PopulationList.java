@@ -22,7 +22,7 @@ public class PopulationList {
 
 	}
 
-	public List<PopulationData> updatePopulation(String searchTerms, List<PopulationData> pops) {
+	public void updatePopulation(String searchTerms, List<PopulationData> pops) {
 		
 		List<PopulationData> matchingPopList = new ArrayList();
 		
@@ -49,7 +49,5 @@ public class PopulationList {
 			AppendText.appendToPane(PhycusGui.popResultsTextPane, pop.getDescription(), Color.BLACK);
 			AppendText.appendToPane(PhycusGui.popResultsTextPane, System.lineSeparator(), Color.BLACK);
 		}
-		
-		return matchingPopList;
 	}
 }

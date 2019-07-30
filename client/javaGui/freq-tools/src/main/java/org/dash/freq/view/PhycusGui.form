@@ -41,26 +41,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="estEntityInstructions1" max="32767" attributes="0"/>
-                              <Component id="estEntityInstructions2" max="32767" attributes="0"/>
-                              <Component id="estEntityInstructions3" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="estEntityInstructions3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="estEntityTextField" min="-2" pref="203" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="estEntityEnterButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="estEntityCloseButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="estEntityTextField" min="-2" pref="203" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <Component id="estEntityEnterButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="estEntityCloseButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace min="50" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="estEntityInstructions1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -70,17 +69,15 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="estEntityInstructions1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="estEntityInstructions2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="estEntityInstructions3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Component id="estEntityTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="estEntityEnterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="estEntityCloseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,17 +103,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="estEntityInstructions1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Please enter the ION or other facility identification "/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="estEntityInstructions2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="of the group performing the haplotyping:"/>
+            <Property name="text" type="java.lang.String" value="If your facility has an ION number, please enter it"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="estEntityInstructions3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="(This can be changed in the options tab)"/>
+            <Property name="text" type="java.lang.String" value="here (This can be changed in the options tab): "/>
           </Properties>
         </Component>
       </SubComponents>

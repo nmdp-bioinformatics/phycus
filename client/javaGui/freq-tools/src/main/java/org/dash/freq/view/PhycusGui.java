@@ -93,7 +93,6 @@ public class PhycusGui extends javax.swing.JFrame {
         estEntityEnterButton = new javax.swing.JButton();
         estEntityCloseButton = new javax.swing.JButton();
         estEntityInstructions1 = new javax.swing.JLabel();
-        estEntityInstructions2 = new javax.swing.JLabel();
         estEntityInstructions3 = new javax.swing.JLabel();
         receiptDirectoryChooser = new javax.swing.JFileChooser(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath));
         advancedOptionsPopupFrame = new javax.swing.JFrame();
@@ -173,11 +172,9 @@ public class PhycusGui extends javax.swing.JFrame {
             }
         });
 
-        estEntityInstructions1.setText("Please enter the ION or other facility identification ");
+        estEntityInstructions1.setText("If your facility has an ION number, please enter it");
 
-        estEntityInstructions2.setText("of the group performing the haplotyping:");
-
-        estEntityInstructions3.setText("(This can be changed in the options tab)");
+        estEntityInstructions3.setText("here (This can be changed in the options tab): ");
 
         javax.swing.GroupLayout estEntityPopupFrameLayout = new javax.swing.GroupLayout(estEntityPopupFrame.getContentPane());
         estEntityPopupFrame.getContentPane().setLayout(estEntityPopupFrameLayout);
@@ -187,20 +184,20 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(estEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(estEntityInstructions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(estEntityInstructions3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(estEntityInstructions3))
                     .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
-                                .addComponent(estEntityEnterButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(estEntityCloseButton)
-                                .addGap(17, 17, 17)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(estEntityEnterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(estEntityCloseButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(estEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         estEntityPopupFrameLayout.setVerticalGroup(
             estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,16 +205,14 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(estEntityInstructions1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estEntityInstructions2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estEntityInstructions3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(estEntityEnterButton)
                     .addComponent(estEntityCloseButton))
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
 
         estEntityPopupFrame.getAccessibleContext().setAccessibleName("");
@@ -1235,7 +1230,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JButton estEntityCloseButton;
     private javax.swing.JButton estEntityEnterButton;
     private javax.swing.JLabel estEntityInstructions1;
-    private javax.swing.JLabel estEntityInstructions2;
     private javax.swing.JLabel estEntityInstructions3;
     private javax.swing.JFrame estEntityPopupFrame;
     private javax.swing.JTextField estEntityTextField;

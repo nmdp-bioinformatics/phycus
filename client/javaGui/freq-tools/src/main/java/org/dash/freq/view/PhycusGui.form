@@ -309,24 +309,24 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="CsvNotificationLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="EstEntityLabel1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="EstEntityLabelCode" min="-2" pref="324" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="licenseHelpIcon" min="-2" pref="15" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="estEntityLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="estEntityLabelCode" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -337,6 +337,10 @@
                               <Component id="mainUploadButton" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="mainCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CsvNotificationLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -362,7 +366,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CsvNotificationLabel" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="CsvNotificationLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="CsvNotificationLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="licenseLabel" max="32767" attributes="0"/>
@@ -373,11 +379,11 @@
                           <Group type="102" attributes="0">
                               <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="EstEntityLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="estEntityLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="EstEntityLabelCode" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="estEntityLabelCode" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace pref="88" max="32767" attributes="0"/>
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
@@ -530,14 +536,17 @@
                 <Property name="text" type="java.lang.String" value="Warnings will not prevent a file from being uploaded. Errors will."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="EstEntityLabel1">
+            <Component class="javax.swing.JLabel" name="estEntityLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Haplotyping Group: "/>
+                <Property name="text" type="java.lang.String" value="Issuing Organization Number (ION):"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="EstEntityLabelCode">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try {if(prefs.nodeExists(&quot;/org/dash/freq/view/PHY_EST_ENTITY&quot;)){&#xa;System.out.println(prefs.get(&quot;PHY_EST_ENTITY&quot;, &quot;PHY_EST_ENTITY not found&quot;));&#xa;EstEntityLabelCode.setText(prefs.get(&quot;PHY_EST_ENTITY&quot;, &quot;No code set&quot;));&#xa;if(EstEntityLabelCode.getText().equals(&quot;No code set&quot;)){estEntityPopupFrame.setVisible(true);}&#xa;} else {&#xa;    estEntityPopupFrame.setVisible(true);&#xa;}} catch (Exception ex){ System.out.println(ex);}"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;estEntityLabel.setVisible(true);&#xa;} else { estEntityLabel.setVisible(false); }"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="estEntityLabelCode">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;estEntityLabelCode.setText(prefs.get(&quot;PHY_ION&quot;, &quot;&quot;));&#xa;estEntityLabelCode.setVisible(true);&#xa;} else { estEntityLabelCode.setVisible(false); }"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="fileOpenButton">
@@ -554,9 +563,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileOpenButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="CsvNotificationLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="You may also select folders of .phycus files. Non-phycus files will be ignored as will subdirectories."/>
+                <Property name="text" type="java.lang.String" value="You may also select folders of .phycus files."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CsvNotificationLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Non-phycus files will be ignored as will subdirectories."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -583,7 +597,7 @@
                           <Group type="102" attributes="0">
                               <Component id="popSearchLabel" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="popSearchTextField" pref="416" max="32767" attributes="0"/>
+                              <Component id="popSearchTextField" pref="499" max="32767" attributes="0"/>
                           </Group>
                           <Component id="popNotificationsScrollPane" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -697,7 +711,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="advancedOptionsButton" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace pref="445" max="32767" attributes="0"/>
+                      <EmptySpace pref="522" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -712,7 +726,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptScrollPane" pref="306" max="32767" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" pref="387" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -903,7 +917,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane5" alignment="0" pref="560" max="32767" attributes="0"/>
+                  <Component id="jScrollPane5" alignment="0" pref="637" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

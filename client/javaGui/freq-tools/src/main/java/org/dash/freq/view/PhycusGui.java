@@ -88,12 +88,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         fileChooserUpload = new javax.swing.JFileChooser(prefs.get("PHY_INPUT_DIR", userDocumentsPath));
         fileOrFolder = new javax.swing.ButtonGroup();
-        estEntityPopupFrame = new javax.swing.JFrame();
-        estEntityTextField = new javax.swing.JTextField();
-        estEntityEnterButton = new javax.swing.JButton();
-        estEntityCloseButton = new javax.swing.JButton();
-        estEntityInstructions1 = new javax.swing.JLabel();
-        estEntityInstructions3 = new javax.swing.JLabel();
+        ionPopupFrame = new javax.swing.JFrame();
+        ionTextField = new javax.swing.JTextField();
+        ionEnterButton = new javax.swing.JButton();
+        ionCloseButton = new javax.swing.JButton();
+        ionInstructions1 = new javax.swing.JLabel();
+        ionInstructions2 = new javax.swing.JLabel();
         receiptDirectoryChooser = new javax.swing.JFileChooser(prefs.get("PHY_RECEIPT_CUSTOM_FOLDER", userDocumentsPath));
         advancedOptionsPopupFrame = new javax.swing.JFrame();
         databaseUrlTextField = new javax.swing.JTextField();
@@ -116,8 +116,8 @@ public class PhycusGui extends javax.swing.JFrame {
         licenseLabel = new javax.swing.JLabel();
         licenseHelpIcon = new javax.swing.JLabel();
         warningLabel = new javax.swing.JLabel();
-        estEntityLabel = new javax.swing.JLabel();
-        estEntityLabelCode = new javax.swing.JLabel();
+        ionLabel = new javax.swing.JLabel();
+        ionLabelCode = new javax.swing.JLabel();
         fileOpenButton = new javax.swing.JButton();
         CsvNotificationLabel2 = new javax.swing.JLabel();
         CsvNotificationLabel3 = new javax.swing.JLabel();
@@ -152,76 +152,76 @@ public class PhycusGui extends javax.swing.JFrame {
         fileChooserUpload.setFileFilter(filter);
         fileChooserUpload.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
 
-        estEntityPopupFrame.setVisible(false);
-        estEntityPopupFrame.setTitle("Haplotyping Registry");
-        estEntityPopupFrame.setAlwaysOnTop(true);
-        estEntityPopupFrame.setLocationByPlatform(true);
-        estEntityPopupFrame.setMinimumSize(new java.awt.Dimension(300, 250));
-        estEntityPopupFrame.setName("EstEntityFrame"); // NOI18N
+        ionPopupFrame.setVisible(false);
+        ionPopupFrame.setTitle("Haplotyping Registry");
+        ionPopupFrame.setAlwaysOnTop(true);
+        ionPopupFrame.setLocationByPlatform(true);
+        ionPopupFrame.setMinimumSize(new java.awt.Dimension(300, 250));
+        ionPopupFrame.setName("EstEntityFrame"); // NOI18N
 
-        estEntityEnterButton.setText("Enter");
-        estEntityEnterButton.addActionListener(new java.awt.event.ActionListener() {
+        ionEnterButton.setText("Enter");
+        ionEnterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estEntityEnterButtonActionPerformed(evt);
+                ionEnterButtonActionPerformed(evt);
             }
         });
 
-        estEntityCloseButton.setText("Close");
-        estEntityCloseButton.addActionListener(new java.awt.event.ActionListener() {
+        ionCloseButton.setText("Close");
+        ionCloseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estEntityCloseButtonActionPerformed(evt);
+                ionCloseButtonActionPerformed(evt);
             }
         });
 
-        estEntityInstructions1.setText("If your facility has an ION number, please enter it");
+        ionInstructions1.setText("If your facility has an ION number, please enter it");
 
-        estEntityInstructions3.setText("here (This can be changed in the options tab): ");
+        ionInstructions2.setText("here (This can be changed in the options tab): ");
 
-        javax.swing.GroupLayout estEntityPopupFrameLayout = new javax.swing.GroupLayout(estEntityPopupFrame.getContentPane());
-        estEntityPopupFrame.getContentPane().setLayout(estEntityPopupFrameLayout);
-        estEntityPopupFrameLayout.setHorizontalGroup(
-            estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
-                .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
+        javax.swing.GroupLayout ionPopupFrameLayout = new javax.swing.GroupLayout(ionPopupFrame.getContentPane());
+        ionPopupFrame.getContentPane().setLayout(ionPopupFrameLayout);
+        ionPopupFrameLayout.setHorizontalGroup(
+            ionPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ionPopupFrameLayout.createSequentialGroup()
+                .addGroup(ionPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ionPopupFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(estEntityInstructions3))
-                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
+                        .addComponent(ionInstructions2))
+                    .addGroup(ionPopupFrameLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(estEntityPopupFrameLayout.createSequentialGroup()
+                        .addComponent(ionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ionPopupFrameLayout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addComponent(estEntityEnterButton)
+                        .addComponent(ionEnterButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(estEntityCloseButton)))
+                        .addComponent(ionCloseButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ionPopupFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(estEntityInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ionInstructions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        estEntityPopupFrameLayout.setVerticalGroup(
-            estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, estEntityPopupFrameLayout.createSequentialGroup()
+        ionPopupFrameLayout.setVerticalGroup(
+            ionPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ionPopupFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(estEntityInstructions1)
+                .addComponent(ionInstructions1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estEntityInstructions3)
+                .addComponent(ionInstructions2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(estEntityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(estEntityPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estEntityEnterButton)
-                    .addComponent(estEntityCloseButton))
+                .addGroup(ionPopupFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ionEnterButton)
+                    .addComponent(ionCloseButton))
                 .addContainerGap())
         );
 
-        estEntityPopupFrame.getAccessibleContext().setAccessibleName("");
-        // estEntityPopupFrame.setVisible(false);
+        ionPopupFrame.getAccessibleContext().setAccessibleName("");
+        // ionPopupFrame.setVisible(false);
 
         receiptDirectoryChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
-        estEntityPopupFrame.setVisible(false);
+        ionPopupFrame.setVisible(false);
         advancedOptionsPopupFrame.setTitle("Advanced Options");
         advancedOptionsPopupFrame.setAlwaysOnTop(true);
         advancedOptionsPopupFrame.setLocationByPlatform(true);
@@ -291,7 +291,7 @@ public class PhycusGui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        // estEntityPopupFrame.setVisible(false);
+        // ionPopupFrame.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Phycus Upload Interface");
@@ -362,12 +362,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         warningLabel.setText("Warnings will not prevent a file from being uploaded. Errors will.");
 
-        estEntityLabel.setText("Issuing Organization Number (ION):");
+        ionLabel.setText("Issuing Organization Number (ION):");
 
         if(!prefs.get("PHY_ION", "").equals("")){
-            estEntityLabelCode.setText(prefs.get("PHY_ION", ""));
-            estEntityLabelCode.setVisible(true);
-        } else { estEntityLabelCode.setVisible(false); }
+            ionLabelCode.setText(prefs.get("PHY_ION", ""));
+            ionLabelCode.setVisible(true);
+        } else { ionLabelCode.setVisible(false); }
 
         fileOpenButton.setText("Select File(s)");
         fileOpenButton.setMaximumSize(new java.awt.Dimension(100, 23));
@@ -420,9 +420,9 @@ public class PhycusGui extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                                        .addComponent(estEntityLabel)
+                                        .addComponent(ionLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(estEntityLabelCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(ionLabelCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(mainUploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,8 +460,8 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                         .addComponent(licenseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estEntityLabel))
-                    .addComponent(estEntityLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ionLabel))
+                    .addComponent(ionLabelCode, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(warningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -474,8 +474,8 @@ public class PhycusGui extends javax.swing.JFrame {
         );
 
         if(!prefs.get("PHY_ION", "").equals("")){
-            estEntityLabel.setVisible(true);
-        } else { estEntityLabel.setVisible(false); }
+            ionLabel.setVisible(true);
+        } else { ionLabel.setVisible(false); }
 
         jTabbedPane1.addTab("Upload Files", uploadFilesPanel);
 
@@ -883,28 +883,28 @@ public class PhycusGui extends javax.swing.JFrame {
 		prefs.putInt("PHY_LICENSE", licenseComboBox.getSelectedIndex());
     }//GEN-LAST:event_licenseComboBoxActionPerformed
 
-    private void estEntityCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estEntityCloseButtonActionPerformed
-        estEntityPopupFrame.setVisible(false);
-    }//GEN-LAST:event_estEntityCloseButtonActionPerformed
+    private void ionCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ionCloseButtonActionPerformed
+        ionPopupFrame.setVisible(false);
+    }//GEN-LAST:event_ionCloseButtonActionPerformed
 
-    private void estEntityEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estEntityEnterButtonActionPerformed
+    private void ionEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ionEnterButtonActionPerformed
 			// save the Estimation entity in the preferences
-			prefs.put("PHY_ION", estEntityTextField.getText());
+			prefs.put("PHY_ION", ionTextField.getText());
 			System.out.println(prefs.get("PHY_ION", ""));
 			
 			// set the label on the GUI
-			estEntityLabelCode.setText(prefs.get("PHY_ION", ""));
+			ionLabelCode.setText(prefs.get("PHY_ION", ""));
 			if(prefs.get("PHY_ION", "").equals("")) {
-				estEntityLabelCode.setVisible(false);
-				estEntityLabel.setVisible(false);
+				ionLabelCode.setVisible(false);
+				ionLabel.setVisible(false);
 			} else {
-				estEntityLabelCode.setVisible(true);
-				estEntityLabel.setVisible(true);
+				ionLabelCode.setVisible(true);
+				ionLabel.setVisible(true);
 			}
 			
 			// hide the window
-			estEntityPopupFrame.setVisible(false);
-    }//GEN-LAST:event_estEntityEnterButtonActionPerformed
+			ionPopupFrame.setVisible(false);
+    }//GEN-LAST:event_ionEnterButtonActionPerformed
 
     private void haplotypeEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haplotypeEntityButtonActionPerformed
         
@@ -914,7 +914,7 @@ public class PhycusGui extends javax.swing.JFrame {
 		catch (Exception ex){System.out.println(ex);}
 		
 		// show Est entity popup
-		estEntityPopupFrame.setVisible(true);
+		ionPopupFrame.setVisible(true);
 		
 		// debugging info
 		System.out.println(prefs.get("PHY_EST_ENTITY", "blank"));
@@ -1230,14 +1230,6 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel databaseUrlLabel;
     private javax.swing.JTextField databaseUrlTextField;
     private javax.swing.JCheckBox defaultUploadReceiptCheckBox;
-    private javax.swing.JButton estEntityCloseButton;
-    private javax.swing.JButton estEntityEnterButton;
-    private javax.swing.JLabel estEntityInstructions1;
-    private javax.swing.JLabel estEntityInstructions3;
-    private javax.swing.JLabel estEntityLabel;
-    private javax.swing.JLabel estEntityLabelCode;
-    private javax.swing.JFrame estEntityPopupFrame;
-    private javax.swing.JTextField estEntityTextField;
     private javax.swing.JFileChooser fileChooserUpload;
     private javax.swing.JTextArea fileLocationTextArea;
     private javax.swing.JButton fileOpenButton;
@@ -1247,6 +1239,14 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel haplotypeEntityLabel;
     private javax.swing.JEditorPane helpEditorPane;
     private javax.swing.JPanel helpPanel;
+    private javax.swing.JButton ionCloseButton;
+    private javax.swing.JButton ionEnterButton;
+    private javax.swing.JLabel ionInstructions1;
+    private javax.swing.JLabel ionInstructions2;
+    private javax.swing.JLabel ionLabel;
+    private javax.swing.JLabel ionLabelCode;
+    private javax.swing.JFrame ionPopupFrame;
+    private javax.swing.JTextField ionTextField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;

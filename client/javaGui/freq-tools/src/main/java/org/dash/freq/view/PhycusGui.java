@@ -888,6 +888,16 @@ public class PhycusGui extends javax.swing.JFrame {
     }//GEN-LAST:event_ionCloseButtonActionPerformed
 
     private void ionEnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ionEnterButtonActionPerformed
+		// is the entered number actually an ion?
+
+		// at least check that it's 4 digits long and the first number isn't 0
+		if(!ionTextField.getText().matches("^[1-9]{1}\\d{3}|\\S{0}")) {
+			javax.swing.JOptionPane.showMessageDialog(this,
+				("Please enter a valid Issuing Organization Number (ION), or blank if your facility doesn't have one."),
+				"This is an invalid ION",
+				javax.swing.JOptionPane.ERROR_MESSAGE);
+		} else {
+
 			// save the Estimation entity in the preferences
 			prefs.put("PHY_ION", ionTextField.getText());
 			System.out.println(prefs.get("PHY_ION", ""));
@@ -904,6 +914,7 @@ public class PhycusGui extends javax.swing.JFrame {
 			
 			// hide the window
 			ionPopupFrame.setVisible(false);
+		}
     }//GEN-LAST:event_ionEnterButtonActionPerformed
 
     private void haplotypeEntityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haplotypeEntityButtonActionPerformed

@@ -1,11 +1,8 @@
-# Data requirements
+# Data Files
 
-This is a work in progress determining how to format data for upload.
+These are sample files for testing and development of the clients. Most have intentionally placed errors.
 
-* Do not include a header
-* There can be no empty lines in the middle of the data. (A blank line at the end seems to be fine.)
-* no spaces between the commas and the next set of data. ("OTH,HLA-A*01:01,0.25" as opposed to "OTH, HLA-A*01:01, 0.25")
-* The frequencies in the file should total 1.0000 (1.00001 is fine, 1.0001 is not.)
-* Haplotypes should be separated by tildas (~).
+A .phycus file is a CSV file with a custom header. The header must include at the minimum a population and a cohort.
 
-See demo_PHYCUS_HFs.csv for an example.
+For working examples of what the files should look like please see demo_OTH_test.phycus and US_CAU.phycus.
+

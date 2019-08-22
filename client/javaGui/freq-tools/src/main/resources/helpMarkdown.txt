@@ -8,11 +8,12 @@
     - [2.1.4 Resolution](#resolution)<br>
     - [2.1.5 Haplotype](#haplotype)<br>
     - [2.1.6 Genotype](#genotype)<br>
+    - [2.1.7 ION](#ion)<br>
   - [2.2 Data](#data)<br>
 ## [3. Options](#options)<br>
   - [3.1 Receipts](#receipts)<br>
   - [3.2 Verbose Reporting](#verbose)<br>
-  - [3.3 Haplotyping Group ID](#haplotypeID)<br>
+  - [3.3 Issuing Organization Number (ION)](#ionID)<br>
   - [3.4 Advanced](#advanced)<br>
     - [3.4.1 Database URL](#database)<br>
 ## [4. The Population Tab](#popTab)<br>
@@ -115,18 +116,25 @@ The resolution is an optional header element describing the resolution of the al
 
 > haplotype=A9576 or haplotype="Children's Hospital Oakland Research Institute"
 
-The haplotyping group ID is an optional header tag that overrides the default set in the program. (The haplotyping group defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the [options tab](#haplotypeID)\).
-
-The haplotyping ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
+The haplotyping group ID is an optional header tag. It identifies the facility that generated the haplotyping frequencies of the data set. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
 
 [back](#top)
 
 <a name="genotype"></a>
 ### 2.1.6 Genotyping Group ID
 
-> genotype=A9576 or genotype="Children's Hospital Oakland Research Institute"
+> genotype=CHORI or genotype="Children's Hospital Oakland Research Institute"
 
 The genotyping group ID is an optional header tag. It identifies the facility that performed the genotyping of the samples. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
+
+[back](#top)
+
+<a name="ion"></a>
+### 2.1.7 Issuing Organization Number (ION)
+
+> ion=9576
+
+The Issuing Organization Number (ION) is an optional header tag that overrides the default set in the program. (The ION defaults to the ID initially entered when starting the program for the first time. This ID can be changed in the [options tab](#ionID)\).
 
 [back](#top)
 
@@ -161,10 +169,10 @@ Verbose reporting also determines what is reported in the receipt file.
 
 [back](#top)
 
-<a name="haplotypeID"></a>
-### 3.3 Haplotyping Group ID
+<a name="ionID"></a>
+### 3.3 Issuing Organization Number (ION)
 
-This variable is initially set when the program is started for the first time. It can be changed in options, and can also be overwritten by adding an optional [header tag](#haplotype) to the file.
+This variable is initially set when the program is started for the first time. It can be changed in options, and can also be overwritten by adding an optional [header tag](#ion) to the file. If your facility does not have one, leave the field blank.
 
 [back](#top)
 

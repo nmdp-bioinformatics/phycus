@@ -120,8 +120,8 @@ public class PhycusGui extends javax.swing.JFrame {
         fileOpenButton = new javax.swing.JButton();
         CsvNotificationLabel2 = new javax.swing.JLabel();
         CsvNotificationLabel3 = new javax.swing.JLabel();
-        ionLabel2 = new javax.swing.JLabel();
-        ionLabelFacility = new javax.swing.JLabel();
+        ionLabel1 = new javax.swing.JLabel();
+        ionLabelCode1 = new javax.swing.JLabel();
         populationPanel = new javax.swing.JPanel();
         popSearchTextField = new javax.swing.JTextField();
         popResultsScrollPane = new javax.swing.JScrollPane();
@@ -383,12 +383,12 @@ public class PhycusGui extends javax.swing.JFrame {
 
         CsvNotificationLabel3.setText("Non-phycus files will be ignored as will subdirectories.");
 
-        ionLabel2.setText("ION Facility:");
+        ionLabel1.setText("ION Facility:");
 
-        if(!prefs.get("PHY_ION_FACILITY", "").equals("")){
-            ionLabelFacility.setText(prefs.get("PHY_ION_FACILITY", ""));
-            ionLabelFacility.setVisible(true);
-        } else { ionLabelFacility.setVisible(false); }
+        if(!prefs.get("PHY_ION", "").equals("")){
+            ionLabelCode.setText(prefs.get("PHY_ION", ""));
+            ionLabelCode.setVisible(true);
+        } else { ionLabelCode.setVisible(false); }
 
         javax.swing.GroupLayout uploadFilesPanelLayout = new javax.swing.GroupLayout(uploadFilesPanel);
         uploadFilesPanel.setLayout(uploadFilesPanelLayout);
@@ -433,9 +433,9 @@ public class PhycusGui extends javax.swing.JFrame {
                                         .addComponent(licenseHelpIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
-                                        .addComponent(ionLabel2)
+                                        .addComponent(ionLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ionLabelFacility, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ionLabelCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(uploadFilesPanelLayout.createSequentialGroup()
                         .addGap(192, 192, 192)
@@ -477,8 +477,8 @@ public class PhycusGui extends javax.swing.JFrame {
                     .addComponent(ionLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(uploadFilesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ionLabel2)
-                    .addComponent(ionLabelFacility, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ionLabel1)
+                    .addComponent(ionLabelCode1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(warningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -494,8 +494,8 @@ public class PhycusGui extends javax.swing.JFrame {
             ionLabel.setVisible(true);
         } else { ionLabel.setVisible(false); }
         if(!prefs.get("PHY_ION", "").equals("")){
-            ionLabel2.setVisible(true);
-        } else { ionLabel2.setVisible(false); }
+            ionLabel.setVisible(true);
+        } else { ionLabel.setVisible(false); }
 
         jTabbedPane1.addTab("Upload Files", uploadFilesPanel);
 
@@ -572,7 +572,7 @@ public class PhycusGui extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Populations", populationPanel);
 
-        haplotypeEntityLabel.setText("Reset Haplotyping Group ID:");
+        haplotypeEntityLabel.setText("Reset Issuing Organization Number (ION):");
 
         haplotypeEntityButton.setText("Reset");
         haplotypeEntityButton.addActionListener(new java.awt.event.ActionListener() {
@@ -659,7 +659,7 @@ public class PhycusGui extends javax.swing.JFrame {
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addComponent(advancedOptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(522, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,7 +671,7 @@ public class PhycusGui extends javax.swing.JFrame {
                                 .addGap(29, 29, 29)
                                 .addComponent(uploadReceiptLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadReceiptScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                        .addComponent(uploadReceiptScrollPane)
                         .addGap(14, 14, 14))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addComponent(verboseCheckBox)
@@ -939,18 +939,18 @@ public class PhycusGui extends javax.swing.JFrame {
 			
 			// set the label on the GUI
 			ionLabelCode.setText(prefs.get("PHY_ION", ""));
-			ionLabelFacility.setText(prefs.get("PHY_ION_FACILITY", ""));
+			ionLabelCode1.setText(prefs.get("PHY_ION_FACILITY", ""));
 
 			if(prefs.get("PHY_ION", "").equals("")) {
 				ionLabelCode.setVisible(false);
 				ionLabel.setVisible(false);
-				ionLabelFacility.setVisible(false);
-				ionLabel2.setVisible(false);
+				ionLabelCode1.setVisible(false);
+				ionLabel1.setVisible(false);
 			} else {
 				ionLabelCode.setVisible(true);
 				ionLabel.setVisible(true);
-				ionLabelFacility.setVisible(true);
-				ionLabel2.setVisible(true);
+				ionLabelCode1.setVisible(true);
+				ionLabel1.setVisible(true);
 			}
 			
 			// hide the window
@@ -1296,9 +1296,9 @@ public class PhycusGui extends javax.swing.JFrame {
     private javax.swing.JLabel ionInstructions1;
     private javax.swing.JLabel ionInstructions2;
     private javax.swing.JLabel ionLabel;
-    private javax.swing.JLabel ionLabel2;
+    private javax.swing.JLabel ionLabel1;
     private javax.swing.JLabel ionLabelCode;
-    private javax.swing.JLabel ionLabelFacility;
+    private javax.swing.JLabel ionLabelCode1;
     private javax.swing.JFrame ionPopupFrame;
     private javax.swing.JTextField ionTextField;
     private javax.swing.JScrollPane jScrollPane1;

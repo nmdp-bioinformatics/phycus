@@ -330,9 +330,9 @@
                                               <EmptySpace min="308" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ionLabel1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="ionLabelFacility" min="-2" pref="445" max="-2" attributes="0"/>
+                                              <Component id="ionLabelCode1" min="-2" pref="445" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -390,8 +390,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="ionLabelFacility" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="ionLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="ionLabelCode1" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="66" max="32767" attributes="0"/>
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
@@ -583,17 +583,17 @@
                 <Property name="text" type="java.lang.String" value="Non-phycus files will be ignored as will subdirectories."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="ionLabel2">
+            <Component class="javax.swing.JLabel" name="ionLabel1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ION Facility:"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabel2.setVisible(true);&#xa;} else { ionLabel2.setVisible(false); }"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabel.setVisible(true);&#xa;} else { ionLabel.setVisible(false); }"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="ionLabelFacility">
+            <Component class="javax.swing.JLabel" name="ionLabelCode1">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabelFacility.setText(prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;));&#xa;ionLabelFacility.setVisible(true);&#xa;} else { ionLabelFacility.setVisible(false); }"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabelCode.setText(prefs.get(&quot;PHY_ION&quot;, &quot;&quot;));&#xa;ionLabelCode.setVisible(true);&#xa;} else { ionLabelCode.setVisible(false); }"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -734,7 +734,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="advancedOptionsButton" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace pref="522" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -749,7 +749,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptScrollPane" pref="387" max="32767" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -818,7 +818,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="haplotypeEntityLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reset Haplotyping Group ID:"/>
+                <Property name="text" type="java.lang.String" value="Reset Issuing Organization Number (ION):"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="haplotypeEntityButton">

@@ -66,6 +66,7 @@ public class HeaderProcessor {
 		this.fullHeaderTitles.put("resolution", "Resolution: ");
 		this.fullHeaderTitles.put("genotype", "Genotyping group: ");
 		this.fullHeaderTitles.put("haplotype", "Haplotyping group: ");
+		this.fullHeaderTitles.put("ion", "Issuing Organization Number (ION): ");
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -143,13 +144,16 @@ public class HeaderProcessor {
 				.toString(), errorCodeList));
 		}
 		
-		// check header for haplotyping institution, 
-		// use if present, otherwise prefs default
-		if(headerPresent) {
-			String haplotypeEnt = headerContent.containsKey("haplotype") 
-					? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
-			printHeader("haplotype", haplotypeEnt, true);
-		} else { flags.add("false"); }
+		// check header for ion, use if present, otherwise prefs default (if present)
+		if(headerContent.containsKey("ion")) {
+			printHeader("ion", headerContent.get("ion"), true);
+		} else if(!prefs.get("PHY_ION", "").equals("")) {  
+			printHeader("ion", prefs.get("PHY_ION", ""), true);
+		}
+		
+		// check header for haplotyping institution, print if present
+		if (headerContent.containsKey("haplotype")) 
+			printHeader("haplotype", headerContent.get("haplotype"), true);
 		
 		// check header for genotyping institution, print if present
 		if (headerContent.containsKey("genotype")) 

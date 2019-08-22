@@ -319,14 +319,21 @@
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="licenseHelpIcon" min="-2" pref="15" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="ionLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="ionLabelCode" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="licenseHelpIcon" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <EmptySpace min="308" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="ionLabelFacility" min="-2" pref="445" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -375,15 +382,18 @@
                           <Component id="licenseHelpIcon" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ionLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="ionLabelCode" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ionLabelCode" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="ionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="ionLabelFacility" min="-2" pref="16" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
@@ -572,6 +582,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Non-phycus files will be ignored as will subdirectories."/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ionLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ION Facility:"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabel2.setVisible(true);&#xa;} else { ionLabel2.setVisible(false); }"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ionLabelFacility">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabelFacility.setText(prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;));&#xa;ionLabelFacility.setVisible(true);&#xa;} else { ionLabelFacility.setVisible(false); }"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

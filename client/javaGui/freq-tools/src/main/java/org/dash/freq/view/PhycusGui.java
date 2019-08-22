@@ -918,14 +918,15 @@ public class PhycusGui extends javax.swing.JFrame {
 			// does results have any data?
 			if(results[0] == "") {
 				javax.swing.JOptionPane.showMessageDialog(this,
-					("Please enter a valid Issuing Organization Number (ION), \n or blank if your facility doesn't have one."),
+					("Please enter a valid Issuing Organization Number (ION), "
+						+ "\n or blank if your facility doesn't have one."),
 					"This is an invalid ION",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
+			} else {
+				// save the Estimation entity in the preferences
+				prefs.put("PHY_ION", results[0]);
+				prefs.put("PHY_ION_FACILITY", results[1]);
 			}
-			
-			// save the Estimation entity in the preferences
-			prefs.put("PHY_ION", results[0]);
-			prefs.put("PHY_ION_FACILITY", results[1]);
 			
 		// if the field is blank
 		} else {
@@ -937,11 +938,14 @@ public class PhycusGui extends javax.swing.JFrame {
 		ionLabelCode.setText(prefs.get("PHY_ION", ""));
 		ionLabelFacility.setText(prefs.get("PHY_ION_FACILITY", ""));
 
+		// if the ION is blank, hide the labels
 		if(prefs.get("PHY_ION", "").equals("")) {
 			ionLabelCode.setVisible(false);
 			ionLabel.setVisible(false);
 			ionLabelFacility.setVisible(false);
 			ionLabel2.setVisible(false);
+			
+		// otherwise show the labels
 		} else {
 			ionLabelCode.setVisible(true);
 			ionLabel.setVisible(true);

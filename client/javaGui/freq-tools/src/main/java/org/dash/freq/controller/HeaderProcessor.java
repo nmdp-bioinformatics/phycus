@@ -146,7 +146,9 @@ public class HeaderProcessor {
 		
 		// check header for ion, use if present, otherwise prefs default (if present)
 		if(headerContent.containsKey("ion")) {
-			printHeader("ion", headerContent.get("ion"), true);
+			flags.add(checkIon(headerContent.get("ion")
+				.toString(), errorCodeList));
+//			printHeader("ion", headerContent.get("ion"), true);
 		} else if(!prefs.get("PHY_ION", "").equals("")) {  
 			printHeader("ion", prefs.get("PHY_ION", ""), true);
 		}
@@ -230,6 +232,26 @@ public class HeaderProcessor {
 		else errorCodeList.add(8);
 		
 		printHeader("resolution", selectedResolution, flag);
+		
+		return String.valueOf(flag);
+	}
+	
+	private String checkIon(String providedIon, List<Integer> errorCodeList) {
+		boolean flag = false;
+		
+		IonCheck ic = new IonCheck();
+		
+		String[] results = ic.checkIon(providedIon);
+		
+		if(!results[0].equals("")) {
+			flag = true;
+			printHeader("ion", (providedIon + " - " + results[1]), flag);
+		} else {
+			errorCodeList.add(10);
+			printHeader("ion", (providedIon), flag);
+		}
+		
+		
 		
 		return String.valueOf(flag);
 	}

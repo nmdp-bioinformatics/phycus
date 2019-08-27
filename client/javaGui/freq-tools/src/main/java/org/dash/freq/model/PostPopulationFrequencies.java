@@ -127,13 +127,20 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			System.out.println("new Header Processor created");
 			headers = hp.readHeader(reader(inputFile), errorCodeList);
 			headerFlag = Boolean.valueOf(headers.get("flag"));
+			Boolean headerPresenceFlag = Boolean.valueOf(headers.get("headerPresent"));
 			System.out.println("Header flag: " + headerFlag);
 			
-			// check the data for consistancy
-			DataChecks dataChecks = new DataChecks();
-			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList, warningCodeList);
-			System.out.println("Data flag: " + dataFlag);
-			System.out.println("ErrorCodeList: " + errorCodeList);
+			// checks for the presence of a header, not whether the headers are valid
+			// if the header line is not present or not the first line, the data
+			// checks will not be correct.
+			if(headerPresenceFlag) {
+				
+				// check the data for consistancy
+				DataChecks dataChecks = new DataChecks();
+				dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList, warningCodeList);
+				System.out.println("Data flag: " + dataFlag);
+				System.out.println("ErrorCodeList: " + errorCodeList);
+			}
 			
 			// if the header and data both check out, post the data
 			if (headerFlag && dataFlag)

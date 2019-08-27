@@ -108,6 +108,10 @@ public class HeaderProcessor {
 				// otherwise it tries to submit the data anyway
 				headerPresent = false;
 				
+				// we also need to pass this info to postpopulationfrequencies
+				// so that it doesn't attempt to process the haplotypes & frequencies
+//				headerContent.put("headerPresent", String.valueOf(headerPresent));
+				
 				// notify user about the problem
 				upTextMgr.setLine("There's a problem with the header line. Please check your file.", "red", "both");
 				
@@ -115,6 +119,10 @@ public class HeaderProcessor {
 				break;
 			}
 		}
+		
+		// if it makes it through the header processing then there must have been a header
+		headerContent.put("headerPresent", String.valueOf(headerPresent));
+
 		
 		// check for population - mandatory
 		if (headerContent.containsKey("pop")) {
@@ -148,9 +156,8 @@ public class HeaderProcessor {
 		if(headerContent.containsKey("ion")) {
 			flags.add(checkIon(headerContent.get("ion")
 				.toString(), errorCodeList));
-//			printHeader("ion", headerContent.get("ion"), true);
-		} else if(!prefs.get("PHY_ION", "").equals("")) {  
-			printHeader("ion", prefs.get("PHY_ION", ""), true);
+		} else if(!prefs.get("PHY_ION", "").equals("") && headerPresent) {  
+			printHeader("ion", (prefs.get("PHY_ION", "") + " - " + prefs.get("PHY_ION_FACILITY", "")), true);
 		}
 		
 		// check header for haplotyping institution, print if present
@@ -238,6 +245,8 @@ public class HeaderProcessor {
 	
 	private String checkIon(String providedIon, List<Integer> errorCodeList) {
 		boolean flag = false;
+		
+		upTextMgr.setLine(("     * " + "Confirming ION, please hold"), "black", "gui");
 		
 		IonCheck ic = new IonCheck();
 		

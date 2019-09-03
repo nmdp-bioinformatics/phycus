@@ -57,7 +57,6 @@ import io.swagger.client.model.HaplotypeFrequencyData;
 import io.swagger.client.model.Label;
 import io.swagger.client.model.LabelData;
 import io.swagger.client.model.License;
-//import io.swagger.client.model.License.TypeOfLicenseEnum;
 import io.swagger.client.model.PopulationData;
 import io.swagger.client.model.PopulationRequest;
 import java.util.HashSet;
@@ -74,8 +73,6 @@ public class PostPopulationFrequencies implements Callable<Integer>
 {
 
 	private File inputFile;
-	private final String gtRegistry;
-	private final String estEntity;
 	private final URL url;
 	private final Population population = new Population();
 	private List<PopulationData> populations;
@@ -97,13 +94,11 @@ public class PostPopulationFrequencies implements Callable<Integer>
 	 * @param cohortId
 	 * @throws MalformedURLException
 	 */
-	public PostPopulationFrequencies(String gtRegistry, String estEntity) //File inputFile, 
+	public PostPopulationFrequencies() //File inputFile, 
 			throws MalformedURLException 
 	{
 
 		this.url = new URL(prefs.get("PHY_DB_URL", PhycusGui.defaultDatabaseURL));
-		this.gtRegistry = gtRegistry;
-        this.estEntity = estEntity;
 
 		try { this.populations = population.getPopulationsFromDB();}
 		catch (Exception ex) { System.out.println(ex); }
@@ -132,13 +127,20 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			System.out.println("new Header Processor created");
 			headers = hp.readHeader(reader(inputFile), errorCodeList);
 			headerFlag = Boolean.valueOf(headers.get("flag"));
+			Boolean headerPresenceFlag = Boolean.valueOf(headers.get("headerPresent"));
 			System.out.println("Header flag: " + headerFlag);
 			
-			// check the data for consistancy
-			DataChecks dataChecks = new DataChecks();
-			dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList, warningCodeList);
-			System.out.println("Data flag: " + dataFlag);
-			System.out.println("ErrorCodeList: " + errorCodeList);
+			// checks for the presence of a header, not whether the headers are valid
+			// if the header line is not present or not the first line, the data
+			// checks will not be correct.
+			if(headerPresenceFlag) {
+				
+				// check the data for consistancy
+				DataChecks dataChecks = new DataChecks();
+				dataFlag = dataChecks.populationDataCheck(reader(inputFile), errorCodeList, warningCodeList);
+				System.out.println("Data flag: " + dataFlag);
+				System.out.println("ErrorCodeList: " + errorCodeList);
+			}
 			
 			// if the header and data both check out, post the data
 			if (headerFlag && dataFlag)
@@ -234,33 +236,33 @@ public class PostPopulationFrequencies implements Callable<Integer>
 		LabelData labelData = new LabelData();
 		
 		// genotyping entity
-		Label registryLabel = new Label();
-		registryLabel.setTypeOfLabel("GT_REGISTRY");
-		if (headers.containsKey("haplotype"))
-		{
+		if (headers.containsKey("genotype")) {
+			Label registryLabel = new Label();
+			registryLabel.setTypeOfLabel("GT_REGISTRY");
 			String headerGenotype = headers.get("genotype").toString();
 			registryLabel.setValue(headerGenotype);
+			labelData.addLabelListItem(registryLabel);
 		}
-		else
-		{
-			registryLabel.setValue(gtRegistry);
-		}
-		
-		labelData.addLabelListItem(registryLabel);
 		
 		// haplotyping entity
-		Label estimatorLabel = new Label();
-		estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
-		if (headers.containsKey("haplotype"))
-		{
+		if (headers.containsKey("haplotype")) {
+			Label estimatorLabel = new Label();
+			estimatorLabel.setTypeOfLabel("HT_ESTIMATION_ENT");
 			String headerHaplotype = headers.get("haplotype").toString();
 			estimatorLabel.setValue(headerHaplotype);
+			labelData.addLabelListItem(estimatorLabel);
 		}
-		else
-		{
-			estimatorLabel.setValue(estEntity);
+		
+		// ION
+		String headerIon = (headers.containsKey("ion")) 
+				? headers.get("ion").toString() : prefs.get("PHY_ION", "");
+		if(!headerIon.equals("")) {
+			Label ionLabel = new Label();
+			ionLabel.setTypeOfLabel("ION");
+			ionLabel.setValue(headerIon);
+			labelData.addLabelListItem(ionLabel);
 		}
-		labelData.addLabelListItem(estimatorLabel);
+		System.out.println("PHY_ION: " + prefs.get("PHY_ION", "nothing to get"));
 		
 		for (String populationName : populationMap.keySet()) {
 			HFCurationRequest hfCurationRequest = new HFCurationRequest();
@@ -271,7 +273,13 @@ public class PostPopulationFrequencies implements Callable<Integer>
 			hfCurationRequest.setCohortID(cohortData.getId());
 			hfCurationRequest.setHaplotypeFrequencyData(populationMap.get(populationName));
 
-			hfCurationRequest.setLabelData(labelData);
+			System.out.println("Is labelData empty? " + labelData.getLabelList().isEmpty());
+				
+			// add labelData to upload only if some labels are present
+			// (the upload fails if an empty labelList is set)
+			if(!labelData.getLabelList().isEmpty()) {
+				hfCurationRequest.setLabelData(labelData);
+			}
 
 			// data only to the gui
 			System.out.println("Submitting frequencies for population: " + selectedPopulation.getName());
@@ -292,8 +300,10 @@ public class PostPopulationFrequencies implements Callable<Integer>
 					upTextMgr.setLine(("Submission ID: " + response.getSubmissionID().toString()), "black", "both");
 
 				}
-			} catch (Exception ex) {
+			} catch (Exception e) {
 				// if not, let the user know that it failed
+				System.out.println("Submission error: " + e);
+				System.out.println(prefs.get("PHY_ION", "PHY_ION: nothing to get"));
 				upTextMgr.setLine("", "red", "both");
 				upTextMgr.setLine("Data submission unsuccessful", "red", "both");
 				upTextMgr.setLine("No submission ID generated", "red", "both");

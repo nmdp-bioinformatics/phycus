@@ -16,7 +16,7 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="fileOrFolder">
     </Component>
-    <Container class="javax.swing.JFrame" name="estEntityPopupFrame">
+    <Container class="javax.swing.JFrame" name="ionPopupFrame">
       <Properties>
         <Property name="title" type="java.lang.String" value="Haplotyping Registry"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
@@ -30,8 +30,8 @@
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
       </AccessibilityProperties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="estEntityPopupFrame.setVisible(false);"/>
-        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// estEntityPopupFrame.setVisible(false);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ionPopupFrame.setVisible(false);"/>
+        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// ionPopupFrame.setVisible(false);"/>
       </AuxValues>
 
       <Layout>
@@ -41,26 +41,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="estEntityInstructions1" max="32767" attributes="0"/>
-                              <Component id="estEntityInstructions2" max="32767" attributes="0"/>
-                              <Component id="estEntityInstructions3" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="ionInstructions2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="estEntityTextField" min="-2" pref="203" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="estEntityEnterButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="estEntityCloseButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="ionTextField" min="-2" pref="203" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <Component id="ionEnterButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="ionCloseButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace min="50" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ionInstructions1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,55 +67,48 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="estEntityInstructions1" min="-2" max="-2" attributes="0"/>
+                  <Component id="ionInstructions1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="estEntityInstructions2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="estEntityInstructions3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="estEntityTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ionInstructions2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <Component id="ionTextField" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="estEntityEnterButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="estEntityCloseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ionEnterButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ionCloseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="estEntityTextField">
+        <Component class="javax.swing.JTextField" name="ionTextField">
         </Component>
-        <Component class="javax.swing.JButton" name="estEntityEnterButton">
+        <Component class="javax.swing.JButton" name="ionEnterButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enter"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="estEntityEnterButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ionEnterButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="estEntityCloseButton">
+        <Component class="javax.swing.JButton" name="ionCloseButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Close"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="estEntityCloseButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ionCloseButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="estEntityInstructions1">
+        <Component class="javax.swing.JLabel" name="ionInstructions1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Please enter the ION or other facility identification "/>
+            <Property name="text" type="java.lang.String" value="If your facility has an ION number, please enter it"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="estEntityInstructions2">
+        <Component class="javax.swing.JLabel" name="ionInstructions2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="of the group performing the haplotyping:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="estEntityInstructions3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="(This can be changed in the options tab)"/>
+            <Property name="text" type="java.lang.String" value="here (This can be changed in the options tab): "/>
           </Properties>
         </Component>
       </SubComponents>
@@ -140,8 +132,8 @@
         <Property name="name" type="java.lang.String" value="EstEntityFrame" noResource="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="estEntityPopupFrame.setVisible(false);"/>
-        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// estEntityPopupFrame.setVisible(false);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ionPopupFrame.setVisible(false);"/>
+        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="// ionPopupFrame.setVisible(false);"/>
       </AuxValues>
 
       <Layout>
@@ -317,24 +309,31 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="CsvNotificationLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="EstEntityLabel1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ionLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="EstEntityLabelCode" min="-2" pref="324" max="-2" attributes="0"/>
+                                              <Component id="ionLabelCode" max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Component id="licenseLabel" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="licenseHelpIcon" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <EmptySpace min="308" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="ionLabelFacility" min="-2" pref="445" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -345,6 +344,10 @@
                               <Component id="mainUploadButton" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="mainCancelButton" min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CsvNotificationLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -370,22 +373,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CsvNotificationLabel" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="CsvNotificationLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="CsvNotificationLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="licenseLabel" max="32767" attributes="0"/>
                           <Component id="licenseHelpIcon" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="EstEntityLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="EstEntityLabelCode" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="licenseComboBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ionLabelCode" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="ionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ionLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="ionLabelFacility" min="-2" pref="16" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                       <Component id="warningLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="199" max="-2" attributes="0"/>
@@ -538,14 +546,17 @@
                 <Property name="text" type="java.lang.String" value="Warnings will not prevent a file from being uploaded. Errors will."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="EstEntityLabel1">
+            <Component class="javax.swing.JLabel" name="ionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Haplotyping Group: "/>
+                <Property name="text" type="java.lang.String" value="Issuing Organization Number (ION):"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="EstEntityLabelCode">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try {if(prefs.nodeExists(&quot;/org/dash/freq/view/PHY_EST_ENTITY&quot;)){&#xa;System.out.println(prefs.get(&quot;PHY_EST_ENTITY&quot;, &quot;PHY_EST_ENTITY not found&quot;));&#xa;EstEntityLabelCode.setText(prefs.get(&quot;PHY_EST_ENTITY&quot;, &quot;No code set&quot;));&#xa;if(EstEntityLabelCode.getText().equals(&quot;No code set&quot;)){estEntityPopupFrame.setVisible(true);}&#xa;} else {&#xa;    estEntityPopupFrame.setVisible(true);&#xa;}} catch (Exception ex){ System.out.println(ex);}"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabel.setVisible(true);&#xa;} else { ionLabel.setVisible(false); }"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ionLabelCode">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabelCode.setText(prefs.get(&quot;PHY_ION&quot;, &quot;&quot;));&#xa;ionLabelCode.setVisible(true);&#xa;} else { ionLabelCode.setVisible(false); }"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="fileOpenButton">
@@ -562,10 +573,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileOpenButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="CsvNotificationLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="You may also select folders of .phycus files. Non-phycus files will be ignored as will subdirectories."/>
+                <Property name="text" type="java.lang.String" value="You may also select folders of .phycus files."/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="CsvNotificationLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Non-phycus files will be ignored as will subdirectories."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ionLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ION Facility:"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabel2.setVisible(true);&#xa;} else { ionLabel2.setVisible(false); }"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ionLabelFacility">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(!prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;).equals(&quot;&quot;)){&#xa;ionLabelFacility.setText(prefs.get(&quot;PHY_ION_FACILITY&quot;, &quot;&quot;));&#xa;ionLabelFacility.setVisible(true);&#xa;} else { ionLabelFacility.setVisible(false); }"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -591,7 +620,7 @@
                           <Group type="102" attributes="0">
                               <Component id="popSearchLabel" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="popSearchTextField" pref="416" max="32767" attributes="0"/>
+                              <Component id="popSearchTextField" pref="499" max="32767" attributes="0"/>
                           </Group>
                           <Component id="popNotificationsScrollPane" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -705,7 +734,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="advancedOptionsButton" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace pref="445" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -720,7 +749,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="uploadReceiptScrollPane" pref="306" max="32767" attributes="0"/>
+                              <Component id="uploadReceiptScrollPane" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -789,7 +818,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="haplotypeEntityLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reset Haplotyping Group ID:"/>
+                <Property name="text" type="java.lang.String" value="Reset Issuing Organization Number (ION):"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="haplotypeEntityButton">
@@ -911,7 +940,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane5" alignment="0" pref="560" max="32767" attributes="0"/>
+                  <Component id="jScrollPane5" alignment="0" pref="637" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

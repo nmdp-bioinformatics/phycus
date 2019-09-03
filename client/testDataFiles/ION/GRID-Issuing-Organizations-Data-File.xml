@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ION_List xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version_Number="3.17" Version_Date="2019-01-04" Issued_by="ICCBBA" Issuer_Website="https://www.iccbba.org" Related-Document="https://www.iccbba.org/docs/tech-library/database/grid-issuing-organizations.xlsx" Related-Document-Comment="This is the authorative list of Valid ION (Issuing Organisation Numbers) Please visit the related-document to find any inactive or archived IONs">
+	<Issuing_Organization>
+		<ION>5866</ION>
+		<Issuing_Organization_Name>Cellab Andorra</Issuing_Organization_Name>
+		<ISO_Country_Code>AD</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-08-09</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5866</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5019</ION>
+		<Issuing_Organization_Name>Armenian Bone Marrow Donor Registry Charitable Trust</Issuing_Organization_Name>
+		<Shortened_Name>AM-ABMDR</Shortened_Name>
+		<ISO_Country_Code>AM</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5019</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5117</ION>
+		<Issuing_Organization_Name>Argentine HSC Donors Registry</Issuing_Organization_Name>
+		<Shortened_Name>AR-INCUCAI</Shortened_Name>
+		<ISO_Country_Code>AR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5117</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2614</ION>
+		<Issuing_Organization_Name>Austrian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>AT-ABMDR</Shortened_Name>
+		<ISO_Country_Code>AT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2614</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4961</ION>
+		<Issuing_Organization_Name>Verein Geben für Leben</Issuing_Organization_Name>
+		<Shortened_Name>AT-GFL</Shortened_Name>
+		<ISO_Country_Code>AT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-09-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4961</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8162</ION>
+		<Issuing_Organization_Name>Vita 34 Gesellschaft für Zelltransplantate mbH</Issuing_Organization_Name>
+		<Shortened_Name>AT-Vita34</Shortened_Name>
+		<ISO_Country_Code>AT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8162</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7748</ION>
+		<Issuing_Organization_Name>Australian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>AU-ABMDR</Shortened_Name>
+		<ISO_Country_Code>AU</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7748</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4201</ION>
+		<Issuing_Organization_Name>Marrow Donor Program Registry Belgium</Issuing_Organization_Name>
+		<Shortened_Name>BE-MDPB</Shortened_Name>
+		<ISO_Country_Code>BE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4201</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7197</ION>
+		<Issuing_Organization_Name>Bulgarian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>BG-BBMDR</Shortened_Name>
+		<ISO_Country_Code>BG</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7197</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8766</ION>
+		<Issuing_Organization_Name>REDOME - Registro Nacional de Doadores Voluntarios de Medula Ossea</Issuing_Organization_Name>
+		<Shortened_Name>BR-REDOME</Shortened_Name>
+		<ISO_Country_Code>BR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8766</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5103</ION>
+		<Issuing_Organization_Name>Canadian Blood Services OneMatch Stem Cell and Marrow Network</Issuing_Organization_Name>
+		<Shortened_Name>CA-OneMatch</Shortened_Name>
+		<ISO_Country_Code>CA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5103</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6912</ION>
+		<Issuing_Organization_Name>Hema-Quebec Stem Cell Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>CA-HemaQuec</Shortened_Name>
+		<ISO_Country_Code>CA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6912</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3066</ION>
+		<Issuing_Organization_Name>Insception Lifebank - Canada’s #1 Cord Blood Program</Issuing_Organization_Name>
+		<Shortened_Name>CA-Insception</Shortened_Name>
+		<ISO_Country_Code>CA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3066</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9341</ION>
+		<Issuing_Organization_Name>Blutspende SRK Schweiz AG</Issuing_Organization_Name>
+		<Shortened_Name>CH-SBSC</Shortened_Name>
+		<ISO_Country_Code>CH</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9341</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1574</ION>
+		<Issuing_Organization_Name>Fundación de Beneficencia Pública DKMS by intermediary of DKMS Registry</Issuing_Organization_Name>
+		<Shortened_Name>CL-DKMS</Shortened_Name>
+		<ISO_Country_Code>CL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2017-02-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1574</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4675</ION>
+		<Issuing_Organization_Name>Vidacel</Issuing_Organization_Name>
+		<Shortened_Name>CL-Vidacel</Shortened_Name>
+		<ISO_Country_Code>CL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4675</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6681</ION>
+		<Issuing_Organization_Name>Beijing New Sunshine Charity Foundation</Issuing_Organization_Name>
+		<Shortened_Name>CN-Sunshine</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6681</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6459</ION>
+		<Issuing_Organization_Name>Bionet Corporation Taipei City</Issuing_Organization_Name>
+		<Shortened_Name>TW-Bionet</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6459</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3458</ION>
+		<Issuing_Organization_Name>Buddhist Tzu Chi Stem Cells Center - BTCSCC Hualien</Issuing_Organization_Name>
+		<Shortened_Name>TW-TzuChi</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3458</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2197</ION>
+		<Issuing_Organization_Name>China Marrow Donor Program</Issuing_Organization_Name>
+		<Shortened_Name>CN-CMDP</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2197</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6692</ION>
+		<Issuing_Organization_Name>Healthbanks Biotech Co., Ltd  Taipei City</Issuing_Organization_Name>
+		<Shortened_Name>TW-Healthbank</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6692</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4070</ION>
+		<Issuing_Organization_Name>Hong Kong Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>HK-HKBMDR</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4070</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3105</ION>
+		<Issuing_Organization_Name>Hong Kong Red Cross Catherine Chow Cord Blood Bank</Issuing_Organization_Name>
+		<Shortened_Name>HK-CBB</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-09-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3105</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1714</ION>
+		<Issuing_Organization_Name>Meribank Biotech Co., Ltd New Taipei City</Issuing_Organization_Name>
+		<Shortened_Name>TW-Meribank</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1714</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1212</ION>
+		<Issuing_Organization_Name>Sino Cell Technologies Ltd. Taipei</Issuing_Organization_Name>
+		<Shortened_Name>TW-SinoCell</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-09-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1212</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5812</ION>
+		<Issuing_Organization_Name>StemCyte Taiwan Cord Blood Bank New Taipei City</Issuing_Organization_Name>
+		<Shortened_Name>TW-StemCyte</Shortened_Name>
+		<ISO_Country_Code>CN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5812</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9751</ION>
+		<Issuing_Organization_Name>Cyprus Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>CY-CBMDR</Shortened_Name>
+		<ISO_Country_Code>CY</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9751</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4278</ION>
+		<Issuing_Organization_Name>Cyprus Paraskevaidio Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>CY-Paraskevaidio</Shortened_Name>
+		<ISO_Country_Code>CY</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4278</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5440</ION>
+		<Issuing_Organization_Name>Czech National Marrow Donor Registry Plzeň</Issuing_Organization_Name>
+		<Shortened_Name>CZ-CNMDR</Shortened_Name>
+		<ISO_Country_Code>CZ</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5440</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4753</ION>
+		<Issuing_Organization_Name>Czech Stem Cells Registry Prague (CSCR)</Issuing_Organization_Name>
+		<Shortened_Name>CZ-CSCR</Shortened_Name>
+		<ISO_Country_Code>CZ</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4753</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4596</ION>
+		<Issuing_Organization_Name>DKMS gemeinnützige GmbH</Issuing_Organization_Name>
+		<ISO_Country_Code>DE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2016-07-07</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4596</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4908</ION>
+		<Issuing_Organization_Name>José Carreras Cord Blood Bank Düsseldorf-Universitätsklinikum Düsseldorf</Issuing_Organization_Name>
+		<Shortened_Name>DE-DUS</Shortened_Name>
+		<ISO_Country_Code>DE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4908</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6939</ION>
+		<Issuing_Organization_Name>ZKRD - Zentrales Knochenmarkspender-Register Deutschland</Issuing_Organization_Name>
+		<Shortened_Name>DE-ZKRD</Shortened_Name>
+		<ISO_Country_Code>DE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6939</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7484</ION>
+		<Issuing_Organization_Name>Danish Stem Cell Donors - East (DSDE)</Issuing_Organization_Name>
+		<Shortened_Name>DK-DSDE</Shortened_Name>
+		<ISO_Country_Code>DK</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7484</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2015</ION>
+		<Issuing_Organization_Name>Danish Stem Cell Donors - West</Issuing_Organization_Name>
+		<Shortened_Name>DK-DSCDW</Shortened_Name>
+		<ISO_Country_Code>DK</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2015</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7813</ION>
+		<Issuing_Organization_Name>Registro Español de Médula Ósea (REDMO)</Issuing_Organization_Name>
+		<Shortened_Name>ES-REDMO</Shortened_Name>
+		<ISO_Country_Code>ES</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7813</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9738</ION>
+		<Issuing_Organization_Name>Finnish Stem Cell Registry</Issuing_Organization_Name>
+		<Shortened_Name>FI-FSCR</Shortened_Name>
+		<ISO_Country_Code>FI</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9738</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1804</ION>
+		<Issuing_Organization_Name>France Greffe de Moelle Registry - FGM</Issuing_Organization_Name>
+		<Shortened_Name>FR-FGM</Shortened_Name>
+		<ISO_Country_Code>FR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1804</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6354</ION>
+		<Issuing_Organization_Name>Anthony Nolan London</Issuing_Organization_Name>
+		<Shortened_Name>GB-ANT</Shortened_Name>
+		<ISO_Country_Code>GB</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6354</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9968</ION>
+		<Issuing_Organization_Name>DKMS United Kingdom</Issuing_Organization_Name>
+		<Shortened_Name>GB-DKMS</Shortened_Name>
+		<ISO_Country_Code>GB</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9968</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2731</ION>
+		<Issuing_Organization_Name>NHS Blood and Transplant - BBMR</Issuing_Organization_Name>
+		<Shortened_Name>GB-BBMR</Shortened_Name>
+		<ISO_Country_Code>GB</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2731</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1726</ION>
+		<Issuing_Organization_Name>Welsh Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>GB-WBMDR</Shortened_Name>
+		<ISO_Country_Code>GB</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1726</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4979</ION>
+		<Issuing_Organization_Name>EOM Hellenic Transplant Organization</Issuing_Organization_Name>
+		<Shortened_Name>GR-HTO</Shortened_Name>
+		<ISO_Country_Code>GR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4979</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4868</ION>
+		<Issuing_Organization_Name>Hellenic Cord Blood Bank</Issuing_Organization_Name>
+		<Shortened_Name>GR-Hellenic</Shortened_Name>
+		<ISO_Country_Code>GR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4868</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6121</ION>
+		<Issuing_Organization_Name>Thessaloniki Public Cord Blood Bank</Issuing_Organization_Name>
+		<Shortened_Name>GR-TCBB</Shortened_Name>
+		<ISO_Country_Code>GR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6121</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5712</ION>
+		<Issuing_Organization_Name>Croatian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>HR-CBMDR</Shortened_Name>
+		<ISO_Country_Code>HR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5712</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1695</ION>
+		<Issuing_Organization_Name>Hungarian Stem Cell Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>HU-HSCDR</Shortened_Name>
+		<ISO_Country_Code>HU</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1695</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5590</ION>
+		<Issuing_Organization_Name>Irish Unrelated Bone Marrow Registry</Issuing_Organization_Name>
+		<Shortened_Name>IE-IUBMR</Shortened_Name>
+		<ISO_Country_Code>IE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5590</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5239</ION>
+		<Issuing_Organization_Name>Bone Marrow and Cord Blood Bank Registry Hadassah University Hospital</Issuing_Organization_Name>
+		<Shortened_Name>IL-Hadassah</Shortened_Name>
+		<ISO_Country_Code>IL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5239</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4068</ION>
+		<Issuing_Organization_Name>Chaim Sheba Medical Centre</Issuing_Organization_Name>
+		<Shortened_Name>IL-SHBB</Shortened_Name>
+		<ISO_Country_Code>IL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4068</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4987</ION>
+		<Issuing_Organization_Name>Ezer Mizion Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>IL-Ezer Mizion</Shortened_Name>
+		<ISO_Country_Code>IL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4987</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4460</ION>
+		<Issuing_Organization_Name>Be The Cure Registry by Jeevan Stem Cell Foundation</Issuing_Organization_Name>
+		<Shortened_Name>IN-Jeevan</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4460</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9935</ION>
+		<Issuing_Organization_Name>BMST India by intermediary of DKMS Registry</Issuing_Organization_Name>
+		<Shortened_Name>IN-BMST</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-02-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9935</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8486</ION>
+		<Issuing_Organization_Name>DATRI Blood Stem Cell Donors Registry</Issuing_Organization_Name>
+		<Shortened_Name>IN-Datri</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8486</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2824</ION>
+		<Issuing_Organization_Name>GeneBandhu New Delhi</Issuing_Organization_Name>
+		<Shortened_Name>IN-GeneBand</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2824</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4131</ION>
+		<Issuing_Organization_Name>MDR Marrow Donor Registry India Mumbai</Issuing_Organization_Name>
+		<Shortened_Name>IN-MDR</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4131</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8196</ION>
+		<Issuing_Organization_Name>The Arjan Vir Foundation</Issuing_Organization_Name>
+		<Shortened_Name>IN-ArjanVir</Shortened_Name>
+		<ISO_Country_Code>IN</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-02-14</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8196</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4993</ION>
+		<Issuing_Organization_Name>Iranian National Stem Cell Donor Network (INSCDN) - Iranian Blood Transfusion Organization</Issuing_Organization_Name>
+		<Shortened_Name>IR-INSCDN</Shortened_Name>
+		<ISO_Country_Code>IR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2016-08-03</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4993</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6887</ION>
+		<Issuing_Organization_Name>Iranian Stem Cell Donor Program (ISCDP)</Issuing_Organization_Name>
+		<Shortened_Name>IR-ISCDP</Shortened_Name>
+		<ISO_Country_Code>IR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6887</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1102</ION>
+		<Issuing_Organization_Name>Royan Institute Cord Blood Bank</Issuing_Organization_Name>
+		<Shortened_Name>IR-Royan</Shortened_Name>
+		<ISO_Country_Code>IR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1102</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3146</ION>
+		<Issuing_Organization_Name>Taleghani Stem Cell Transplantation and Cell Therapy Center</Issuing_Organization_Name>
+		<Shortened_Name>IR-Taleghani</Shortened_Name>
+		<ISO_Country_Code>IR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3146</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7450</ION>
+		<Issuing_Organization_Name>Italian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>IT-IBMDR</Shortened_Name>
+		<ISO_Country_Code>IT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7450</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4364</ION>
+		<Issuing_Organization_Name>JMDP - Japan Marrow Donor Program</Issuing_Organization_Name>
+		<Shortened_Name>JP-JMDP</Shortened_Name>
+		<ISO_Country_Code>JP</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4364</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8405</ION>
+		<Issuing_Organization_Name>Korean Network for Organ Sharing</Issuing_Organization_Name>
+		<Shortened_Name>KR-KONOS</Shortened_Name>
+		<ISO_Country_Code>KR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8405</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2073</ION>
+		<Issuing_Organization_Name>Lithuanian National Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>LT-LNBMDR</Shortened_Name>
+		<ISO_Country_Code>LT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2073</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3099</ION>
+		<Issuing_Organization_Name>Luxembourg Marrow Donor Program (LMDP)</Issuing_Organization_Name>
+		<Shortened_Name>LU-LMDP</Shortened_Name>
+		<ISO_Country_Code>LU</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3099</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4307</ION>
+		<Issuing_Organization_Name>MBMDR - Macedonian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>MK-MBMDR</Shortened_Name>
+		<ISO_Country_Code>MK</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4307</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9275</ION>
+		<Issuing_Organization_Name>Be The Match Mexico</Issuing_Organization_Name>
+		<ISO_Country_Code>MX</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-05-15</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9275</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1671</ION>
+		<Issuing_Organization_Name>Mexican BMDR - DONORMO</Issuing_Organization_Name>
+		<Shortened_Name>MX-MBMDR</Shortened_Name>
+		<ISO_Country_Code>MX</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1671</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3034</ION>
+		<Issuing_Organization_Name>Bone Marrow Registry Nigeria</Issuing_Organization_Name>
+		<Shortened_Name>NG-NBMRN</Shortened_Name>
+		<ISO_Country_Code>NG</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3034</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8139</ION>
+		<Issuing_Organization_Name>Matchis Foundation</Issuing_Organization_Name>
+		<Shortened_Name>NL-Matchis</Shortened_Name>
+		<ISO_Country_Code>NL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8139</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1131</ION>
+		<Issuing_Organization_Name>Sanquin</Issuing_Organization_Name>
+		<Shortened_Name>Sanquin CBB</Shortened_Name>
+		<ISO_Country_Code>NL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2017-10-30</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1131</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7214</ION>
+		<Issuing_Organization_Name>Norwegian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>NO-NBMDR</Shortened_Name>
+		<ISO_Country_Code>NO</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7214</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8261</ION>
+		<Issuing_Organization_Name>New Zealand Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>NZ-NZBMDR</Shortened_Name>
+		<ISO_Country_Code>NZ</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8261</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3918</ION>
+		<Issuing_Organization_Name>Against Leukemia Foundation MDR (ALF), Warsaw</Issuing_Organization_Name>
+		<Shortened_Name>PL-ALF</Shortened_Name>
+		<ISO_Country_Code>PL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3918</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7414</ION>
+		<Issuing_Organization_Name>Fundacja DKMS</Issuing_Organization_Name>
+		<Shortened_Name>PL-DKMS</Shortened_Name>
+		<ISO_Country_Code>PL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7414</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5391</ION>
+		<Issuing_Organization_Name>Poltransplant</Issuing_Organization_Name>
+		<Shortened_Name>PL-Poltrans</Shortened_Name>
+		<ISO_Country_Code>PL</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5391</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7358</ION>
+		<Issuing_Organization_Name>CEDACE/Portuguese BMD Registry</Issuing_Organization_Name>
+		<Shortened_Name>PT-Cedace</Shortened_Name>
+		<ISO_Country_Code>PT</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7358</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1372</ION>
+		<Issuing_Organization_Name>National Registry of Hematopoietic Stem Cells Voluntary Donors</Issuing_Organization_Name>
+		<Shortened_Name>RO-RNDVCSH</Shortened_Name>
+		<ISO_Country_Code>RO</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1372</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4650</ION>
+		<Issuing_Organization_Name>Serbian Bone Marrow Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>RS-SBMDR</Shortened_Name>
+		<ISO_Country_Code>RS</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4650</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>9778</ION>
+		<Issuing_Organization_Name>HPC Registry (Samara)</Issuing_Organization_Name>
+		<Shortened_Name>RU-HPC</Shortened_Name>
+		<ISO_Country_Code>RU</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-9778</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8256</ION>
+		<Issuing_Organization_Name>Karelian Registry of Hematopoietic Stem Cells</Issuing_Organization_Name>
+		<Shortened_Name>RU-Karelian</Shortened_Name>
+		<ISO_Country_Code>RU</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8256</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1810</ION>
+		<Issuing_Organization_Name>King Faisal Specialist Hospital &amp; Research Centre Stem Cell Donor Registry (KFSH&amp;RC;-UDR)</Issuing_Organization_Name>
+		<Shortened_Name>SA-KFSHRC</Shortened_Name>
+		<ISO_Country_Code>SA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-03-22</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1810</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>2107</ION>
+		<Issuing_Organization_Name>Saudi Stem Cells Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>SA-SSCDR</Shortened_Name>
+		<ISO_Country_Code>SA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-2107</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5285</ION>
+		<Issuing_Organization_Name>Tobias Registry</Issuing_Organization_Name>
+		<Shortened_Name>SE-Tobias</Shortened_Name>
+		<ISO_Country_Code>SE</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5285</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3785</ION>
+		<Issuing_Organization_Name>Singapore BMDP</Issuing_Organization_Name>
+		<Shortened_Name>SG-BMDP</Shortened_Name>
+		<ISO_Country_Code>SG</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3785</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4291</ION>
+		<Issuing_Organization_Name>Singapore Cord Blood Bank</Issuing_Organization_Name>
+		<Shortened_Name>SG-SCBB</Shortened_Name>
+		<ISO_Country_Code>SG</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-09-02</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4291</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4565</ION>
+		<Issuing_Organization_Name>Slovenia Donor + CB Bank ESPOK</Issuing_Organization_Name>
+		<Shortened_Name>Sl-SBMDR</Shortened_Name>
+		<ISO_Country_Code>SI</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4565</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1005</ION>
+		<Issuing_Organization_Name>Slovak National BMD Registry</Issuing_Organization_Name>
+		<Shortened_Name>SK-SNBMDR</Shortened_Name>
+		<ISO_Country_Code>SK</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1005</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4398</ION>
+		<Issuing_Organization_Name>Slovenský register placentárnych krvotvorných buniek- Eurocord-Slovakia (SRPKB)</Issuing_Organization_Name>
+		<Shortened_Name>SK-Eurocord</Shortened_Name>
+		<ISO_Country_Code>SK</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4398</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8362</ION>
+		<Issuing_Organization_Name>Thai National Stem Cell Donor Registry</Issuing_Organization_Name>
+		<Shortened_Name>TH-TSCDR</Shortened_Name>
+		<ISO_Country_Code>TH</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8362</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3893</ION>
+		<Issuing_Organization_Name>Ankara University Faculty of Medicine/TRAN Ankara</Issuing_Organization_Name>
+		<Shortened_Name>TR-TRAN</Shortened_Name>
+		<ISO_Country_Code>TR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3893</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5509</ION>
+		<Issuing_Organization_Name>Blood and Bone Marrow Donor Registry of Istanbul Medical Faculty</Issuing_Organization_Name>
+		<Shortened_Name>TR-TRIS</Shortened_Name>
+		<ISO_Country_Code>TR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5509</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3503</ION>
+		<Issuing_Organization_Name>TURKOK - Turkish Stem Cell Coordination Centre</Issuing_Organization_Name>
+		<Shortened_Name>TR-TURKOK</Shortened_Name>
+		<ISO_Country_Code>TR</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2016-07-07</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3503</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5315</ION>
+		<Issuing_Organization_Name>C.W. Bill Young Department of Defense Marrow Donor Program/Georgetown University</Issuing_Organization_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-08-24</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5315</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>4857</ION>
+		<Issuing_Organization_Name>Celebration Stem Cell Centre</Issuing_Organization_Name>
+		<Shortened_Name>US-CSCC</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2016-07-07</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-4857</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>7470</ION>
+		<Issuing_Organization_Name>Celularity Biosourcing, LLC</Issuing_Organization_Name>
+		<Shortened_Name>US-Lifebank</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-7470</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6579</ION>
+		<Issuing_Organization_Name>Cleveland Cord Blood Center</Issuing_Organization_Name>
+		<Shortened_Name>US-Cleveland</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6579</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5081</ION>
+		<Issuing_Organization_Name>DKMS United States of America</Issuing_Organization_Name>
+		<Shortened_Name>US-DKMS</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2016-10-14</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-5081</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>1033</ION>
+		<Issuing_Organization_Name>Gift of Life Marrow Registry</Issuing_Organization_Name>
+		<Shortened_Name>US-GOL</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-1033</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>5928</ION>
+		<Issuing_Organization_Name>Mayo Clinic</Issuing_Organization_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-12-27</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>5928</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8691</ION>
+		<Issuing_Organization_Name>National Cord Blood Program New York Blood Center</Issuing_Organization_Name>
+		<Shortened_Name>US-NCBP</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8691</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>3553</ION>
+		<Issuing_Organization_Name>NMDP-National Marrow Donor Program/Be The Match</Issuing_Organization_Name>
+		<Shortened_Name>US-NMDP</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-3553</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8379</ION>
+		<Issuing_Organization_Name>StemCyte Inc.</Issuing_Organization_Name>
+		<Shortened_Name>US-StemCyte</Shortened_Name>
+		<ISO_Country_Code>US</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8379</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6517</ION>
+		<Issuing_Organization_Name>Sindome</Issuing_Organization_Name>
+		<Shortened_Name>UY-SINDOME</Shortened_Name>
+		<ISO_Country_Code>UY</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6517</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>8118</ION>
+		<Issuing_Organization_Name>South African Bone Marrow Registry</Issuing_Organization_Name>
+		<Shortened_Name>ZA-SABMR</Shortened_Name>
+		<ISO_Country_Code>ZA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2015-06-18</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-8118</WMDA_ID>
+	</Issuing_Organization>
+	<Issuing_Organization>
+		<ION>6738</ION>
+		<Issuing_Organization_Name>The Sunflower Fund</Issuing_Organization_Name>
+		<Shortened_Name>ZA-Sunflower</Shortened_Name>
+		<ISO_Country_Code>ZA</ISO_Country_Code>
+		<Date_Registered_by_ICCBBA>2018-03-22</Date_Registered_by_ICCBBA>
+		<Status>Active</Status>
+		<WMDA_ID>ION-6738</WMDA_ID>
+	</Issuing_Organization>
+</ION_List>

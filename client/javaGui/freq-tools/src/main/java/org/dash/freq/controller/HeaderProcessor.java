@@ -66,6 +66,7 @@ public class HeaderProcessor {
 		this.fullHeaderTitles.put("resolution", "Resolution: ");
 		this.fullHeaderTitles.put("genotype", "Genotyping group: ");
 		this.fullHeaderTitles.put("haplotype", "Haplotyping group: ");
+		this.fullHeaderTitles.put("ion", "Issuing Organization Number (ION): ");
 	}
 	
 	public TreeMap<String, String> readHeader(BufferedReader reader,
@@ -107,6 +108,10 @@ public class HeaderProcessor {
 				// otherwise it tries to submit the data anyway
 				headerPresent = false;
 				
+				// we also need to pass this info to postpopulationfrequencies
+				// so that it doesn't attempt to process the haplotypes & frequencies
+//				headerContent.put("headerPresent", String.valueOf(headerPresent));
+				
 				// notify user about the problem
 				upTextMgr.setLine("There's a problem with the header line. Please check your file.", "red", "both");
 				
@@ -114,6 +119,10 @@ public class HeaderProcessor {
 				break;
 			}
 		}
+		
+		// if it makes it through the header processing then there must have been a header
+		headerContent.put("headerPresent", String.valueOf(headerPresent));
+
 		
 		// check for population - mandatory
 		if (headerContent.containsKey("pop")) {
@@ -143,13 +152,17 @@ public class HeaderProcessor {
 				.toString(), errorCodeList));
 		}
 		
-		// check header for haplotyping institution, 
-		// use if present, otherwise prefs default
-		if(headerPresent) {
-			String haplotypeEnt = headerContent.containsKey("haplotype") 
-					? headerContent.get("haplotype") : prefs.get("PHY_EST_ENTITY", null);
-			printHeader("haplotype", haplotypeEnt, true);
-		} else { flags.add("false"); }
+		// check header for ion, use if present, otherwise prefs default (if present)
+		if(headerContent.containsKey("ion")) {
+			flags.add(checkIon(headerContent.get("ion")
+				.toString(), errorCodeList));
+		} else if(!prefs.get("PHY_ION", "").equals("") && headerPresent) {  
+			printHeader("ion", (prefs.get("PHY_ION", "") + " - " + prefs.get("PHY_ION_FACILITY", "")), true);
+		}
+		
+		// check header for haplotyping institution, print if present
+		if (headerContent.containsKey("haplotype")) 
+			printHeader("haplotype", headerContent.get("haplotype"), true);
 		
 		// check header for genotyping institution, print if present
 		if (headerContent.containsKey("genotype")) 
@@ -226,6 +239,28 @@ public class HeaderProcessor {
 		else errorCodeList.add(8);
 		
 		printHeader("resolution", selectedResolution, flag);
+		
+		return String.valueOf(flag);
+	}
+	
+	private String checkIon(String providedIon, List<Integer> errorCodeList) {
+		boolean flag = false;
+		
+		upTextMgr.setLine(("     * " + "Confirming ION, please hold"), "black", "gui");
+		
+		IonCheck ic = new IonCheck();
+		
+		String[] results = ic.checkIon(providedIon);
+		
+		if(!results[0].equals("")) {
+			flag = true;
+			printHeader("ion", (providedIon + " - " + results[1]), flag);
+		} else {
+			errorCodeList.add(10);
+			printHeader("ion", (providedIon), flag);
+		}
+		
+		
 		
 		return String.valueOf(flag);
 	}

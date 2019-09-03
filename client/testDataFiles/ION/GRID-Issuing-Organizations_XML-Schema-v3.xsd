@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="ION_List">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Issuing_Organization" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:short" name="ION"/>
+              <xs:element type="xs:string" name="Issuing_Organization_Name"/>
+              <xs:element type="xs:string" name="Shortened_Name"/>
+              <xs:element type="xs:string" name="ISO_Country_Code"/>
+              <xs:element type="xs:date" name="Date_Registered_by_ICCBBA"/>
+              <xs:element type="xs:string" name="Status"/>
+              <xs:element type="xs:string" name="WMDA_ID"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="Version_Number"/>
+      <xs:attribute type="xs:date" name="Version_Date"/>
+      <xs:attribute type="xs:string" name="Issued_by"/>
+      <xs:attribute type="xs:string" name="Issuer_Website"/>
+      <xs:attribute type="xs:string" name="Related-Document"/>
+      <xs:attribute type="xs:string" name="Related-Document-Comment"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

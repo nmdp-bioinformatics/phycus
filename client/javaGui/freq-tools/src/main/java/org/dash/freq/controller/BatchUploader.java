@@ -45,8 +45,7 @@ public class BatchUploader {
 		try 
 		{
 			// instatiate Post Pop Freq
-			PostPopulationFrequencies ppf = new PostPopulationFrequencies(
-					gtRegistry, estEntity);
+			PostPopulationFrequencies ppf = new PostPopulationFrequencies();
 			
 			// for each file in the folder
 			for (File file : dir.listFiles()) {

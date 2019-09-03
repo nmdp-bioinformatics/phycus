@@ -2,8 +2,8 @@
 PHY_INPUT_DIR				Folder data files are uploaded from
 PHY_DEFAULT_RECEIPT_FOLDER	Folder data files are uploaded from
 userDocumentsPath           default variable: User docs dir
-PHY_RECEIPT					Boolean: does user want receipt?
-PHY_EST_ENTITY				The code for the haplotyping entity
+PHY_ION						The ION for the facility (Optional)
+PHY_EST_ENTITY				Haplotyping group. Not currently used.
 PHY_LICENSE					License type set by dropdown
 PHY_VERBOSE_REPORTING		Boolean: verbose reporting
 PHY_RECEIPT_DEFAULT			Boolean: receipt in upload dir?

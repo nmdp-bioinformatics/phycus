@@ -141,7 +141,7 @@ The Issuing Organization Number (ION) is an optional header tag that overrides t
 <a name="data"></a>
 ### 2.2 Data
 
-Data should start on the second line, and should list the haplotype first, a comma, then its frequency. No spaces should be included. Individual loci should be separated by a tilde ( ~ ). Ideally the frequencies should total up to 1.00, but may range as high as 1.01 and as low as 0.95 and still be accepted.
+Data should start on the second line, and should list the haplotype first, a comma, then its frequency. No spaces should be included. Individual loci should be separated by a tilde ( ~ ). Ideally the frequencies should total up to 1.00, but may range as high as 1.01 or as low as 0.95 and still be accepted.
 
 > DRB1\*07:01:01:01~DQB1\*02:02:01,0.082586969
 

@@ -50,8 +50,7 @@ public class DataChecks {
 	public boolean populationDataCheck(BufferedReader reader, 
 										List<Integer> errorCodeList,
 										List<Integer> warningCodeList
-										) throws IOException, ApiException 
-	{
+										) throws IOException, ApiException {
 		// while loop variables
 		String row;
 		String[] columns;
@@ -82,8 +81,7 @@ public class DataChecks {
 		System.out.println(columns[0]);
 		
 		// check for missing tildas in first haplotype
-		if (!haplotypeProcessor.asteriksAndTildas(columns[0]))
-		{
+		if (!haplotypeProcessor.asteriksAndTildas(columns[0])) {
 			flag = false;
 			
 			// because there can be multiple errors for each line, neither the 
@@ -100,25 +98,23 @@ public class DataChecks {
 		// resolution of the total frequencies & target frequency
 		BigDecimal targetFrequency = new BigDecimal(1.0);
 		BigDecimal maxFrequency = new BigDecimal(1.01);
+		BigDecimal minFrequency = new BigDecimal(0.95);
 		
 		// read through the file, consolodate the data for checking
-		while ((row = reader.readLine()) != null) 
-		{
+		while ((row = reader.readLine()) != null) {
 			// break the row down into useable pieces
 			columns = row.split(",");
 			String haplotype = columns[0];			
 			BigDecimal frequency = new BigDecimal(columns[1]);
 			
 			// compare current line's loci to first haplotype
-			if (!haplotypeProcessor.checkLoci(haplotype))
-			{
+			if (!haplotypeProcessor.checkLoci(haplotype)) {
 				flag = false;
 				haplotypeLineErrorsMismatch.add(i + ":" + 1);
 			}
 
 			// checking for missing tildas: A*01:01gA*01:01g
-			if (!haplotypeProcessor.asteriksAndTildas(haplotype))
-			{
+			if (!haplotypeProcessor.asteriksAndTildas(haplotype)) {
 				flag = false;
 				haplotypeLineErrorsMismatch.add(i + ":" + 2);
 			}
@@ -135,38 +131,47 @@ public class DataChecks {
 		
 		// does the frequency fall withing the target range?
 		// if frequencies total to 0 report total
-		if (freqTotal.compareTo(targetFrequency) == 0)
-		{
+		if (freqTotal.compareTo(targetFrequency) == 0) {
 			upTextMgr.setLine(("Frequency total: " + freqTotal), "black", "both");
 		}
 		
 		// if frequency over 1.0, but under 1.01, give warning
-		// if frequencies less than 0, give warning
-		else if (freqTotal.compareTo(targetFrequency) < 0 || freqTotal.compareTo(maxFrequency) < 0)
-		{
-//			flag = false;
+		else if (freqTotal.compareTo(targetFrequency) > 0 && freqTotal.compareTo(maxFrequency) < 0) {
 			warningCodeList.add(2);
 		}
+		
+		// if frequency over 0.95, but less than 1.0, give warning
+		else if (freqTotal.compareTo(targetFrequency) < 0 && freqTotal.compareTo(minFrequency) > 0) {
+			warningCodeList.add(3);
+		}
+		
 		// if frequencies greater than 1.01, give error
-		else
-		{
+		else if (freqTotal.compareTo(maxFrequency) > 0) {
 			flag = false;
 			errorCodeList.add(2);
 		}
 		
+		// if frequencies less than 0.95, give error
+		else if (freqTotal.compareTo(minFrequency) < 0) {
+			flag = false;
+			errorCodeList.add(11);
+		}
+		
 		// if there are warnings, print out the warnings to the gui
-		if (!warningCodeList.isEmpty()) 
-		{
+		if (!warningCodeList.isEmpty()) {
 			upTextMgr.setLine("", "black", "both");
 			upTextMgr.setLine("Warnings:", "black", "both");
 
-			for (int x:warningCodeList)
-			{
+			for (int x:warningCodeList) {
 				System.out.println("* " + ErrorCodes.warningList().get(x));
 				upTextMgr.setLine(("* " + ErrorCodes.warningList().get(x)), "black", "both");
 
-				if (x == 2)
-				{
+				if (x == 2) {
+					upTextMgr.setLine(("  - Frequency total: " + freqTotal), "black", "both");
+					upTextMgr.setLine("  - Frequency sum will be normalized by the server to 1.0.", "black", "both");
+				}
+				
+				if (x == 3) {
 					upTextMgr.setLine(("  - Frequency total: " + freqTotal), "black", "both");
 					upTextMgr.setLine("  - Frequency sum will be normalized by the server to 1.0.", "black", "both");
 				}
@@ -174,25 +179,26 @@ public class DataChecks {
 		}
 		
 		// if there are errors, print out the errors to the gui
-		if (!errorCodeList.isEmpty()) 
-		{
+		if (!errorCodeList.isEmpty()) {
 			upTextMgr.setLine("", "black", "both");
 			upTextMgr.setLine("Errors:", "red", "both");
 				
-			for (int x:errorCodeList)
-			{
+			for (int x:errorCodeList) {
 				System.out.println("* " + ErrorCodes.errorList().get(x));
 				upTextMgr.setLine(("* " + ErrorCodes.errorList().get(x)), "red", "both");
 				
-				// frequency total error
-				if (x == 2)
-				{
+				// frequency total error: greater than
+				if (x == 2) {
+					upTextMgr.setLine(("  - Frequency totals: " + freqTotal), "red", "both");
+				}
+				
+				// frequency total error: less than
+				if (x == 11) {
 					upTextMgr.setLine(("  - Frequency totals: " + freqTotal), "red", "both");
 				}
 				
 				// haplotype consistency error
-				if (x == 9)
-				{
+				if (x == 9) {
 					haplotypeProcessor.printOutErrors(haplotypeLineErrorsMismatch);
 				}
 			}

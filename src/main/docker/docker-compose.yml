@@ -143,7 +143,7 @@ services:
             - app-infra-db-mysql-keycloak
         links:
             - app-infra-db-mysql-keycloak
-        restart: 'always'
+      #  restart: 'always'
         networks:
             - devToolsEnv-Network
 

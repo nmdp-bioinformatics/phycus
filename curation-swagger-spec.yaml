@@ -3,6 +3,9 @@ info:
   version: 1.0.0
   title: Haplotype Frequency Curation Service
   description: Allows to store and return haplotype frequency data
+
+basePath: /api
+
 paths:
   '/hfc/{submissionId}':
     delete:

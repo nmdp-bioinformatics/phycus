@@ -1,0 +1,197 @@
+version: '2.0'
+
+# TO START THE DESIRED CONTAINERS:
+# - To start Only PhycusApp Database Services:
+#    > clear && docker-compose up app-infra-db-mysql-phycusshfc app-infra-swagger-editor
+#
+# - To start the infra needed by KeyCloak Services:
+#    > clear && docker-compose up app-infra-db-mysql-phycusshfc app-infra-db-mysql-keycloak app-infra-phpmyadmin app-infra-mailserver app-infra-swagger-editor
+# - To start only Databases:
+#    > clear && docker-compose up app-infra-keycloak
+
+
+services:
+
+    app-infra-db-mysql-phycusshfc:  # port: 3306:3306
+        image: mysql/mysql-server:${MYSQL_VERSION}
+        container_name: db-mysql-phycusshfc
+        volumes:
+            - vlmcfg-mysql-srv-01-data:/var/lib/mysql:rw,delegated
+            - ./persistences-storages/mysql-srv-01/init-scripts/00-create-users.sql:/docker-entrypoint-initdb.d/00-create-users.sql:ro
+            - ./persistences-storages/mysql-srv-01/init-scripts/01-init-dbs-schemas.sql:/docker-entrypoint-initdb.d/01-init-dbs-schemas.sql:ro
+        #    - ./persistences-storages/⁨mysql-srv-01/dumpsDBs/01-phycusshfc-dump-to-load.sql:/db/dumpsToImport/01-phycusshfc-dump-to-load.sql
+        restart: 'always'
+        expose:
+            - '3306'
+        ports:
+            - '3306:3306'
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_ROOT_PASSWORD=root
+        #    - MYSQL_ROOT_HOST=0.0.0.0
+        command: mysqld --lower_case_table_names=1 --skip-ssl=1 --character_set_server=utf8mb4 --explicit_defaults_for_timestamp --log-error-verbosity --default-authentication-plugin=mysql_native_password --default-authentication-plugin=mysql_native_password
+        networks:
+            - devToolsEnv-Network
+
+
+    app-infra-db-mysql-keycloak:  # port: 3307:3306
+        image: mysql/mysql-server:${MYSQL_VERSION}
+        container_name: db-mysql-keycloak
+        volumes:
+            - vlmcfg-mysql-srv-02-data:/var/lib/mysql:rw,delegated
+            - ./persistences-storages/mysql-srv-02/init-scripts/00-create-users.sql:/docker-entrypoint-initdb.d/00-create-users.sql:ro
+            - ./persistences-storages/mysql-srv-02/init-scripts/01-init-dbs-schemas.sql:/docker-entrypoint-initdb.d/01-init-dbs-schemas.sql:ro
+        #    - ./persistences-storages/⁨mysql-srv-02/dumpsDBs/01-keycloak-dump-to-load.sql:/db/dumpsToImport/01-keycloak-dump-to-load.sql
+        restart: 'always'
+        expose:
+            - '3306'
+        ports:
+            - '3307:3306'
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_ROOT_PASSWORD=root
+        #    - MYSQL_ROOT_HOST=0.0.0.0
+        # healthcheck:
+        #    test: ["CMD", "mysqladmin", "ping", "--silent"]
+        command: mysqld --lower_case_table_names=1 --skip-ssl=1 --character_set_server=utf8mb4 --explicit_defaults_for_timestamp --log-error-verbosity --default-authentication-plugin=mysql_native_password --default-authentication-plugin=mysql_native_password
+        networks:
+            - devToolsEnv-Network
+
+
+    app-infra-phpmyadmin: # port: 89:80
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: app-infra-phpmyadmin
+        links:
+        #    - app-infra-db-mysql-phycusshfc
+            - app-infra-db-mysql-keycloak
+        ports:
+            - 89:80
+        environment:
+            - PMA_ARBITRARY=1
+        depends_on:
+            - app-infra-db-mysql-phycusshfc
+            - app-infra-db-mysql-keycloak
+        networks:
+            - devToolsEnv-Network
+
+
+    app-infra-mailserver:
+        image: tvial/docker-mailserver:latest
+        hostname: fake-mailserver
+        domainname: phycusapp.com
+        container_name: app-infra-mailserver
+        ports:
+            - "25:25"
+            - "143:143"
+            - "465:465"
+            - "587:587"
+            - "993:993"
+        volumes:
+            - vlmcfg-maildata:/var/mail
+            - vlmcfg-mailstate:/var/mail-state
+            - vlmcfg-maillogs:/var/log/mail
+            - ./persistences-storages/mail-server/configs/:/tmp/docker-mailserver/
+        environment:
+            - ENABLE_SPAMASSASSIN=1
+            - ENABLE_CLAMAV=1
+            - ENABLE_FAIL2BAN=1
+            - ENABLE_POSTGREY=1
+            - ONE_DIR=1
+            - DMS_DEBUG=0
+        cap_add:
+            - NET_ADMIN
+            - SYS_PTRACE
+        networks:
+            - devToolsEnv-Network
+
+
+    app-infra-keycloak:
+        image: jboss/keycloak:9.0.0
+        command:
+          [
+              '-b',
+              '0.0.0.0',
+              '-Dkeycloak.migration.action=import',
+              '-Dkeycloak.migration.provider=dir',
+              '-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config',
+              '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING',
+              '-Djboss.socket.binding.port-offset=1000',
+              '-Dkeycloak.profile.feature.upload_scripts=enabled',
+          ]
+        volumes:
+            - ./persistences-storages/keycloak/configs/realm-config:/opt/jboss/keycloak/realm-config
+        environment:
+            - DB_VENDOR=MYSQL
+            - DB_ADDR=app-infra-db-mysql-keycloak
+            - DB_DATABASE=DBKeyCloak
+            - DB_USER=dbakeycloak
+            - DB_PASSWORD=1a88a1
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=Pa55w0rd
+            # - DB_SCHEMA=public
+            # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+            - JDBC_PARAMS="useSSL=false;connectTimeout=30000;verifyServerCertificate=false;"
+        ports:
+            - 9080:9080
+            - 9443:9443
+            - 10990:10990
+        depends_on:
+            - app-infra-db-mysql-keycloak
+        links:
+            - app-infra-db-mysql-keycloak
+        restart: 'always'
+        networks:
+            - devToolsEnv-Network
+
+
+    app-infra-swagger-editor:
+        image: swaggerapi/swagger-editor:latest
+        ports:
+            - 7742:8080
+        networks:
+            - devToolsEnv-Network
+
+
+# Networks configurations
+networks:
+    devToolsEnv-Network:
+        driver: bridge
+
+
+
+# Volumes for persisting data, see https://docs.docker.com/engine/admin/volumes/volumes/
+volumes:
+
+    vlmcfg-mysql-srv-01-data:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_MYSQL_SRV_01_DATA_PATH}
+
+    vlmcfg-mysql-srv-02-data:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_MYSQL_SRV_02_DATA_PATH}
+
+    vlmcfg-maildata:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_MAILSERVER_DATA_PATH}
+
+    vlmcfg-mailstate:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_MAILSERVER_STATE_PATH}
+
+    vlmcfg-maillogs:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_MAILSERVER_LOGS_PATH}

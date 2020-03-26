@@ -111,6 +111,7 @@ services:
 
     app-infra-keycloak:
         image: jboss/keycloak:9.0.0
+        container_name: app-infra-keycloak
         command:
           [
               '-b',
@@ -150,6 +151,7 @@ services:
 
     app-infra-swagger-editor:
         image: swaggerapi/swagger-editor:latest
+        container_name: app-infra-swagger-editor
         ports:
             - 7742:8080
         networks:

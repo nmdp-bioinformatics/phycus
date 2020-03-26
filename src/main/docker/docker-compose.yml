@@ -69,7 +69,7 @@ services:
         #    - app-infra-db-mysql-phycusshfc
             - app-infra-db-mysql-keycloak
         ports:
-            - 89:80
+            - 9999:80
         environment:
             - PMA_ARBITRARY=1
         depends_on:
@@ -91,9 +91,9 @@ services:
             - "587:587"
             - "993:993"
         volumes:
-            - vlmcfg-maildata:/var/mail
-            - vlmcfg-mailstate:/var/mail-state
-            - vlmcfg-maillogs:/var/log/mail
+        #    - vlmcfg-maildata:/var/mail
+        #    - vlmcfg-mailstate:/var/mail-state
+        #    - vlmcfg-maillogs:/var/log/mail
             - ./persistences-storages/mail-server/configs/:/tmp/docker-mailserver/
         environment:
             - ENABLE_SPAMASSASSIN=1

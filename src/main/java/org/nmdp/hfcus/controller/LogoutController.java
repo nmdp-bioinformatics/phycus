@@ -1,5 +1,6 @@
 package org.nmdp.hfcus.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -21,7 +22,16 @@ import java.util.Map;
  */
 @RestController
 public class LogoutController {
+
+
+    @Value("${spring.security.oauth2.client.registration.oidc.client-id}")
+    private String strClientIdInOIDC;
+
+    @Value("${spring.security.oauth2.client.registration.oidc.client-secret}")
+    private String strClientSecretInOIDC;
+
     private final ClientRegistration registration;
+
 
     public LogoutController(ClientRegistrationRepository registrations) {
         this.registration = registrations.findByRegistrationId("oidc");
@@ -46,6 +56,8 @@ public class LogoutController {
         String logoutUrl = null;
         Map<String, String> logoutDetails = null;
 
+        // TODO: Improve this logout procedure.
+
         logoutUrl = this.registration.getProviderDetails()
                                      .getConfigurationMetadata()
                                      .get("end_session_endpoint")
@@ -61,8 +73,8 @@ public class LogoutController {
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             requestParams = new LinkedMultiValueMap<>();
-            requestParams.add("client_id", "PhycusSHFCApp");
-            requestParams.add("client_secret", "2981ec96-1e1a-4c41-a0dc-507ae757e6ac");
+            requestParams.add("client_id", strClientIdInOIDC);
+            requestParams.add("client_secret", strClientSecretInOIDC);
             requestParams.add("refresh_token", pIdToken.getTokenValue());
             request = new HttpEntity<>(requestParams, headers);
 
@@ -82,6 +94,7 @@ public class LogoutController {
             logoutDetails.put("idToken", pIdToken.getTokenValue());
 
         }
+
         return ResponseEntity.ok().body(logoutDetails);
     }
 

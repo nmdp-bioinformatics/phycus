@@ -58,8 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/i18n/**")
                 .antMatchers("/content/**")
                 .antMatchers("/webjars/**")
-                .antMatchers("/test/**")
-                .antMatchers("/swagger-ui.html*/**");
+                .antMatchers("/test/**");
+                // .antMatchers("/swagger-ui.html*/**");
     }
 
 
@@ -87,14 +87,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //    .deny()
         // .and()
         .authorizeRequests()
-            // .antMatchers("/swagger-ui.html*/**").hasAuthority("05_REGISTERED_USERS_CLIENT_ROLE")
+            .antMatchers("/swagger-ui.html*/**").hasAuthority("05_REGISTERED_USERS_CLIENT_ROLE")
+            .antMatchers("/hfc/**").hasAuthority("04_PUBLISHER_CLIENT_ROLE")
+            .antMatchers("/population/**").hasAuthority("03_REVIEWER_CLIENT_ROLE")
+            .antMatchers("/cohort/**").hasAuthority("05_REGISTERED_USERS_CLIENT_ROLE")
+
             .antMatchers("/api/auth-info").permitAll()
             .antMatchers("/api/logout").permitAll()
             .antMatchers("/api/**").authenticated()
-            .antMatchers("/hfc/**").hasAuthority("04_PUBLISHER_CLIENT_ROLE")
-            .antMatchers("/management/health").hasAuthority("03_REVIEWER_CLIENT_ROLE")
+
+            .antMatchers("/management/health").hasAuthority("05_REGISTERED_USERS_CLIENT_ROLE")
             .antMatchers("/management/info").hasAuthority("BASIC_REGISTERED_GLOBAL_ROLE")
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/management/**").hasAuthority("02_APP_MANAGER_CLIENT_ROLE")
             .anyRequest().permitAll()
         .and()
             .oauth2Login()

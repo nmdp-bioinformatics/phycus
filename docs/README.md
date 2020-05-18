@@ -22,7 +22,8 @@ Our specific goal is to provide a computational resource that will address unmet
 ## Future capabiltites of PHYCuS
 
 * Global visual of HLA with geographical distributions e.g. [haplostats.org](http://haplostats.org) maps but interactive
-* Realtime analysis of population differences e.g. [nextstrain](https://nextstrain.org/ncov)* The ability to seamlessly navigate from HLA haplotypes to alleles to motifs to single amino acid polymorphims or even nucleotide sequence polymorophisms e.g. [SSHAARP](https://cran.r-project.org/web/packages/SSHAARP/index.html)
+* Realtime analysis of population differences e.g. [nextstrain](https://nextstrain.org/ncov)
+* The ability to seamlessly navigate from HLA haplotypes to alleles to motifs to single amino acid polymorphims or even nucleotide sequence polymorophisms e.g. [SSHAARP](https://cran.r-project.org/web/packages/SSHAARP/index.html)
 ![SHAARP Vignette](shaarp.jpg)
 
 

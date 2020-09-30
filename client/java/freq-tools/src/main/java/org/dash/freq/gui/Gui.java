@@ -46,10 +46,10 @@ public class Gui extends JFrame {
 		parentTabbedPane.addTab("Populations", null, popTab, "Search available populations");
 		
 		// label tab
-		parentTabbedPane.addTab("Labels", null, labelTab, "Search available labels");
+		// parentTabbedPane.addTab("Labels", null, labelTab, "Search available labels");
 		
 		// DOI converter tab
-		parentTabbedPane.addTab("DOI converter", null, doiTab, "Convert publication IDs");
+		// parentTabbedPane.addTab("DOI converter", null, doiTab, "Convert publication IDs");
 		
 		// options tab
 		parentTabbedPane.addTab("Options", null, optionsTab, "Program options");

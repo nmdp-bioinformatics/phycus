@@ -1,0 +1,104 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /phycusApp
+    session:
+      cookie:
+        http-only: true
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.security: DEBUG
+    org.nmdp.hfcus: DEBUG
+
+spring:
+  application:
+    name: PhycusApp
+  profiles:
+    # The commented value for `active` can be replaced with valid Spring profiles to load.
+    # Otherwise, it will be filled in by maven when building the JAR file
+    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+    active: dev
+    include:
+      - swagger
+      # Uncomment to activate TLS for the dev profile
+      #- tls
+  devtools:
+    restart:
+      enabled: true
+      additional-exclude: static/**
+    livereload:
+      enabled: false # we use Webpack dev server + BrowserSync for livereload
+  jackson:
+    serialization:
+      indent-output: true
+
+  jmx:
+    enabled: false
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/hfcusdb
+    username: hfcus_user
+    password: hfcus_user1
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+    show-sql: true
+    open-in-view: true
+    generate-ddl: true
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: false
+      hibernate.show_sql: true
+      hibernate.use_sql_comments: true
+      hibernate.format_sql: true
+      hibernate.type: trace
+    hibernate:
+      ddl-auto: validate
+
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://localhost:9080/auth/realms/CIBMTR-BioInformatics-Realm
+        registration:
+          oidc:
+            client-id: PhycusSHFCApp
+            client-secret: 2981ec96-1e1a-4c41-a0dc-507ae757e6ac
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: ['health', 'info']
+  endpoint:
+    health:
+      show-details: always
+#      roles: 'ROLE_ADMIN'

@@ -1,4 +1,10 @@
 .classpath
 .project
 .settings
+
+# system file for IDE testing
 nbactions.xml
+
+# thumbnails for images
+/src/main/resources/Thumbs.db
+

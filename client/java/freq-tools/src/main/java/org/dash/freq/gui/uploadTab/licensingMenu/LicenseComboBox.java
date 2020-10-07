@@ -21,14 +21,21 @@ public class LicenseComboBox {
 							"BY-NC-SA - Attribution - NonCommercial - ShareAlike",
 							"BY-NC-ND - Attribution - NonCommercial - NoDerivatives" };
 
-	private Map<Integer, String> licenseStringCorrenspondances = new HashMap<Integer, String>();
-			licenseStringCorrenspondances.put(0, "CC0");
-			licenseStringCorrenspondances.put(1, "by");
-			licenseStringCorrenspondances.put(2, "by-sa");
-			licenseStringCorrenspondances.put(3, "by-nd");
-			licenseStringCorrenspondances.put(4, "by-nc");
-			licenseStringCorrenspondances.put(5, "by-nc-sa");
-			licenseStringCorrenspondances.put(6, "by-nc-nd");
+	private static final Map<Integer, String> LICENSE_STRING_CORRESPONDANCES = initiateLicenseStringHashMap();
+
+	private static Map<Integer, String> initiateLicenseStringHashMap() {
+		Map<Integer, String> licenseStringCorrenspondances = new HashMap<>();
+
+		licenseStringCorrenspondances.put(0, "CC0");
+		licenseStringCorrenspondances.put(1, "by");
+		licenseStringCorrenspondances.put(2, "by-sa");
+		licenseStringCorrenspondances.put(3, "by-nd");
+		licenseStringCorrenspondances.put(4, "by-nc");
+		licenseStringCorrenspondances.put(5, "by-nc-sa");
+		licenseStringCorrenspondances.put(6, "by-nc-nd");
+
+		return licenseStringCorrenspondances;
+	}
 
 	private JComboBox licenseComboBox = new JComboBox(LICENSE_OPTIONS);
 
@@ -47,7 +54,7 @@ public class LicenseComboBox {
 		public void actionPerformed(ActionEvent evt) {
 			int licenseComboBoxSelection = licenseComboBox.getSelectedIndex();
 			Prefs.setLicensingSelectedIndex(licenseComboBoxSelection);
-			Prefs.setLicensingSelected(licenseStringCorrenspondances.get(licenseComboBoxSelection));
+			Prefs.setLicensingSelected(LICENSE_STRING_CORRESPONDANCES.get(licenseComboBoxSelection));
 		}
 	};
 

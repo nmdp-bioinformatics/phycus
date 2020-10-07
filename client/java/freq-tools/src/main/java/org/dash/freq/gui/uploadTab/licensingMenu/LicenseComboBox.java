@@ -2,7 +2,7 @@ package org.dash.freq.gui.uploadTab.licensingMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JComboBox;
 
@@ -21,14 +21,14 @@ public class LicenseComboBox {
 							"BY-NC-SA - Attribution - NonCommercial - ShareAlike",
 							"BY-NC-ND - Attribution - NonCommercial - NoDerivatives" };
 
-	private final Map<Integer, String> LICENSE_STRING_CORRESPONDANCES = 
-			Map.of(0, "CC0",
-				   1, "by",
-				   2, "by-sa",
-				   3, "by-nd",
-				   4, "by-nc",
-				   5, "by-nc-sa",
-				   6, "by-nc-nd");
+	private Map<Integer, String> licenseStringCorrenspondances = new HashMap<Integer, String>();
+			licenseStringCorrenspondances.put(0, "CC0");
+			licenseStringCorrenspondances.put(1, "by");
+			licenseStringCorrenspondances.put(2, "by-sa");
+			licenseStringCorrenspondances.put(3, "by-nd");
+			licenseStringCorrenspondances.put(4, "by-nc");
+			licenseStringCorrenspondances.put(5, "by-nc-sa");
+			licenseStringCorrenspondances.put(6, "by-nc-nd");
 
 	private JComboBox licenseComboBox = new JComboBox(LICENSE_OPTIONS);
 
@@ -47,7 +47,7 @@ public class LicenseComboBox {
 		public void actionPerformed(ActionEvent evt) {
 			int licenseComboBoxSelection = licenseComboBox.getSelectedIndex();
 			Prefs.setLicensingSelectedIndex(licenseComboBoxSelection);
-			Prefs.setLicensingSelected(LICENSE_STRING_CORRESPONDANCES.get(licenseComboBoxSelection));
+			Prefs.setLicensingSelected(licenseStringCorrenspondances.get(licenseComboBoxSelection));
 		}
 	};
 

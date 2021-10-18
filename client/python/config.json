@@ -1,6 +1,7 @@
 {
-	"resolution": "G",
+	"resolution": "gNMDP",
 	"license_type": "CC0",
-	"population_id": 1
+	"population_id": 1,
+	"cohort_id": 1
 }
 

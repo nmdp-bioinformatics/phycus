@@ -62,6 +62,7 @@ def main():
     license = License(type_of_license=license_type)
 
     pop_id = config['population_id']
+    cohort_id = config['cohort_id']
 
     resolution = config['resolution']
     resinfo = [ResolutionInfo(resolution=resolution)]
@@ -80,10 +81,12 @@ def main():
                         haplotype_frequency_list=hapfreqs,
                         resolution_data=resinfo)
 
-    cur_request = HFCurationRequest(population_id=pop_id,
+    cur_request = HFCurationRequest(population_id=pop_id, cohort_id=cohort_id,
                                     haplotype_frequency_data=hapfreqdata)
 
-    response = api_instance.hfc_post(hf_curation_request=cur_request)
+    print(cur_request)
+    #response = api_instance.hfc_post(hf_curation_request=cur_request)
+    response = api_instance.hfc_post(cur_request)
 
     print(response)
 

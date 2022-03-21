@@ -1,5 +1,6 @@
 package org.nmdp.hfcus.configuration;
 
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableTransactionManagement
 public class SwaggerDocumentationConfig {
 
+    private final BuildProperties buildProperties;
+
+    public SwaggerDocumentationConfig(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Haplotype Frequency Curation Service")
@@ -23,7 +30,7 @@ public class SwaggerDocumentationConfig {
                 .license("LGPL 3.0")
                 .licenseUrl("https://www.gnu.org/licenses/lgpl-3.0.txt")
                 .termsOfServiceUrl("")
-                .version("1.0.0")
+                .version(this.constructBuildVersion())
                 .contact(new Contact("Pradeep Bashyal","https://github.com/nmdp-bioinformatics/phycus", ""))
                 .build();
     }
@@ -37,6 +44,10 @@ public class SwaggerDocumentationConfig {
                 .directModelSubstitute(java.time.LocalDate.class, java.sql.Date.class)
                 .directModelSubstitute(java.time.OffsetDateTime.class, java.util.Date.class)
                 .apiInfo(apiInfo());
+    }
+
+    private String constructBuildVersion() {
+        return this.buildProperties.getVersion() + "-" + this.buildProperties.getTime().getEpochSecond();
     }
 
 }

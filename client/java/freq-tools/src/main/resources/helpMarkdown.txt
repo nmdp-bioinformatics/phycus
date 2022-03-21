@@ -1,0 +1,193 @@
+<a name="top"></a>
+## 1. Contents
+## [2. Phycus file format](#phycus)<br>
+  - [2.1 Header Block](#header)<br>
+    - [2.1.1 Population](#pop)<br>
+    - [2.1.2 Cohort](#cohort)<br>
+    - [2.1.3 License](#license)<br>
+    - [2.1.4 Resolution](#resolution)<br>
+    - [2.1.5 Haplotype](#haplotype)<br>
+    - [2.1.6 Genotype](#genotype)<br>
+    - [2.1.7 ION](#ion)<br>
+  - [2.2 Data](#data)<br>
+## [3. Options](#options)<br>
+  - [3.1 Receipts](#receipts)<br>
+  - [3.2 Verbose Reporting](#verbose)<br>
+  - [3.3 Issuing Organization Number (ION)](#ionID)<br>
+  - [3.4 Advanced](#advanced)<br>
+    - [3.4.1 Database URL](#database)<br>
+## [4. The Population Tab](#popTab)<br>
+
+<a name="phycus"></a>
+## 2. Phycus File Format
+
+A Phycus file is a comma separated value file with a custom header, and the suffix '.phycus'. (Example: 'file_name.phycus') The first line is a header, followed by lines for haplotypes and their frequencies. There should be no spaces outside of quoted text, and commas should not be used except to separate data and header options. (Do not use commas in quoted descriptions.)
+
+A minature example file:
+
+
+```
+pop=OTH,cohort="Description of the cohort",license=CC0,resolution=G
+DRB1*07:01:01:01~DQB1*02:02:01,0.082586969
+DRB1*15:01:01:01~DQB1*03:03:02:03,0.175318163
+DRB1*01:01:01~DQB1*05:03:01:01,0.053289506
+DRB1*03:01:02~DQB1*06:02:01,0.120375511
+DRB1*03:01:01:01~DQB1*05:01:01:01,0.099318824
+DRB1*04:01:01~DQB1*04:01:01,0.056614833
+DRB1*15:01:01:01~DQB1*03:02:12,0.106412321
+DRB1*08:01:03~DQB1*03:02:01,0.188099248
+DRB1*13:01:01~DQB1*03:01:01:01,0.000557303
+DRB1*15:01:01:01~DQB1*06:05:01,0.117427322
+```
+
+[back](#top)
+
+<a name="header"></a>
+## 2.1 Header Block:
+
+A minimum header block must contain a population value and cohort value. All other header elements are optional. Any header options that can be selected in the interface will be over-written by the option listed in the header.
+
+Headers must be separated by commas, and spaces are not allowed (outside of quotes).
+
+A header example:
+
+ > pop=OTH,cohort="Description of the cohort",license=CC0,resolution=G
+
+[back](#top)
+
+<a name="pop"></a>
+### 2.1.1 Population
+
+> pop=POPULATION_TAG
+
+The population is a mandatory header, and to prevent duplicates, must use a population tag already found in the database. To add a population, please see the Populations tab.
+
+[back](#top)
+
+<a name="cohort"></a>
+### 2.1.2 Cohort
+
+> cohort="Description of the cohort"
+
+The cohort is a mandatory header. You have 255 characters available to you to describe your cohort. Do not use commas. 
+
+[back](#top)
+
+<a name="license"></a>
+### 2.1.3 License
+
+> license=CC0
+
+The license is an optional header. If it is not provided, the license selected on the main page will be applied. If provided, the license in the header will override the option selected on the main page. There are 7 license options:
+
+- CC0: Creative Commons no rights reserved.
+- BY: Give Attribution.
+- BY-SA: Give Attribution and Share Alike.
+- BY-ND: Give Attribution and No Derivatives.
+- BY-NC: Give Attribution and Non-Commercial.
+- BY-NC-SA: Give Attribution and Non-Commercial and Share Alike.
+- BY-NC-ND: Give Attribution and Non-Commercial and No Derivatives.
+
+For more information, see [here](https://creativecommons.org/share-your-work/licensing-types-examples/).
+
+[back](#top)
+
+<a name="resolution"></a>
+### 2.1.4 Resolution
+
+> resolution=gDKMS
+
+The resolution is an optional header element describing the resolution of the allele names in the haplotypes. There are 9 resolution options (described below). If specified, the resolution must exactly match one of the following options:
+
+- G: G-groups. HLA alleles that have identical nucleotide sequences across the exons encoding the peptide binding domains form a G group. See: [http://hla.alleles.org/alleles/g_groups.html](http://hla.alleles.org/alleles/g_groups.html)
+- P: P-Groups. HLA alleles encoding the same antigen recognition domain form a P group. Null alleles are excluded from P groups. See: [http://hla.alleles.org/alleles/p_groups.html](http://hla.alleles.org/alleles/p_groups.html)
+- gNMDP: "Little g group", NMDP standard. HLA alleles described at the protein level that have identical nucleotide sequences across the exons encoding the peptide binding domains form a g-group. See: [https://doi.org/10.1016/j.humimm.2013.06.025](https://doi.org/10.1016/j.humimm.2013.06.025)
+- gDKMS: "Little g group", DKMS standard. HLA alleles encoding the same antigen recognition domain, including Null alleles, form a g-group. See: [https://doi.org/10.1016/j.humimm.2009.08.006](https://doi.org/10.1016/j.humimm.2009.08.006)
+- 1-Field: 1 field allele names. Alleles are described using only the first field of an allele name. See: [http://hla.alleles.org/nomenclature/naming.html](http://hla.alleles.org/nomenclature/naming.html)
+- 2-Field: 2 field allele names. Alleles are described using only the first two fields of an allele name. 
+- 3-Field: 3 field allele names. Alleles are described using only the first three fields (where possible) of an allele name. 
+- 4-Field: 4 field allele names. Alleles are described using all four fields (where possible) of an allele name. 
+- Serology: Serological allele names. Alleles are described using serological equivalents only. See: [https://doi.org/10.1111/j.1399-0039.2008.01183.x](https://doi.org/10.1111/j.1399-0039.2008.01183.x)
+
+[back](#top)
+
+<a name="haplotype"></a>
+### 2.1.5 Haplotyping Group ID
+
+> haplotype=A9576 or haplotype="Children's Hospital Oakland Research Institute"
+
+The haplotyping group ID is an optional header tag. It identifies the facility that generated the haplotyping frequencies of the data set. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
+
+[back](#top)
+
+<a name="genotype"></a>
+### 2.1.6 Genotyping Group ID
+
+> genotype=CHORI or genotype="Children's Hospital Oakland Research Institute"
+
+The genotyping group ID is an optional header tag. It identifies the facility that performed the genotyping of the samples. The ID may include spaces, but to do so requires that the text be put in quotes. Do not include commas.
+
+[back](#top)
+
+<a name="ion"></a>
+### 2.1.7 Issuing Organization Number (ION)
+
+> ion=9576
+
+The Issuing Organization Number (ION) is an optional header tag that overrides the default set in the program (if one is set in the program. This ID can be changed in the [options tab](#ionID)\).
+
+[back](#top)
+
+<a name="data"></a>
+### 2.2 Data
+
+Data should start on the second line, and should list the haplotype first, a comma, then its frequency. No spaces should be included. Individual loci should be separated by a tilde ( ~ ). Ideally the frequencies should total up to 1.00, but may range as high as 1.01 or as low as 0.95 and still be accepted.
+
+> DRB1\*07:01:01:01~DQB1\*02:02:01,0.082586969
+
+[back](#top)
+
+<a name="options"></a>
+## 3. Options:
+
+The Phycus client includes a few basic reporting options
+
+### 3.1 Receipts <a name="receipts"></a>
+
+A receipt of the upload log is saved in a datestamped/timestamped text file. The file location will default to the folder the data file was uploaded from. This can be changed to a custom location. If a custom location is checked, but not specified, the files will default to the current user's Documents folder.
+
+[back](#top)
+
+<a name="verbose"></a>
+### 3.2 Verbose Reporting
+
+This gives the option to turn on and off verbose reporting. This determines how many errors are shown when attempting to upload data.
+
+Errors are partially determined by comparing all data in the file to the first line of data in the file. If there is an error in that first line, and it's a 3000 line file, you can get 3000 errors. This is to minimize that.
+
+Verbose reporting also determines what is reported in the receipt file.
+
+[back](#top)
+
+<a name="ionID"></a>
+### 3.3 Issuing Organization Number (ION)
+
+This variable can be changed in options, and can also be overwritten by adding an optional [header tag](#ion) to the file. If your facility does not have one, leave the field blank.
+
+[back](#top)
+
+<a name="advanced"></a>
+### 3.4 Advanced Options <a name="database"></a>
+### 3.4.1 Database URL
+
+The program possesses the ability to change the URL to reach the server. Do not change this unless otherwise notified. If it does get changed inappropriately, the "Reset to default" button will restore the original url.
+
+[back](#top)
+
+<a name="popTab"></a>
+## 4. The Population Tab:
+
+Before uploading a data file its population must be listed in the database. This is to limit the number of duplicate population names in the database. The name of a new population can be typed in the "Population name" text box, and created using the "Create" button at the bottom of the screen. The population name should be short, in uppercase letters, and use underscores in lieu of spaces. A brief description of the population (255 characters maximum) must be included. Please check the database for an existing population name before adding a new one.
+
+[back](#top)
+

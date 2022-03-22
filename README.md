@@ -11,6 +11,7 @@ Service to help curate Haplotype Frequencies.
 
 ### Build the application
 
+Note: must be java version 8.
 ```bash
 mvn clean package
 ```

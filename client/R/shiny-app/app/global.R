@@ -1,3 +1,3 @@
 library(RSQLite)
 
-db <- dbConnect(SQLite(), '~/phycus/shiny-app/db/hfc.db')
+db <- dbConnect(SQLite(), '../db/hfc.db')

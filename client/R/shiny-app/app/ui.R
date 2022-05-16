@@ -1,5 +1,4 @@
 library(auth0)
-options(shiny.port = 8080)
 
 auth0_ui(fluidPage(theme = shinytheme("cerulean"),
   # Application title

@@ -22,7 +22,7 @@ this github. It does not require the java app or the docker mySQL/phpMyadmin ins
 `auth0_server` and `auth0_ui` statements in `server.R` and `ui.R` with `server` and `ui` respectively.
 
 The input data tab can upload a .csv file with a "haplotype,frequency" header to 
-the sqlite database. An example file can be found in `shiny-app/data/MUSLEM.csv`.
+the sqlite database. An example file can be found in `shiny-app/data/sample_pop.csv`.
 
 
 

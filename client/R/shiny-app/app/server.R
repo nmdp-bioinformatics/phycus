@@ -10,8 +10,9 @@ library(DT)
 
 options(shiny.port = 8088)
 
-auth0_server(function(input, output, session) {
-  
+#auth0_server(function(input, output, session) {
+server <- function(input, output, session) {
+
   observeEvent(input$logout, {
     logout()
   })
@@ -114,5 +115,5 @@ auth0_server(function(input, output, session) {
     
     })
   
-})
+}#)
 

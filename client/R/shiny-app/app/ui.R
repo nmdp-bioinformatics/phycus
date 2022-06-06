@@ -1,6 +1,12 @@
 library(auth0)
+library(shiny)
+library(shinythemes)
 
-auth0_ui(fluidPage(theme = shinytheme("cerulean"),
+options(shiny.port = 8088)
+
+#auth0_ui(fluidPage(theme = shinytheme("cerulean"),
+ui <- fluidPage(theme = shinytheme("cerulean"),
+                                      
   # Application title
   #titlePanel("PHYCuS: Population Haplotype Frequency Curation Service"),
 
@@ -64,5 +70,5 @@ auth0_ui(fluidPage(theme = shinytheme("cerulean"),
     tabPanel("Download", tableOutput("download"))),
  
   )
-)
+#)
 

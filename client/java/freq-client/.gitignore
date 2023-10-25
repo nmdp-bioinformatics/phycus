@@ -19,15 +19,3 @@ hs_err_pid*
 target
 .gradle
 build
-/docs/
-/gradle/
-/src/
-/.travis.yml
-/README.md
-/build.gradle
-/build.sbt
-/git_push.sh
-/gradle.properties
-/gradlew
-/gradlew.bat
-/settings.gradle

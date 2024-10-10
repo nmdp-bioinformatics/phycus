@@ -1,0 +1,52 @@
+{
+  "metaData": {
+    "outputResolution": [
+      {
+        "locus": "HLA-A",
+        "resolution": "g"
+      },
+      {
+        "locus": "HLA-C",
+        "resolution": "g"
+      },
+      {
+        "locus": "HLA-B",
+        "resolution": "g"
+      },
+      {
+        "locus": "HLA-DRB1",
+        "resolution": "g"
+      },
+      {
+        "locus": "HLA-DQB1",
+        "resolution": "g"
+      }
+    ],
+    "hfeMethod": {
+      "method": "nemo",
+      "parameters": [
+        {
+          "parameter": "version",
+          "value": "0.000001"
+        }
+      ]
+    },
+    "cohortDescription": {
+      "population": {
+        "geoCode": "NAM",
+        "ethnicity": "CAU"
+      },
+      "inputSize": 1988
+    },
+    "nomenclatureUsed": {
+      "kind": "imgt",
+      "version": "3.58.0"
+    }
+  },
+  "frequencyData": [
+    {
+      "haplotype": "HLA-A*01:01~HLA-B*02:01",
+      "frequency": 1.2221e-7
+    }
+  ]
+}

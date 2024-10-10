@@ -1,0 +1,121 @@
+{
+	"type": "object",
+	"properties": {
+		"metaData": {
+			"type": "object",
+			"properties": {
+				"outputResolution": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"locus": {
+								"type": "string"
+							},
+							"resolution": {
+								"type": "string",
+								"enum": [
+									"G",
+									"P",
+									"g",
+									"1-Field",
+									"2-Field",
+									"3-Field",
+									"4-Field",
+									"Serology"
+								]
+							}
+						},
+						"required": [ "locus", "resolution" ],
+						"additionalProperties": false
+					}
+				},
+				"hfeMethod": {
+					"type": "object",
+					"properties": {
+						"method": {
+							"type": "string"
+						},
+						"parameters": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"parameter": {
+										"type": "string"
+									},
+									"value": {
+										"type": "string"
+									}
+								},
+								"required": [ "parameter", "value" ],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": [ "method", "parameters" ],
+					"additionalProperties": false
+				},
+				"cohortDescription": {
+					"type": "object",
+					"properties": {
+						"population": {
+							"type": "object",
+							"properties": {
+								"geoCode": {
+									"type": "string"
+								},
+								"ethnicity": {
+									"type": "string"
+								}
+							},
+							"required": [ "geoCode", "ethnicity" ],
+							"additionalProperties": false
+						},
+						"inputSize": {
+							"type": "number"
+						}
+					},
+					"required": [ "population", "inputSize" ],
+					"additionalProperties": false
+				},
+				"nomenclatureUsed": {
+					"type": "object",
+					"properties": {
+						"kind": {
+							"type": "string",
+							"enum": [ "imgt", "ipd" ]
+						},
+						"version": {
+							"type": "string"
+						}
+					},
+					"required": [ "kind", "version" ],
+					"additionalProperties": false
+				}
+			},
+			"required": [ "outputResolution", "hfeMethod", "cohortDescription", "nomenclatureUsed" ],
+			"additionalProperties": false
+		},
+		"frequencyData": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"haplotype": {
+						"type": "string",
+						"pattern": "^[gA-Z-~*:0-9\\.;>\\[\\]]*$"
+					},
+					"frequency": {
+						"type": "number",
+						"format": "int64"
+					}
+				},
+				"required": [ "haplotype", "frequency" ],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": [ "metaData", "frequencyData" ],
+	"additionalProperties": false
+}

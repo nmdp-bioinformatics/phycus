@@ -22,8 +22,6 @@ GetOptions(
 
 # 1) Read optional config file for meta data, or use defaults
 my %config = (
-    locus       => 'HLA-DRB1',
-    resolution  => '2-Field',
     method      => 'Unknown',
     parameter   => 'Unknown',
     value       => 'Unknown',
@@ -35,15 +33,51 @@ my %config = (
 );
 
 # If config file is provided, override default metadata with its values
+my @output_resolutions;
+my @parameters;
 if ($config_file) {
     open my $cfg_fh, '<', $config_file or die "Cannot open config file: $!";
+    my ($current_locus, $current_resolution, $current_parameter, $current_value);
     while (<$cfg_fh>) {
         chomp;
         my ($key, $value) = split(/\s*=\s*/, $_);
-        $config{$key} = $value;
+        if ($key eq 'locus') {
+            $current_locus = $value;
+        } elsif ($key eq 'resolution') {
+            $current_resolution = $value;
+        } elsif ($key eq 'parameter') {
+            $current_parameter = $value;
+        } elsif ($key eq 'value') {
+            $current_value = $value;
+        }
+
+        # Collect locus-resolution pairs
+        if ($current_locus && $current_resolution) {
+            push @output_resolutions, { locus => $current_locus, resolution => $current_resolution };
+            $current_locus = undef;
+            $current_resolution = undef;
+        }
+
+        # Collect parameter-value pairs
+        if ($current_parameter && $current_value) {
+            push @parameters, { parameter => $current_parameter, value => $current_value };
+            $current_parameter = undef;
+            $current_value = undef;
+        }
+
+        # Other general config values
+        $config{$key} = $value unless $key eq 'locus' || $key eq 'resolution' || $key eq 'parameter' || $key eq 'value';
     }
     close $cfg_fh;
 }
+# If no locus/resolution pairs are found, add default pair
+if (!@output_resolutions) {
+    push @output_resolutions, { locus => 'HLA-DRB1', resolution => '2-Field' };
+}
+
+
+
+
 
 # 2) Read and parse CSV file if provided, or use an empty dataset
 my @haplotype_data;
@@ -74,20 +108,31 @@ $writer->startTag('hfxHaplotypeList');
 # Add metadata from config (or defaults if config file not provided)
 $writer->startTag('metaData');
 
-# OutputResolution
+
+# OutputResolution (multiple locus/resolution pairs)
 $writer->startTag('outputResolution');
-$writer->dataElement('locus', $config{'locus'});
-if ($config{'resolution'}) {
-    $writer->dataElement('resolution', $config{'resolution'});
+foreach my $res (@output_resolutions) {
+    $writer->startTag('resolutionPair');
+    $writer->dataElement('locus', $res->{locus});
+    if ($res->{resolution}) {
+        $writer->dataElement('resolution', $res->{resolution});
+    }
+    $writer->endTag('resolutionPair');
 }
 $writer->endTag('outputResolution');
+
 
 # hfeMethod
 $writer->startTag('hfeMethod');
 $writer->dataElement('method', $config{'method'});
+# Add all parameter-value pairs
 $writer->startTag('parameters');
-$writer->dataElement('parameter', $config{'parameter'});
-$writer->dataElement('value', $config{'value'});
+foreach my $param (@parameters) {
+    $writer->startTag('parameterPair');
+    $writer->dataElement('parameter', $param->{parameter});
+    $writer->dataElement('value', $param->{value});
+    $writer->endTag('parameterPair');
+}
 $writer->endTag('parameters');
 $writer->endTag('hfeMethod');
 
@@ -111,20 +156,22 @@ $writer->endTag('nomenclatureUsed');
 $writer->endTag('metaData');
 
 # Add haplotype frequency data if CSV was provided, otherwise skip
+$writer->startTag('frequencyData');
 if (@haplotype_data) {
     foreach my $data (@haplotype_data) {
-        $writer->startTag('frequencyData');
+        $writer->startTag('frequencyPair');
         $writer->dataElement('haplotype', $data->{haplotype});
         $writer->dataElement('frequency', $data->{frequency});
-        $writer->endTag('frequencyData');
+        $writer->endTag('frequencyPair');
     }
 }
+$writer->endTag('frequencyData');
 
 $writer->endTag('hfxHaplotypeList');
 $writer->end();
 
 $output->close if $output_xml_file;
-
+# exit;
 # 5) Validate the generated XML against the XSD
 if ($output_xml_file) {
     my $schema = XML::LibXML::Schema->new(location => $xsd_file);

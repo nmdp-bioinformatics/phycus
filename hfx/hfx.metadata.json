@@ -43,10 +43,4 @@
       "version": "3.58.0"
     }
   },
-  "frequencyData": [
-    {
-      "haplotype": "HLA-A*01:01~HLA-B*02:01",
-      "frequency": 1.2221e-7
-    }
-  ]
 }

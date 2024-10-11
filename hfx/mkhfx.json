@@ -1,6 +1,0 @@
-{
-  "hapfreqfile": "../data/CAU.freqs",
-  "example_file": "hfx.example.json",
-  "json_file": "hfx.json",
-  "schema_file": "hfx.schema.json"
-}

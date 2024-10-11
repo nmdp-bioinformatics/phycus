@@ -1,0 +1,101 @@
+
+CREATE TABLE cohort (
+  cohort_id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  ION_number TEXT
+);
+
+CREATE TABLE method (
+  method_id INTEGER PRIMARY KEY,
+  name TEXT
+);
+
+CREATE TABLE population (
+	population_id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	description TEXT
+);
+
+CREATE TABLE user (
+  user_id INTEGER PRIMARY KEY,
+  username TEXT NOT NULL
+);
+
+
+CREATE TABLE hfc_submission (
+  hfc_entry_id INTEGER PRIMARY KEY,
+  population_id INTEGER NOT NULL,
+  cohort_id INTEGER NOT NULL,
+  method_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  FOREIGN KEY (population_id) 
+      REFERENCES population (population_id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION,
+  FOREIGN KEY (cohort_id) 
+      REFERENCES cohort (cohort_id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION,
+   FOREIGN KEY (method_id) 
+      REFERENCES method (method_id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION,
+   FOREIGN KEY (user_id) 
+      REFERENCES user (user_id) 
+         ON DELETE CASCADE 
+         ON UPDATE NO ACTION
+);
+
+
+CREATE TABLE haplotype (
+  haplotype_id INTEGER PRIMARY KEY,
+	haplotype TEXT NOT NULL,
+	frequency REAL NOT NULL,
+	hfc_entry_id INTEGER NOT NULL,
+	FOREIGN KEY (hfc_entry_id) 
+	  REFERENCES hfc_submission (hfc_entry_id) 
+     ON DELETE CASCADE 
+     ON UPDATE NO ACTION
+);
+
+
+INSERT INTO cohort (name,ION_number)
+VALUES 
+	("test_cohort1", 1234),
+	("test_cohort2", 78626),
+	("test_cohort3", 1920);
+
+INSERT INTO method (name)
+VALUES 
+	("test_method1"),
+	("test_method2"),
+	("test_method3");
+
+INSERT INTO population (name, description)
+VALUES 
+	("US_CAU", "caucasians in US"),
+	("MUSLEM", ''),
+	("POP2", '');
+
+INSERT INTO user (username)
+VALUES 
+	("user1"),
+	("user2");
+
+
+INSERT INTO hfc_submission (population_id,cohort_id,method_id,user_id)
+VALUES
+	(1,1,2,1),
+	(1,2,2,1),
+	(2,2,1,2);
+
+INSERT INTO haplotype (haplotype,frequency,hfc_entry_id)
+VALUES
+	("A*01:01~C*12:02~B*52:01",0.0247720909355414,1),
+	("A*30:01~C*06:02~B*13:02",0.0190871820717698,2),
+	("A*02:05~C*06:02~B*50:01",0.0177420421007255,2),
+	("A*23:01~C*07:01~B*49:01",0.0142463736874706,2),
+	("A*24:02~C*04:01~B*35:02",0.0127333903034554,3),
+	("A*33:01~C*08:02~B*14:02",0.0127281369703687,3),
+	("A*01:01~C*17:01~B*41:01",0.0126120382790285,3),
+	("A*26:01~C*12:03~B*38:01",0.0116995713388112,1);

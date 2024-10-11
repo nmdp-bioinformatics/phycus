@@ -80,7 +80,20 @@
 									"type": "string"
 								}
 							},
-							"required": [  ],
+							"anyOf": [
+								{
+									"required": [ "species" ]
+								},
+								{
+									"required": [ "geoCode" ]
+								},
+								{
+									"required": [ "ethnicity" ]
+								},
+								{
+									"required": [ "description" ]
+								}
+							],
 							"additionalProperties": false
 						},
 						"inputSize": {

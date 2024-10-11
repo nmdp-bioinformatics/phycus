@@ -4,6 +4,10 @@
 		"metaData": {
 			"type": "object",
 			"properties": {
+				"creationDateTime": {
+					"type": "string",
+					"format": "date-time"
+				},
 				"outputResolution": {
 					"type": "array",
 					"items": {

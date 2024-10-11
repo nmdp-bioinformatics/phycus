@@ -48,17 +48,19 @@
                   <xs:sequence>
                     <xs:element name="population" minOccurs="1" maxOccurs="1">
                       <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="geoCode" type="xs:string" />
-                          <xs:element name="ethnicity" type="xs:string" />
-                        </xs:sequence>
+                        <xs:choice minOccurs="1" maxOccurs="4">
+                          <xs:element name="geoCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="ethnicity" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="species" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        </xs:choice >
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="inputSize" type="xs:decimal" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="nomenclatureUsed" minOccurs="1" maxOccurs="1">
+              <xs:element name="nomenclatureUsed" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="kind">
@@ -73,6 +75,7 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="creationDateTime" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

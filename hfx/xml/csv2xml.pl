@@ -11,6 +11,7 @@ use Getopt::Long;
 my $csv_file;
 my $config_file;
 my $output_xml_file;
+my $xsd_file = 'hfx_schema.xsd'; # Default XSD file (update the path as needed)
 
 # Optional command-line arguments
 GetOptions(
@@ -23,14 +24,14 @@ GetOptions(
 my %config = (
     locus       => 'HLA-DRB1',
     resolution  => '2-Field',
-    method      => 'Haplotype Frequency Estimation',
-    parameter   => 'SomeParameter',
-    value       => 'SomeValue',
-    geoCode     => 'US',
-    ethnicity   => 'Caucasian',
-    inputSize   => '1000',
-    kind        => 'imgt',
-    version     => '3.40.0'
+    method      => 'Unknown',
+    parameter   => 'Unknown',
+    value       => 'Unknown',
+    geoCode     => 'Unknown',
+    ethnicity   => 'Unknown',
+    inputSize   => '0',
+    kind        => 'Unknown',
+    version     => 'Unknown'
 );
 
 # If config file is provided, override default metadata with its values
@@ -68,7 +69,7 @@ if ($output_xml_file) {
 my $writer = XML::Writer->new(OUTPUT => $output, DATA_MODE => 1, DATA_INDENT => 4);
 
 $writer->xmlDecl('UTF-8');
-$writer->startTag('hfxFormatResponse');
+$writer->startTag('hfxHaplotypeList');
 
 # Add metadata from config (or defaults if config file not provided)
 $writer->startTag('metaData');
@@ -95,6 +96,8 @@ $writer->startTag('cohortDescription');
 $writer->startTag('population');
 $writer->dataElement('geoCode', $config{'geoCode'});
 $writer->dataElement('ethnicity', $config{'ethnicity'});
+$writer->dataElement('species', $config{'species'});
+$writer->dataElement('description', $config{'description'});
 $writer->endTag('population');
 $writer->dataElement('inputSize', $config{'inputSize'});
 $writer->endTag('cohortDescription');
@@ -117,10 +120,24 @@ if (@haplotype_data) {
     }
 }
 
-$writer->endTag('hfxFormatResponse');
+$writer->endTag('hfxHaplotypeList');
 $writer->end();
 
 $output->close if $output_xml_file;
 
-# 5) Optionally validate the generated XML against the XSD
-# This step can be added if you want to ensure validation, similar to previous script versions
+# 5) Validate the generated XML against the XSD
+if ($output_xml_file) {
+    my $schema = XML::LibXML::Schema->new(location => $xsd_file);
+
+    # Load the generated XML file
+    my $doc = XML::LibXML->load_xml(location => $output_xml_file);
+
+    # Perform validation
+    eval { $schema->validate($doc); };
+    
+    if ($@) {
+        die "XML validation failed: $@\n";
+    } else {
+        print "XML successfully validated against the schema!\n";
+    }
+}

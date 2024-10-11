@@ -62,14 +62,21 @@
 						"population": {
 							"type": "object",
 							"properties": {
+								"species": {
+									"type": "string",
+									"description": "The species the Hf set is based on"
+								},
 								"geoCode": {
 									"type": "string"
 								},
 								"ethnicity": {
 									"type": "string"
+								},
+								"description": {
+									"type": "string"
 								}
 							},
-							"required": [ "geoCode", "ethnicity" ],
+							"required": [  ],
 							"additionalProperties": false
 						},
 						"inputSize": {

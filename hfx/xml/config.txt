@@ -1,0 +1,12 @@
+locus=HLA-DRB1
+resolution=2-Field
+method=Haplotype Frequency Estimation
+parameter=SomeParameter
+value=SomeValue
+geoCode=US
+ethnicity=Caucasian
+species=Human
+description=Those guys
+inputSize=1000
+kind=imgt
+version=3.40.0

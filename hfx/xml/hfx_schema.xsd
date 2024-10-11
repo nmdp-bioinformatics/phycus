@@ -1,0 +1,94 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+  <!-- Root element for hfx-format -->
+  <xs:element name="hfxHaplotypeList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="metaData" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="outputResolution" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="locus" type="xs:string" />
+                    <xs:element name="resolution" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="G" />
+                          <xs:enumeration value="P" />
+                          <xs:enumeration value="g" />
+                          <xs:enumeration value="1-Field" />
+                          <xs:enumeration value="2-Field" />
+                          <xs:enumeration value="3-Field" />
+                          <xs:enumeration value="4-Field" />
+                          <xs:enumeration value="Serology" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="hfeMethod" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="method" type="xs:string" />
+                    <xs:element name="parameters" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parameter" type="xs:string" />
+                          <xs:element name="value" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="cohortDescription" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="population" minOccurs="1" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:choice minOccurs="1" maxOccurs="4">
+                          <xs:element name="geoCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="ethnicity" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="species" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                        </xs:choice >
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="inputSize" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="nomenclatureUsed" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="kind">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="imgt" />
+                          <xs:enumeration value="ipd" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="version" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="creationDateTime" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="frequencyData" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="haplotype" type="xs:string" />
+              <xs:element name="frequency" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

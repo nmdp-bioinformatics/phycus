@@ -1,0 +1,5 @@
+{
+  "hapfreq_path": "https://www.allelefrequencies.net/hla6003a_scr.asp?hla_selection=&hla_locus1=&hla_locus2=&hla_locus3=&hla_locus4=&hla_locus5=&hla_locus6=&hla_locus7=&hla_locus8=&hla_population=1488&hla_country=&hla_dataset=&hla_region=&hla_ethnic=&hla_study=&hla_sample_size=&hla_sample_size_pattern=equal&hla_sample_year=&hla_sample_year_pattern=equal&hla_loci=&hla_order=order_1",
+  "output_hfx_file": "hfx_afnd.json",
+  "schema_file": "hfx.schema.json"
+}

@@ -98,6 +98,9 @@
 						},
 						"inputSize": {
 							"type": "number"
+						},
+						"dataSource": {
+							"type": "string"
 						}
 					},
 					"required": [ "population", "inputSize" ],
@@ -116,6 +119,28 @@
 					},
 					"required": [ "kind", "version" ],
 					"additionalProperties": false
+				},
+				"submitter": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"organisation": {
+							"type": "string"
+						},
+						"email": {
+							"type": "string",
+							"format": "email"
+						}
+					},
+					"required": [  ],
+					"additionalProperties": false
+				},
+				"checkSum": {
+					"type": "string",
+					"pattern": "^[a-fA-F0-9]{32}$",
+					"description": "MD5 checksum represented as a 32-character hexadecimal string."
 				}
 			},
 			"required": [ "outputResolution", "hfeMethod", "cohortDescription", "nomenclatureUsed" ],

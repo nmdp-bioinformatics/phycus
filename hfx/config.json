@@ -1,0 +1,6 @@
+{
+  "hapfreq_file": "hf.csv",
+  "metadata_file": "hfx.metadata.json",
+  "json_file": "hfx.json",
+  "schema_file": "hfx.schema.json"
+}

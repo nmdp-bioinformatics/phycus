@@ -1,0 +1,224 @@
+{
+    "metaData": {
+        "outputResolution": [
+            {
+                "locus": "A",
+                "resolution": null
+            },
+            {
+                "locus": "B",
+                "resolution": null
+            },
+            {
+                "locus": "C",
+                "resolution": null
+            }
+        ],
+        "cohortDescription": {
+            "population": {
+                "geoCode": null,
+                "ethnicity": "Zambia Lusaka"
+            },
+            "inputSize": 44
+        },
+        "hfeMethod": {
+            "method": null,
+            "parameters": [
+                {
+                    "parameter": null,
+                    "value": null
+                }
+            ]
+        },
+        "nomenclatureUsed": {
+            "kind": null,
+            "version": null
+        }
+    },
+    "frequencyData": [
+        {
+            "haplotype": "A*02:01~B*15:10",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*02:01~B*15:10~C*03:04",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*02:01~B*45:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*02:01~B*45:01~C*16:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*02:01~B*51:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*02:01~B*51:01~C*16:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*23:01~B*14:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*23:01~B*14:01~C*02:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*29:02~B*42:01",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "A*29:02~B*42:01~C*17:01",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "A*29:02~B*44:03",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*29:02~B*44:03~C*07:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*30:01~B*42:01",
+            "frequency": 0.11599999999999999
+        },
+        {
+            "haplotype": "A*30:01~B*42:01~C*17:01",
+            "frequency": 0.11599999999999999
+        },
+        {
+            "haplotype": "A*30:02~B*53:01",
+            "frequency": 0.057999999999999996
+        },
+        {
+            "haplotype": "A*30:02~B*53:01~C*04:01",
+            "frequency": 0.057999999999999996
+        },
+        {
+            "haplotype": "A*30:02~B*57:03",
+            "frequency": 0.047
+        },
+        {
+            "haplotype": "A*30:02~B*57:03~C*18:01",
+            "frequency": 0.047
+        },
+        {
+            "haplotype": "A*30:02~B*81:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*30:02~B*81:01~C*07:04",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*31:01~B*40:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*31:01~B*40:01~C*03:04",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*36:01~B*53:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*36:01~B*53:01~C*04:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*68:02~B*07:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*68:02~B*07:02~C*07:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*74:01~B*15:03",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*74:01~B*15:03~C*02:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*80:01~B*57:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "A*80:01~B*57:02~C*18:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*07:02~C*07:02",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "B*08:01~C*07:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*14:01~C*02:02",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*14:02~C*08:02",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "B*15:03~C*02:02",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "B*15:10~C*03:04",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "B*18:01~C*18:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*40:01~C*03:04",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*42:01~C*17:01",
+            "frequency": 0.151
+        },
+        {
+            "haplotype": "B*44:03~C*07:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*45:01~C*16:01",
+            "frequency": 0.047
+        },
+        {
+            "haplotype": "B*51:01~C*16:01",
+            "frequency": 0.035
+        },
+        {
+            "haplotype": "B*53:01~C*04:01",
+            "frequency": 0.105
+        },
+        {
+            "haplotype": "B*57:02~C*18:01",
+            "frequency": 0.023
+        },
+        {
+            "haplotype": "B*57:03~C*18:01",
+            "frequency": 0.057999999999999996
+        },
+        {
+            "haplotype": "B*81:01~C*07:04",
+            "frequency": 0.023
+        }
+    ]
+}

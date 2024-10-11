@@ -1,6 +1,6 @@
 {
-  "hapfreq_file": "hf.csv",
+  "hapfreq_path": "hf.csv",
   "metadata_file": "hfx.metadata.json",
-  "json_file": "hfx.json",
+  "output_hfx_file": "hfx.json",
   "schema_file": "hfx.schema.json"
 }

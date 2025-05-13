@@ -154,7 +154,7 @@ def check_loci_order(hapfreqs, loci):
     loci_dict = {locus['locus']: locus for locus in loci}
     loci_metadata_ordered = [
         loci_dict[f"HLA-{locus}"]
-        if "HLA" not in locus else loci_dict[locus]
+        if "HLA" not in locus and f"HLA-{locus}" in loci_dict else loci_dict[locus]
         for locus in input_loci_split
     ]
     return loci_metadata_ordered

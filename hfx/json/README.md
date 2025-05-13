@@ -3,7 +3,7 @@
 To run: 
 `python mkhfx.py` 
 
-Needs installation of requests and pandas
+Needs installation of requests, pandas, jsonschema, py-ard
 
 This script will read the config file to get the actual file paths to produce hfx output
 There are two different configs activating different modes of the program:

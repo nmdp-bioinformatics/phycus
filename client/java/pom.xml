@@ -203,7 +203,7 @@
   	<dependency>
   		<groupId>com.google.guava</groupId>
   		<artifactId>guava</artifactId>
-  		<version>24.1.1</version>
+  		<version>32.0.0-android</version>
   	</dependency>
       <dependency>
         <groupId>org.dishevelled</groupId>

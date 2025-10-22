@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "outputResolution": [
+      {
+        "locus": "A",
+        "resolution": "g"
+      },
+      {
+        "locus": "B",
+        "resolution": "g"
+      },
+      {
+        "locus": "C",
+        "resolution": "g"
+      },
+      {
+        "locus": "DRB1",
+        "resolution": "g"
+      },
+      {
+        "locus": "DQB1",
+        "resolution": "g"
+      }
+    ],
+    "hfeMethod": {
+      "method": "EM",
+      "parameters": [
+        {
+          "parameter": "iterations",
+          "value": "100"
+        }
+      ]
+    },
+    "cohortDescription": {
+      "species": "Homo sapiens",
+      "population": [
+        {
+          "name": "CAU",
+          "geoLocation": {
+            "ISO3166": "US",
+            "subdivision": []
+          },
+          "populationSize": 1000
+        }
+      ],
+      "cohortSize": 1000,
+      "dataSource": "Registry"
+    },
+    "nomenclatureUsed": {
+      "database": "IPD-IMGT/HLA",
+      "group": "",
+      "version": "3.20.0"
+    },
+    "producer": {
+      "name": "Martin Maiers",
+      "organisation": "NMDP",
+      "email": "mmaiers@nmdp.org",
+      "publication": {
+        "doi": "10.1016/j.humimm.2007.04.005",
+        "year": "2007"
+      }
+    },
+    "frequencyLocation": "inline"
+  },
+  "frequencyData": [
+    {
+      "haplotype": "A*01:01g~C*07:04g~B*15:18g~DRB1*13:01~DQB1*06:03g",
+      "frequency": 0.00316656111463
+    },
+    {
+      "haplotype": "A*02:01g~C*16:04~B*13:02g~DRB1*10:01~DQB1*05:01",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*24:02g~C*07:01g~B*49:01~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*02:01g~C*02:02g~B*27:05g~DRB1*07:01~DQB1*03:03g",
+      "frequency": 0.00538315389487
+    },
+    {
+      "haplotype": "A*02:01g~C*03:03g~B*15:01g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.0060164661178
+    },
+    {
+      "haplotype": "A*11:01g~C*05:01g~B*44:02g~DRB1*13:01~DQB1*06:03g",
+      "frequency": 0.0145661811273
+    },
+    {
+      "haplotype": "A*02:01g~C*03:03g~B*51:01g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*06:02g~B*57:01g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00664977834072
+    },
+    {
+      "haplotype": "A*31:01g~C*03:03g~B*15:01g~DRB1*01:01~DQB1*05:01",
+      "frequency": 0.00538315389487
+    },
+    {
+      "haplotype": "A*24:02g~C*07:01g~B*51:01g~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.000633312222926
+    },
+    {
+      "haplotype": "A*24:02g~C*07:01g~B*15:17~DRB1*15:01~DQB1*06:03g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*31:01g~C*15:02g~B*51:01g~DRB1*04:01~DQB1*03:02g",
+      "frequency": 0.00569981000633
+    },
+    {
+      "haplotype": "A*68:01g~C*03:03g~B*15:01g~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*25:01g~C*06:02g~B*50:01~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*17:01g~B*41:02~DRB1*04:04~DQB1*04:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*74:01g~C*04:01g~B*35:03g~DRB1*13:02~DQB1*06:04g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*02:02g~B*27:05g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00316656111463
+    },
+    {
+      "haplotype": "A*25:01g~C*12:03g~B*18:01g~DRB1*13:01~DQB1*06:03g",
+      "frequency": 0.0123495883471
+    },
+    {
+      "haplotype": "A*03:01g~C*04:01g~B*35:08~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*01:01g~C*06:02g~B*38:01~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.00791640278657
+    },
+    {
+      "haplotype": "A*03:01g~C*04:01g~B*35:01g~DRB1*04:07g~DQB1*03:01g",
+      "frequency": 0.00664977834072
+    },
+    {
+      "haplotype": "A*01:01g~C*07:01g~B*08:01g~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.164344521849
+    },
+    {
+      "haplotype": "A*24:02g~C*05:01g~B*44:02g~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00443318556048
+    },
+    {
+      "haplotype": "A*02:01g~C*07:01g~B*58:01g~DRB1*13:02~DQB1*06:09",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*11:01g~C*04:01g~B*51:01g~DRB1*15:01~DQB1*05:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*06:02g~B*57:01g~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00728309056365
+    },
+    {
+      "haplotype": "A*01:01g~C*08:02~B*14:02~DRB1*01:02~DQB1*05:01",
+      "frequency": 0.00981633945535
+    },
+    {
+      "haplotype": "A*26:01g~C*12:03g~B*38:01~DRB1*16:01~DQB1*05:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*01:01g~C*06:02g~B*13:02g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*24:02g~C*07:02g~B*18:01g~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*01:01g~C*02:02g~B*40:02g~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.00728309056365
+    },
+    {
+      "haplotype": "A*03:01g~C*12:03g~B*18:01g~DRB1*04:03~DQB1*03:02g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*32:01~C*03:03g~B*15:01g~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.0167827739075
+    },
+    {
+      "haplotype": "A*01:01g~C*03:03g~B*55:01~DRB1*04:01~DQB1*03:01g",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*11:01g~C*03:03g~B*15:01g~DRB1*14:01g~DQB1*05:03g",
+      "frequency": 0.00474984167194
+    },
+    {
+      "haplotype": "A*31:01g~C*02:02g~B*27:05g~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.00379987333756
+    },
+    {
+      "haplotype": "A*32:01~C*03:04g~B*40:01g~DRB1*04:01~DQB1*03:01g",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*24:02g~C*07:01g~B*18:01g~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.0326155794807
+    },
+    {
+      "haplotype": "A*24:02g~C*03:04g~B*40:01g~DRB1*04:08~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*30:01g~C*03:03g~B*15:01g~DRB1*11:01g~DQB1*06:02",
+      "frequency": 0.000633312222926
+    },
+    {
+      "haplotype": "A*02:01g~C*01:02g~B*51:01g~DRB1*04:01~DQB1*03:01g",
+      "frequency": 0.00126662444585
+    },
+    {
+      "haplotype": "A*01:01g~C*06:02g~B*57:01g~DRB1*04:07g~DQB1*03:01g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*68:01g~C*04:01g~B*35:01g~DRB1*04:01~DQB1*03:02g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*23:01g~C*07:01g~B*49:01~DRB1*04:01~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*03:04g~B*44:02g~DRB1*04:04~DQB1*03:02g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*02:01g~C*17:01g~B*41:01~DRB1*13:03~DQB1*03:01g",
+      "frequency": 0.0060164661178
+    },
+    {
+      "haplotype": "A*01:01g~C*03:04g~B*40:01g~DRB1*04:04~DQB1*03:02g",
+      "frequency": 0.0155161494617
+    },
+    {
+      "haplotype": "A*01:01g~C*07:01g~B*49:01~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*01:01g~C*07:01g~B*18:01g~DRB1*01:03~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*02:02g~B*44:05~DRB1*16:01~DQB1*05:02",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*11:01g~C*03:03g~B*51:01g~DRB1*09:01~DQB1*03:03g",
+      "frequency": 0.00443318556048
+    },
+    {
+      "haplotype": "A*02:01g~C*03:04g~B*40:01g~DRB1*04:04~DQB1*03:02g",
+      "frequency": 0.0807473084231
+    },
+    {
+      "haplotype": "A*68:01g~C*04:01g~B*35:03g~DRB1*07:01~DQB1*03:03g",
+      "frequency": 0.00379987333756
+    },
+    {
+      "haplotype": "A*32:01~C*08:02~B*14:02~DRB1*04:08~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*03:04g~B*15:01g~DRB1*01:01~DQB1*05:01",
+      "frequency": 0.00538315389487
+    },
+    {
+      "haplotype": "A*25:01g~C*16:01~B*52:01g~DRB1*13:03~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*29:02g~C*16:01~B*44:03~DRB1*04:01~DQB1*03:02g",
+      "frequency": 0.00474984167194
+    },
+    {
+      "haplotype": "A*25:01g~C*03:04g~B*40:01g~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*02:05g~C*07:01g~B*58:01g~DRB1*11:02~DQB1*03:01g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*24:02g~C*07:02g~B*07:02g~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00506649778341
+    },
+    {
+      "haplotype": "A*02:01g~C*05:01g~B*44:02g~DRB1*14:01g~DQB1*05:03g",
+      "frequency": 0.0307156428119
+    },
+    {
+      "haplotype": "A*01:01g~C*08:02~B*14:02~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00474984167194
+    },
+    {
+      "haplotype": "A*26:01g~C*03:04g~B*40:01g~DRB1*01:03~DQB1*05:01",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*03:04g~B*40:01g~DRB1*15:02~DQB1*06:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*32:01~C*02:02g~B*40:02g~DRB1*16:02~DQB1*05:02",
+      "frequency": 0.00823305889804
+    },
+    {
+      "haplotype": "A*02:01g~C*07:01g~B*18:01g~DRB1*04:01~DQB1*03:02g",
+      "frequency": 0.0145661811273
+    },
+    {
+      "haplotype": "A*30:02g~C*07:01g~B*49:01~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*01:01g~C*06:02g~B*57:01g~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.0107663077897
+    },
+    {
+      "haplotype": "A*66:01g~C*17:01g~B*41:02~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.0060164661178
+    },
+    {
+      "haplotype": "A*01:01g~C*03:03g~B*55:01~DRB1*04:03~DQB1*04:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*32:01~C*01:02g~B*56:01g~DRB1*04:04~DQB1*04:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*26:01g~C*04:01g~B*44:03~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.0060164661178
+    },
+    {
+      "haplotype": "A*24:02g~C*03:03g~B*15:01g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00316656111463
+    },
+    {
+      "haplotype": "A*03:01g~C*04:01g~B*35:03g~DRB1*13:02~DQB1*06:04g",
+      "frequency": 0.00411652944902
+    },
+    {
+      "haplotype": "A*02:01g~C*07:04g~B*15:18g~DRB1*04:01~DQB1*03:02g",
+      "frequency": 0.00379987333756
+    },
+    {
+      "haplotype": "A*31:01g~C*07:02g~B*07:21~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*04:01g~B*35:01g~DRB1*04:07g~DQB1*03:01g",
+      "frequency": 0.0085497150095
+    },
+    {
+      "haplotype": "A*01:01g~C*07:07~B*08:01g~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*03:04g~B*40:01g~DRB1*09:01~DQB1*03:03g",
+      "frequency": 0.0186827105763
+    },
+    {
+      "haplotype": "A*02:01g~C*07:01g~B*49:01~DRB1*04:05~DQB1*03:02g",
+      "frequency": 0.0151994933502
+    },
+    {
+      "haplotype": "A*29:02g~C*08:02~B*14:02~DRB1*12:01g~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*66:01g~C*17:01g~B*41:02~DRB1*04:01~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*26:01g~C*12:03g~B*38:01~DRB1*14:01g~DQB1*05:03g",
+      "frequency": 0.0142495250158
+    },
+    {
+      "haplotype": "A*01:01g~C*02:02g~B*18:01g~DRB1*13:01~DQB1*06:03g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:06g~C*02:02g~B*27:05g~DRB1*14:01g~DQB1*05:03g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*26:01g~C*12:03g~B*38:01~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.0167827739075
+    },
+    {
+      "haplotype": "A*11:01g~C*07:01g~B*18:01g~DRB1*01:01~DQB1*05:01",
+      "frequency": 0.00158328055731
+    },
+    {
+      "haplotype": "A*01:01g~C*12:03g~B*18:01g~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.00443318556048
+    },
+    {
+      "haplotype": "A*02:01g~C*04:01g~B*35:08~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*15:02g~B*51:02~DRB1*16:01~DQB1*05:02",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*01:02g~B*55:01~DRB1*11:04~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*03:01g~C*01:02g~B*27:05g~DRB1*08:01~DQB1*04:02",
+      "frequency": 0.00443318556048
+    },
+    {
+      "haplotype": "A*03:01g~C*12:03g~B*35:03g~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*24:02g~C*04:01g~B*35:02~DRB1*13:02~DQB1*06:04g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*26:01g~C*12:03g~B*18:01g~DRB1*03:01~DQB1*02:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*02:01g~C*07:01g~B*57:01g~DRB1*07:01~DQB1*03:03g",
+      "frequency": 0.00221659278024
+    },
+    {
+      "haplotype": "A*02:01g~C*07:01g~B*18:01g~DRB1*07:01~DQB1*02:01g",
+      "frequency": 0.00759974667511
+    },
+    {
+      "haplotype": "A*24:02g~C*14:02g~B*40:01g~DRB1*11:01g~DQB1*03:01g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*24:02g~C*03:03g~B*35:01g~DRB1*04:04~DQB1*03:02g",
+      "frequency": 0.00189993666878
+    },
+    {
+      "haplotype": "A*24:02g~C*07:02g~B*07:02g~DRB1*15:01~DQB1*06:02",
+      "frequency": 0.251741608613
+    }
+  ]
+}

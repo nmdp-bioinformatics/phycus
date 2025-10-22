@@ -10,3 +10,9 @@ repos:
       # Run the formatter.
       - id: ruff-format
         types_or: [python, pyi]
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.34.1
+    hooks:
+      - id: check-github-workflows
+        files: ^submission/.*\.hfx-metadata\.json$
+        args: ["--verbose","--schemafile", "https://raw.githubusercontent.com/nmdp-bioinformatics/hfx/refs/heads/main/hfx.schema.json"]

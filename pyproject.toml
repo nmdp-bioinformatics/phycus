@@ -1,0 +1,54 @@
+[project]
+name = "nmdp-python-script-template"
+version = "0.0.1"
+description = "Add your description here"
+authors = [{ name = "NMDP Bioinformatics", email = "bioinformatics@nmdp.org" }]
+readme = "README.md"
+requires-python = ">=3.13"
+license = "LGPL-3.0-only"
+dependencies = []
+classifiers = [
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+    "Development Status :: 3 - Alpha",
+
+    # Indicate who your project is intended for
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+
+    # Specify the Python versions you support here.
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+
+[tool.setuptools]
+py-modules = ["main"] # main.py in the root
+
+[dependency-groups]
+dev = ["pre-commit>=4.2.0", "ruff>=0.11.11"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.bumpversion]
+current_version = "0.0.1"
+commit = true
+
+[[tool.bumpversion.files]]
+filename = "main.py"

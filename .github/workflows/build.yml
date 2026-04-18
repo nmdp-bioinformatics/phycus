@@ -42,7 +42,7 @@ jobs:
         run: uv sync --dev
       
       - name: Generate static site
-        run: uv run phycus --submission-dir submission --output-dir docs
+        run: uv run python -m phycus.cli --submission-dir submission --output-dir docs
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4

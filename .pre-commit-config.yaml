@@ -13,6 +13,6 @@ repos:
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.34.1
     hooks:
-      - id: check-github-workflows
+      - id: check-jsonschema
         files: ^submission/.*\.hfx-metadata\.json$
         args: ["--verbose","--schemafile", "https://raw.githubusercontent.com/nmdp-bioinformatics/hfx/refs/heads/main/hfx.schema.json"]

@@ -1,0 +1,64 @@
+name: Build HFX Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'submission/**'
+      - 'phycus/**'
+      - 'pyproject.toml'
+      - '.github/workflows/build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'submission/**'
+      - 'phycus/**'
+      - 'pyproject.toml'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: "latest"
+      
+      - name: Install dependencies
+        run: uv sync --dev
+      
+      - name: Generate static site
+        run: uv run phycus --submission-dir submission --output-dir docs
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hfx-index
+          path: docs/
+      
+      - name: Commit and push (main branch)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: rebuild HFX index [skip ci]"
+            git push
+          fi

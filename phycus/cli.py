@@ -25,9 +25,9 @@ def main():
         default="docs",
         help="Output directory for generated HTML (default: docs)",
     )
-    
+
     args = parser.parse_args()
-    
+
     generator = StaticSiteGenerator(
         submission_dir=args.submission_dir,
         output_dir=args.output_dir,

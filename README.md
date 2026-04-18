@@ -1,47 +1,105 @@
-# Project Template for Python Scripts
+# Phycus - Public Haplotype Frequency Curation Service
 
-## How to use the template:
+Publish and index HFX (Haplotype Frequency Exchange) files with a searchable static table.
 
-Create a template by clicking on the "Use this template" button and select "Create a new repository"
-   This will create a new repository with the given name e.g. `urban-potato`.
+## Quick Start
 
-## Clone and Run the template
-
-1. Clone the repository locally
-    ```shell
-    git clone https://github.com/pbashyal-nmdp/urban-potato.git
-    cd urban-potato
+1. Clone the repository
+    ```bash
+    git clone https://github.com/nmdp-bioinformatics/phycus.git
+    cd phycus
     ```
-2. Make a virtual environment by running `make venv`
-   ```shell
-    > make venv
-    uv venv --prompt urban-potato-venv
-    Using CPython 3.13.0
-    Creating virtual environment at: .venv
-    Activate with: source .venv/bin/activate
-   ```
-3. Source the virtual environment
-   ```shell
-   source .venv/bin/activate
-   ```
-4. Install dependencies
-    ```shell
+
+2. Set up virtual environment and install
+    ```bash
+    make venv
+    source .venv/bin/activate
     make install
     ```
 
-## Make commands
+3. Generate the static site
+    ```bash
+    uv run phycus --submission-dir submission --output-dir docs
+    # or
+    make run
+    ```
 
-Development workflow is driven through `Makefile`. Use `make` to list show all targets.
+4. View the generated site
+    ```bash
+    open docs/index.html
+    ```
+
+## Usage
+
+### Add HFX Files
+
+Place HFX files in the `submission/` directory:
+- `.hfx` - HFX wheel/archive files (ZIP with metadata.json inside)
+- `.hfx-metadata.json` - Raw HFX metadata JSON files
+
+### Generate Site
+
+```bash
+# Default directories
+uv run phycus
+
+# Custom directories
+uv run phycus --submission-dir my-submissions --output-dir public
 ```
-> make
-clean                remove all build and other Python artifacts
-clean-build          remove build artifacts
-clean-pyc            remove Python file artifacts
-lint                 check style with ruff
-install              install packages
-local                Make local environment editable
-run                  Run main script
-venv                 Create a Python3 virtualenv environment in .venv
-activate             Activating the virtual environment. Run `make venv` before activating.
-bump-dry             Bump up the patch version (dry-run)
+
+### Features
+
+- **Search** - Full-text search across all fields
+- **Filters** - Filter by species, data source
+- **Sort** - Click column headers to sort
+- **Responsive** - Works on mobile and desktop
+
+## GitHub Integration
+
+The workflow in `.github/workflows/build.yml` automatically:
+- Runs when files in `submission/` change
+- Generates updated `docs/index.html`
+- Uploads as artifact on PR for preview
+- Auto-commits to main on push
+
+## Deployment to GitHub Pages
+
+1. Enable GitHub Pages in repository settings:
+   - Go to **Settings → Pages**
+   - Select **Deploy from a branch**
+   - Select branch: `main`
+   - Select folder: `/docs`
+   - Save
+
+2. Your site will be published at:
+   ```
+   https://nmdp-bioinformatics.github.io/phycus/
+   ```
+
+3. View the generated site:
+   - **In a PR**: Check the "Artifacts" section of the GitHub Actions run
+   - **On main**: Visit the GitHub Pages URL above
+
+## Development
+
+```bash
+# Run linter
+make lint
+
+# Run pre-commit hooks
+pre-commit run --all-files
+
+# Clean build artifacts
+make clean
+```
+
+## Make Commands
+
+```bash
+make help        # Show all targets
+make venv        # Create virtual environment
+make install     # Install dependencies
+make run         # Generate site
+make lint        # Check code style
+make clean       # Remove artifacts
 ```

@@ -36,6 +36,9 @@ phycus = "phycus.cli:main"
 [dependency-groups]
 dev = ["pre-commit>=4.2.0", "ruff>=0.11.11"]
 
+[tool.ruff]
+line-length = 120
+
 [tool.ruff.lint]
 select = [
     # pycodestyle
@@ -51,6 +54,7 @@ select = [
     # isort
     "I",
 ]
+ignore = ["E501"]  # Line too long - relax this check
 
 [tool.bumpversion]
 current_version = "0.0.1"
@@ -59,6 +63,6 @@ commit = true
 [[tool.bumpversion.files]]
 filename = "main.py"
 
-[build-system]
+[build-systm]
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"

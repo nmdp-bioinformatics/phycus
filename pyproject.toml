@@ -8,7 +8,7 @@ requires-python = ">=3.13"
 license = "LGPL-3.0-only"
 dependencies = [
     "jinja2>=3.0.0",
-    "hfx-tools @ git+https://github.com/immunomath/hfx-tools.git@mvp",
+    "hfx-tools @ git+https://github.com/immunomath/hfx-tools.git@main",
 ]
 classifiers = [
     # How mature is this project? Common values are

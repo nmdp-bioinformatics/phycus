@@ -10,8 +10,8 @@ wheels/
 # Virtual environments
 .venv
 venv
+uv.lock
 
 # Misc
 .DS_Store
 #/submission
-uv.lock

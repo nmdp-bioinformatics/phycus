@@ -168,6 +168,45 @@
             font-size: 0.85em;
             font-weight: 500;
         }
+
+        .file-link {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #667eea;
+            text-decoration: underline dotted;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            z-index: 100;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            padding: 12px 16px;
+            min-width: 260px;
+            font-size: 0.85em;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .tooltip dl {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4px 12px;
+            margin: 0;
+        }
+
+        .tooltip dt { font-weight: 600; color: #666; }
+        .tooltip dd { margin: 0; }
+
+        .file-link:hover .tooltip {
+            display: block;
+        }
         
         .pagination {
             text-align: center;
@@ -233,15 +272,36 @@
                         <th onclick="sortTable(2)">Cohort Size</th>
                         <th onclick="sortTable(3)">Species</th>
                         <th onclick="sortTable(4)">Loci</th>
-                        <th onclick="sortTable(5)">Method</th>
-                        <th onclick="sortTable(6)">Data Source</th>
-                        <th onclick="sortTable(7)">Nomenclature</th>
+                        <th onclick="sortTable(5)">Data Source</th>
+                        <th onclick="sortTable(6)">Nomenclature Version</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     {% for submission in submissions %}
                     <tr class="data-row" data-searchtext="{{ submission.filename|lower }} {{ submission.populations|map(attribute='name')|join(' ')|lower }} {{ submission.method|lower }} {{ submission.data_source|lower }}">
-                        <td><code>{{ submission.filename }}</code></td>
+                        <td>
+                            <span class="file-link">
+                                <code>{{ submission.filename }}</code>
+                                <div class="tooltip">
+                                    <dl>
+                                        <dt>Method</dt><dd>{{ submission.method }}</dd>
+                                        {% if submission.producer %}
+                                        <dt>Producer</dt><dd>{{ submission.producer.name }} ({{ submission.producer.organisation }})</dd>
+                                        {% if submission.producer.doi %}
+                                        <dt>DOI</dt><dd><a href="https://doi.org/{{ submission.producer.doi }}" target="_blank">{{ submission.producer.doi }}</a></dd>
+                                        {% endif %}
+                                        {% if submission.producer.publication_year %}
+                                        <dt>Published</dt><dd>{{ submission.producer.publication_year }}</dd>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% for pop in submission.populations %}
+                                        <dt>{{ pop.name }} size</dt><dd>{{ "{:,}".format(pop.population_size) }}</dd>
+                                        {% if pop.iso3166 %}<dt>Country</dt><dd>{{ pop.iso3166 }}</dd>{% endif %}
+                                        {% endfor %}
+                                    </dl>
+                                </div>
+                            </span>
+                        </td>
                         <td>
                             {% for pop in submission.populations %}
                                 <span class="badge">{{ pop.name }}</span>
@@ -250,9 +310,8 @@
                         <td>{{ "{:,}".format(submission.cohort_size) }}</td>
                         <td>{{ submission.species }}</td>
                         <td>{{ submission.loci }}</td>
-                        <td>{{ submission.method }}</td>
                         <td>{{ submission.data_source }}</td>
-                        <td>{{ submission.nomenclature_database }}</td>
+                        <td>{{ submission.nomenclature_version }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

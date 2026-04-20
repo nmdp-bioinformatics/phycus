@@ -21,6 +21,17 @@ class Population:
 
 
 @dataclass
+class Producer:
+    """Represents the producer of HFX metadata."""
+
+    name: str
+    organisation: str
+    email: str | None = None
+    doi: str | None = None
+    publication_year: str | None = None
+
+
+@dataclass
 class HFXMetadata:
     """Represents parsed HFX metadata."""
 
@@ -32,9 +43,14 @@ class HFXMetadata:
     method: str
     data_source: str
     nomenclature_database: str | None = None
+    nomenclature_version: str | None = None
+    producer: Producer | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for templating."""
+        nomenclature = self.nomenclature_database or "N/A"
+        if self.nomenclature_version:
+            nomenclature = f"{nomenclature} {self.nomenclature_version}"
         return {
             "filename": self.filename,
             "cohort_size": self.cohort_size,
@@ -43,7 +59,8 @@ class HFXMetadata:
             "loci": ", ".join(self.loci),
             "method": self.method,
             "data_source": self.data_source,
-            "nomenclature_database": self.nomenclature_database or "N/A",
+            "nomenclature_version": nomenclature,
+            "producer": asdict(self.producer) if self.producer else None,
         }
 
 
@@ -87,11 +104,23 @@ class HFXMetadataParser:
                         name=pop.get("name", "Unknown"),
                         population_size=pop.get("populationSize", 0),
                         iso3166=geo.get("ISO3166"),
-                        subdivision=", ".join(geo.get("subdivision", []))
-                        if geo.get("subdivision")
-                        else None,
+                        subdivision=", ".join(geo.get("subdivision", [])) if geo.get("subdivision") else None,
                     )
                 )
+
+            producer_data = metadata_obj.get("producer", {})
+            pub = producer_data.get("publication", {})
+            producer = (
+                Producer(
+                    name=producer_data.get("name", "Unknown"),
+                    organisation=producer_data.get("organisation", ""),
+                    email=producer_data.get("email"),
+                    doi=pub.get("doi"),
+                    publication_year=pub.get("year"),
+                )
+                if producer_data
+                else None
+            )
 
             return HFXMetadata(
                 filename=filename,
@@ -102,6 +131,8 @@ class HFXMetadataParser:
                 method=hfe_method.get("method", "Unknown"),
                 data_source=cohort_desc.get("dataSource", "Unknown"),
                 nomenclature_database=nomenclature.get("database"),
+                nomenclature_version=nomenclature.get("version"),
+                producer=producer,
             )
         except Exception as e:
             print(f"Error parsing metadata from {filename}: {e}")
@@ -130,9 +161,7 @@ class HFXMetadataParser:
                         return self._parse_metadata_dict(data, filepath.name)
 
                 # If no metadata.json found, list what's in the archive
-                print(
-                    f"No metadata.json found in {filepath}. Contents: {hfx_archive.namelist()}"
-                )
+                print(f"No metadata.json found in {filepath}. Contents: {hfx_archive.namelist()}")
                 return None
 
         except Exception as e:

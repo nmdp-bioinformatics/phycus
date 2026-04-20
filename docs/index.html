@@ -168,6 +168,45 @@
             font-size: 0.85em;
             font-weight: 500;
         }
+
+        .file-link {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #667eea;
+            text-decoration: underline dotted;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            z-index: 100;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            padding: 12px 16px;
+            min-width: 260px;
+            font-size: 0.85em;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .tooltip dl {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4px 12px;
+            margin: 0;
+        }
+
+        .tooltip dt { font-weight: 600; color: #666; }
+        .tooltip dd { margin: 0; }
+
+        .file-link:hover .tooltip {
+            display: block;
+        }
         
         .pagination {
             text-align: center;
@@ -194,7 +233,7 @@
         
         <div class="stats">
             <div class="stat-card">
-                <div class="number">3</div>
+                <div class="number">2</div>
                 <div class="label">HFX Submissions</div>
             </div>
         </div>
@@ -233,30 +272,64 @@
                         <th onclick="sortTable(2)">Cohort Size</th>
                         <th onclick="sortTable(3)">Species</th>
                         <th onclick="sortTable(4)">Loci</th>
-                        <th onclick="sortTable(5)">Method</th>
-                        <th onclick="sortTable(6)">Data Source</th>
-                        <th onclick="sortTable(7)">Nomenclature</th>
+                        <th onclick="sortTable(5)">Data Source</th>
+                        <th onclick="sortTable(6)">Nomenclature Version</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     
-                    <tr class="data-row" data-searchtext="hegl_afa.hfx cau em registry">
-                        <td><code>HEGL_AFA.hfx</code></td>
+                    <tr class="data-row" data-searchtext="hegl_afa.hfx afa em registry">
+                        <td>
+                            <span class="file-link">
+                                <code>HEGL_AFA.hfx</code>
+                                <div class="tooltip">
+                                    <dl>
+                                        <dt>Method</dt><dd>EM</dd>
+                                        
+                                        <dt>Producer</dt><dd>Martin Maiers (NMDP)</dd>
+                                        
+                                        <dt>DOI</dt><dd><a href="https://doi.org/10.1016/j.humimm.2007.04.005" target="_blank">10.1016/j.humimm.2007.04.005</a></dd>
+                                        
+                                        
+                                        <dt>Published</dt><dd>2007</dd>
+                                        
+                                        
+                                        
+                                        <dt>AFA size</dt><dd>38,600,000</dd>
+                                        <dt>Country</dt><dd>US</dd>
+                                        
+                                    </dl>
+                                </div>
+                            </span>
+                        </td>
                         <td>
                             
-                                <span class="badge">CAU</span>
+                                <span class="badge">AFA</span>
                             
                         </td>
                         <td>3,156</td>
                         <td>Homo sapiens</td>
                         <td>A, B, C, DRB1, DQB1</td>
-                        <td>EM</td>
                         <td>Registry</td>
-                        <td>IPD-IMGT/HLA</td>
+                        <td>IPD-IMGT/HLA 2.16.0</td>
                     </tr>
                     
                     <tr class="data-row" data-searchtext="test.hfx test em test">
-                        <td><code>test.hfx</code></td>
+                        <td>
+                            <span class="file-link">
+                                <code>test.hfx</code>
+                                <div class="tooltip">
+                                    <dl>
+                                        <dt>Method</dt><dd>EM</dd>
+                                        
+                                        
+                                        <dt>TEST size</dt><dd>100</dd>
+                                        <dt>Country</dt><dd>US</dd>
+                                        
+                                    </dl>
+                                </div>
+                            </span>
+                        </td>
                         <td>
                             
                                 <span class="badge">TEST</span>
@@ -265,36 +338,20 @@
                         <td>100</td>
                         <td>Homo sapiens</td>
                         <td>A</td>
-                        <td>EM</td>
                         <td>Test</td>
-                        <td>IPD-IMGT/HLA</td>
-                    </tr>
-                    
-                    <tr class="data-row" data-searchtext="cau.hfx-metadata.json cau em registry">
-                        <td><code>cau.hfx-metadata.json</code></td>
-                        <td>
-                            
-                                <span class="badge">CAU</span>
-                            
-                        </td>
-                        <td>1,000</td>
-                        <td>Homo sapiens</td>
-                        <td>A, B, C, DRB1, DQB1</td>
-                        <td>EM</td>
-                        <td>Registry</td>
                         <td>IPD-IMGT/HLA</td>
                     </tr>
                     
                 </tbody>
             </table>
             <div class="pagination">
-                Showing <span id="rowCount">3</span> of 3 submissions
+                Showing <span id="rowCount">2</span> of 2 submissions
             </div>
             
         </div>
         
         <footer>
-            <p>Generated by <a href="https://github.com/nmdp-bioinformatics/phycus">Phycus</a> | Last updated: <span id="updateTime"></span></p>
+            <p>Generated by <a href="https://github.com/nmdp-bioinformatics/phycus">Phycus</a> | Last updated: <span id="updateTime">2026-04-20 13:19</span></p>
         </footer>
     </div>
     

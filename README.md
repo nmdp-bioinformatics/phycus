@@ -1,7 +1,7 @@
 # Phycus - Public Haplotype Frequency Curation Service
 
 Publish and index HFX (Haplotype Frequency Exchange) files with a searchable static table.
-
+ 
 ## Quick Start
 
 1. Clone the repository
